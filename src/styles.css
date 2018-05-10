@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+	--color-accent: #16a17b;
+	--color-primary: #215ba1;
+	--color-text: white;
+	--color-link: #5ac2a5;
+}
+
+html, body {
+	color: var(--color-text);
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	font-size: 1.1em;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	background: var(--color-primary) url('assets/images/bg.png') 0 0/1920px 1080px no-repeat;
+	display: grid;
+	grid:
+	'header' 50px
+	'eventinfo' auto
+	'content' auto
+	'footer' auto
+	/ 1fr;
+	min-height: 100%;
+}

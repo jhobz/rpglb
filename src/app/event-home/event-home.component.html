@@ -1,0 +1,53 @@
+<header>
+	<img class="logo" src="../assets/images/logo_1200x424.png" />
+	<nav>
+		<a href="donate" target="_blank">DONATE</a>
+		<a href="tracker/runs/6">SCHEDULE</a>
+		<a href="https://theyetee.com" target="_blank">SHIRTS</a>
+		<a href="tracker/6">TRACKER</a>
+		<a routerLink="about">ABOUT</a>
+	</nav>
+</header>
+<div class="eventinfo-container">
+	<!-- <div class="logo-bg rpglb"></div> -->
+	<div class="wrapper">
+		<h4 class="title">{{event.name}} benefits <a [href]="event.causeLink" target="_blank">{{event.cause}}</a></h4>
+		<div class="donation-container">
+			<div>Total Raised:</div>
+			<div class="donation-box" id="donation-total">{{event.donations.total | moneify}}</div>
+			<div>Donation Goal:</div>
+			<div class="donation-box" id="donation-goal">{{event.donations.goal | moneify}}</div>
+			<a class="button" href="donate" target="_blank">❤ DONATE ❤</a>
+		</div>
+	</div>
+	<!-- <div class="logo-bg nami"></div> -->
+</div>
+<div class="main-content">
+	<div class="embed-wrapper">
+		<iframe class="embed" src="https://player.twitch.tv/?channel=rpglimitbreak" frameborder="0" scrolling="no"
+		     allowfullscreen="true">
+		</iframe>
+	</div>
+	<div class="event-description">
+		<iframe [ngClass]="{ 'show-chat': isChatOpen }" frameborder="0" src="https://www.twitch.tv/embed/rpglimitbreak/chat">
+		</iframe>
+		<p class="blurb">
+			RPG Limit Break features role-playing games as its main genre and is a meeting grounds of like-minded
+			players. The event celebrates “speedrunning,” a competitive approach to playing video games by completing
+			them as fast as possible. Players gather together, set up their consoles, follow a schedule and stream
+			their speedy playthroughs of games while raising money for <a [href]="event.causeLink" target="_blank">{{event.cause}}</a>.
+		</p>
+		<hr />
+		<img src="../assets/images/logo_1200x424.png" />
+		<p class="title">
+			in support of
+		</p>
+		<img src="../assets/images/nami_long_white.png" />
+		<a [ngClass]="{ 'button': true, 'fixed-bottom': true, 'close-chat': isChatOpen }" href="#" (click)="toggleChat($event)">Chat with viewers!</a>
+	</div>
+</div>
+<footer>
+	<p>
+		<br><br><br>Copyright 2018. RPG Limit Break, LLC.
+	</p>
+</footer>
