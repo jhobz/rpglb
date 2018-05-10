@@ -1,11 +1,11 @@
 <header>
-	<img class="logo" src="../assets/images/logo_1200x424.png" />
+	<img class="logo" src="assets/images/logo_1200x424.png" />
 	<nav>
 		<a href="donate" target="_blank">DONATE</a>
 		<a href="tracker/runs/6">SCHEDULE</a>
 		<a href="https://theyetee.com" target="_blank">SHIRTS</a>
 		<a href="tracker/6">TRACKER</a>
-		<a routerLink="about">ABOUT</a>
+		<!-- <a routerLink="about">ABOUT</a> -->
 	</nav>
 </header>
 <div class="eventinfo-container">
@@ -38,11 +38,11 @@
 			their speedy playthroughs of games while raising money for <a [href]="event.causeLink" target="_blank">{{event.cause}}</a>.
 		</p>
 		<hr />
-		<img src="../assets/images/logo_1200x424.png" />
+		<img src="assets/images/logo_1200x424.png" />
 		<p class="title">
 			in support of
 		</p>
-		<img src="../assets/images/nami_long_white.png" />
+		<img src="assets/images/nami_long_white.png" />
 		<a [ngClass]="{ 'button': true, 'fixed-bottom': true, 'close-chat': isChatOpen }" href="#" (click)="toggleChat($event)">Chat with viewers!</a>
 	</div>
 </div>

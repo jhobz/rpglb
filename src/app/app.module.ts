@@ -1,3 +1,4 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,7 +21,7 @@ import { MoneifyPipe } from './moneify.pipe';
 		AppRoutingModule,
 		HttpClientModule
 	],
-	providers: [],
+	providers: [{provide: APP_BASE_HREF, useValue: '/staging'}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -29,7 +29,7 @@ nav > a {
 	display: flex;
 	justify-content: center;
 	position: relative;
-	background: url('../../assets/images/bannerbg.png') center center/cover no-repeat;
+	background: url('assets/images/bannerbg.png') center center/cover no-repeat;
 	font-weight: bold;
 	background-color: var(--color-primary);
 	padding: 25px;
@@ -46,10 +46,10 @@ nav > a {
 	min-width: 300px;
 }
 .rpglb {
-	background: url('../../assets/images/logo_1200x424.png') left center/contain no-repeat;
+	background: url('assets/images/logo_1200x424.png') left center/contain no-repeat;
 }
 .nami {
-	background: url('../../assets/images/nami_white.png') right center/contain no-repeat;
+	background: url('assets/images/nami_white.png') right center/contain no-repeat;
 } */
 .sidebar {
 	background-color: var(--color-primary);
@@ -134,10 +134,21 @@ a:hover {
 	text-align: left;
 }
 
-.event-description > img {
+.link-wrapper {
+	width: calc(100%);
+	max-width: 500px;
+}
+
+.event-description > img,
+.event-description > a.clear {
 	max-width: 100%;
 	max-height: 160px;
 	margin: auto;
+}
+
+.event-description > a.clear {
+	/* width: 100%; */
+	text-decoration: none;
 }
 
 .event-description > .button {

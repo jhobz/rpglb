@@ -12,8 +12,8 @@ import { DonationData, SpeedrunEvent } from '../speedrun-event';
 	providers: [DonationService]
 })
 export class EventHomeComponent implements OnInit {
-	private event: SpeedrunEvent = new SpeedrunEvent();
-	private isChatOpen: boolean = false;
+	event: SpeedrunEvent = new SpeedrunEvent();
+	isChatOpen: boolean = false;
 
 	constructor(private donationService: DonationService) {
 		this.event.name = 'RPG Limit Break 2018';
