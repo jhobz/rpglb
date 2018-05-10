@@ -32,12 +32,12 @@ nav > a {
 	background: url('assets/images/bannerbg.png') center center/cover no-repeat;
 	font-weight: bold;
 	background-color: var(--color-primary);
-	padding: 25px;
+	padding: 20px;
 	color: #333;
 }
 
 .eventinfo-container > .wrapper {
-	padding: 25px;
+	padding: 20px;
 	background-color: rgba(255,255,255,0.8);
 	min-width: 650px;
 }
@@ -63,7 +63,14 @@ footer {
 	padding: 25px;
 	font-family: 'Segoe UI';
 	font-size: 0.75em;
+}
+
+.dim {
 	color: rgba(255, 255, 255, 0.5);
+}
+
+footer > .title {
+	text-align: left;
 }
 
 a {
@@ -182,6 +189,7 @@ a:hover {
 }
 
 .button:hover {
+	text-decoration: none;
 	background-color: #08926c;
 }
 
