@@ -177,6 +177,7 @@ a:hover {
 .logo {
 	height: 40px;
 	margin: 5px;
+	vertical-align: middle;
 }
 
 .button {
