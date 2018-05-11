@@ -18,7 +18,7 @@ nav > a {
 }
 
 .main-content {
-	background: url('assets/images/bg.png') 0 0/1920px 1080px no-repeat;
+	background: url('/assets/images/bg.png') 0 0/1920px 1080px no-repeat;
 	grid-area: content;
 	padding: 25px;
 	display: grid;
@@ -30,7 +30,7 @@ nav > a {
 	display: flex;
 	justify-content: center;
 	position: relative;
-	background: url('assets/images/bannerbg.png') center center/cover no-repeat;
+	background: url('/assets/images/bannerbg.png') center center/cover no-repeat;
 	font-weight: bold;
 	background-color: var(--color-primary);
 	padding: 20px;
