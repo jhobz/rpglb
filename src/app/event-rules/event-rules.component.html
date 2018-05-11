@@ -1,0 +1,72 @@
+<header>
+	<a routerLink="/"><img class="logo" src="assets/images/logo_1200x424.png" /></a>
+	<nav>
+		<a href="/donate" target="_blank">DONATE</a>
+		<a href="/tracker/runs/6">SCHEDULE</a>
+		<a href="https://theyetee.com" target="_blank">SHIRTS</a>
+		<a href="/tracker/6">TRACKER</a>
+		<a routerLink="/rules">EVENT RULES</a>
+	</nav>
+</header>
+<div class="eventinfo-container">
+	<div class="wrapper">
+		<h4 class="title">{{event.name}} benefits <a [href]="event.causeLink" target="_blank">{{event.cause}}</a></h4>
+		<div class="donation-container">
+			<div>Total Raised:</div>
+			<div class="donation-box" id="donation-total">{{event.donations.total | moneify}}</div>
+			<div>Donation Goal:</div>
+			<div class="donation-box" id="donation-goal">{{event.donations.goal | moneify}}</div>
+			<a class="button" href="/donate" target="_blank">❤ DONATE ❤</a>
+		</div>
+	</div>
+</div>
+<div class="main-content">
+	<div class="event-description">
+		<h4>General Rules:</h4>
+		<ul>
+			<li>Be respectful to others, whether they are attending the event or not</li>
+			<li>Treat the equipment and furniture with care</li>
+			<li>Wear your badge at all times and please make sure it is viewable.</li>
+			<li>Shower daily. For everybody’s sake</li>
+			<li>Clean up after yourself and throw away your trash</li>
+			<li>Keep food to the food/puzzle/board games room within the main hotel building. Food will not be allowed in the Officers Club. The room will be cleaned up an hour after catering is delivered, and leftovers are allowed to be taken up to your own room if you wish to save some for later.</li>
+			<li>Beverages in the kitchen are free to attendees (courtesy of NAMI).  If you take the last can/bottle of a flavor out of the fridge, please put a new pack in to replace it</li>
+			<li>No alcohol or drunkenness in the Officer’s Club - keep that to your rooms or offsite</li>
+			<li>No illegal drugs. Period</li>
+			<li>We are not above the law, so do not break it</li>
+			<li>Please be aware that sleeping in the Officer’s Club is not allowed. If you’re tired then please take a nap in your hotel room. Attendees staying offsite are responsible for arranging transportation to return to where they are staying.</li>
+			<li>Breaking of the rules will result in a verbal warning to begin with, and moving onto more steps if repeat violations occur and depending on severity of the incidence.</li>
+			<li>We do not allow animals onsite except ADA qualified service animals</li>
+		</ul>
+		<h4>Practice Room Rules:</h4>
+		<ul>
+			<li>People practicing for upcoming runs in the marathon have priority for using the practice room TVs/monitors.</li>
+			<li>Please do not leave consoles/games or other personal property unattended, RPGLB isn't responsible for stuff getting lost.</li>
+			<li>Stream Room Rules:</li>
+			<li>Fun is good, but make sure the runner(s), commentator(s) and run are the main focus</li>
+			<li>Do not touch cables or consoles unless on tech, or if asked to by an active tech volunteer</li>
+			<li>Please do not leave consoles/games or other personal property unattended, RPGLB isn't responsible for stuff getting lost.</li>
+			<li>People practicing for upcoming runs in the marathon have priority for using the practice room TVs/monitors.</li>
+			<li>Runner(s) have the final say as to who can be on the couch</li>
+			<li>We have a zero tolerance policy when it comes to drunkeness and or the influence of drugs on camera. This can and will lead to an immediate kicking out of the event.</li>
+			<li>Drinks are allowed in the stream room but please be careful as we have lots of equipment in there :)! Runners/Volunteers that have shifts/runs that overlap the breakfast buffet or the catering of lunch can make arrangements with Staff in regards to food.</li>
+			<li>Runners/Commentators, please make sure to review the commentary guidelines at https://forum.speeddemosarchive.com/post/rpg_limit_break_2018__commentary_thread.html</li>
+			<li>The Twitch ToS still applies even during the marathon.</li>
+		</ul>
+		<h4>Security Information:</h4>
+		<ul>
+			<li>Enforcement will be on site 24/7 so if you do have an issue they will be available.</li>
+			<li>The hotel offers a free security escort service.  If you’d like an escort between the hotel and Officer’s Club, you can call (801) 585-COPS 24 hours a day.</li>
+			<li>If you or somebody else is being harassed, please let RPGLB Staff know. You can also contact Brossentia or MetaSigma for harassment or safety concerns</li>
+			<li>Brossentia: phone - (435) 994-4753, @brossentia on Discord</li>
+			<li>MetaSigma: phone - (406) 671-1587, @ᕦ(° Д°)ᕤ MetaSigma on Discord (Please note Meta does not have Discord on his phone and it’s much easier to directly contact him via text or call)</li>
+		</ul>
+	</div>
+</div>
+<footer>
+	<div class="title">CONTACT</div>
+	<span>Email: <a href="mailto:rpglimitbreak@gmail.com">rpglimitbreak@gmail.com</a></span><br>
+	<span>Twitter: <a href="https://twitter.com/rpglimitbreak" target="_blank">@RPGLimitBreak</a></span><br>
+	<br>
+	<span class="dim">Copyright 2018. RPG Limit Break, LLC.</span>
+</footer>

@@ -19,7 +19,7 @@ html {
 }
 
 body {
-	background: var(--color-primary) url('assets/images/bg.png') 0 0/1920px 1080px no-repeat;
+	background: var(--color-primary);
 	display: grid;
 	grid:
 	'header' 50px

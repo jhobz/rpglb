@@ -8,20 +8,22 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AppComponent } from './app.component';
 import { EventHomeComponent } from './event-home/event-home.component';
 import { MoneifyPipe } from './moneify.pipe';
+import { EventRulesComponent } from './event-rules/event-rules.component';
 
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		EventHomeComponent,
-		MoneifyPipe
+		MoneifyPipe,
+		EventRulesComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule
 	],
-	providers: [{provide: APP_BASE_HREF, useValue: '/staging'}],
+	// providers: [{provide: APP_BASE_HREF, useValue: '/staging'}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

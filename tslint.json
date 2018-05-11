@@ -30,7 +30,7 @@
 		"indent": [ true, "tabs" ],
 		"interface-over-type-literal": true,
 		"label-position": true,
-		"linebreak-style": [ true, "LF" ],
+		"linebreak-style": [ false, "LF" ],
 		"max-line-length": [ true, 120 ],
 		"member-access": false,
 		"member-ordering": [

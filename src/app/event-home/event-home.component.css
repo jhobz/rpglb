@@ -18,6 +18,7 @@ nav > a {
 }
 
 .main-content {
+	background: url('assets/images/bg.png') 0 0/1920px 1080px no-repeat;
 	grid-area: content;
 	padding: 25px;
 	display: grid;
@@ -146,8 +147,7 @@ a:hover {
 	max-width: 500px;
 }
 
-.event-description > img,
-.event-description > a.clear {
+.event-description img {
 	max-width: 100%;
 	max-height: 160px;
 	margin: auto;
