@@ -8,6 +8,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AppComponent } from './app.component';
 import { EventHomeComponent } from './event-home/event-home.component';
 import { EventRulesComponent } from './event-rules/event-rules.component';
+import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component';
 import { MoneifyPipe } from './moneify.pipe';
 
 
@@ -16,7 +17,8 @@ import { MoneifyPipe } from './moneify.pipe';
 		AppComponent,
 		EventHomeComponent,
 		MoneifyPipe,
-		EventRulesComponent
+		EventRulesComponent,
+		EventSweepstakesComponent
 	],
 	imports: [
 		BrowserModule,
