@@ -1,0 +1,49 @@
+<button (click)="getUsers()">Fetch Users</button>
+<div class="user-list" *ngFor="let user of userList">
+	<span>{{user.username}}: </span>
+	<span>{{user.firstName}} {{user.lastName}} - </span>
+	<span>{{user.email}}</span>
+</div>
+
+<form #f="ngForm" novalidate (ngSubmit)="onSubmit()">
+	<fieldset ngModelGroup="name">
+		<div class="form-group">
+			<label>First Name</label>
+			<input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" required />
+		</div>
+		<div class="form-group">
+			<label>Last Name</label>
+			<input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" required />
+		</div>
+	</fieldset>
+
+	<div class="form-group"
+		[ngClass]="{
+			'has-danger': email.invalid && (email.dirty || email.touched),
+			'has-success': email.valid && (email.dirty || email.touched)
+		}">
+		<label>Email</label>
+		<input type="email" class="form-control" name="email" [(ngModel)]="model.email" required pattern="[^ @]*@[^ @]*" #email="ngModel" />
+		<div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+			<p *ngIf="email.errors.required">Email is required</p>
+			<p *ngIf="email.errors.pattern">Must be an email</p>
+		</div>
+		<pre>Valid? {{f.form.controls.email?.valid}}</pre>
+		<pre>Dirty? {{f.form.controls.email?.dirty}}</pre>
+		<pre>Touched? {{f.form.controls.email?.touched}}</pre>
+	</div>
+
+	<div class="form-group">
+		<label>Username</label>
+		<input type="text" class="form-control" name="username" [(ngModel)]="model.username" required minlength="3" />
+	</div>
+
+	<div class="form-group">
+		<label>Password</label>
+		<input type="password" class="form-control" name="password" [(ngModel)]="model.password" required minlength="12" />
+	</div>
+	<button type="submit" [disabled]="f.invalid">Create</button>
+</form>
+
+<pre>{{f.value | json}}</pre>
+<pre>{{model | json}}</pre>
