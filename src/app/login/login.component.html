@@ -1,0 +1,12 @@
+<form class="form-login" novalidate (ngSubmit)="login()" #f="ngForm">
+	<div class="alert" role="alert" *ngIf="message !== ''">{{message}}</div>
+	<h2 class="form-login-header">Login</h2>
+	<label for="username" class="sr-only">Username</label>
+	<input type="text" class="form-control" placeholder="Username" [(ngModel)]="loginData.username" name="username" required />
+	<label for="password" class="sr-only">Password</label>
+	<input type="password" class="form-control" placeholder="Password" [(ngModel)]="loginData.password" name="password" required />
+	<button class="btn" type="submit" [disabled]="!f.form.valid">Login</button>
+	<p>
+		Don't have an account? <a [routerLink]="['/register']">Register here</a>
+	</p>
+</form>

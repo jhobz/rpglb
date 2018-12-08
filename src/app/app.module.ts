@@ -10,6 +10,7 @@ import { AppComponent } from './app.component'
 import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
+import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
 import { UserListComponent } from './user-list/user-list.component'
 
@@ -21,7 +22,8 @@ import { UserListComponent } from './user-list/user-list.component'
 		MoneifyPipe,
 		EventRulesComponent,
 		EventSweepstakesComponent,
-		UserListComponent
+		UserListComponent,
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,

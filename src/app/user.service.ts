@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable'
@@ -19,7 +19,11 @@ export class UserService {
 	}
 
 	getUsers(): Observable<User[]> {
-		return this.http.get(this.apiUrl)
+		const options = {
+			// The default empty string is necessary here or HttpClient throws a hissy fit
+			headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') || '' })
+		}
+		return this.http.get(this.apiUrl, options)
 			.map( (res: any) => {
 				return res.data.docs as User[]
 			} )
@@ -31,6 +35,11 @@ export class UserService {
 
 	deleteUser(id: string): Observable<any> {
 		return this.http.delete(`${this.apiUrl}/${id}`)
+	}
+
+	// TODO: make a proper class for `loginData`
+	loginUser(loginData: any): Observable<any> {
+		return this.http.post(`${this.apiUrl}/login`, loginData)
 	}
 
 	private handleError(error: any): Promise<any> {

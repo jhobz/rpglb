@@ -1,8 +1,33 @@
+const passport = require('passport')
+const dbConfig = require('../config/database')
+require('../config/passport')(passport)
+const jwt = require('jsonwebtoken')
+
 const UserService = require('../services/users.service')
 
 _this = this
 
+const getTokenFromHeaders = (headers) => {
+	if (headers && headers.authorization) {
+		let parted = headers.authorization.split(' ')
+		if (parted.length === 2) {
+			return parted[1]
+		}
+		return null
+	}
+	return null
+}
+
 exports.getUsers = async function (req, res, next) {
+	// Check authorization token to ensure user is logged in
+	const token = getTokenFromHeaders(req.headers)
+	if (!token) {
+		return res.status(403).json( {
+			status: 403,
+			message: 'Unauthorized'
+		} )
+	}
+
 	let page = req.query.page ? req.query.page : 1
 	let limit = req.query.limit ? req.query.limit : 10
 
@@ -93,6 +118,32 @@ exports.removeUser = async function (req, res, next) {
 		return res.status(400).json( {
 			status: 400,
 			message: e.message
+		} )
+	}
+}
+
+exports.loginUser = async function (req, res, next) {
+	try {
+		console.log(req.body.username)
+		let user = await UserService.getUser(req.body.username)
+		return user.comparePassword(req.body.password, (err, isMatch) => {
+			if (isMatch && !err) {
+				const token = jwt.sign(user.toJSON(), dbConfig.secret)
+				return res.status(200).json( {
+					status: 200,
+					token: `JWT ${token}`
+				} )
+			} else {
+				return res.status(401).json( {
+					status: 401,
+					message: 'Login failed. Username or password was incorrect.'
+				})
+			}
+		})
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: `Login failed. ${e.message}`
 		} )
 	}
 }

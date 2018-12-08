@@ -75,3 +75,14 @@ exports.deleteUser = async function (id) {
 		throw Error(`Error occurred while attempting to delete user: ${e.message}`)
 	}
 }
+
+// Get a single user by username search
+exports.getUser = async function (username) {
+	try {
+		let user = await User.findOne({ username: username })
+		console.log(user)
+		return user
+	} catch (e) {
+		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
+	}
+}
