@@ -80,7 +80,6 @@ exports.deleteUser = async function (id) {
 exports.getUser = async function (username) {
 	try {
 		let user = await User.findOne({ username: username })
-		console.log(user)
 		return user
 	} catch (e) {
 		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
