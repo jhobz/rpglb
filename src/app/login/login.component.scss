@@ -1,0 +1,14 @@
+.form-wrapper {
+	width: 500px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-wrapper > * {
+	width: 100%;
+}
+
+.login-subheader {
+	margin-top: 80px;
+}

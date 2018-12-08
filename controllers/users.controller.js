@@ -143,7 +143,7 @@ exports.loginUser = async function (req, res, next) {
 	} catch (e) {
 		return res.status(400).json( {
 			status: 400,
-			message: `Login failed. ${e.message}`
+			message: `Login failed. Username or password incorrect.`
 		} )
 	}
 }

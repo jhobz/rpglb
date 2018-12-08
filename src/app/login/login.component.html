@@ -1,17 +1,22 @@
-<form class="form-login" novalidate (ngSubmit)="login()" #f="ngForm">
-	<fieldset [disabled]="disableForm">
-		<div class="alert" role="alert" *ngIf="message !== ''">{{message}}</div>
+<div class="form-wrapper">
+	<form class="form-wrapper" novalidate (ngSubmit)="login()" #f="ngForm">
 		<h2 class="form-login-header">Login</h2>
-		<label for="username" class="sr-only">Username</label>
-		<input type="text" class="form-control" placeholder="Username" [(ngModel)]="loginData.username" name="username" required />
+		<div class="warn" role="alert" *ngIf="message !== ''">{{message}}</div>
+		<mat-form-field hideRequiredMarker>
+			<input matInput name="username" placeholder="Username" [(ngModel)]="loginData.username" required />
+		</mat-form-field>
+
+		<mat-form-field hideRequiredMarker>
+			<input matInput name="password" placeholder="Password" [(ngModel)]="loginData.password" [type]="hidePassword ? 'password' : 'text'" required />
+			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+		</mat-form-field>
 		<br />
-		<label for="password" class="sr-only">Password</label>
-		<input type="password" class="form-control" placeholder="Password" [(ngModel)]="loginData.password" name="password" required />
-		<br />
-		<button class="btn" type="submit" [disabled]="!f.form.valid">Login</button>
+		<button mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid">Login</button>
+		<h3 class="login-subheader">Don't have an account?</h3>
 		<p>
-			An account is required to register and submit for RPGLB events. <a [routerLink]="['/signup']">Signup here.</a>
+			An account is required to register and submit for RPGLB events.
 		</p>
-	</fieldset>
-</form>
+		<a mat-raised-button color="accent" [routerLink]="['/signup']">Signup</a>
+	</form>
+</div>
 <p style="color: lightGreen">{{successMessage}}</p>

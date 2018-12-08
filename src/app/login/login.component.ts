@@ -10,7 +10,7 @@ import { UserService } from '../user.service'
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css'],
+	styleUrls: ['./login.component.scss'],
 	providers: [UserService]
 })
 export class LoginComponent implements OnInit {
@@ -22,13 +22,12 @@ export class LoginComponent implements OnInit {
 	message: string = ''
 	successMessage: string = ''
 	data: any
-	disableForm: boolean = false
+	hidePassword: boolean = true
 
 	constructor(private userService: UserService, private router: Router) { }
 
 	login() {
 		if (this.form.valid) {
-			this.disableForm = true
 			this.userService.loginUser(this.loginData)
 				.subscribe(
 					(res: any) => {
@@ -49,7 +48,6 @@ export class LoginComponent implements OnInit {
 		// Redirect user if already logged in
 		const token = localStorage.getItem('jwtToken')
 		if (token) {
-			this.disableForm = true
 			this.successMessage = 'Already logged in, redirecting...'
 			setTimeout(() => {
 				this.router.navigate(['users'])

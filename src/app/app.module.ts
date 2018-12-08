@@ -2,7 +2,9 @@ import { APP_BASE_HREF } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
+import { MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule } from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 import { AppRoutingModule } from './/app-routing.module'
@@ -29,9 +31,14 @@ import { UserListComponent } from './user-list/user-list.component'
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		HttpClientModule,
-		FormsModule
+		FormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatIconModule,
+		MatInputModule
 	],
 	bootstrap: [AppComponent]
 })

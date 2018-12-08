@@ -1,0 +1,78 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Import custom theme
+@import 'rpglb-dark-theme.scss';
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme( $rpglb-app-theme );
+
+$primary: map-get($rpglb-app-theme, primary);
+$accent: map-get($rpglb-app-theme, accent);
+$warn: map-get($rpglb-app-theme, warn);
+$foreground: map-get($rpglb-app-theme, foreground);
+$background: map-get($rpglb-app-theme, background);
+
+:root {
+	--color-accent: #16a17b;
+	--color-primary: #215ba1;
+	--color-text: white;
+	--color-link: #5ac2a5;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	/* color: var(--color-text); */
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	font-size: 1.1em;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	/* background: var(--color-primary); */
+	display: grid;
+	grid:
+	'header' 50px
+	'eventinfo' auto
+	'content' auto
+	'footer' auto
+	/ 1fr;
+	min-height: 100%;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+.warn {
+	background-color: mat-color($background, card);
+	color: mat-color($warn);
+	font-size: 0.8em;
+	margin-bottom: 20px;
+	padding: 10px;
+	border-radius: 5px;
+	text-align: center;
+}
