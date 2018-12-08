@@ -20,18 +20,24 @@ export class LoginComponent implements OnInit {
 	}
 	@ViewChild('f') form: any
 	message: string = ''
+	successMessage: string = ''
 	data: any
+	disableForm: boolean = false
 
 	constructor(private userService: UserService, private router: Router) { }
 
 	login() {
 		if (this.form.valid) {
+			this.disableForm = true
 			this.userService.loginUser(this.loginData)
 				.subscribe(
 					(res: any) => {
 						this.data = res
 						localStorage.setItem('jwtToken', this.data.token)
-						this.router.navigate(['users'])
+						this.successMessage = 'Login successful, redirecting...'
+						setTimeout(() => {
+							this.router.navigate(['users'])
+						},         1500)
 					},
 					(err: any) => {
 						this.message = err.error.message
@@ -40,6 +46,15 @@ export class LoginComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		// Redirect user if already logged in
+		const token = localStorage.getItem('jwtToken')
+		if (token) {
+			this.disableForm = true
+			this.successMessage = 'Already logged in, redirecting...'
+			setTimeout(() => {
+				this.router.navigate(['users'])
+			},         1500)
+		}
 	}
 
 }

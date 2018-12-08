@@ -1,6 +1,5 @@
-import { Component, NgModule, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import * as $ from 'jquery'
 
 import { User } from '../user'
 import { UserService } from '../user.service'
@@ -13,8 +12,6 @@ import { UserService } from '../user.service'
 })
 
 export class UserListComponent implements OnInit {
-	model: User = new User()
-	@ViewChild('f') form: any
 	userList: User[] = []
 
 	constructor(private userService: UserService, private router: Router) { }
@@ -30,20 +27,6 @@ export class UserListComponent implements OnInit {
 						this.router.navigate(['login'])
 					}
 				})
-	}
-
-	onSubmit() {
-		if (this.form.valid) {
-			this.userService.createUser(this.model)
-				.subscribe(
-					(res: any) => {
-						this.userList.push(res.data)
-						this.form.reset()
-					},
-					(err: any) => {
-						console.error('Error creating user.', err)
-					} )
-		}
 	}
 
 	ngOnInit() {

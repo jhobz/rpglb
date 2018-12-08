@@ -5,6 +5,7 @@ import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
 import { LoginComponent } from './login/login.component'
+import { SignupComponent } from './signup/signup.component'
 import { UserListComponent } from './user-list/user-list.component'
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
 	{ path: 'event', component: EventHomeComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'rules', component: EventRulesComponent },
+	{ path: 'signup', component: SignupComponent },
 	{ path: 'sweepstakes', component: EventSweepstakesComponent },
 	{ path: 'users', component: UserListComponent }
 ]
