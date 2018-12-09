@@ -16,7 +16,7 @@
 			'has-success': email.valid && (email.dirty || email.touched)
 		}">
 		<label>Email</label>
-		<input type="email" class="form-control" name="email" [(ngModel)]="model.email" required pattern="[^ @]*@[^ @]*" #email="ngModel" />
+		<input type="email" class="form-control" name="email" [(ngModel)]="model.email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" #email="ngModel" />
 		<div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
 			<p *ngIf="email.errors.required">Email is required</p>
 			<p *ngIf="email.errors.pattern">Must be an email</p>

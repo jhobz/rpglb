@@ -7,27 +7,7 @@ const UserService = require('../services/users.service')
 
 _this = this
 
-const getTokenFromHeaders = (headers) => {
-	if (headers && headers.authorization) {
-		let parted = headers.authorization.split(' ')
-		if (parted.length === 2) {
-			return parted[1]
-		}
-		return null
-	}
-	return null
-}
-
 exports.getUsers = async function (req, res, next) {
-	// Check authorization token to ensure user is logged in
-	const token = getTokenFromHeaders(req.headers)
-	if (!token) {
-		return res.status(403).json( {
-			status: 403,
-			message: 'Unauthorized'
-		} )
-	}
-
 	let page = req.query.page ? req.query.page : 1
 	let limit = req.query.limit ? req.query.limit : 10
 
@@ -126,6 +106,7 @@ exports.loginUser = async function (req, res, next) {
 	try {
 		console.log(req.body.username)
 		let user = await UserService.getUser(req.body.username)
+		console.log(user.id,user.username,req.body.username)
 		return user.comparePassword(req.body.password, (err, isMatch) => {
 			if (isMatch && !err) {
 				const token = jwt.sign(user.toJSON(), dbConfig.secret)

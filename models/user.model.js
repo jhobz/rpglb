@@ -5,26 +5,38 @@ const bcrypt = require('bcrypt-nodejs')
 let UserSchema = new mongoose.Schema({
 	firstName: {
 		type: String,
+		maxlength: 32,
 		required: true
 	},
 	lastName: {
 		type: String,
+		maxlength: 32,
 		required: true
 	},
 	email: {
 		type: String,
 		unique: true,
-		require: true
+		maxlength: 64,
+		require: true,
+		match: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g
 	},
 	username: {
 		type: String,
 		unique: true,
+		minlength: 3,
+		maxlength: 26,
 		require: true
 	},
 	password: {
 		type: String,
+		minlength: 12,
+		maxlength: 128,
 		required: true
-	}
+	},
+	submissions: [{
+		type: mongoose.Schema.ObjectId,
+		ref: 'GameSubmission'
+	}]
 })
 
 // Specifically have to NOT use arrow notation here (no access to `this`)
