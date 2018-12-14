@@ -1,32 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { User } from '../user'
-import { UserService } from '../user.service'
+import { AuthenticationService, TokenPayload } from '../authentication.service'
 
 @Component({
 	selector: 'app-signup',
 	templateUrl: './signup.component.html',
-	styleUrls: ['./signup.component.css'],
-	providers: [UserService]
+	styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
-	model: User = new User()
+export class SignupComponent {
+	model: TokenPayload = {
+		username: '',
+		password: '',
+		email: '',
+		firstName: '',
+		lastName: ''
+	}
 	@ViewChild('f') form: any
 	message: string
 
-	constructor(private userService: UserService, private router: Router) { }
+	constructor(private auth: AuthenticationService, private router: Router) { }
 
-	onSubmit() {
+	register() {
 		if (this.form.valid) {
-			this.userService.createUser(this.model)
+			this.auth.register(this.model)
 				.subscribe(
 					(res: any) => {
 						this.form.reset()
 						// TODO: Require email verification
-						this.message = 'User created successfully! Redirecting to login page...'
+						this.message = 'User created successfully! Redirecting to profile page...'
 						setTimeout(() => {
-							this.router.navigate(['login'])
+							this.router.navigate(['users'])
 						},         1500)
 					},
 					(err: any) => {
@@ -35,13 +39,4 @@ export class SignupComponent implements OnInit {
 					} )
 		}
 	}
-
-	ngOnInit() {
-		// Log user out if they manage to reach the signup page while logged in
-		const token = localStorage.getItem('jwtToken')
-		if (token) {
-			localStorage.removeItem('jwtToken')
-		}
-	}
-
 }

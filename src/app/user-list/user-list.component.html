@@ -1,3 +1,6 @@
+<div *ngIf="!auth.isLoggedIn()"><a routerLink="/login">Login</a></div>
+<div *ngIf="auth.isLoggedIn()"><a routerLink="/profile">{{ auth.getUserInfo()?.username }}</a></div>
+<div *ngIf="auth.isLoggedIn()"><a (click)="auth.logout()">Logout</a></div>
 <button (click)="getUsers()">Fetch Users</button>
 <div class="user-list" *ngFor="let user of userList">
 	<span>{{user.username}}: </span>

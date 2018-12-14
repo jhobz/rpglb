@@ -3,7 +3,6 @@ const router = express.Router()
 const passport = require('passport')
 const dbConfig = require('../../config/database')
 require('../../config/passport')(passport)
-const jwt = require('jsonwebtoken')
 
 const UserController = require('../../controllers/users.controller')
 

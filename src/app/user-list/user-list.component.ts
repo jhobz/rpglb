@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 
+import { AuthenticationService } from '../authentication.service'
 import { User } from '../user'
 import { UserService } from '../user.service'
 
@@ -11,10 +12,10 @@ import { UserService } from '../user.service'
 	providers: [UserService]
 })
 
-export class UserListComponent implements OnInit {
+export class UserListComponent {
 	userList: User[] = []
 
-	constructor(private userService: UserService, private router: Router) { }
+	constructor(public auth: AuthenticationService, private userService: UserService, private router: Router) { }
 
 	getUsers() {
 		this.userService.getUsers()
@@ -28,8 +29,4 @@ export class UserListComponent implements OnInit {
 					}
 				})
 	}
-
-	ngOnInit() {
-	}
-
 }

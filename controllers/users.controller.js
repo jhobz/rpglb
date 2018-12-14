@@ -7,6 +7,17 @@ const UserService = require('../services/users.service')
 
 _this = this
 
+function generateToken (user) {
+	return jwt.sign(
+		{
+			_id: user._id,
+			username: user.username
+		},
+		dbConfig.secret,
+		{ expiresIn: '30d' }
+	)
+}
+
 exports.getUsers = async function (req, res, next) {
 	let page = req.query.page ? req.query.page : 1
 	let limit = req.query.limit ? req.query.limit : 10
@@ -39,9 +50,11 @@ exports.createUser = async function (req, res, next) {
 
 	try {
 		let createdUser = await UserService.createUser(user)
+		const token = generateToken(createdUser)
 		return res.status(201).json( {
 			status: 201,
 			data: createdUser,
+			token: token,
 			message: 'User created successfully'
 		} )
 	} catch (e) {
@@ -108,11 +121,11 @@ exports.loginUser = async function (req, res, next) {
 		let user = await UserService.getUser(req.body.username)
 		console.log(user.id,user.username,req.body.username)
 		return user.comparePassword(req.body.password, (err, isMatch) => {
+			const token = generateToken(user)
 			if (isMatch && !err) {
-				const token = jwt.sign(user.toJSON(), dbConfig.secret)
 				return res.status(200).json( {
 					status: 200,
-					token: `JWT ${token}`
+					token: `${token}`
 				} )
 			} else {
 				return res.status(401).json( {
