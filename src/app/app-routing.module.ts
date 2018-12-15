@@ -8,6 +8,7 @@ import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes
 import { LoginComponent } from './login/login.component'
 import { ProfileComponent } from './profile/profile.component'
 import { SignupComponent } from './signup/signup.component'
+import { SubmissionListComponent } from './submission-list/submission-list.component'
 import { UserListComponent } from './user-list/user-list.component'
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
 	{ path: 'rules', component: EventRulesComponent },
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
 	{ path: 'signup', component: SignupComponent },
+	{ path: 'submissions', component: SubmissionListComponent },
 	{ path: 'sweepstakes', component: EventSweepstakesComponent },
 	{ path: 'users', component: UserListComponent }
 ]

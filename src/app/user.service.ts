@@ -1,16 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable'
+import { map } from 'rxjs/operators/map'
 
+import { AuthenticationService } from './authentication.service'
 import { User } from './user'
 
 @Injectable()
 export class UserService {
 	private apiUrl: string = 'http://localhost:3000/api/users'
 
-	constructor(private http: HttpClient) {
-	}
+	constructor(private auth: AuthenticationService, private http: HttpClient) { }
 
 	// TODO: Make PaginationResponse class to replace "any" as the repsonse type
 
@@ -19,10 +19,8 @@ export class UserService {
 	}
 
 	getUsers(): Observable<User[]> {
-		const options = {
-			// The default empty string is necessary here or HttpClient throws a hissy fit
-			headers: new HttpHeaders({ 'Authorization': `Bearer ${localStorage.getItem('jwtToken') || ''}` })
-		}
+		const options = { headers: this.auth.generateAuthHeader() }
+
 		return this.http.get(this.apiUrl, options)
 			.map( (res: any) => {
 				return res.data.docs as User[]

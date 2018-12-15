@@ -1,0 +1,59 @@
+<div class="table-container">
+	<div class="loading-shade" *ngIf="isLoadingResults">
+		<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+		<!-- TODO: Include an error message here when appropriate -->
+	</div>
+	<mat-table #table [dataSource]="dataSource"
+	           matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
+
+		<ng-container matColumnDef="runner">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Runner</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.runner}}</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef
+				mat-sort-header disableClear="true">Game</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.name}}</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="console">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Console</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.console}}</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="description">
+			<mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.description}}</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="pros">
+			<mat-header-cell *matHeaderCellDef>Pros</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.pros}}</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="cons">
+			<mat-header-cell *matHeaderCellDef>Cons</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.cons}}</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="categories">
+			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.categories}}</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="public">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Visibility</mat-header-cell>
+			<mat-cell *matCellDef="let submission">{{submission.public ? 'Public' : 'Private'}}</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+	</mat-table>
+	<mat-paginator #paginator
+		[length]="resultsLength"
+		[pageSize]="10"
+		[pageSizeOptions]="[5, 10, 20, 50]"
+		[showFirstLastButtons]="true">
+	</mat-paginator>
+</div>

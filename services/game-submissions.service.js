@@ -2,11 +2,12 @@ let GameSubmission = require('../models/game-submission.model')
 
 _this = this
 
-exports.getSubmissions = async function (query, page, limit) {
+exports.getSubmissions = async function (query, page, limit, sort, order) {
 	// options for mongoose paginate
 	let options = {
 		page,
-		limit
+		limit,
+		sort: { [sort]: order }
 	}
 
 	// try-catch for db query
@@ -26,6 +27,7 @@ exports.createSubmission = async function (submission) {
 		description: submission.description,
 		pros: submission.pros,
 		cons: submission.cons,
+		public: submission.public,
 		categories: submission.categories
 	})
 

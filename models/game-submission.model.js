@@ -23,7 +23,7 @@ let CategorySchema = new mongoose.Schema({
 		type: String, // URL
 		trim: true,
 		require: true,
-		match: /^(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+$/gi
+		match: /^(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+$/i
 	}
 })
 
@@ -58,6 +58,10 @@ let GameSubmissionSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		maxlength: 500
+	},
+	public: {
+		type: Boolean,
+		default: false
 	},
 	categories: {
 		type: [CategorySchema],

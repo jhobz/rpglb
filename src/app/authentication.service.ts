@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
@@ -66,8 +66,13 @@ export class AuthenticationService {
 		return this.request('post', 'login', user)
 	}
 
+	// TODO: Move this to UserService
 	public profile(): Observable<User> {
 		return this.request('get', 'profile')
+	}
+
+	public generateAuthHeader(): HttpHeaders {
+		return new HttpHeaders({ 'Authorization': `Bearer ${this.getToken()}` })
 	}
 
 	private saveToken(token: string): void {
@@ -90,7 +95,7 @@ export class AuthenticationService {
 			base = this.http.post(`http://localhost:3000/api/users/${type === 'signup' ? '' : type}`, user)
 		} else {
 			base = this.http.get(`http://localhost:3000/api/users/${type}`, {
-				headers: { Authorization: `Bearer ${this.getToken()}` }
+				headers: this.generateAuthHeader()
 			})
 		}
 

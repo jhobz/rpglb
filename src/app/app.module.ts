@@ -2,7 +2,16 @@ import { APP_BASE_HREF } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule } from '@angular/material'
+import {
+	MatButtonModule,
+	MatFormFieldModule,
+	MatIconModule,
+	MatInputModule,
+	MatPaginatorModule,
+	MatProgressSpinnerModule,
+	MatSortModule,
+	MatTableModule
+} from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
@@ -18,6 +27,7 @@ import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
 import { ProfileComponent } from './profile/profile.component'
 import { SignupComponent } from './signup/signup.component'
+import { SubmissionListComponent } from './submission-list/submission-list.component'
 import { UserListComponent } from './user-list/user-list.component'
 
 
@@ -32,6 +42,7 @@ import { UserListComponent } from './user-list/user-list.component'
 		LoginComponent,
 		SignupComponent,
 		ProfileComponent,
+		SubmissionListComponent
 	],
 	imports: [
 		BrowserModule,
@@ -42,7 +53,11 @@ import { UserListComponent } from './user-list/user-list.component'
 		MatButtonModule,
 		MatFormFieldModule,
 		MatIconModule,
-		MatInputModule
+		MatInputModule,
+		MatPaginatorModule,
+		MatProgressSpinnerModule,
+		MatSortModule,
+		MatTableModule
 	],
 	providers: [
 		AuthGuardService,
