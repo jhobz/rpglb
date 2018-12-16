@@ -5,8 +5,9 @@ import { map } from 'rxjs/operators/map'
 
 import { AuthenticationService } from './authentication.service'
 
-interface GameCategory {
+export interface GameCategory {
 	name: string
+	estimateTimeString?: string
 	estimate: number
 	description: string
 	video: string

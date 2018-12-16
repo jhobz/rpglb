@@ -1,0 +1,20 @@
+.form-wrapper {
+	width: 500px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-wrapper > * {
+	width: 100%;
+}
+
+.row-wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.row-wrapper > :first-child {
+	flex-grow: 3;
+	margin-right: 10px;
+}

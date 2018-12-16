@@ -4,7 +4,7 @@ const mongoosePaginate = require('mongoose-paginate')
 let CategorySchema = new mongoose.Schema({
 	name: {
 		type: String,
-		maxlength: 32,
+		maxlength: 64,
 		required: true
 	},
 	estimate: {
@@ -35,7 +35,7 @@ let GameSubmissionSchema = new mongoose.Schema({
 	},
 	name: {
 		type: String,
-		maxlength: 32,
+		maxlength: 64,
 		required: true
 	},
 	console: {
