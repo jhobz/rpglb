@@ -1,6 +1,6 @@
 .form-wrapper {
-	width: 500px;
-	margin: auto;
+	min-width: 500px;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 }
@@ -14,7 +14,11 @@
 	flex-direction: row;
 }
 
+.row-wrapper > * {
+	flex-grow: 1;
+}
+
 .row-wrapper > :first-child {
-	flex-grow: 3;
+	flex-grow: 5;
 	margin-right: 10px;
 }

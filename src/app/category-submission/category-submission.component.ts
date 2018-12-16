@@ -8,11 +8,10 @@ import { convertTimeStringToMinutes } from '../time-range.directive'
 @Component({
 	selector: 'app-category-submission',
 	templateUrl: './category-submission.component.html',
-	styleUrls: ['./category-submission.component.css']
+	styleUrls: ['./category-submission.component.css'],
 })
 export class CategorySubmissionComponent {
-	@Input() _id: number
-	category: GameCategory = {
+	@Input() category: GameCategory = {
 		name: '',
 		estimateTimeString: '',
 		estimate: null,

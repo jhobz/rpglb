@@ -1,4 +1,110 @@
-<p>
-  game-submission works!
-</p>
-<app-category-submission [_id]="0"></app-category-submission>
+<div class="submission-wrapper">
+	<h3>Game Information</h3>
+	<fieldset class="game-info form-wrapper">
+		<div class="row-wrapper">
+			<mat-form-field>
+				<input
+					matInput
+					[name]="'game'+game._id+'-name'"
+					placeholder="Game Name"
+					maxlength="64"
+					[(ngModel)]="game.name"
+					required />
+			</mat-form-field>
+
+			<mat-form-field>
+				<input
+					matInput
+					[name]="'game-'+game._id+'console'"
+					placeholder="Console"
+					maxlength="32"
+					[(ngModel)]="game.console"
+					required />
+				<mat-hint>What you'll be playing on - official releases only</mat-hint>
+			</mat-form-field>
+		</div>
+
+		<mat-form-field>
+			<textarea
+				matInput
+				#desc
+				[name]="'game-'+game._id+'description'"
+				placeholder="Description"
+				maxlength="500"
+				[(ngModel)]="game.description"
+				matTextareaAutosize
+				matAutosizeMinRows="3"
+				matAutosizeMaxRows="5"
+				required >
+			</textarea>
+			<mat-hint align="end">{{desc.value?.length || 0}}/500</mat-hint>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Pros</mat-label>
+			<textarea
+				matInput
+				#pros
+				[name]="'game-'+game._id+'pros'"
+				placeholder="Cutscenes are skippable, nostalgia factor, etc."
+				maxlength="500"
+				[(ngModel)]="game.pros"
+				matTextareaAutosize
+				matAutosizeMinRows="3"
+				matAutosizeMaxRows="5"
+				required >
+			</textarea>
+			<mat-hint>Describe the positives of your game as a speedrun</mat-hint>
+			<mat-hint align="end">{{pros.value?.length || 0}}/500</mat-hint>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Cons</mat-label>
+			<textarea
+				matInput
+				#cons
+				[name]="'game-'+game._id+'cons'"
+				placeholder="Unskippable cutscenes, long walking sections, etc."
+				maxlength="500"
+				[(ngModel)]="game.cons"
+				matTextareaAutosize
+				matAutosizeMinRows="3"
+				matAutosizeMaxRows="5"
+				required >
+			</textarea>
+			<mat-hint>Describe the downsides of your game as a speedrun (be honest!)</mat-hint>
+			<mat-hint align="end">{{cons.value?.length || 0}}/500</mat-hint>
+		</mat-form-field>
+	</fieldset>
+	<h3>
+		Categories
+		<span *ngIf="game.name">for {{game.name}}</span>
+	</h3>
+	<div class="category-info">
+		<fieldset
+			*ngFor="let cat of game.categories"
+			class="category-wrapper"
+			[@fadeInOut]="'in'">
+			<app-category-submission [category]="cat"></app-category-submission>
+			<br />
+			<span class="category-id">Category #{{cat._id + 1}}</span>
+			<button
+				mat-raised-button
+				color="warn"
+				(click)="removeCategory(cat._id)"
+				[disabled]="game.categories.length === 1">
+				<mat-icon>clear</mat-icon>
+				<span>Remove Category</span>
+			</button>
+		</fieldset>
+		<fieldset *ngIf="game.categories.length < 5" class="category-new">
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="addCategory()">
+				<mat-icon>add_circle</mat-icon>
+				<span>Add Category</span>
+			</button>
+		</fieldset>
+	</div>
+</div>

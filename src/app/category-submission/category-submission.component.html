@@ -3,7 +3,7 @@
 		<mat-form-field>
 			<input
 				matInput
-				[name]="'cat-'+_id+'-name'"
+				[name]="'cat-'+category._id+'-name'"
 				placeholder="Category Name"
 				maxlength="64"
 				[(ngModel)]="category.name"
@@ -15,14 +15,14 @@
 			<input
 				matInput
 				#estimate="ngModel"
-				[name]="'cat-'+_id+'-estimate'"
+				[name]="'cat-'+category._id+'-estimate'"
 				placeholder="HH:MM"
 				pattern="([0-9]?[0-9]?[0-9]):([0-5][0-9])"
 				appTimeRange="[1,10080]"
 				[(ngModel)]="category.estimateTimeString"
 				(change)="onEstimateChange(estimate.value)"
 				required />
-			<mat-hint>Round to the nearest whole minute</mat-hint>
+			<mat-hint>Round to the whole minute</mat-hint>
 			<mat-error *ngIf="estimate.errors?.pattern && !estimate.errors.required">Please enter a valid time in the format HH:MM</mat-error>
 			<mat-error *ngIf="estimate.errors?.timeRange?.bound === 'max' && !estimate.errors.pattern && !estimate.errors.required">I see someone's a fan of Baten Kaitos...</mat-error>
 			<mat-error *ngIf="estimate.errors?.timeRange?.bound === 'min' && !estimate.errors.pattern && !estimate.errors.required">I see someone's a fan of Clue...</mat-error>
@@ -33,7 +33,7 @@
 		<textarea
 			matInput
 			#desc
-			[name]="'cat-'+_id+'-description'"
+			[name]="'cat-'+category._id+'-description'"
 			placeholder="Description"
 			maxlength="240"
 			[(ngModel)]="category.description"
@@ -44,5 +44,17 @@
 		</textarea>
 		<mat-hint>Pitch your category in 2 tweets or less</mat-hint>
 		<mat-hint align="end">{{desc.value?.length || 0}}/240</mat-hint>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input
+			matInput
+			#video="ngModel"
+			[name]="'cat-'+category._id+'-video'"
+			placeholder="Video link"
+			pattern="(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+"
+			[(ngModel)]="category.video"
+			required />
+			<mat-error *ngIf="video.errors?.pattern && !video.errors.required">Please enter a valid video URL</mat-error>
 	</mat-form-field>
 </div>

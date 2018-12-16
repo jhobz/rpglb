@@ -65,9 +65,14 @@ let GameSubmissionSchema = new mongoose.Schema({
 	},
 	categories: {
 		type: [CategorySchema],
+		validate: [numCategoriesValidator, '{PATH} either has too few or too many items'],
 		required: true
 	}
 })
+
+function numCategoriesValidator(arr) {
+	return arr.length > 0 && arr.length <= 5
+}
 
 GameSubmissionSchema.plugin(mongoosePaginate)
 

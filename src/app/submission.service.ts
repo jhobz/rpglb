@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators/map'
 import { AuthenticationService } from './authentication.service'
 
 export interface GameCategory {
+	_id?: number
 	name: string
 	estimateTimeString?: string
 	estimate: number
@@ -14,7 +15,7 @@ export interface GameCategory {
 }
 
 export interface GameSubmission {
-	_id: string
+	_id?: string
 	runner: string
 	name: string
 	console: string
