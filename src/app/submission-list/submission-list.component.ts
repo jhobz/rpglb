@@ -18,7 +18,7 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 	providers: [SubmissionService]
 })
 export class SubmissionListComponent implements OnInit {
-	columnsToDisplay: string[] = ['runner', 'name', 'console', 'description', 'pros', 'cons', 'categories', 'public']
+	columnsToDisplay: string[] = ['runner', 'name', 'console', 'description', 'pros', 'cons', 'categories']
 	dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
 
 	resultsLength: number = 0
@@ -35,6 +35,11 @@ export class SubmissionListComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		const user = this.auth.getUserInfo()
+		if (user && user.roles.includes('submissions')) {
+			this.columnsToDisplay.push('public')
+		}
+
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
 
 		merge(this.sort.sortChange, this.paginator.page)

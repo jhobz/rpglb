@@ -11,7 +11,8 @@ function generateToken (user) {
 	return jwt.sign(
 		{
 			_id: user._id,
-			username: user.username
+			username: user.username,
+			roles: user.roles
 		},
 		dbConfig.secret,
 		{ expiresIn: '30d' }
@@ -80,7 +81,8 @@ exports.updateUser = async function (req, res, next) {
 		lastName: req.body.lastName ? req.body.lastName : null,
 		email: req.body.email ? req.body.email : null,
 		username: req.body.username ? req.body.username : null,
-		password: req.body.password ? req.body.password : null
+		password: req.body.password ? req.body.password : null,
+		roles: req.body.roles ? req.body.roles : []
 	}
 
 	try {

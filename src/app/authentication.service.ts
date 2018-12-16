@@ -9,6 +9,7 @@ import { User } from './user'
 export interface TokenUserInfo {
 	_id: string
 	username: string
+	roles: string[]
 	exp: number
 	iat: number
 }

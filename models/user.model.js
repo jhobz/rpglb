@@ -33,6 +33,10 @@ let UserSchema = new mongoose.Schema({
 		maxlength: 128,
 		required: true
 	},
+	roles: {
+		type: [String],
+		default: []
+	},
 	submissions: [{
 		type: mongoose.Schema.ObjectId,
 		ref: 'GameSubmission'

@@ -26,6 +26,7 @@ import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes
 import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
 import { ProfileComponent } from './profile/profile.component'
+import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
 import { SubmissionListComponent } from './submission-list/submission-list.component'
 import { UserListComponent } from './user-list/user-list.component'
@@ -61,7 +62,8 @@ import { UserListComponent } from './user-list/user-list.component'
 	],
 	providers: [
 		AuthGuardService,
-		AuthenticationService
+		AuthenticationService,
+		RoleGuardService
 	],
 	bootstrap: [AppComponent]
 })

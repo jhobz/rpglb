@@ -50,11 +50,12 @@ exports.updateUser = async function (user) {
 		return false
 	}
 
-	oldUser.firstName = user.firstName
-	oldUser.lastName = user.lastName
-	oldUser.email = user.email
-	oldUser.username = user.username
-	oldUser.password = user.password
+	// Replace any changed values
+	Object.keys(user).forEach(key => {
+		if (user[key]) {
+			oldUser[key] = user[key]
+		}
+	})
 
 	try {
 		let savedUser = await oldUser.save()

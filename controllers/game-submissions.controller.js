@@ -8,9 +8,10 @@ const GameSubmissionService = require('../services/game-submissions.service')
 _this = this
 
 exports.getSubmissions = async function (req, res, next) {
+	let query = { public: true }
 	// If user is logged in, check for admin status
-	if (req.user) {
-		// TODO: Grant additional privileges if admin
+	if (req.user && req.user.roles && req.user.roles.indexOf('submissions') >= 0) {
+		query = {}
 	}
 
 	const page = req.query.page ? parseInt(req.query.page) : 1
@@ -19,7 +20,7 @@ exports.getSubmissions = async function (req, res, next) {
 	const order = req.query.order ? req.query.order : 'asc'
 
 	try {
-		let submissions = await GameSubmissionService.getSubmissions({}, page, limit, sort, order)
+		let submissions = await GameSubmissionService.getSubmissions(query, page, limit, sort, order)
 		return res.status(200).json( {
 			status: 200,
 			data: submissions,
@@ -43,6 +44,7 @@ exports.createSubmission = async function (req, res, next) {
 		description: req.body.description,
 		pros: req.body.pros,
 		cons: req.body.cons,
+		public: req.body.public,
 		categories: req.body.categories
 	}
 
