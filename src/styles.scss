@@ -86,8 +86,16 @@ a:hover {
 	color: mat-color($warn);
 }
 
+.warn-light {
+	color: mat-color($warn, lighter);
+}
+
 .success {
 	color: mat-color($primary, 200);
+}
+
+.info {
+	color: mat-color($accent, lighter);
 }
 
 .preserve-newlines {

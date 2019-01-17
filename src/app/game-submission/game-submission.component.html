@@ -1,11 +1,11 @@
-<div class="submission-wrapper">
+<form novalidate #f="ngForm" class="submission-wrapper">
 	<h3>Game Information</h3>
 	<fieldset class="game-info form-wrapper">
 		<div class="row-wrapper">
 			<mat-form-field>
 				<input
 					matInput
-					[name]="'game'+game._id+'-name'"
+					name="gameName"
 					placeholder="Game Name"
 					maxlength="64"
 					[(ngModel)]="game.name"
@@ -15,7 +15,7 @@
 			<mat-form-field>
 				<input
 					matInput
-					[name]="'game-'+game._id+'console'"
+					name="gameConsole"
 					placeholder="Console"
 					maxlength="32"
 					[(ngModel)]="game.console"
@@ -28,7 +28,7 @@
 			<textarea
 				matInput
 				#desc
-				[name]="'game-'+game._id+'description'"
+				name="gameDescription"
 				placeholder="Description"
 				maxlength="500"
 				[(ngModel)]="game.description"
@@ -45,14 +45,13 @@
 			<textarea
 				matInput
 				#pros
-				[name]="'game-'+game._id+'pros'"
+				name="gamePros"
 				placeholder="Cutscenes are skippable, nostalgia factor, etc."
 				maxlength="500"
 				[(ngModel)]="game.pros"
 				matTextareaAutosize
 				matAutosizeMinRows="3"
-				matAutosizeMaxRows="5"
-				required >
+				matAutosizeMaxRows="5" >
 			</textarea>
 			<mat-hint>Describe the positives of your game as a speedrun</mat-hint>
 			<mat-hint align="end">{{pros.value?.length || 0}}/500</mat-hint>
@@ -63,14 +62,13 @@
 			<textarea
 				matInput
 				#cons
-				[name]="'game-'+game._id+'cons'"
+				name="gameCons"
 				placeholder="Unskippable cutscenes, long walking sections, etc."
 				maxlength="500"
 				[(ngModel)]="game.cons"
 				matTextareaAutosize
 				matAutosizeMinRows="3"
-				matAutosizeMaxRows="5"
-				required >
+				matAutosizeMaxRows="5" >
 			</textarea>
 			<mat-hint>Describe the downsides of your game as a speedrun (be honest!)</mat-hint>
 			<mat-hint align="end">{{cons.value?.length || 0}}/500</mat-hint>
@@ -87,17 +85,17 @@
 			[@fadeInOut]="'in'">
 			<app-category-submission [category]="cat"></app-category-submission>
 			<br />
-			<span class="category-id">Category #{{cat._id + 1}}</span>
+			<span class="category-id">Category #{{game.categories.indexOf(cat) + 1}}</span>
 			<button
 				mat-raised-button
 				color="warn"
-				(click)="removeCategory(cat._id)"
+				(click)="removeCategory(game.categories.indexOf(cat))"
 				[disabled]="game.categories.length === 1">
 				<mat-icon>clear</mat-icon>
 				<span>Remove Category</span>
 			</button>
 		</fieldset>
-		<fieldset *ngIf="game.categories.length < 5" class="category-new">
+		<fieldset *ngIf="game.categories.length < maxCategories" class="category-new">
 			<button
 				mat-raised-button
 				color="primary"
@@ -107,4 +105,4 @@
 			</button>
 		</fieldset>
 	</div>
-</div>
+</form>

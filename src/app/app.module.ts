@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import {
 	MatButtonModule,
+	MatCardModule,
 	MatFormFieldModule,
 	MatIconModule,
 	MatInputModule,
@@ -11,6 +12,7 @@ import {
 	MatProgressBarModule,
 	MatProgressSpinnerModule,
 	MatSortModule,
+	MatStepperModule,
 	MatTableModule,
 	MatToolbarModule
 } from '@angular/material'
@@ -34,6 +36,7 @@ import { NavbarComponent } from './navbar/navbar.component'
 import { ProfileComponent } from './profile/profile.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
+import { SubmissionFormComponent } from './submission-form/submission-form.component'
 import { SubmissionListComponent } from './submission-list/submission-list.component'
 import { TimeRangeValidatorDirective } from './time-range.directive'
 import { UserListComponent } from './user-list/user-list.component'
@@ -55,7 +58,8 @@ import { UserListComponent } from './user-list/user-list.component'
 		GameSubmissionComponent,
 		TimeRangeValidatorDirective,
 		NavbarComponent,
-		FooterComponent
+		FooterComponent,
+		SubmissionFormComponent
 	],
 	imports: [
 		BrowserModule,
@@ -64,12 +68,14 @@ import { UserListComponent } from './user-list/user-list.component'
 		HttpClientModule,
 		FormsModule,
 		MatButtonModule,
+		MatCardModule,
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
 		MatPaginatorModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
+		MatStepperModule,
 		MatSortModule,
 		MatTableModule,
 		MatToolbarModule

@@ -10,8 +10,16 @@ _this = this
 exports.getSubmissions = async function (req, res, next) {
 	let query = { public: true }
 	// If user is logged in, check for admin status
-	if (req.user && req.user.roles && req.user.roles.indexOf('submissions') >= 0) {
+	if (req.user && (
+		req.user.roles && req.user.roles.indexOf('submissions') >= 0 ||
+		req.query.user && req.user._id == req.query.user )
+	) {
 		query = {}
+	}
+
+	// Get submissions for one runner specifically
+	if (req.query.user) {
+		query.runner = req.query.user
 	}
 
 	const page = req.query.page ? parseInt(req.query.page) : 1
@@ -80,6 +88,7 @@ exports.updateSubmission = async function (req, res, next) {
 		description: req.body.description ? req.body.description : null,
 		pros: req.body.pros ? req.body.pros : null,
 		cons: req.body.cons ? req.body.cons : null,
+		public: req.body.public !== undefined ? req.body.public : null,
 		categories: req.body.categories ? req.body.categories : null
 	}
 

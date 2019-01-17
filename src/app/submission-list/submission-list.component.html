@@ -39,7 +39,9 @@
 
 		<ng-container matColumnDef="categories">
 			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
-			<mat-cell *matCellDef="let submission">{{submission.categories}}</mat-cell>
+			<mat-cell *matCellDef="let submission">
+				<div *ngFor="let cat of submission.categories">{{cat.name}} - {{cat.estimateTimeString}}</div>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="public">
@@ -50,10 +52,17 @@
 		<mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
 		<mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
 	</mat-table>
-	<mat-paginator #paginator
-		[length]="resultsLength"
-		[pageSize]="10"
-		[pageSizeOptions]="[5, 10, 20, 50]"
-		[showFirstLastButtons]="true">
-	</mat-paginator>
+
+	<!--
+		Common sense would use *ngIf directive on mat-paginator here, but this does not work with @ViewChild and
+ 		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
+	-->
+	<div [hidden]="!showPagination">
+		<mat-paginator #paginator
+			[length]="resultsLength"
+			[pageSize]="10"
+			[pageSizeOptions]="[5, 10, 20, 50]"
+			[showFirstLastButtons]="true">
+		</mat-paginator>
+	</div>
 </div>

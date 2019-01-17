@@ -12,11 +12,12 @@ article {
 
 header {
 	grid-area: header;
+	z-index: 6; /* Matches elevation */
 }
 
 main {
 	grid-area: content;
-	margin: auto 0;
+	/* margin: auto 0; */
 }
 
 footer {

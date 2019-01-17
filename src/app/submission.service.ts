@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators/map'
 import { AuthenticationService } from './authentication.service'
 
 export interface GameCategory {
-	_id?: number
+	_uid?: number
 	name: string
 	estimateTimeString?: string
 	estimate: number
@@ -44,6 +44,17 @@ export class SubmissionService {
 
 	createSubmission(submission: GameSubmission): Observable<any> {
 		return this.http.post(this.apiUrl, submission)
+	}
+
+	getSubmissionsForUser(userId: string): Observable<GameSubmissionResponse> {
+		const options = {
+			headers: this.auth.generateAuthHeader(),
+			params: new HttpParams()
+				.set('user', userId)
+		}
+
+		return this.http.get<any>(this.apiUrl, options)
+			.map((data: any) => data.data as GameSubmissionResponse)
 	}
 
 	getSubmissions(

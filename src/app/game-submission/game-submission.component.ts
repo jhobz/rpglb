@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations'
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 
 import { GameCategory, GameSubmission } from '../submission.service'
 
@@ -24,6 +24,7 @@ import { GameCategory, GameSubmission } from '../submission.service'
 })
 export class GameSubmissionComponent implements OnInit {
 	@Input() runnerId: string
+	@Input() maxCategories: number = 3
 
 	@Input() game: GameSubmission = {
 		runner: this.runnerId,
@@ -33,33 +34,30 @@ export class GameSubmissionComponent implements OnInit {
 		pros: '',
 		cons: '',
 		public: false,
-		categories: [{ _id: 0 } as GameCategory]
+		categories: [{ _uid: 0 } as GameCategory]
 	}
+
+	@ViewChild('f') form: any
 
 	constructor() { }
 
-	ngOnInit() {
-	}
+	ngOnInit() { }
 
 	addCategory() {
 		const id = this.game.categories.length
-		this.game.categories.push({ _id: id } as GameCategory)
+		this.game.categories.push({ _uid: id } as GameCategory)
 	}
 
-	removeCategory(id: number) {
+	removeCategory(index: number) {
 		const len = this.game.categories.length
 		if (len === 1) {
 			// TODO: Display some kind of error message
 			return
 		}
 
-		if (len > id) {
-			// GameSubmission must have at least one CategorySubmission
-			this.game.categories.splice(id, 1)
-			// Update ids of remaining categories
-			this.game.categories.forEach((item: GameCategory, i: number) => {
-				item._id = i
-			})
+		// GameSubmission must have at least one CategorySubmission
+		if (len > index) {
+			this.game.categories.splice(index, 1)
 		}
 	}
 

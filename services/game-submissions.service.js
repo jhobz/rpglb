@@ -56,7 +56,7 @@ exports.updateSubmission = async function (submission) {
 
 	// Replace any changed values
 	Object.keys(submission).forEach(key => {
-		if (submission[key]) {
+		if (submission[key] || key === 'public') {
 			oldSubmission[key] = submission[key]
 		}
 	})

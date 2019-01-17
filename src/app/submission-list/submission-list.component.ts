@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatPaginator, MatSort, MatTable, MatTableDataSource } from '@angular/material'
 import { Router } from '@angular/router'
+import { Observable } from 'rxjs/Observable'
 import { merge } from 'rxjs/observable/merge'
 import { of as observableOf } from 'rxjs/observable/of'
 import { catchError } from 'rxjs/operators/catchError'
@@ -18,8 +19,10 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 	providers: [SubmissionService]
 })
 export class SubmissionListComponent implements OnInit {
-	columnsToDisplay: string[] = ['runner', 'name', 'console', 'description', 'pros', 'cons', 'categories']
-	dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
+	columnsToDisplay: string[] = ['name', 'console', 'description', 'pros', 'cons', 'categories']
+	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
+	@Input() showRunner: boolean = true
+	@Input() showPagination: boolean = true
 
 	resultsLength: number = 0
 	isLoadingResults: boolean = true
@@ -40,30 +43,35 @@ export class SubmissionListComponent implements OnInit {
 			this.columnsToDisplay.push('public')
 		}
 
+		if (this.showRunner) {
+			this.columnsToDisplay.unshift('runner')
+		}
+
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
 
 		merge(this.sort.sortChange, this.paginator.page)
-			.pipe(
-				startWith({}),
-				switchMap(() => {
-					this.isLoadingResults = true
-					return this.submissionService.getSubmissions(
-						this.sort.active, this.sort.direction, this.paginator.pageSize, this.paginator.pageIndex)
-				}),
-				map((data: GameSubmissionResponse) => {
-					this.isLoadingResults = false
-					this.resultsLength = data.total
+				.pipe(
+					startWith({}),
+					switchMap(() => {
+						this.isLoadingResults = true
+						return this.submissionService.getSubmissions(
+							this.sort.active, this.sort.direction, this.paginator.pageSize, this.paginator.pageIndex)
+					}),
+					map((data: GameSubmissionResponse) => {
+						this.isLoadingResults = false
+						this.resultsLength = data.total
 
-					return data.docs
-				}),
-				catchError(() => {
-					this.isLoadingResults = false
-					// TODO: Display an error message on the table
-					return observableOf([])
+						return data.docs
+					}),
+					catchError(() => {
+						this.isLoadingResults = false
+						// TODO: Display an error message on the table
+						return observableOf([])
+					})
+				).subscribe((data: GameSubmission[]) => {
+					this.dataSource.data = data
 				})
-			).subscribe((data: GameSubmission[]) => {
-				this.dataSource.data = data
-			})
+		// }
 	}
 
 }

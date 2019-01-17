@@ -6,7 +6,7 @@ $rpglb-app-primary: mat-palette( $mat-blue, 700, 500, 900 );
 $rpglb-app-accent:  mat-palette( $mat-orange, A400, A200, A700 );
 
 // The warn palette is optional (defaults to red).
-$rpglb-app-warn:    mat-palette( $mat-red );
+$rpglb-app-warn:    mat-palette( $mat-red, 500, 300, 800 );
 
 // Create the theme object (a Sass map containing all of the palettes).
 $rpglb-app-theme: mat-dark-theme(

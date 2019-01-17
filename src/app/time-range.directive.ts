@@ -66,6 +66,11 @@ function timeRangeValidator(...args: number[]): ValidatorFn {
 	}
 }
 
+export function convertMinutesToTimeString(mins: number): string|false {
+	const nf = new Intl.NumberFormat('en-US', { minimumIntegerDigits: 2 })
+	return `${nf.format(Math.floor(mins / 60))}:${nf.format(mins % 60)}`
+}
+
 export function convertTimeStringToMinutes(time: string): number|false {
 	const matches = time && time.match(/^([0-9]?[0-9]?[0-9]):([0-5][0-9])$/)
 	const [hours, mins] =

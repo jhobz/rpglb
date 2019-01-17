@@ -1,0 +1,62 @@
+.submission-flow-container {
+	max-width: 1710px;
+	margin: 0 auto 50px;
+}
+
+.step-controls {
+	display: flex;
+	flex-direction: horizontal;
+	justify-content: space-between;
+}
+
+.step-controls [matsteppernext] .mat-icon {
+	margin-right: 0;
+	margin-left: 10px;
+}
+
+.step-controls .mat-icon {
+	margin-right: 10px;
+}
+
+.center-wrapper {
+	width: 100%;
+	text-align: center;
+}
+
+.btn-add-game {
+	width: 500px;
+	height: 300px;
+	font-size: 2em;
+	/* margin: 0 auto; */
+}
+
+.btn-add-game mat-icon {
+	width: 100px;
+	height: 100px;
+	font-size: 100px;
+	line-height: 100px;
+}
+
+.description {
+	margin: 25px 0;
+}
+
+.submission-summary {
+	width: 100%;
+}
+
+.submission-summary-row {
+	display: grid;
+	grid: 'game cats' / 1fr 2fr;
+	border-bottom: 2px inset white;
+}
+
+.submission-summary > .game-name {
+	grid-area: game;
+}
+
+.submission-summary > .category-container {
+	grid-area: cats;
+	display: flex;
+	flex-direction: column;
+}

@@ -3,7 +3,7 @@
 		<mat-form-field>
 			<input
 				matInput
-				[name]="'cat-'+category._id+'-name'"
+				[name]="'cat-'+category._uid+'-name'"
 				placeholder="Category Name"
 				maxlength="64"
 				[(ngModel)]="category.name"
@@ -15,7 +15,7 @@
 			<input
 				matInput
 				#estimate="ngModel"
-				[name]="'cat-'+category._id+'-estimate'"
+				[name]="'cat-'+category._uid+'-estimate'"
 				placeholder="HH:MM"
 				pattern="([0-9]?[0-9]?[0-9]):([0-5][0-9])"
 				appTimeRange="[1,10080]"
@@ -33,7 +33,7 @@
 		<textarea
 			matInput
 			#desc
-			[name]="'cat-'+category._id+'-description'"
+			[name]="'cat-'+category._uid+'-description'"
 			placeholder="Description"
 			maxlength="240"
 			[(ngModel)]="category.description"
@@ -50,7 +50,7 @@
 		<input
 			matInput
 			#video="ngModel"
-			[name]="'cat-'+category._id+'-video'"
+			[name]="'cat-'+category._uid+'-video'"
 			placeholder="Video link"
 			pattern="(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+"
 			[(ngModel)]="category.video"
