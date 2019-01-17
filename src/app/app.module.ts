@@ -10,7 +10,8 @@ import {
 	MatPaginatorModule,
 	MatProgressSpinnerModule,
 	MatSortModule,
-	MatTableModule
+	MatTableModule,
+	MatToolbarModule
 } from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -24,9 +25,11 @@ import { CategorySubmissionComponent } from './category-submission/category-subm
 import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
+import { FooterComponent } from './footer/footer.component'
 import { GameSubmissionComponent } from './game-submission/game-submission.component'
 import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
+import { NavbarComponent } from './navbar/navbar.component'
 import { ProfileComponent } from './profile/profile.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
@@ -49,7 +52,9 @@ import { UserListComponent } from './user-list/user-list.component'
 		SubmissionListComponent,
 		CategorySubmissionComponent,
 		GameSubmissionComponent,
-		TimeRangeValidatorDirective
+		TimeRangeValidatorDirective,
+		NavbarComponent,
+		FooterComponent
 	],
 	imports: [
 		BrowserModule,
@@ -64,7 +69,8 @@ import { UserListComponent } from './user-list/user-list.component'
 		MatPaginatorModule,
 		MatProgressSpinnerModule,
 		MatSortModule,
-		MatTableModule
+		MatTableModule,
+		MatToolbarModule
 	],
 	providers: [
 		AuthGuardService,

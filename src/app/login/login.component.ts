@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
 					(res: any) => {
 						this.successMessage = 'Login successful! Redirecting...'
 						const redirect = this.auth.redirectUrl ? this.auth.redirectUrl : '/users'
+						// TODO: Re-evaluate timeout
 						setTimeout(() => {
 							this.router.navigate([redirect])
 						},         1500)
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
 		// Redirect user if already logged in
 		if (this.auth.isLoggedIn()) {
 			this.successMessage = 'Already logged in, redirecting...'
+			// TODO: Re-evaluate timeout
 			setTimeout(() => {
 				this.router.navigate(['users'])
 			},         1500)

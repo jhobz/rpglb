@@ -1,0 +1,33 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: 125px 1fr;
+	z-index: 6;
+	/* background-color: #222; */
+}
+
+nav {
+	font-family: 'Segoe UI';
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+nav a {
+	color: #fff;
+	margin: 0 20px;
+}
+
+nav > .auth-container {
+	margin-left: auto;
+}
+
+nav > .auth-container > a {
+	margin: 0 10px;
+	cursor: pointer;
+}
+
+.logo {
+	height: 40px;
+	margin: 5px;
+	vertical-align: middle;
+}
