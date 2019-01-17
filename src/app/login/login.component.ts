@@ -20,11 +20,13 @@ export class LoginComponent implements OnInit {
 	message: string = ''
 	successMessage: string = ''
 	hidePassword: boolean = true
+	isDebouncing: boolean = false
 
 	constructor(private auth: AuthenticationService, private router: Router) { }
 
 	login() {
 		if (this.form.valid) {
+			this.isDebouncing = true
 			this.auth.login(this.loginData)
 				.subscribe(
 					(res: any) => {
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
 					},
 					(err: any) => {
 						this.message = err.error.message
+						this.isDebouncing = false
 					})
 		}
 	}

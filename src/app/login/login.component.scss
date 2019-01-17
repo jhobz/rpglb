@@ -9,6 +9,18 @@
 	width: 100%;
 }
 
+.msg-status.warn {
+	margin-bottom: 20px;
+}
+
+.msg-status.success {
+	margin-top: 20px;
+}
+
 .login-subheader {
 	margin-top: 80px;
+}
+
+.mat-icon {
+	cursor: pointer;
 }

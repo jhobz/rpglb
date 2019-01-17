@@ -74,14 +74,20 @@ a:hover {
 	border: 0;
 }
 
-.warn {
+.msg-status {
 	background-color: mat-color($background, card);
-	color: mat-color($warn);
 	font-size: 0.8em;
-	margin-bottom: 20px;
 	padding: 10px;
 	border-radius: 5px;
 	text-align: center;
+}
+
+.warn {
+	color: mat-color($warn);
+}
+
+.success {
+	color: mat-color($primary, 200);
 }
 
 .preserve-newlines {

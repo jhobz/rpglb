@@ -1,17 +1,34 @@
 <div class="form-wrapper">
 	<form class="form-wrapper" novalidate (ngSubmit)="login()" #f="ngForm">
 		<h2 class="form-login-header">Login</h2>
-		<div class="warn" role="alert" *ngIf="message !== ''">{{message}}</div>
+		<div class="msg-status warn" role="alert" *ngIf="message !== ''">{{message}}</div>
 		<mat-form-field hideRequiredMarker>
-			<input matInput name="username" placeholder="Username" [(ngModel)]="loginData.username" required />
+			<input
+				matInput
+				name="username"
+				placeholder="Username"
+				[(ngModel)]="loginData.username"
+				required />
 		</mat-form-field>
 
 		<mat-form-field hideRequiredMarker>
-			<input matInput name="password" placeholder="Password" [(ngModel)]="loginData.password" [type]="hidePassword ? 'password' : 'text'" required />
+			<input
+				matInput
+				name="password"
+				placeholder="Password"
+				[(ngModel)]="loginData.password"
+				[type]="hidePassword ? 'password' : 'text'"
+				required />
 			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
 		</mat-form-field>
 		<br />
-		<button mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid">Login</button>
+		<button mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid || isDebouncing">Login</button>
+		<div class="msg-status success" *ngIf="successMessage !== ''">{{successMessage}}</div>
+		<mat-progress-bar
+			color="primary"
+			mode="indeterminate"
+			role="alert"
+			*ngIf="successMessage !== ''"></mat-progress-bar>
 		<h3 class="login-subheader">Don't have an account?</h3>
 		<p>
 			An account is required to register and submit for RPGLB events.
@@ -19,4 +36,3 @@
 		<a mat-raised-button color="accent" [routerLink]="['/signup']">Signup</a>
 	</form>
 </div>
-<p style="color: lightGreen">{{successMessage}}</p>

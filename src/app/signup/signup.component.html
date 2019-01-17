@@ -1,48 +1,71 @@
-<form #f="ngForm" novalidate (ngSubmit)="register()">
-	<fieldset ngModelGroup="name">
-		<div class="form-group">
-			<label>First Name</label>
-			<input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" required />
+<div class="form-wrapper">
+	<form class="form-wrapper" #f="ngForm" novalidate (ngSubmit)="register()">
+		<h2 class="form-signup-header">Sign Up</h2>
+		<div class="msg-status warn" role="alert" *ngIf="errorMessage !== ''">{{errorMessage}}</div>
+		<div class="form-name-wrapper">
+			<mat-form-field>
+				<input
+					matInput
+					name="firstName"
+					placeholder="First name"
+					[(ngModel)]="model.firstName"
+					required />
+			</mat-form-field>
+			<mat-form-field>
+				<input
+					matInput
+					name="lastName"
+					placeholder="Last name"
+					[(ngModel)]="model.lastName"
+					required />
+			</mat-form-field>
 		</div>
-		<div class="form-group">
-			<label>Last Name</label>
-			<input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" required />
-		</div>
-	</fieldset>
 
-	<div class="form-group"
-		[ngClass]="{
-			'has-danger': email.invalid && (email.dirty || email.touched),
-			'has-success': email.valid && (email.dirty || email.touched)
-		}">
-		<label>Email</label>
-		<input type="email" class="form-control" name="email" [(ngModel)]="model.email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" #email="ngModel" />
-		<div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
-			<p *ngIf="email.errors.required">Email is required</p>
-			<p *ngIf="email.errors.pattern">Must be an email</p>
-		</div>
-	</div>
+		<mat-form-field>
+			<input
+				matInput
+				#email="ngModel"
+				type="email"
+				name="email"
+				placeholder="Email"
+				[(ngModel)]="model.email"
+				pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+				required />
+			<mat-error *ngIf="email.errors?.pattern">Must be a valid email address</mat-error>
+		</mat-form-field>
 
-	<div class="form-group">
-		<label>Username</label>
-		<input type="text" class="form-control" name="username" [(ngModel)]="model.username" required minlength="3" />
-	</div>
+		<mat-form-field>
+			<input
+				matInput
+				name="username"
+				placeholder="Username"
+				[(ngModel)]="model.username"
+				minlength="3"
+				maxlength="26"
+				required />
+		</mat-form-field>
 
-	<div class="form-group">
-		<label>Password</label>
-		<input type="password" class="form-control" name="password" [(ngModel)]="model.password" required minlength="12" #password="ngModel" />
-		<div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
-			<p *ngIf="password.errors.required">Password is required</p>
-			<p *ngIf="password.errors.minlength">Password must be at least 12 characters</p>
-		</div>
-	</div>
-	<button type="submit" [disabled]="f.invalid">Create</button>
-</form>
-
-<hr>
-<h3>Debug info</h3>
-<p style="color: lightGreen">{{message}}</p>
-<div>f.value</div>
-<pre>{{f.value | json}}</pre>
-<div>model</div>
-<pre>{{model | json}}</pre>
+		<mat-form-field>
+			<input
+				matInput
+				#password="ngModel"
+				type="password"
+				name="password"
+				placeholder="Password"
+				[(ngModel)]="model.password"
+				[type]="hidePassword ? 'password' : 'text'"
+				minlength="12"
+				required />
+			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+			<mat-error *ngIf="password.errors?.minlength && !password.errors.required">Password must be at least 12 characters</mat-error>
+		</mat-form-field>
+		<br />
+		<button mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid || isDebouncing">Create</button>
+		<div class="msg-status success" *ngIf="successMessage !== ''">{{successMessage}}</div>
+		<mat-progress-bar
+			color="primary"
+			mode="indeterminate"
+			role="alert"
+			*ngIf="successMessage !== ''"></mat-progress-bar>
+	</form>
+</div>

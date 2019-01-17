@@ -17,25 +17,28 @@ export class SignupComponent {
 		lastName: ''
 	}
 	@ViewChild('f') form: any
-	message: string
+	hidePassword: boolean = true
+	errorMessage: string = ''
+	successMessage: string = ''
+	isDebouncing: boolean = false
 
 	constructor(private auth: AuthenticationService, private router: Router) { }
 
 	register() {
 		if (this.form.valid) {
+			this.isDebouncing = true
 			this.auth.register(this.model)
 				.subscribe(
 					(res: any) => {
-						this.form.reset()
 						// TODO: Require email verification
-						this.message = 'User created successfully! Redirecting to profile page...'
+						this.successMessage = 'User created successfully! Redirecting to profile page...'
 						setTimeout(() => {
-							this.router.navigate(['users'])
+							this.router.navigate(['profile'])
 						},         1500)
 					},
 					(err: any) => {
-						console.error('Error creating user.', err)
-						this.message = 'Error creating user (see console)'
+						this.errorMessage = 'Error: An account already exists with that username or email address.'
+						this.isDebouncing = false
 					} )
 		}
 	}

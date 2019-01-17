@@ -1,0 +1,35 @@
+.form-wrapper {
+	width: 500px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-wrapper > * {
+	width: 100%;
+}
+
+.form-name-wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.form-name-wrapper > mat-form-field {
+	flex-grow: 1;
+}
+
+.form-name-wrapper > mat-form-field:last-child {
+	margin-left: 10px;
+}
+
+.msg-status.warn {
+	margin-bottom: 20px;
+}
+
+.msg-status.success {
+	margin-top: 20px;
+}
+
+.mat-icon {
+	cursor: pointer;
+}
