@@ -11,5 +11,6 @@ router.post('/', UserController.createUser)
 router.put('/', UserController.updateUser)
 router.delete('/:id', UserController.removeUser)
 router.post('/login', UserController.loginUser)
+router.post('/changePassword', passport.authenticate('jwt', { session: false }), UserController.changePassword)
 
 module.exports = router;

@@ -119,9 +119,7 @@ exports.removeUser = async function (req, res, next) {
 
 exports.loginUser = async function (req, res, next) {
 	try {
-		console.log(req.body.username)
 		let user = await UserService.getUser(req.body.username)
-		console.log(user.id,user.username,req.body.username)
 		return user.comparePassword(req.body.password, (err, isMatch) => {
 			const token = generateToken(user)
 			if (isMatch && !err) {
@@ -139,7 +137,34 @@ exports.loginUser = async function (req, res, next) {
 	} catch (e) {
 		return res.status(400).json( {
 			status: 400,
-			message: `Login failed. Username or password incorrect.`
+			message: 'Login failed. Username or password incorrect.'
+		} )
+	}
+}
+
+exports.changePassword = async function (req, res, next) {
+	try {
+		let user = await UserService.getUser(req.body.username)
+		return user.comparePassword(req.body.current, async (err, isMatch) => {
+			if (isMatch && !err) {
+				const userChange = {
+					id: user._id,
+					password: req.body.new,
+				}
+				let updatedUser = await UserService.updateUser(userChange)
+				const token = generateToken(updatedUser)
+				return res.status(200).json( {
+					status: 200,
+					token: `${token}`
+				} )
+			} else {
+				throw new Error()
+			}
+		})
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Password unchanged.'
 		} )
 	}
 }

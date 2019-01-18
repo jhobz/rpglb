@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
-import { AuthenticationService, TokenUserInfo } from '../authentication.service'
+import { AuthenticationService, PasswordData, TokenUserInfo } from '../authentication.service'
 import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../submission.service'
 
 @Component({
@@ -13,6 +13,18 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 export class ProfileComponent implements OnInit {
 	user: TokenUserInfo
 	games: GameSubmission[]
+	passwordData: PasswordData = {
+		username: '',
+		current: '',
+		new: '',
+		confirm: ''
+	}
+	hidePassword: boolean = true
+	hidePassword2: boolean = true
+	hidePassword3: boolean = true
+	status: 'warn'|'success'
+	statusMessage: string = ''
+	@ViewChild('f') form: any
 	// TODO: Don't hardcode this value
 	event: string = 'RPG Limit Break 2019'
 
@@ -24,6 +36,23 @@ export class ProfileComponent implements OnInit {
 			.map((data: GameSubmissionResponse) => data.docs )
 			.subscribe((data: GameSubmission[]) => {
 				this.games = data
+			})
+	}
+
+	changePassword() {
+		if (this.passwordData.new !== this.passwordData.confirm) {
+			this.status = 'warn'
+			this.statusMessage = 'New passwords must match'
+			return false
+		}
+		this.passwordData.username = this.user.username
+		this.auth.changePassword(this.passwordData)
+			.map((data) => data.token)
+			.subscribe((token: string) => {
+				this.auth.updateToken(token)
+				this.form.resetForm()
+				this.status = 'success'
+				this.statusMessage = 'Password changed successfully'
 			})
 	}
 

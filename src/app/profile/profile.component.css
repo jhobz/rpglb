@@ -2,3 +2,26 @@
 	max-width: 1500px;
 	margin: 50px auto;
 }
+
+.no-bold {
+	font-weight: normal;
+	border-left: 2px solid;
+	padding-left: 10px;
+}
+
+.mat-form-field {
+	display: block;
+	width: 350px;
+}
+
+.mat-form-field .mat-icon {
+	cursor: pointer;
+}
+
+.form-password {
+	display: inline-block;
+}
+
+.msg-status {
+	margin-top: 10px;
+}

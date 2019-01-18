@@ -26,6 +26,13 @@ export interface TokenPayload {
 	email?: string
 }
 
+export interface PasswordData {
+	username: string
+	current: string
+	'new': string
+	confirm: string
+}
+
 @Injectable()
 export class AuthenticationService {
 	redirectUrl: string
@@ -48,6 +55,12 @@ export class AuthenticationService {
 		}
 
 		return null
+	}
+
+	public changePassword(payload: PasswordData): Observable<any> {
+		return this.http.post('http://localhost:3000/api/users/changePassword', payload, {
+			headers: this.generateAuthHeader()
+		})
 	}
 
 	public isLoggedIn(): boolean {
@@ -74,6 +87,10 @@ export class AuthenticationService {
 
 	public generateAuthHeader(): HttpHeaders {
 		return new HttpHeaders({ 'Authorization': `Bearer ${this.getToken()}` })
+	}
+
+	public updateToken(token: string): void {
+		this.saveToken(token)
 	}
 
 	private saveToken(token: string): void {
