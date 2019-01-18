@@ -3,6 +3,12 @@
 		<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
 		<!-- TODO: Include an error message here when appropriate -->
 	</div>
+	<div *ngIf="showFilter" class="table-header">
+		<mat-form-field>
+			<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+		</mat-form-field>
+	</div>
+
 	<mat-table #table [dataSource]="dataSource"
 	           matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
 

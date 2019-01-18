@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 				.subscribe(
 					(res: any) => {
 						this.successMessage = 'Login successful! Redirecting...'
-						const redirect = this.auth.redirectUrl ? this.auth.redirectUrl : '/users'
+						const redirect = this.auth.redirectUrl ? this.auth.redirectUrl : '/profile'
 						// TODO: Re-evaluate timeout
 						setTimeout(() => {
 							this.router.navigate([redirect])

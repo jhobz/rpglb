@@ -1,4 +1,15 @@
-<p>
-  profile works!
-</p>
-<a routerLink="/submissions/create">Submit a game!</a>
+<div class="wrapper">
+	<h1>Profile | {{user.username}}</h1>
+	<h3>Your submissions</h3>
+	<mat-card *ngIf="games && games.length > 0">
+		<app-submission-list #submissionList
+			[dataSource]="games"
+			[showFilter]="false"
+			[showRunner]="false"
+			[showPagination]="false">
+		</app-submission-list>
+	</mat-card>
+	<div *ngIf="!games || games.length === 0">You haven't submitted any games to {{event}}</div>
+	<br />
+	<a routerLink="/submissions/create">Create / Edit Submissions</a>
+</div>

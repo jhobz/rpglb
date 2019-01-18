@@ -38,15 +38,12 @@ export class SubmissionFormComponent implements OnInit {
 
 	removeGame(index: number) {
 		const len = this.games.length
-		if (len === 1) {
+		if (len === 0) {
 			return false
 		}
 
 		let game
-		// Must have at least one GameSubmission
-		if (len > index) {
-			game = this.games.splice(index, 1)[0]
-		}
+		game = this.games.splice(index, 1)[0]
 
 		// Remove submission from database
 		const gameId = game._id

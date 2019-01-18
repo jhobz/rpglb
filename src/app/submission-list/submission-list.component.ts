@@ -23,6 +23,8 @@ export class SubmissionListComponent implements OnInit {
 	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
 	@Input() showRunner: boolean = true
 	@Input() showPagination: boolean = true
+	@Input() showFilter: boolean = true
+	@Input() filter: string
 
 	resultsLength: number = 0
 	isLoadingResults: boolean = true
@@ -39,12 +41,16 @@ export class SubmissionListComponent implements OnInit {
 
 	ngOnInit() {
 		const user = this.auth.getUserInfo()
-		if (user && user.roles.includes('submissions')) {
+		if (user && user.roles.includes('submissions') || this.router.url === '/profile') {
 			this.columnsToDisplay.push('public')
 		}
 
 		if (this.showRunner) {
 			this.columnsToDisplay.unshift('runner')
+		}
+
+		if (this.filter) {
+			this.applyFilter(this.filter)
 		}
 
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
@@ -71,7 +77,12 @@ export class SubmissionListComponent implements OnInit {
 				).subscribe((data: GameSubmission[]) => {
 					this.dataSource.data = data
 				})
-		// }
+	}
+
+	applyFilter(filterValue: string) {
+		filterValue = filterValue.trim()
+		filterValue = filterValue.toLowerCase()
+		this.dataSource.filter = filterValue
 	}
 
 }

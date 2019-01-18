@@ -17,3 +17,13 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.table-header {
+	min-height: 64px;
+	padding: 8px 24px 0;
+	font-size: 14px;
+}
+
+.table-header > .mat-form-field {
+	width: 100%;
+}
