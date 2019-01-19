@@ -28,7 +28,7 @@
 					<mat-icon>clear</mat-icon>
 					<span>Remove Game</span>
 				</button>
-				<button mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form)"><span>Next</span><mat-icon>arrow_forward</mat-icon></button>
+				<button #nextBtnTop mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form, [nextBtnTop, nextBtnBot])"><span>Next</span><mat-icon>arrow_forward</mat-icon></button>
 			</div>
 			<app-game-submission #sub [game]="game"></app-game-submission>
 			<div class="step-controls">
@@ -41,7 +41,7 @@
 					<mat-icon>clear</mat-icon>
 					<span>Remove Game</span>
 				</button>
-				<button mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form)">Next<mat-icon>arrow_forward</mat-icon></button>
+				<button #nextBtnBot mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form, [nextBtnTop, nextBtnBot])">Next<mat-icon>arrow_forward</mat-icon></button>
 			</div>
 			<br />
 		</mat-step>

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
+import { MatButton } from '@angular/material'
 import { of } from 'rxjs/observable/of'
 
 import { AuthenticationService } from '../authentication.service'
@@ -15,6 +16,7 @@ export class SubmissionFormComponent implements OnInit {
 	event: string = 'RPG Limit Break 2019'
 	games: GameSubmission[] = []
 	maxGames: number = 5
+	isDebouncing: boolean = false
 	@ViewChild('stepper') stepper: any
 
 	constructor(
@@ -55,23 +57,28 @@ export class SubmissionFormComponent implements OnInit {
 		}
 	}
 
-	submitGame(game: GameSubmission, form: any) {
-		if (!form.valid) {
+	submitGame(game: GameSubmission, form: any, buttons: MatButton[]) {
+		if (!form.valid || this.isDebouncing) {
 			return false
 		}
 
+		// Debounce buttons
+		this.isDebouncing = true
+		buttons.forEach((btn: MatButton) => btn.disabled = true)
 		game.public = false
 		if (game._id) {
 			// PUT
 			this.submissionService.editSubmission(game)
 				.subscribe((data) => {
-					// Maybe do something
+					this.isDebouncing = false
+					buttons.forEach((btn: MatButton) => btn.disabled = false)
 				})
 		} else {
 			// POST
 			this.submissionService.createSubmission(game)
 				.subscribe((data) => {
-					// Maybe do something
+					this.isDebouncing = false
+					buttons.forEach((btn: MatButton) => btn.disabled = false)
 				})
 		}
 	}
