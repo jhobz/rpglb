@@ -1,9 +1,9 @@
 <mat-toolbar class="wrapper mat-elevation-z6" color="primary">
 	<a routerLink="/"><img class="logo" src="assets/images/logo_1200x424.png" /></a>
 	<nav>
-		<a href="/donate" target="_blank">DONATE</a>
-		<a href="/tracker/runs/6">SCHEDULE</a>
-		<a href="https://theyetee.com/rpglb" target="_blank">SHIRTS</a>
+		<a *ngIf="mode === 'event'" href="/donate" target="_blank">DONATE</a>
+		<a *ngIf="mode === 'event'" href="/tracker/runs/6">SCHEDULE</a>
+		<a *ngIf="mode === 'event'" href="https://theyetee.com/rpglb" target="_blank">SHIRTS</a>
 		<a href="/tracker/6">TRACKER</a>
 		<a routerLink="/rules">EVENT RULES</a>
 		<a href="https://discord.gg/rpglb" target="_blank">DISCORD</a>

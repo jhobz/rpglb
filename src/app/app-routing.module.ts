@@ -6,6 +6,7 @@ import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
 import { LoginComponent } from './login/login.component'
+import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 import { ProfileComponent } from './profile/profile.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
@@ -15,11 +16,12 @@ import { UserListComponent } from './user-list/user-list.component'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/event', pathMatch: 'full' },
+	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
 	{ path: 'event', component: EventHomeComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'rules', component: EventRulesComponent },
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+	{ path: 'pre', component: PreEventHomePageComponent },
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },

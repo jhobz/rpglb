@@ -44,7 +44,8 @@ import { UserService } from './user.service'
 import { VerifyPageComponent } from './verify-page/verify-page.component';
 import { IdToUsernamePipe } from './id-to-username.pipe';
 import { TimeToStringPipe } from './time-to-string.pipe';
-import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
+import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component';
+import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { SubmissionsListPageComponent } from './submissions-list-page/submission
 		VerifyPageComponent,
 		IdToUsernamePipe,
 		TimeToStringPipe,
-		SubmissionsListPageComponent
+		SubmissionsListPageComponent,
+		PreEventHomePageComponent
 	],
 	imports: [
 		BrowserModule,

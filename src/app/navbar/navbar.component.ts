@@ -8,6 +8,9 @@ import { AuthenticationService } from '../authentication.service'
 	styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+	// TODO: Don't hardcode this
+	mode: 'pre'|'off'|'event' = 'pre'
+
 	constructor(private auth: AuthenticationService) { }
 
 	ngOnInit() {
