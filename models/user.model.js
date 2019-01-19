@@ -19,20 +19,23 @@ let UserSchema = new mongoose.Schema({
 		unique: true,
 		maxlength: 64,
 		trim: true,
-		lowercase: true,
 		required: true,
 		match: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i
 	},
 	username: {
 		type: String,
 		collation: {
-			locale: 'en',
+			locale: 'en_US',
 			strength: 1
 		},
 		unique: true,
 		minlength: 3,
 		maxlength: 26,
 		trim: true,
+		validate: {
+			isAsync: true,
+			validator: validateUnique('username')
+		},
 		required: true,
 		match: /^[A-Za-z0-9_]+$/i
 	},
@@ -59,6 +62,22 @@ let UserSchema = new mongoose.Schema({
 		ref: 'GameSubmission'
 	}]
 })
+
+function validateUnique(field) {
+	return function(value, cb) {
+		if (value && value.length) {
+			var query = mongoose.model('User').where(field, new RegExp('^'+value+'$', 'i'));
+			if(!this.isNew) {
+				query = query.where('_id').ne(this._id);
+			}
+			query.count(function(err, n) {
+				cb(n < 1);
+			});
+		} else {
+			cb(false, 'Error: username is not unique');
+		}
+	}
+}
 
 // Specifically have to NOT use arrow notation here (no access to `this`)
 UserSchema.pre('save', function (next) {
@@ -91,7 +110,6 @@ UserSchema.methods.comparePassword = function (pass, cb) {
 	})
 }
 
-UserSchema.plugin(uniqueValidator)
 UserSchema.plugin(mongoosePaginate)
 
 module.exports = mongoose.model('User', UserSchema)

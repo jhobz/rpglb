@@ -52,6 +52,7 @@
 			#video="ngModel"
 			[name]="'cat-'+(category._uid || category._id)+'-video'"
 			placeholder="Video link"
+			maxlength="500"
 			pattern="(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+"
 			[(ngModel)]="category.video"
 			required />

@@ -23,6 +23,7 @@ let CategorySchema = new mongoose.Schema({
 		type: String, // URL
 		trim: true,
 		require: true,
+		maxlength: 500,
 		match: /^(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+$/i
 	}
 })
