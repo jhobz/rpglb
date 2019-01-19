@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate')
+const uniqueValidator = require('mongoose-unique-validator')
 const bcrypt = require('bcrypt-nodejs')
 
 let UserSchema = new mongoose.Schema({
@@ -90,6 +91,7 @@ UserSchema.methods.comparePassword = function (pass, cb) {
 	})
 }
 
+UserSchema.plugin(uniqueValidator)
 UserSchema.plugin(mongoosePaginate)
 
 module.exports = mongoose.model('User', UserSchema)
