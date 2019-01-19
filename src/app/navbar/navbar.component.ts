@@ -8,8 +8,9 @@ import { AuthenticationService } from '../authentication.service'
 	styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-	// TODO: Don't hardcode this
+	// TODO: Don't hardcode these
 	mode: 'pre'|'off'|'event' = 'pre'
+	areSubmissionsOpen: boolean = false
 
 	constructor(private auth: AuthenticationService) { }
 

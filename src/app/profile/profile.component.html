@@ -1,7 +1,7 @@
 <div class="wrapper">
 	<h1 class="no-bold">{{user.username}}</h1>
 	<h3>Your submissions</h3>
-	<mat-card *ngIf="games && games.length > 0">
+	<mat-card *ngIf="areSubmissionsOpen && games && games.length > 0">
 		<app-submission-list #submissionList
 			[dataSource]="games"
 			[showFilter]="false"
@@ -9,9 +9,10 @@
 			[showPagination]="false">
 		</app-submission-list>
 	</mat-card>
-	<div *ngIf="!games || games.length === 0">You haven't submitted any games to {{event}}</div>
+	<div *ngIf="areSubmissionsOpen && !games || games.length === 0">You haven't submitted any games to {{event}}</div>
+	<div *ngIf="!areSubmissionsOpen">Submissions aren't quite open. Check back later.</div>
 	<br />
-	<a routerLink="/submissions/create">Create / Edit Submissions</a>
+	<a *ngIf="areSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>
 	<br /><br /><br />
 	<h3>Need to change your password?</h3>
 	<form #f="ngForm" class="form-password" (ngSubmit)="changePassword()">

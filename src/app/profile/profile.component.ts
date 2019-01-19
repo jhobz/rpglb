@@ -25,8 +25,9 @@ export class ProfileComponent implements OnInit {
 	status: 'warn'|'success'
 	statusMessage: string = ''
 	@ViewChild('f') form: any
-	// TODO: Don't hardcode this value
+	// TODO: Don't hardcode these
 	event: string = 'RPG Limit Break 2019'
+	areSubmissionsOpen: boolean = false
 
 	constructor(private auth: AuthenticationService, private submissionService: SubmissionService) { }
 
