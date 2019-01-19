@@ -19,7 +19,7 @@
 		<mat-step *ngFor="let game of games" [completed]="sub.form.valid">
 			<ng-template matStepLabel>{{game.name || 'New Game'}}</ng-template>
 			<div class="step-controls">
-				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Previous</span></button>
+				<button [disabled]="games.length <= 1" mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Previous</span></button>
 				<button
 					[disabled]="games.length <= 0"
 					mat-raised-button

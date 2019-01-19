@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
-import { MatButton } from '@angular/material'
+import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import { MAT_DIALOG_DATA, MatButton, MatDialog, MatDialogRef } from '@angular/material'
 import { of } from 'rxjs/observable/of'
 
 import { AuthenticationService } from '../authentication.service'
@@ -21,7 +21,8 @@ export class SubmissionFormComponent implements OnInit {
 
 	constructor(
 		private auth: AuthenticationService,
-		private submissionService: SubmissionService
+		private submissionService: SubmissionService,
+		public dialog: MatDialog
 	) {}
 
 	ngOnInit() {
@@ -44,17 +45,28 @@ export class SubmissionFormComponent implements OnInit {
 			return false
 		}
 
-		let game
-		game = this.games.splice(index, 1)[0]
+		console.log(this.games[index])
 
-		// Remove submission from database
-		const gameId = game._id
-		if (gameId) {
-			this.submissionService.deleteSubmission(gameId)
-				.subscribe((data) => {
-					// Maybe do something
-				})
-		}
+		const dialogRef = this.dialog.open(SubmissionConfirmationDialog, {
+			width: '800px',
+			data: this.games[index].name || 'New Game'
+		})
+
+		dialogRef.afterClosed().subscribe((shouldRemove: boolean) => {
+			if (shouldRemove) {
+				let game
+				game = this.games.splice(index, 1)[0]
+
+				// Remove submission from database
+				const gameId = game._id
+				if (gameId) {
+					this.submissionService.deleteSubmission(gameId)
+						.subscribe((data) => {
+							// Maybe do something
+						})
+				}
+			}
+		})
 	}
 
 	submitGame(game: GameSubmission, form: any, buttons: MatButton[]) {
@@ -92,4 +104,19 @@ export class SubmissionFormComponent implements OnInit {
 		return of(this.games)
 	}
 
+}
+
+@Component({
+	selector: 'submission-confirmation-dialog',
+	templateUrl: 'submission-confirmation-dialog.html',
+})
+export class SubmissionConfirmationDialog {
+	constructor(
+		public dialogRef: MatDialogRef<SubmissionConfirmationDialog>,
+		@Inject(MAT_DIALOG_DATA) public game: string
+	) {}
+
+	onNoClick(): void {
+		this.dialogRef.close()
+	}
 }

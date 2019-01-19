@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms'
 import {
 	MatButtonModule,
 	MatCardModule,
+	MatDialogModule,
 	MatFormFieldModule,
 	MatIconModule,
 	MatInputModule,
@@ -19,7 +20,6 @@ import {
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-
 import { AppRoutingModule } from './/app-routing.module'
 import { AppComponent } from './app.component'
 import { AuthGuardService } from './auth-guard.service'
@@ -30,22 +30,22 @@ import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
 import { FooterComponent } from './footer/footer.component'
 import { GameSubmissionComponent } from './game-submission/game-submission.component'
+import { IdToUsernamePipe } from './id-to-username.pipe'
 import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
 import { NavbarComponent } from './navbar/navbar.component'
+import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 import { ProfileComponent } from './profile/profile.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
-import { SubmissionFormComponent } from './submission-form/submission-form.component'
+import { SubmissionConfirmationDialog, SubmissionFormComponent } from './submission-form/submission-form.component'
 import { SubmissionListComponent } from './submission-list/submission-list.component'
+import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
 import { TimeRangeValidatorDirective } from './time-range.directive'
+import { TimeToStringPipe } from './time-to-string.pipe'
 import { UserListComponent } from './user-list/user-list.component'
 import { UserService } from './user.service'
-import { VerifyPageComponent } from './verify-page/verify-page.component';
-import { IdToUsernamePipe } from './id-to-username.pipe';
-import { TimeToStringPipe } from './time-to-string.pipe';
-import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component';
-import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
+import { VerifyPageComponent } from './verify-page/verify-page.component'
 
 
 @NgModule({
@@ -66,11 +66,15 @@ import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-
 		NavbarComponent,
 		FooterComponent,
 		SubmissionFormComponent,
+		SubmissionConfirmationDialog,
 		VerifyPageComponent,
 		IdToUsernamePipe,
 		TimeToStringPipe,
 		SubmissionsListPageComponent,
 		PreEventHomePageComponent
+	],
+	entryComponents: [
+		SubmissionConfirmationDialog
 	],
 	imports: [
 		BrowserModule,
@@ -80,6 +84,7 @@ import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-
 		FormsModule,
 		MatButtonModule,
 		MatCardModule,
+		MatDialogModule,
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,

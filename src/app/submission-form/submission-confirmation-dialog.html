@@ -1,0 +1,11 @@
+<h1 class="warn" mat-dialog-title style="text-align:center;">Are you sure you want to remove <strong>{{game}}</strong>?</h1>
+<div mat-dialog-content>
+	<p>
+		If you change your mind later, you'll have to start from scratch. Only <strong>{{game}}</strong> will be
+		removed. All others will be unaffected.
+	</p>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="onNoClick()">Nevermind</button>
+	<button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Yes, delete it</button>
+</div>
