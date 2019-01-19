@@ -17,6 +17,8 @@ let UserSchema = new mongoose.Schema({
 		type: String,
 		unique: true,
 		maxlength: 64,
+		trim: true,
+		lowercase: true,
 		required: true,
 		match: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i
 	},
@@ -25,7 +27,10 @@ let UserSchema = new mongoose.Schema({
 		unique: true,
 		minlength: 3,
 		maxlength: 26,
-		required: true
+		lowercase: true,
+		trim: true,
+		required: true,
+		match: /^[A-Za-z0-9_]+$/i
 	},
 	password: {
 		type: String,

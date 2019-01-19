@@ -50,7 +50,7 @@ export class SubmissionFormComponent implements OnInit {
 		if (gameId) {
 			this.submissionService.deleteSubmission(gameId)
 				.subscribe((data) => {
-					console.log('deleted', data)
+					// Maybe do something
 				})
 		}
 	}
@@ -65,13 +65,13 @@ export class SubmissionFormComponent implements OnInit {
 			// PUT
 			this.submissionService.editSubmission(game)
 				.subscribe((data) => {
-					console.log('edited', data)
+					// Maybe do something
 				})
 		} else {
 			// POST
 			this.submissionService.createSubmission(game)
 				.subscribe((data) => {
-					console.log('created', data)
+					// Maybe do something
 				})
 		}
 	}
