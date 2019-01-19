@@ -16,7 +16,7 @@ let CategorySchema = new mongoose.Schema({
 	description: {
 		type: String,
 		trim: true,
-		maxlength: 240, // Pitch it in 2 tweets or less
+		maxlength: 560, // Pitch it in 2 tweets or less
 		require: true
 	},
 	video: {
@@ -46,18 +46,18 @@ let GameSubmissionSchema = new mongoose.Schema({
 	description: {
 		type: String,
 		trim: true,
-		maxlength: 500,
+		maxlength: 1120,
 		required: true
 	},
 	pros: {
 		type: String,
 		trim: true,
-		maxlength: 500
+		maxlength: 560
 	},
 	cons: {
 		type: String,
 		trim: true,
-		maxlength: 500
+		maxlength: 560
 	},
 	public: {
 		type: Boolean,

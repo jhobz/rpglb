@@ -38,7 +38,7 @@ export interface GameSubmissionResponse {
 
 @Injectable()
 export class SubmissionService {
-	private apiUrl: string = `${environment.apiUrl}/api/submissions`
+	private apiUrl: string = `${environment.apiUrl}/submissions`
 
 	constructor(private auth: AuthenticationService, private http: HttpClient) { }
 

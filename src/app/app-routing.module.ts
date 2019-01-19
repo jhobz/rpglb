@@ -26,7 +26,7 @@ const routes: Routes = [
 	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },
 	{ path: 'sweepstakes', component: EventSweepstakesComponent },
-	{ path: 'users', component: UserListComponent },
+	// { path: 'users', component: UserListComponent },
 	{ path: 'verify', component: VerifyPageComponent }
 ]
 
