@@ -3,6 +3,7 @@ const dbConfig = require('../config/database')
 require('../config/passport')(passport)
 const jwt = require('jsonwebtoken')
 
+const EmailService = require('../services/email.service')
 const UserService = require('../services/users.service')
 
 _this = this
@@ -52,12 +53,21 @@ exports.createUser = async function (req, res, next) {
 	try {
 		let createdUser = await UserService.createUser(user)
 		const token = generateToken(createdUser)
-		return res.status(201).json( {
-			status: 201,
-			data: createdUser,
-			token: token,
-			message: 'User created successfully'
-		} )
+		// Send verification email
+		return EmailService.sendVerificationEmail(createdUser, req)
+			.then(async (response) => {
+				if (response.accepted.length > 0) {
+					return res.status(201).json( {
+						status: 201,
+						data: createdUser,
+						token: token,
+						message: 'User created successfully'
+					} )
+				} else {
+					await UserService.deleteUser(createdUser._id)
+					throw new Error('Failed to send verification email')
+				}
+			})
 	} catch (e) {
 		return res.status(400).json( {
 			status: 400,
@@ -123,10 +133,18 @@ exports.loginUser = async function (req, res, next) {
 		return user.comparePassword(req.body.password, (err, isMatch) => {
 			const token = generateToken(user)
 			if (isMatch && !err) {
-				return res.status(200).json( {
-					status: 200,
-					token: `${token}`
-				} )
+				if (user.verified) {
+					return res.status(200).json( {
+						status: 200,
+						token: `${token}`
+					} )
+				} else {
+					return res.status(401).json( {
+						status: 401,
+						user: user._id,
+						message: 'Login failed. Email is not verified.'
+					} )
+				}
 			} else {
 				return res.status(401).json( {
 					status: 401,
@@ -165,6 +183,43 @@ exports.changePassword = async function (req, res, next) {
 		return res.status(400).json( {
 			status: 400,
 			message: 'Password unchanged.'
+		} )
+	}
+}
+
+exports.verifyEmail = async function (req, res, next) {
+	try{
+		let user = await UserService.getUserById(req.body.user)
+		if (!req.body.token) {
+			// No token, send new email
+			return EmailService.sendVerificationEmail(user, req)
+				.then((response) => {
+					if (response.accepted.length > 0) {
+						return res.status(201).json( {
+							status: 201,
+							message: 'Email sent.'
+						} )
+					} else {
+						return res.status(400).json( {
+							status: 400,
+							message: 'Something went wrong, try again later.'
+						} )
+					}
+				})
+		} else if (user.verificationToken === req.body.token) {
+			const updatedUser = await UserService.updateUser({
+				id: user._id,
+				verified: true
+			})
+			return res.status(200).json( {
+				status: 200,
+				user: user.username
+			} )
+		}
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Verification failed.'
 		} )
 	}
 }

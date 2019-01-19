@@ -17,7 +17,7 @@ let UserSchema = new mongoose.Schema({
 		type: String,
 		unique: true,
 		maxlength: 64,
-		require: true,
+		required: true,
 		match: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i
 	},
 	username: {
@@ -25,7 +25,7 @@ let UserSchema = new mongoose.Schema({
 		unique: true,
 		minlength: 3,
 		maxlength: 26,
-		require: true
+		required: true
 	},
 	password: {
 		type: String,
@@ -36,6 +36,14 @@ let UserSchema = new mongoose.Schema({
 	roles: {
 		type: [String],
 		default: []
+	},
+	verificationToken: {
+		type: String
+	},
+	verified: {
+		type: Boolean,
+		default: false,
+		required: true
 	},
 	submissions: [{
 		type: mongoose.Schema.ObjectId,

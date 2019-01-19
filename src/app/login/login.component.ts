@@ -38,6 +38,12 @@ export class LoginComponent implements OnInit {
 						},         1500)
 					},
 					(err: any) => {
+						if (err.error.message === 'Login failed. Email is not verified.') {
+							this.successMessage = 'Redirecting...'
+							setTimeout(() => {
+								this.router.navigateByUrl(`/verify?user=${err.error.user}`)
+							},         1500)
+						}
 						this.message = err.error.message
 						this.isDebouncing = false
 					})

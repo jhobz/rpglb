@@ -33,7 +33,7 @@ export class SignupComponent {
 						// TODO: Require email verification
 						this.successMessage = 'User created successfully! Redirecting to profile page...'
 						setTimeout(() => {
-							this.router.navigate(['profile'])
+							this.router.navigateByUrl(`/verify?user=${res.data._id}`)
 						},         1500)
 					},
 					(err: any) => {

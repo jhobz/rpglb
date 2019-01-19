@@ -40,6 +40,8 @@ import { SubmissionFormComponent } from './submission-form/submission-form.compo
 import { SubmissionListComponent } from './submission-list/submission-list.component'
 import { TimeRangeValidatorDirective } from './time-range.directive'
 import { UserListComponent } from './user-list/user-list.component'
+import { UserService } from './user.service'
+import { VerifyPageComponent } from './verify-page/verify-page.component'
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { UserListComponent } from './user-list/user-list.component'
 		TimeRangeValidatorDirective,
 		NavbarComponent,
 		FooterComponent,
-		SubmissionFormComponent
+		SubmissionFormComponent,
+		VerifyPageComponent
 	],
 	imports: [
 		BrowserModule,
@@ -83,7 +86,8 @@ import { UserListComponent } from './user-list/user-list.component'
 	providers: [
 		AuthGuardService,
 		AuthenticationService,
-		RoleGuardService
+		RoleGuardService,
+		UserService
 	],
 	bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
+import { of } from 'rxjs/observable/of'
 import { map } from 'rxjs/operators/map'
 
 import { AuthenticationService } from './authentication.service'
@@ -33,6 +34,22 @@ export class UserService {
 
 	deleteUser(id: string): Observable<any> {
 		return this.http.delete(`${this.apiUrl}/${id}`)
+	}
+
+	verifyUser(id: string, token: string): Observable<any> {
+		if (!token) {
+			return of(false)
+		}
+		return this.http.post(`${this.apiUrl}/verify`, {
+			user: id,
+			token: token
+		})
+	}
+
+	sendVerificationEmail(id: string): Observable<any> {
+		return this.http.post(`${this.apiUrl}/verify`, {
+			user: id
+		})
 	}
 
 	private handleError(error: any): Promise<any> {

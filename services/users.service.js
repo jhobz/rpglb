@@ -1,4 +1,5 @@
 let User = require('../models/user.model')
+const crypto = require('crypto')
 
 _this = this
 
@@ -24,7 +25,9 @@ exports.createUser = async function (user) {
 		lastName: user.lastName,
 		email: user.email,
 		username: user.username,
-		password: user.password
+		password: user.password,
+		verified: false,
+		verificationToken: crypto.randomBytes(16).toString('hex')
 	})
 
 	try {
@@ -52,7 +55,7 @@ exports.updateUser = async function (user) {
 
 	// Replace any changed values
 	Object.keys(user).forEach(key => {
-		if (user[key]) {
+		if (user[key] || key === 'verified') {
 			oldUser[key] = user[key]
 		}
 	})
@@ -81,6 +84,15 @@ exports.deleteUser = async function (id) {
 exports.getUser = async function (username) {
 	try {
 		let user = await User.findOne({ username: username })
+		return user
+	} catch (e) {
+		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
+	}
+}
+
+exports.getUserById = async function (id) {
+	try {
+		let user = await User.findOne({ _id: id })
 		return user
 	} catch (e) {
 		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
