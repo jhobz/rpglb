@@ -2,24 +2,20 @@ article {
 	/* background: var(--color-primary); */
 	display: grid;
 	grid:
-	'header' 64px
-	/* 'eventinfo' auto */
-	'content' 1fr
-	'footer' auto
-	/ 1fr;
+		64px
+		1fr
+		auto
+		/ 1fr;
 	height: 100%;
 }
 
 header {
-	grid-area: header;
 	z-index: 6; /* Matches elevation */
 }
 
 main {
-	grid-area: content;
 	/* margin: auto 0; */
 }
 
 footer {
-	grid-area: footer;
 }

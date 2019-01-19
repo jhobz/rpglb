@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { map } from 'rxjs/operators/map'
 
+import { environment } from '../environments/environment'
+
 import { AuthenticationService } from './authentication.service'
 
 export interface GameCategory {
@@ -36,7 +38,7 @@ export interface GameSubmissionResponse {
 
 @Injectable()
 export class SubmissionService {
-	private apiUrl: string = 'http://localhost:3000/api/submissions'
+	private apiUrl: string = `${environment.apiUrl}/api/submissions`
 
 	constructor(private auth: AuthenticationService, private http: HttpClient) { }
 

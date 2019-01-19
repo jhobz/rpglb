@@ -4,6 +4,8 @@ import { Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 import { map } from 'rxjs/operators/map'
 
+import { environment } from '../environments/environment'
+
 import { User } from './user'
 
 export interface TokenUserInfo {
@@ -35,6 +37,7 @@ export interface PasswordData {
 
 @Injectable()
 export class AuthenticationService {
+	apiUrl: string = environment.apiUrl
 	redirectUrl: string
 	private token: string
 
@@ -58,7 +61,7 @@ export class AuthenticationService {
 	}
 
 	public changePassword(payload: PasswordData): Observable<any> {
-		return this.http.post('http://localhost:3000/api/users/changePassword', payload, {
+		return this.http.post(`${this.apiUrl}/users/changePassword`, payload, {
 			headers: this.generateAuthHeader()
 		})
 	}
@@ -110,9 +113,9 @@ export class AuthenticationService {
 		let base
 
 		if (method === 'post') {
-			base = this.http.post(`http://localhost:3000/api/users/${type === 'signup' ? '' : type}`, user)
+			base = this.http.post(`${this.apiUrl}/users/${type === 'signup' ? '' : type}`, user)
 		} else {
-			base = this.http.get(`http://localhost:3000/api/users/${type}`, {
+			base = this.http.get(`${this.apiUrl}/api/users/${type}`, {
 				headers: this.generateAuthHeader()
 			})
 		}

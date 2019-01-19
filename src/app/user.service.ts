@@ -4,12 +4,14 @@ import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
 import { map } from 'rxjs/operators/map'
 
+import { environment } from '../environments/environment'
+
 import { AuthenticationService } from './authentication.service'
 import { User } from './user'
 
 @Injectable()
 export class UserService {
-	private apiUrl: string = 'http://localhost:3000/api/users'
+	private apiUrl: string = `${environment.apiUrl}/users`
 
 	constructor(private auth: AuthenticationService, private http: HttpClient) { }
 

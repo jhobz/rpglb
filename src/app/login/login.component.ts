@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 			this.successMessage = 'Already logged in, redirecting...'
 			// TODO: Re-evaluate timeout
 			setTimeout(() => {
-				this.router.navigate(['users'])
+				this.router.navigate(['profile'])
 			},         1500)
 		}
 	}
