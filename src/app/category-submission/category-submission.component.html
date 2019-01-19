@@ -35,15 +35,15 @@
 			#desc
 			[name]="'cat-'+category._uid+'-description'"
 			placeholder="Description"
-			maxlength="240"
+			maxlength="560"
 			[(ngModel)]="category.description"
 			matTextareaAutosize
 			matAutosizeMinRows="2"
 			matAutosizeMaxRows="5"
 			required >
 		</textarea>
-		<mat-hint>Pitch your category in 2 tweets or less</mat-hint>
-		<mat-hint align="end">{{desc.value?.length || 0}}/240</mat-hint>
+		<mat-hint>Pitch/describe this category in 2 tweets or less</mat-hint>
+		<mat-hint align="end">{{desc.value?.length || 0}}/560</mat-hint>
 	</mat-form-field>
 
 	<mat-form-field>
