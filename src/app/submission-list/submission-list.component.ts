@@ -19,7 +19,7 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 	providers: [SubmissionService]
 })
 export class SubmissionListComponent implements OnInit {
-	columnsToDisplay: string[] = ['name', 'console', 'description', 'pros', 'cons', 'categories']
+	columnsToDisplay: string[] = ['name', 'console', 'description', 'pros', 'cons', 'incentives', 'categories']
 	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
 	@Input() showRunner: boolean = true
 	@Input() showPagination: boolean = true
