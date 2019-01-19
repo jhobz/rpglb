@@ -20,7 +20,9 @@ exports.sendVerificationEmail = function (user, req) {
 			<h1>RPG Limit Break</h1>
 			<p>Click this link to verify your email:
 			<a href="${req.protocol}://${process.env.NODE_ENV === 'development' ? 'localhost:4200' : 'rpglimitbreak.com'}/verify?user=${user._id}&token=${user.verificationToken}">
-			Verify email address</a></p>`
+			Verify email address</a></p>
+			<p>If the link above doesn't work, copy and paste the following URL into your browser:</p>
+			<p>${req.protocol}://${process.env.NODE_ENV === 'development' ? 'localhost:4200' : 'rpglimitbreak.com'}/verify?user=${user._id}&token=${user.verificationToken}</p>`
 	}
 
 	return transporter.sendMail(mailOptions)
