@@ -9,7 +9,7 @@
 			[showPagination]="false">
 		</app-submission-list>
 	</mat-card>
-	<div *ngIf="areSubmissionsOpen && !games || games.length === 0">You haven't submitted any games to {{event}}</div>
+	<div *ngIf="areSubmissionsOpen && (!games || (games && games.length === 0))">You haven't submitted any games to {{event}}</div>
 	<div *ngIf="!areSubmissionsOpen">Submissions aren't quite open. Check back later.</div>
 	<br />
 	<a *ngIf="areSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>

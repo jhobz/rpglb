@@ -13,7 +13,7 @@ exports.sendVerificationEmail = function (user, req) {
 	})
 
 	const mailOptions = {
-		from: 'jeffrey296@gmail.com',//'rpglimitbreak@gmail.com',
+		from: 'rpglimitbreak@gmail.com',
 		to: user.email,
 		subject: 'Verify your RPGLB account',
 		html: `
