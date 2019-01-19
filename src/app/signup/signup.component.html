@@ -34,18 +34,21 @@
 				maxlength="64"
 				pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
 				required />
-			<mat-error *ngIf="email.errors?.pattern">Must be a valid email address</mat-error>
+			<mat-error *ngIf="email.errors?.pattern">Must be a valid email address (all lowercase)</mat-error>
 		</mat-form-field>
 
 		<mat-form-field>
 			<input
 				matInput
+				#username="ngModel"
 				name="username"
 				placeholder="Username"
 				[(ngModel)]="model.username"
 				minlength="3"
 				maxlength="26"
+				pattern="[A-Za-z0-9_]+"
 				required />
+			<mat-error *ngIf="username.errors?.pattern">Username can only contain letters, numbers, and underscores</mat-error>
 		</mat-form-field>
 
 		<mat-form-field>
