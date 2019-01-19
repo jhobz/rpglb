@@ -9,11 +9,11 @@
 		<a *ngIf="areSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>
 		<a href="https://discord.gg/rpglb" target="_blank">DISCORD</a>
 		<!-- <a routerLink="about">ABOUT</a> -->
-		<div class="auth-container" *ngIf="auth.isLoggedIn()">
+		<div class="auth-container" *ngIf="isLoggedIn()">
 			<a routerLink="/profile">PROFILE</a>
-			<a (click)="auth.logout()">LOGOUT</a>
+			<a (click)="logout()">LOGOUT</a>
 		</div>
-		<div class="auth-container" *ngIf="!auth.isLoggedIn()">
+		<div class="auth-container" *ngIf="!isLoggedIn()">
 			<a routerLink="/login">LOGIN</a>
 			<a routerLink="/signup">SIGN UP</a>
 		</div>
