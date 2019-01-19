@@ -41,7 +41,10 @@ import { SubmissionListComponent } from './submission-list/submission-list.compo
 import { TimeRangeValidatorDirective } from './time-range.directive'
 import { UserListComponent } from './user-list/user-list.component'
 import { UserService } from './user.service'
-import { VerifyPageComponent } from './verify-page/verify-page.component'
+import { VerifyPageComponent } from './verify-page/verify-page.component';
+import { IdToUsernamePipe } from './id-to-username.pipe';
+import { TimeToStringPipe } from './time-to-string.pipe';
+import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		NavbarComponent,
 		FooterComponent,
 		SubmissionFormComponent,
-		VerifyPageComponent
+		VerifyPageComponent,
+		IdToUsernamePipe,
+		TimeToStringPipe,
+		SubmissionsListPageComponent
 	],
 	imports: [
 		BrowserModule,

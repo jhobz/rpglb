@@ -52,6 +52,10 @@ export class UserService {
 		})
 	}
 
+	getUsername(id: string): Observable<any> {
+		return this.http.get(`${this.apiUrl}/${id}/username`)
+	}
+
 	private handleError(error: any): Promise<any> {
 		// TODO: Put some proper error handling in later
 		console.error('An error occurred', error)

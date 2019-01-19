@@ -10,7 +10,7 @@ import { ProfileComponent } from './profile/profile.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
 import { SubmissionFormComponent } from './submission-form/submission-form.component'
-import { SubmissionListComponent } from './submission-list/submission-list.component'
+import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
 import { UserListComponent } from './user-list/user-list.component'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
 
@@ -21,7 +21,7 @@ const routes: Routes = [
 	{ path: 'rules', component: EventRulesComponent },
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
 	{ path: 'signup', component: SignupComponent },
-	{ path: 'submissions', component: SubmissionListComponent },
+	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },
 	{ path: 'sweepstakes', component: EventSweepstakesComponent },
 	{ path: 'users', component: UserListComponent },

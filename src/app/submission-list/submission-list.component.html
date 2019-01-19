@@ -14,7 +14,7 @@
 
 		<ng-container matColumnDef="runner">
 			<mat-header-cell *matHeaderCellDef mat-sort-header>Runner</mat-header-cell>
-			<mat-cell *matCellDef="let submission">{{submission.runner}}</mat-cell>
+			<mat-cell *matCellDef="let submission">{{submission.runner | idToUsername | async}}</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="name">
@@ -46,13 +46,13 @@
 		<ng-container matColumnDef="categories">
 			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
 			<mat-cell *matCellDef="let submission">
-				<div *ngFor="let cat of submission.categories">{{cat.name}} - {{cat.estimateTimeString}}</div>
+				<div *ngFor="let cat of submission.categories">{{cat.name}} - {{cat.estimate | timeToString}}</div>
 			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="public">
 			<mat-header-cell *matHeaderCellDef mat-sort-header>Visibility</mat-header-cell>
-			<mat-cell *matCellDef="let submission">{{submission.public ? 'Public' : 'Private'}}</mat-cell>
+			<mat-cell *matCellDef="let submission">{{submission.public ? 'Public' : 'Not Yet Public'}}</mat-cell>
 		</ng-container>
 
 		<mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
@@ -67,7 +67,7 @@
 		<mat-paginator #paginator
 			[length]="resultsLength"
 			[pageSize]="10"
-			[pageSizeOptions]="[5, 10, 20, 50]"
+			[pageSizeOptions]="[5, 10, 20, 50, 5000]"
 			[showFirstLastButtons]="true">
 		</mat-paginator>
 	</div>

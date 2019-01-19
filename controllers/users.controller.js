@@ -92,7 +92,8 @@ exports.updateUser = async function (req, res, next) {
 		email: req.body.email ? req.body.email : null,
 		username: req.body.username ? req.body.username : null,
 		password: req.body.password ? req.body.password : null,
-		roles: req.body.roles ? req.body.roles : []
+		roles: req.body.roles ? req.body.roles : null,
+		verificationToken: req.body.verificationToken ? req.body.verificationToken : null
 	}
 
 	try {
@@ -220,6 +221,29 @@ exports.verifyEmail = async function (req, res, next) {
 		return res.status(400).json( {
 			status: 400,
 			message: 'Verification failed.'
+		} )
+	}
+}
+
+exports.getUserInfo = async function (req, res, next) {
+	try {
+		let user = await UserService.getUserById(req.params.id)
+		const prop = req.params.prop
+		if (!prop) {
+			return res.status(201).json( {
+				status: 201,
+				data: user
+			} )
+		} else {
+			return res.status(201).json( {
+				status: 201,
+				[prop]: user[prop]
+			} )
+		}
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Unable to retrieve user information.'
 		} )
 	}
 }
