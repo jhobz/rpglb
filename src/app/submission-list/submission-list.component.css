@@ -30,7 +30,8 @@
 
 .mat-column-description,
 .mat-column-pros,
-.mat-column-cons {
+.mat-column-cons,
+.mat-column-incentives {
 	flex: 2;
 }
 
