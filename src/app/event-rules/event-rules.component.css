@@ -7,7 +7,7 @@
 	display: flex;
 	justify-content: center;
 	position: relative;
-	background: url('assets/images/bannerbg.png') center center/cover no-repeat;
+	/* background: url('assets/images/bannerbg.png') center center/cover no-repeat; */
 	font-weight: bold;
 	background-color: var(--color-primary);
 	padding: 20px;

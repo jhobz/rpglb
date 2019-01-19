@@ -30,8 +30,11 @@
 }
 
 .row-wrapper > :first-child {
-	flex-grow: 5;
 	margin-right: 10px;
+}
+
+.row-wrapper.5-1 > :first-child {
+	flex-grow: 5;
 }
 
 .category-info {

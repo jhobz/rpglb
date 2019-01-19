@@ -23,6 +23,7 @@
 				[(ngModel)]="passwordData.current"
 				name="currentPassword"
 				placeholder="Current password"
+				maxlength="128"
 				required />
 			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{ hidePassword ? 'visibility': 'visibility_off' }}</mat-icon>
 		</mat-form-field>
@@ -34,6 +35,7 @@
 				name="newPassword"
 				placeholder="New password"
 				minlength="12"
+				maxlength="128"
 				required />
 			<mat-icon matSuffix (click)="hidePassword2 = !hidePassword2">{{ hidePassword2 ? 'visibility': 'visibility_off' }}</mat-icon>
 		</mat-form-field>
@@ -45,6 +47,7 @@
 				name="newPasswordConfirm"
 				placeholder="Confirm new password"
 				minlength="12"
+				maxlength="128"
 				required />
 			<mat-icon matSuffix (click)="hidePassword3 = !hidePassword3">{{ hidePassword3 ? 'visibility': 'visibility_off' }}</mat-icon>
 		</mat-form-field>

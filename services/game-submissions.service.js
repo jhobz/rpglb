@@ -25,6 +25,7 @@ exports.createSubmission = async function (submission) {
 		name: submission.name,
 		console: submission.console,
 		description: submission.description,
+		incentives: submission.incentives,
 		pros: submission.pros,
 		cons: submission.cons,
 		public: submission.public,

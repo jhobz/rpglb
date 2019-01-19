@@ -16,8 +16,7 @@ let CategorySchema = new mongoose.Schema({
 	description: {
 		type: String,
 		trim: true,
-		maxlength: 560, // Pitch it in 2 tweets or less
-		require: true
+		maxlength: 560 // Pitch it in 2 tweets or less
 	},
 	video: {
 		type: String, // URL
@@ -49,6 +48,11 @@ let GameSubmissionSchema = new mongoose.Schema({
 		trim: true,
 		maxlength: 1120,
 		required: true
+	},
+	incentives: {
+		type: String,
+		trim: true,
+		maxlength: 560
 	},
 	pros: {
 		type: String,

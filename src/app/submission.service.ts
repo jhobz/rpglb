@@ -23,6 +23,7 @@ export interface GameSubmission {
 	name: string
 	console: string
 	description: string
+	incentives: string
 	pros: string
 	cons: string
 	public: boolean

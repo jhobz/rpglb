@@ -22,7 +22,9 @@ export class VerifyPageComponent implements OnInit {
 					(res: any) => {
 						if (!res) {
 							this.status = 'info'
-							this.statusMessage = 'Click below to send a new verification email. This will invalidate the email previously sent to you.'
+							this.statusMessage = 'You haven\'t verified your email yet. Check your email for a message ' +
+								'from rpglimitbreak@gmail.com. Click below to send a new email if you need one. This will ' +
+								'invalidate the email previously sent to you.'
 							return
 						}
 						this.status = 'success'

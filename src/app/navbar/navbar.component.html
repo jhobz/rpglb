@@ -5,7 +5,7 @@
 		<a *ngIf="mode === 'event'" href="/tracker/runs/6">SCHEDULE</a>
 		<a *ngIf="mode === 'event'" href="https://theyetee.com/rpglb" target="_blank">SHIRTS</a>
 		<a href="/tracker/6">TRACKER</a>
-		<a routerLink="/rules">EVENT RULES</a>
+		<a *ngIf="mode === 'event'" routerLink="/rules">EVENT RULES</a>
 		<a *ngIf="areSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>
 		<a href="https://discord.gg/rpglb" target="_blank">DISCORD</a>
 		<!-- <a routerLink="about">ABOUT</a> -->

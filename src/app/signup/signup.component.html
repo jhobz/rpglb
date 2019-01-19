@@ -9,6 +9,7 @@
 					name="firstName"
 					placeholder="First name"
 					[(ngModel)]="model.firstName"
+					maxlength="32"
 					required />
 			</mat-form-field>
 			<mat-form-field>
@@ -17,6 +18,7 @@
 					name="lastName"
 					placeholder="Last name"
 					[(ngModel)]="model.lastName"
+					maxlength="32"
 					required />
 			</mat-form-field>
 		</div>
@@ -29,6 +31,7 @@
 				name="email"
 				placeholder="Email"
 				[(ngModel)]="model.email"
+				maxlength="64"
 				pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
 				required />
 			<mat-error *ngIf="email.errors?.pattern">Must be a valid email address</mat-error>
@@ -55,6 +58,7 @@
 				[(ngModel)]="model.password"
 				[type]="hidePassword ? 'password' : 'text'"
 				minlength="12"
+				maxlength="128"
 				required />
 			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
 			<mat-error *ngIf="password.errors?.minlength && !password.errors.required">Password must be at least 12 characters</mat-error>

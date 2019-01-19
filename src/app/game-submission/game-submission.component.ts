@@ -31,6 +31,7 @@ export class GameSubmissionComponent implements OnInit {
 		name: '',
 		console: '',
 		description: '',
+		incentives: '',
 		pros: '',
 		cons: '',
 		public: false,
