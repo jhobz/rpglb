@@ -10,7 +10,7 @@ import { AuthenticationService } from '../authentication.service'
 export class NavbarComponent implements OnInit {
 	// TODO: Don't hardcode these
 	mode: 'pre'|'off'|'event' = 'pre'
-	areSubmissionsOpen: boolean = false
+	areSubmissionsOpen: boolean = true
 
 	constructor(private auth: AuthenticationService) { }
 
