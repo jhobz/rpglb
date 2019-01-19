@@ -24,10 +24,13 @@ let UserSchema = new mongoose.Schema({
 	},
 	username: {
 		type: String,
+		collation: {
+			locale: 'en',
+			strength: 1
+		},
 		unique: true,
 		minlength: 3,
 		maxlength: 26,
-		lowercase: true,
 		trim: true,
 		required: true,
 		match: /^[A-Za-z0-9_]+$/i
