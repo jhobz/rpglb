@@ -1,0 +1,83 @@
+<div class="submission-flow-container">
+	<h1>{{event}} Game Submission</h1>
+	<mat-card class="description">
+		<p>
+			On this page you can create and edit your game submissions for {{event}}. You can submit up to 5 games, each
+			with up to 3 categories. Every game must have at least one category. Fields with an asterisk (*) are required.
+			The "Pros" and "Cons" fields are not required, but are encouraged! Please include any information about
+			potential donation incentives in the <strong>description</strong> field.
+		</p>
+		<p>
+			<strong class="success">Your game submission is saved when you click the "Next" button,</strong> so be sure to look over your
+			submission carefully before continuing to the next game. Don't worry though, you can come back and edit
+			previous games at any time while submissions are still open. If you wish to delete a submission, either replace
+			the information with another game, or simply click the "Remove Game" button. <strong class="warn-light">If you click "Remove Game"
+			and later choose to submit the same game, you will have to enter all of the information again, so be wary.</strong>
+		</p>
+	</mat-card>
+	<mat-horizontal-stepper linear #stepper="matHorizontalStepper">
+		<mat-step *ngFor="let game of games" [completed]="sub.form.valid">
+			<ng-template matStepLabel>{{game.name || 'New Game'}}</ng-template>
+			<div class="step-controls">
+				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Previous</span></button>
+				<button
+					[disabled]="games.length <= 0"
+					mat-raised-button
+					color="warn"
+					(click)="removeGame(games.indexOf(game))">
+					<mat-icon>clear</mat-icon>
+					<span>Remove Game</span>
+				</button>
+				<button mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form)"><span>Next</span><mat-icon>arrow_forward</mat-icon></button>
+			</div>
+			<app-game-submission #sub [game]="game"></app-game-submission>
+			<div class="step-controls">
+				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon>Previous</button>
+				<button
+					[disabled]="games.length <= 0"
+					mat-raised-button
+					color="warn"
+					(click)="removeGame(games.indexOf(game))">
+					<mat-icon>clear</mat-icon>
+					<span>Remove Game</span>
+				</button>
+				<button mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form)">Next<mat-icon>arrow_forward</mat-icon></button>
+			</div>
+			<br />
+		</mat-step>
+
+		<mat-step *ngIf="games.length < maxGames">
+			<ng-template matStepLabel>More...</ng-template>
+			<div class="step-controls">
+				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Previous</span></button>
+				<button mat-raised-button color="primary" matStepperNext><span>Skip to End</span><mat-icon>arrow_forward</mat-icon></button>
+			</div>
+			<div class="center-wrapper">
+				<button mat-raised-button color="primary" class="btn-add-game" (click)="addGame()">
+					<mat-icon>add_circle</mat-icon>
+					<span>Add another game</span>
+				</button>
+			</div>
+			<div class="step-controls">
+				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon>Previous</button>
+				<button mat-raised-button color="primary" matStepperNext>Skip to End<mat-icon>arrow_forward</mat-icon></button>
+			</div>
+			<br />
+		</mat-step>
+
+		<mat-step>
+			<ng-template matStepLabel>Done</ng-template>
+			<h2>Your submissions</h2>
+			<app-submission-list #submissionList [dataSource]="getObservableOfGames()" [showFilter]="false" [showRunner]="false" [showPagination]="false"></app-submission-list>
+			<br />
+			<h3 class="info">Done with submissions?</h3>
+			<p>You can always come back later (until submissions close). Note that your submissions will not show up in the public list just yet. They first need to be approved by the game selection committee and marked as public.</p>
+			<div class="step-controls">
+				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Go Back</span></button>
+				<!-- TODO: Make this a link to all submissions or profile or something -->
+				<a mat-raised-button color="primary" routerLink="/submissions" matStepperNext>I'm done for now<mat-icon>arrow_forward</mat-icon></a>
+			</div>
+			<br />
+		</mat-step>
+	</mat-horizontal-stepper>
+</div>

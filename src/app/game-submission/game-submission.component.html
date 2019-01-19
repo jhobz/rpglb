@@ -1,0 +1,108 @@
+<form novalidate #f="ngForm" class="submission-wrapper">
+	<h3>Game Information</h3>
+	<fieldset class="game-info form-wrapper">
+		<div class="row-wrapper">
+			<mat-form-field>
+				<input
+					matInput
+					name="gameName"
+					placeholder="Game Name"
+					maxlength="64"
+					[(ngModel)]="game.name"
+					required />
+			</mat-form-field>
+
+			<mat-form-field>
+				<input
+					matInput
+					name="gameConsole"
+					placeholder="Console"
+					maxlength="32"
+					[(ngModel)]="game.console"
+					required />
+				<mat-hint>What you'll be playing on - official releases only</mat-hint>
+			</mat-form-field>
+		</div>
+
+		<mat-form-field>
+			<textarea
+				matInput
+				#desc
+				name="gameDescription"
+				placeholder="Description"
+				maxlength="1120"
+				[(ngModel)]="game.description"
+				matTextareaAutosize
+				matAutosizeMinRows="3"
+				matAutosizeMaxRows="5"
+				required >
+			</textarea>
+			<mat-hint align="end">{{desc.value?.length || 0}}/1120</mat-hint>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Pros</mat-label>
+			<textarea
+				matInput
+				#pros
+				name="gamePros"
+				placeholder="Cutscenes are skippable, nostalgia factor, etc."
+				maxlength="560"
+				[(ngModel)]="game.pros"
+				matTextareaAutosize
+				matAutosizeMinRows="3"
+				matAutosizeMaxRows="5" >
+			</textarea>
+			<mat-hint>Describe the positives of your game as a speedrun</mat-hint>
+			<mat-hint align="end">{{pros.value?.length || 0}}/560</mat-hint>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Cons</mat-label>
+			<textarea
+				matInput
+				#cons
+				name="gameCons"
+				placeholder="Unskippable cutscenes, long walking sections, etc."
+				maxlength="560"
+				[(ngModel)]="game.cons"
+				matTextareaAutosize
+				matAutosizeMinRows="3"
+				matAutosizeMaxRows="5" >
+			</textarea>
+			<mat-hint>Describe the downsides of your game as a speedrun (be honest!)</mat-hint>
+			<mat-hint align="end">{{cons.value?.length || 0}}/560</mat-hint>
+		</mat-form-field>
+	</fieldset>
+	<h3>
+		Categories
+		<span *ngIf="game.name">for {{game.name}}</span>
+	</h3>
+	<div class="category-info">
+		<fieldset
+			*ngFor="let cat of game.categories"
+			class="category-wrapper"
+			[@fadeInOut]="'in'">
+			<app-category-submission [category]="cat"></app-category-submission>
+			<br />
+			<span class="category-id">Category #{{game.categories.indexOf(cat) + 1}}</span>
+			<button
+				mat-raised-button
+				color="warn"
+				(click)="removeCategory(game.categories.indexOf(cat))"
+				[disabled]="game.categories.length === 1">
+				<mat-icon>clear</mat-icon>
+				<span>Remove Category</span>
+			</button>
+		</fieldset>
+		<fieldset *ngIf="game.categories.length < maxCategories" class="category-new">
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="addCategory()">
+				<mat-icon>add_circle</mat-icon>
+				<span>Add Category</span>
+			</button>
+		</fieldset>
+	</div>
+</form>

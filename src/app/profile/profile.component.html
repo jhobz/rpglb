@@ -1,0 +1,54 @@
+<div class="wrapper">
+	<h1 class="no-bold">{{user.username}}</h1>
+	<h3>Your submissions</h3>
+	<mat-card *ngIf="areSubmissionsOpen && games && games.length > 0">
+		<app-submission-list #submissionList
+			[dataSource]="games"
+			[showFilter]="false"
+			[showRunner]="false"
+			[showPagination]="false">
+		</app-submission-list>
+	</mat-card>
+	<div *ngIf="areSubmissionsOpen && !games || games.length === 0">You haven't submitted any games to {{event}}</div>
+	<div *ngIf="!areSubmissionsOpen">Submissions aren't quite open. Check back later.</div>
+	<br />
+	<a *ngIf="areSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>
+	<br /><br /><br />
+	<h3>Need to change your password?</h3>
+	<form #f="ngForm" class="form-password" (ngSubmit)="changePassword()">
+		<mat-form-field>
+			<input
+				matInput
+				[type]="hidePassword ? 'password' : 'text'"
+				[(ngModel)]="passwordData.current"
+				name="currentPassword"
+				placeholder="Current password"
+				required />
+			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{ hidePassword ? 'visibility': 'visibility_off' }}</mat-icon>
+		</mat-form-field>
+		<mat-form-field>
+			<input
+				matInput
+				[type]="hidePassword2 ? 'password' : 'text'"
+				[(ngModel)]="passwordData.new"
+				name="newPassword"
+				placeholder="New password"
+				minlength="12"
+				required />
+			<mat-icon matSuffix (click)="hidePassword2 = !hidePassword2">{{ hidePassword2 ? 'visibility': 'visibility_off' }}</mat-icon>
+		</mat-form-field>
+		<mat-form-field>
+			<input
+				matInput
+				[type]="hidePassword3 ? 'password' : 'text'"
+				[(ngModel)]="passwordData.confirm"
+				name="newPasswordConfirm"
+				placeholder="Confirm new password"
+				minlength="12"
+				required />
+			<mat-icon matSuffix (click)="hidePassword3 = !hidePassword3">{{ hidePassword3 ? 'visibility': 'visibility_off' }}</mat-icon>
+		</mat-form-field>
+		<button mat-raised-button type="submit" color="primary" [disabled]="!f.form.valid">Change Password</button>
+		<div *ngIf="statusMessage" [class]="'msg-status ' + status">{{statusMessage}}</div>
+	</form>
+</div>

@@ -1,0 +1,39 @@
+.table-container {
+	display: flex;
+	flex-direction: column;
+	max-width: 1400px;
+	position: relative;
+}
+
+.loading-shade {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 56px;
+	right: 0;
+	background: rgba(0, 0, 0, 0.45);
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.table-header {
+	min-height: 64px;
+	padding: 8px 24px 0;
+	font-size: 14px;
+}
+
+.table-header > .mat-form-field {
+	width: 100%;
+}
+
+.mat-column-description,
+.mat-column-pros,
+.mat-column-cons {
+	flex: 2;
+}
+
+.mat-cell, .mat-header-cell {
+	padding: 10px;
+}

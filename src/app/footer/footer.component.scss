@@ -1,0 +1,14 @@
+@import '../../rpglb-dark-theme.scss';
+
+$background: map-get($rpglb-app-theme, background);
+
+.wrapper {
+	background-color: mat-color($background, app-bar);
+	padding: 25px;
+	font-family: 'Segoe UI';
+	font-size: 0.75em;
+}
+
+.wrapper > .title {
+	text-align: left;
+}
