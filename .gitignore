@@ -44,5 +44,5 @@ testem.log
 Thumbs.db
 
 # private
-/config
+/config/database.js
 .env
