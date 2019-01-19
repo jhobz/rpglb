@@ -23,6 +23,7 @@ interface TokenResponse {
 export interface TokenPayload {
 	username: string
 	password: string
+	confirm?: string
 	firstName?: string
 	lastName?: string
 	email?: string

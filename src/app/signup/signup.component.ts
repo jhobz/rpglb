@@ -12,12 +12,14 @@ export class SignupComponent {
 	model: TokenPayload = {
 		username: '',
 		password: '',
+		confirm: '',
 		email: '',
 		firstName: '',
 		lastName: ''
 	}
 	@ViewChild('f') form: any
 	hidePassword: boolean = true
+	hidePassword2: boolean = true
 	errorMessage: string = ''
 	successMessage: string = ''
 	isDebouncing: boolean = false
@@ -25,6 +27,12 @@ export class SignupComponent {
 	constructor(private auth: AuthenticationService, private router: Router) { }
 
 	register() {
+		// TODO: Probably convert this check to a proper form validator eventually
+		if (this.form.form.value.password !== this.form.form.value.confirmPassword) {
+			this.errorMessage = 'Passwords must match.'
+			this.isDebouncing = false
+			return false
+		}
 		if (this.form.valid) {
 			this.isDebouncing = true
 			this.auth.register(this.model)

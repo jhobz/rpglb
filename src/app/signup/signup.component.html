@@ -63,6 +63,22 @@
 			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
 			<mat-error *ngIf="password.errors?.minlength && !password.errors.required">Password must be at least 12 characters</mat-error>
 		</mat-form-field>
+
+		<mat-form-field>
+			<input
+				matInput
+				#confirm="ngModel"
+				type="password"
+				name="confirmPassword"
+				placeholder="Confirm password"
+				[(ngModel)]="model.confirm"
+				[type]="hidePassword2 ? 'password' : 'text'"
+				minlength="12"
+				maxlength="128"
+				required />
+			<mat-icon matSuffix (click)="hidePassword2 = !hidePassword2">{{hidePassword2 ? 'visibility' : 'visibility_off'}}</mat-icon>
+			<mat-error *ngIf="confirm.errors?.minlength && !confirm.errors.required">Passwords must match</mat-error>
+		</mat-form-field>
 		<br />
 		<button mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid || isDebouncing">Create</button>
 		<div class="msg-status success" *ngIf="successMessage !== ''">{{successMessage}}</div>
