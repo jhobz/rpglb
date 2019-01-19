@@ -8,6 +8,7 @@ import { environment } from '../environments/environment'
 import { AuthenticationService } from './authentication.service'
 
 export interface GameCategory {
+	_id?: string
 	_uid?: number
 	name: string
 	estimateTimeString?: string
