@@ -1,7 +1,8 @@
-<h1 class="warn" mat-dialog-title style="text-align:center;">Are you sure you want to remove <strong>{{game}}</strong>?</h1>
+<h1 class="warn" mat-dialog-title style="text-align:center;">Are you sure you want to remove <strong>{{data.game}}</strong>?</h1>
 <div mat-dialog-content>
-	<p>
-		If you change your mind later, you'll have to start from scratch. Only <strong>{{game}}</strong> will be
+	<p *ngIf="data.body">{{data.body}}</p>
+	<p *ngIf="!data.body">
+		If you change your mind later, you'll have to start from scratch. Only <strong>{{data.game}}</strong> will be
 		removed. All others will be unaffected.
 	</p>
 </div>

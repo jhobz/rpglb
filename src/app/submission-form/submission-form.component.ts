@@ -45,11 +45,9 @@ export class SubmissionFormComponent implements OnInit {
 			return false
 		}
 
-		console.log(this.games[index])
-
-		const dialogRef = this.dialog.open(SubmissionConfirmationDialog, {
+		const dialogRef = this.dialog.open(SubmissionConfirmationDialogComponent, {
 			width: '800px',
-			data: this.games[index].name || 'New Game'
+			data: { game: this.games[index].name || 'New Game' }
 		})
 
 		dialogRef.afterClosed().subscribe((shouldRemove: boolean) => {
@@ -61,7 +59,7 @@ export class SubmissionFormComponent implements OnInit {
 				const gameId = game._id
 				if (gameId) {
 					this.submissionService.deleteSubmission(gameId)
-						.subscribe((data) => {
+						.subscribe((res: any) => {
 							// Maybe do something
 						})
 				}
@@ -81,14 +79,14 @@ export class SubmissionFormComponent implements OnInit {
 		if (game._id) {
 			// PUT
 			this.submissionService.editSubmission(game)
-				.subscribe((data) => {
+				.subscribe((res: any) => {
 					this.isDebouncing = false
 					buttons.forEach((btn: MatButton) => btn.disabled = false)
 				})
 		} else {
 			// POST
 			this.submissionService.createSubmission(game)
-				.subscribe((data) => {
+				.subscribe((res: any) => {
 					this.isDebouncing = false
 					buttons.forEach((btn: MatButton) => btn.disabled = false)
 				})
@@ -106,14 +104,19 @@ export class SubmissionFormComponent implements OnInit {
 
 }
 
+export interface DialogData {
+	game: string,
+	body?: string
+}
+
 @Component({
-	selector: 'submission-confirmation-dialog',
+	selector: 'app-submission-confirmation-dialog',
 	templateUrl: 'submission-confirmation-dialog.html',
 })
-export class SubmissionConfirmationDialog {
+export class SubmissionConfirmationDialogComponent {
 	constructor(
-		public dialogRef: MatDialogRef<SubmissionConfirmationDialog>,
-		@Inject(MAT_DIALOG_DATA) public game: string
+		public dialogRef: MatDialogRef<SubmissionConfirmationDialogComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: DialogData
 	) {}
 
 	onNoClick(): void {

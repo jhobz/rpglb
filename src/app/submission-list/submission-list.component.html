@@ -65,17 +65,30 @@
 		<ng-container matColumnDef="categories">
 			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
 			<mat-cell *matCellDef="let submission">
-				<div *ngFor="let cat of submission.categories">{{cat.name}} - {{cat.estimate | timeToString}}</div>
+				<div *ngFor="let cat of submission.categories">
+					<a *ngIf="hasSubmissionsRole"
+						[href]="cat.video.includes('http') ? cat.video : 'http://' + cat.video"
+						target="_blank">
+						{{cat.name}} - {{cat.estimate | timeToString}}
+					</a>
+					<span *ngIf="!hasSubmissionsRole">
+						{{cat.name}} - {{cat.estimate | timeToString}}
+					</span>
+				</div>
 			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="public">
 			<mat-header-cell *matHeaderCellDef mat-sort-header>Visibility</mat-header-cell>
-			<mat-cell *matCellDef="let submission">{{submission.public ? 'Public' : 'Not Yet Public'}}</mat-cell>
+			<mat-cell *matCellDef="let submission"
+				[ngClass]="{ 'primary': submission.public, 'warn': !submission.public }">
+				{{submission.public ? 'Public' : 'Not Yet Public'}}<br />
+				<mat-icon>{{submission.public ? 'visibility' : 'visibility_off'}}</mat-icon>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="controls">
-			<mat-header-cell *matHeaderCellDef mat-sort-header>Controls</mat-header-cell>
+			<mat-header-cell *matHeaderCellDef>Controls</mat-header-cell>
 			<mat-cell *matCellDef="let submission">
 				<fieldset #controlsFieldset class="controls-group">
 					<h3>Visibility</h3>
@@ -86,28 +99,38 @@
 						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
 					</button>
 					<button mat-raised-button
-						color="accent"
+						color="warn"
 						(click)="markSubmission(submission, 'private', $event.target.closest('button'))">
 						<span>Mark Private</span>
-						<mat-spinner color="accent" [diameter]="28"></mat-spinner>
+						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
 					</button>
 					<h3>Selection (Internal)<br />[Not yet implemented]</h3>
 					<button mat-raised-button
 						color="primary"
+						disabled
 						(click)="markSubmission(submission, 'accept', $event.target.closest('button'))">
 						<span>Mark Accepted</span>
 						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
 					</button>
 					<button mat-raised-button
 						color="accent"
+						disabled
 						(click)="markSubmission(submission, 'backup', $event.target.closest('button'))">
 						<span>Mark Backup</span>
 						<mat-spinner color="accent" [diameter]="28"></mat-spinner>
 					</button>
 					<button mat-raised-button
 						color="warn"
+						disabled
 						(click)="markSubmission(submission, 'reject', $event.target.closest('button'))">
 						<span>Mark Rejected</span>
+						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
+					</button>
+					<h3>Removal</h3>
+					<button mat-raised-button
+						color="warn"
+						(click)="deleteSubmission(submission)">
+						<span>DELETE</span>
 						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
 					</button>
 				</fieldset>

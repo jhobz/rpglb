@@ -39,7 +39,10 @@ import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-
 import { ProfileComponent } from './profile/profile.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
-import { SubmissionConfirmationDialog, SubmissionFormComponent } from './submission-form/submission-form.component'
+import {
+	SubmissionConfirmationDialogComponent,
+	SubmissionFormComponent
+} from './submission-form/submission-form.component'
 import { SubmissionListComponent } from './submission-list/submission-list.component'
 import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
 import { TimeRangeValidatorDirective } from './time-range.directive'
@@ -67,7 +70,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		NavbarComponent,
 		FooterComponent,
 		SubmissionFormComponent,
-		SubmissionConfirmationDialog,
+		SubmissionConfirmationDialogComponent,
 		VerifyPageComponent,
 		IdToUsernamePipe,
 		TimeToStringPipe,
@@ -75,7 +78,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		PreEventHomePageComponent,
 	],
 	entryComponents: [
-		SubmissionConfirmationDialog
+		SubmissionConfirmationDialogComponent
 	],
 	imports: [
 		BrowserModule,
