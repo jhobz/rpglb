@@ -9,6 +9,20 @@
 		</mat-form-field>
 	</div>
 
+	<!--
+		Common sense would use *ngIf directive on mat-paginator here, but this does not work with @ViewChild and
+ 		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
+	-->
+	<div [hidden]="!showPagination">
+		<mat-paginator #paginatorTop
+			[length]="resultsLength"
+			[pageSize]="defaultPageSize"
+			[pageSizeOptions]="[5, 10, 20, 50, 5000]"
+			[showFirstLastButtons]="true"
+			(page)="onPageChange($event)">
+		</mat-paginator>
+	</div>
+
 	<mat-table #table [dataSource]="dataSource"
 	           matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
 
@@ -60,6 +74,46 @@
 			<mat-cell *matCellDef="let submission">{{submission.public ? 'Public' : 'Not Yet Public'}}</mat-cell>
 		</ng-container>
 
+		<ng-container matColumnDef="controls">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Controls</mat-header-cell>
+			<mat-cell *matCellDef="let submission">
+				<fieldset #controlsFieldset class="controls-group">
+					<h3>Visibility</h3>
+					<button mat-raised-button
+						color="primary"
+						(click)="markSubmission(submission, 'public', $event.target.closest('button'))">
+						<span>Mark Public</span>
+						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
+					</button>
+					<button mat-raised-button
+						color="accent"
+						(click)="markSubmission(submission, 'private', $event.target.closest('button'))">
+						<span>Mark Private</span>
+						<mat-spinner color="accent" [diameter]="28"></mat-spinner>
+					</button>
+					<h3>Selection (Internal)<br />[Not yet implemented]</h3>
+					<button mat-raised-button
+						color="primary"
+						(click)="markSubmission(submission, 'accept', $event.target.closest('button'))">
+						<span>Mark Accepted</span>
+						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
+					</button>
+					<button mat-raised-button
+						color="accent"
+						(click)="markSubmission(submission, 'backup', $event.target.closest('button'))">
+						<span>Mark Backup</span>
+						<mat-spinner color="accent" [diameter]="28"></mat-spinner>
+					</button>
+					<button mat-raised-button
+						color="warn"
+						(click)="markSubmission(submission, 'reject', $event.target.closest('button'))">
+						<span>Mark Rejected</span>
+						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
+					</button>
+				</fieldset>
+			</mat-cell>
+		</ng-container>
+
 		<mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
 		<mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
 	</mat-table>
@@ -69,11 +123,12 @@
  		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
 	-->
 	<div [hidden]="!showPagination">
-		<mat-paginator #paginator
+		<mat-paginator #paginatorBottom
 			[length]="resultsLength"
-			[pageSize]="10"
+			[pageSize]="defaultPageSize"
 			[pageSizeOptions]="[5, 10, 20, 50, 5000]"
-			[showFirstLastButtons]="true">
+			[showFirstLastButtons]="true"
+			(page)="onPageChange($event)">
 		</mat-paginator>
 	</div>
 </div>

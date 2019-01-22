@@ -43,7 +43,21 @@ exports.getSubmissions = async function (req, res, next) {
 }
 
 exports.createSubmission = async function (req, res, next) {
-	// req.body contains the submitted form values
+	if (!req.user) {
+		console.warn('Unauthorized submission creation attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: 'Unauthorized. You must be logged in to create a submission.'
+		} )
+	}
+
+	if (req.user._id != req.body.runner) {
+		console.warn('Unauthorized submission creation attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: 'Unauthorized. You may not create a submission for this user.'
+		} )
+	}
 
 	let submission = {
 		runner: req.body.runner,
@@ -80,6 +94,24 @@ exports.updateSubmission = async function (req, res, next) {
 		})
 	}
 
+	if (!req.user) {
+		console.warn('Unauthorized submission editing attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: 'Unauthorized. You must be logged in to edit a submission.'
+		} )
+	}
+
+	if (req.user._id != req.body.runner && (
+		!req.user.roles || req.user.roles.indexOf('submissions') === -1
+	)) {
+		console.warn('Unauthorized submission editing attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: 'Unauthorized. You do not have permission to edit this user\'s submission.'
+		} )
+	}
+
 	let id = req.body._id
 	let submission = {
 		id,
@@ -110,7 +142,26 @@ exports.updateSubmission = async function (req, res, next) {
 }
 
 exports.removeSubmission = async function (req, res, next) {
+	if (!req.user) {
+		console.warn('Unauthorized submission deletion attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: 'Unauthorized. You must be logged in to delete a submission.'
+		} )
+	}
+
 	let id = req.params.id
+	let submission = await GameSubmissionService.getSubmissionById(id)
+
+	if (req.user._id != submission.runner && (
+		!req.user.roles || req.user.roles.indexOf('submissions') === -1
+	)) {
+		console.warn('Unauthorized submission deletion attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: 'Unauthorized. You do not have permission to delete this user\'s submission.'
+		} )
+	}
 
 	try {
 		let deleted = await GameSubmissionService.deleteSubmission(id)

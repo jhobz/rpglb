@@ -12,6 +12,7 @@ import {
 	MatPaginatorModule,
 	MatProgressBarModule,
 	MatProgressSpinnerModule,
+	MatSnackBarModule,
 	MatSortModule,
 	MatStepperModule,
 	MatTableModule,
@@ -71,7 +72,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		IdToUsernamePipe,
 		TimeToStringPipe,
 		SubmissionsListPageComponent,
-		PreEventHomePageComponent
+		PreEventHomePageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialog
@@ -91,6 +92,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		MatPaginatorModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
+		MatSnackBarModule,
 		MatStepperModule,
 		MatSortModule,
 		MatTableModule,

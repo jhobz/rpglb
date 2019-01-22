@@ -7,9 +7,9 @@ const jwt = require('jsonwebtoken')
 
 const GameSubmissionController = require('../../controllers/game-submissions.controller')
 
-router.get('/', passport.authenticate(['jwt','anonymous'], { session: false }), GameSubmissionController.getSubmissions)
-router.post('/', GameSubmissionController.createSubmission)
-router.put('/', GameSubmissionController.updateSubmission)
-router.delete('/:id', GameSubmissionController.removeSubmission)
+router.get('/', passport.authenticate(['jwt', 'anonymous'], { session: false }), GameSubmissionController.getSubmissions)
+router.post('/', passport.authenticate(['jwt'], { session: false }), GameSubmissionController.createSubmission)
+router.put('/', passport.authenticate(['jwt'], { session: false }), GameSubmissionController.updateSubmission)
+router.delete('/:id', passport.authenticate(['jwt'], { session: false }), GameSubmissionController.removeSubmission)
 
 module.exports = router;
