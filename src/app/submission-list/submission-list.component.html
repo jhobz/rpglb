@@ -9,6 +9,20 @@
 		</mat-form-field>
 	</div>
 
+	<!--
+		Common sense would use *ngIf directive on mat-paginator here, but this does not work with @ViewChild and
+ 		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
+	-->
+	<div [hidden]="!showPagination">
+		<mat-paginator #paginatorTop
+			[length]="resultsLength"
+			[pageSize]="defaultPageSize"
+			[pageSizeOptions]="[5, 10, 20, 50, 5000]"
+			[showFirstLastButtons]="true"
+			(page)="onPageChange($event)">
+		</mat-paginator>
+	</div>
+
 	<mat-table #table [dataSource]="dataSource"
 	           matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
 
@@ -69,11 +83,12 @@
  		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
 	-->
 	<div [hidden]="!showPagination">
-		<mat-paginator #paginator
+		<mat-paginator #paginatorBottom
 			[length]="resultsLength"
-			[pageSize]="10"
+			[pageSize]="defaultPageSize"
 			[pageSizeOptions]="[5, 10, 20, 50, 5000]"
-			[showFirstLastButtons]="true">
+			[showFirstLastButtons]="true"
+			(page)="onPageChange($event)">
 		</mat-paginator>
 	</div>
 </div>

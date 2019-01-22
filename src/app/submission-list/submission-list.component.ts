@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core'
-import { MatPaginator, MatSort, MatTable, MatTableDataSource } from '@angular/material'
+import { Component, EventEmitter, Input, OnInit, ViewChild } from '@angular/core'
+import { MatPaginator, MatSort, MatTable, MatTableDataSource, PageEvent } from '@angular/material'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 import { merge } from 'rxjs/observable/merge'
@@ -20,6 +20,7 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 })
 export class SubmissionListComponent implements OnInit {
 	columnsToDisplay: string[] = ['name', 'console', 'description', 'pros', 'cons', 'incentives', 'categories']
+	defaultPageSize: number = 10
 	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
 	@Input() showRunner: boolean = true
 	@Input() showPagination: boolean = true
@@ -30,8 +31,12 @@ export class SubmissionListComponent implements OnInit {
 	isLoadingResults: boolean = true
 
 	@ViewChild(MatTable) table: any
-	@ViewChild(MatPaginator) paginator: MatPaginator
+	@ViewChild('paginatorTop') paginatorTop: MatPaginator
+	@ViewChild('paginatorBottom') paginatorBottom: MatPaginator
 	@ViewChild(MatSort) sort: MatSort
+
+	paginators: MatPaginator[]
+	pageChangedEmitter: EventEmitter<number> = new EventEmitter<number>()
 
 	constructor(
 		public auth: AuthenticationService,
@@ -43,6 +48,7 @@ export class SubmissionListComponent implements OnInit {
 		const user = this.auth.getUserInfo()
 		if (user && user.roles.includes('submissions') || this.router.url === '/profile') {
 			this.columnsToDisplay.push('public')
+			this.defaultPageSize = 5000
 		}
 
 		if (this.showRunner) {
@@ -52,16 +58,16 @@ export class SubmissionListComponent implements OnInit {
 		if (this.filter) {
 			this.applyFilter(this.filter)
 		}
+		this.paginators = [this.paginatorTop, this.paginatorBottom]
+		this.sort.sortChange.subscribe(() => this.paginators.forEach((pag: MatPaginator) => pag.pageIndex = 0))
 
-		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
-
-		merge(this.sort.sortChange, this.paginator.page)
+		merge(this.sort.sortChange, this.pageChangedEmitter)
 				.pipe(
 					startWith({}),
 					switchMap(() => {
 						this.isLoadingResults = true
 						return this.submissionService.getSubmissions(
-							this.sort.active, this.sort.direction, this.paginator.pageSize, this.paginator.pageIndex)
+							this.sort.active, this.sort.direction, this.paginatorTop.pageSize, this.paginatorTop.pageIndex)
 					}),
 					map((data: GameSubmissionResponse) => {
 						this.isLoadingResults = false
@@ -77,6 +83,14 @@ export class SubmissionListComponent implements OnInit {
 				).subscribe((data: GameSubmission[]) => {
 					this.dataSource.data = data
 				})
+	}
+
+	onPageChange(event: PageEvent) {
+		for (const pag of this.paginators) {
+			pag.pageIndex = event.pageIndex
+			pag.pageSize = event.pageSize
+		}
+		this.pageChangedEmitter.emit(event.pageIndex)
 	}
 
 	applyFilter(filterValue: string) {
