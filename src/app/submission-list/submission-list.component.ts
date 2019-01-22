@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, ViewChild } from '@angular/core'
-import { MatPaginator, MatSort, MatTable, MatTableDataSource, PageEvent } from '@angular/material'
+import { MatButton, MatPaginator, MatSnackBar, MatSort, MatTable, MatTableDataSource, PageEvent } from '@angular/material'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 import { merge } from 'rxjs/observable/merge'
@@ -40,6 +40,7 @@ export class SubmissionListComponent implements OnInit {
 
 	constructor(
 		public auth: AuthenticationService,
+		private snackBar: MatSnackBar,
 		private submissionService: SubmissionService,
 		private router: Router
 	) { }
@@ -48,6 +49,9 @@ export class SubmissionListComponent implements OnInit {
 		const user = this.auth.getUserInfo()
 		if (user && user.roles.includes('submissions') || this.router.url === '/profile') {
 			this.columnsToDisplay.push('public')
+			if (this.showRunner) {
+				this.columnsToDisplay.push('controls')
+			}
 			this.defaultPageSize = 5000
 		}
 
@@ -97,6 +101,37 @@ export class SubmissionListComponent implements OnInit {
 		filterValue = filterValue.trim()
 		filterValue = filterValue.toLowerCase()
 		this.dataSource.filter = filterValue
+	}
+
+	markSubmission(submission: GameSubmission, status: string, button: HTMLButtonElement) {
+		const elems = button.closest('fieldset').getElementsByTagName('button')
+		for (let i = 0; i < elems.length; i++) {
+			elems.item(i).disabled = true
+		}
+		button.classList.add('showSpinner')
+		this.submissionService.markSubmission(submission, status)
+			.subscribe(
+				(res: any) => {
+					for (let i = 0; i < elems.length; i++) {
+						elems.item(i).disabled = false
+					}
+					button.classList.remove('showSpinner')
+					this.snackBar.open(`Successfully marked ${status}!`, '', {
+						duration: 5000,
+						panelClass: ['snack-success', 'no-action']
+					})
+				},
+				(err: any) => {
+					for (let i = 0; i < elems.length; i++) {
+						elems.item(i).disabled = false
+					}
+					button.classList.remove('showSpinner')
+					this.snackBar.open(`Failed to mark ${status}!`, '', {
+						duration: 5000,
+						panelClass: ['snack-warn', 'no-action']
+					})
+					console.error('FAILED TO MARK PUBLIC')
+				})
 	}
 
 }

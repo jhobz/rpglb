@@ -47,7 +47,8 @@ export class SubmissionService {
 	// TODO: Make PaginationResponse class to replace "any" as the repsonse type
 
 	createSubmission(submission: GameSubmission): Observable<any> {
-		return this.http.post(this.apiUrl, submission)
+		const options = { headers: this.auth.generateAuthHeader() }
+		return this.http.post(this.apiUrl, submission, options)
 	}
 
 	getSubmissionsForUser(userId: string): Observable<GameSubmissionResponse> {
@@ -80,11 +81,32 @@ export class SubmissionService {
 	}
 
 	editSubmission(submission: GameSubmission): Observable<any> {
-		return this.http.put(this.apiUrl, submission)
+		const options = { headers: this.auth.generateAuthHeader() }
+		return this.http.put(this.apiUrl, submission, options)
 	}
 
 	deleteSubmission(id: string): Observable<any> {
-		return this.http.delete(`${this.apiUrl}/${id}`)
+		const options = { headers: this.auth.generateAuthHeader() }
+		return this.http.delete(`${this.apiUrl}/${id}`, options)
+	}
+
+	markSubmission(submission: GameSubmission, status: string): Observable<any> {
+		switch (status) {
+			case 'public':
+				submission.public = true
+				break
+			case 'private':
+				submission.public = false
+				break
+			case 'accept':
+			case 'backup':
+			case 'reject':
+				// TODO: Uncomment when selection is implemented
+				// submission.selectionStatus = status
+				break
+		}
+
+		return this.editSubmission(submission)
 	}
 
 	private handleError(error: any): Promise<any> {

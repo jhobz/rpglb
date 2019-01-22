@@ -101,3 +101,17 @@ a:hover {
 .preserve-newlines {
 	white-space: pre-line;
 }
+
+.snack-success {
+	background-color: mat-color($primary);
+	color: white;
+}
+
+.snack-warn {
+	background-color: mat-color($warn);
+	color: white;
+}
+
+.no-action .mat-simple-snackbar {
+	justify-content: center;
+}

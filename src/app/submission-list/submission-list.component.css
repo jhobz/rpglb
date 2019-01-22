@@ -31,10 +31,38 @@
 .mat-column-description,
 .mat-column-pros,
 .mat-column-cons,
-.mat-column-incentives {
+.mat-column-incentives,
+.mat-column-controls {
 	flex: 2;
 }
 
 .mat-cell, .mat-header-cell {
 	padding: 10px;
+}
+
+.mat-cell > .controls-group {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	border: 0;
+	padding: 0;
+}
+
+.controls-group > button {
+	width: 122px;
+	height: 36px;
+	margin: 2px 0;
+}
+
+.controls-group .mat-spinner {
+	margin: 4px auto;
+	display: none;
+}
+
+.controls-group .showSpinner span {
+	display: none;
+}
+
+.controls-group .showSpinner .mat-spinner {
+	display: block;
 }

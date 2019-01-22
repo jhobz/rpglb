@@ -82,12 +82,20 @@ exports.deleteSubmission = async function (id) {
 	}
 }
 
-// ???: Should I add a `getSubmissionsByUsername` method?
-
+// TODO: Is this method even used??? Name implies it should return all submissions for user but actually returns only one.
 // Get a single submission by user search
 exports.getSubmissionsByUser = async function (user) {
 	try {
 		let submission = await GameSubmission.findOne({ runner: user._id })
+		return submission
+	} catch (e) {
+		throw Error(`Error occurred while attempting to retrieve submission: ${e.message}`)
+	}
+}
+
+exports.getSubmissionById = async function (id) {
+	try {
+		let submission = await GameSubmission.findOne({ _id: id })
 		return submission
 	} catch (e) {
 		throw Error(`Error occurred while attempting to retrieve submission: ${e.message}`)
