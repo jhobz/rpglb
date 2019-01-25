@@ -47,6 +47,7 @@ import { SubmissionListComponent } from './submission-list/submission-list.compo
 import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
 import { TimeRangeValidatorDirective } from './time-range.directive'
 import { TimeToStringPipe } from './time-to-string.pipe'
+import { TruncatePipe } from './truncate.pipe'
 import { UserListComponent } from './user-list/user-list.component'
 import { UserService } from './user.service'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
@@ -76,6 +77,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		TimeToStringPipe,
 		SubmissionsListPageComponent,
 		PreEventHomePageComponent,
+		TruncatePipe,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent

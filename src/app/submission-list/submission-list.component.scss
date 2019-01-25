@@ -36,24 +36,115 @@ $background: map-get($rpglb-app-theme, background);
 	width: 100%;
 }
 
-.mat-column-description,
-.mat-column-pros,
-.mat-column-cons,
-.mat-column-incentives,
-.mat-column-controls {
+.mat-row-sticky {
+	position: sticky;
+	z-index: 10;
+	background: mat-color($background, card);
+
+	&.top {
+		top: 0;
+	}
+	&.bottom {
+		bottom: 0;
+		border-top: 1px solid mat-color($foreground, dividers);
+	}
+}
+
+.mat-row {
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.mat-column-runner {
 	flex: 2;
 }
 
-.mat-cell, .mat-header-cell {
-	padding: 10px;
+.mat-column-description,
+.mat-column-proscons,
+.mat-column-incentives,
+.mat-column-categories,
+.mat-column-controls {
+	flex: 3;
+}
+
+// These columns are purely used for sorting and are thus hidden
+.mat-column-name,
+.mat-column-console {
+	display: none;
+}
+
+.mat-column-proscons .title {
+	margin-bottom: 0;
+	text-align: left;
+}
+
+.category-container {
+	.cell-title {
+		color: mat-color($accent, lighter);
+		word-wrap: normal;
+	}
+	hr {
+		margin-top: 10px;
+		border: 1px solid mat-color($foreground, dividers);
+	}
+}
+
+.cell-title {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: mat-color($primary, 200);
+}
+
+.cell-subtitle {
+	color: mat-color($foreground, base, 0.7);
+	font-style: italic;
+}
+
+.runner {
+	font-size: 1.1em;
+}
+
+.collapsible {
+	cursor: pointer;
+}
+
+.collapsible::after {
+	display: block;
+	font-family: 'Material Icons';
+	font-size: 1.5em;
+	color: mat-color($foreground, base, 0.7);
+	content: 'expand_more';
+	text-align: center;
+	flex-basis: 100%;
+}
+
+.collapsible.expanded::after {
+	content: 'expand_less';
+}
+
+.collapsible:hover {
+	background-color: mat-color($background, hover);
+}
+
+.mat-cell {
+	padding: 25px;
+}
+
+.mat-header-cell {
+	padding: 10px 25px;
 }
 
 .mat-cell > .controls-group {
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-start;
 	align-items: flex-start;
 	border: 0;
 	padding: 0;
+
+	h3:first-of-type {
+		margin-top: 0;
+	}
 }
 
 .controls-group > button {

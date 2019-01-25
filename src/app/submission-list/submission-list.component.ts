@@ -29,7 +29,7 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 	providers: [SubmissionService]
 })
 export class SubmissionListComponent implements OnInit {
-	columnsToDisplay: string[] = ['name', 'console', 'description', 'pros', 'cons', 'incentives', 'categories']
+	columnsToDisplay: string[] = ['name', 'console', 'description', 'proscons', 'incentives', 'categories']
 	defaultPageSize: number = 10
 	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
 	@Input() showRunner: boolean = true
@@ -42,8 +42,7 @@ export class SubmissionListComponent implements OnInit {
 	hasSubmissionsRole: boolean = false
 
 	@ViewChild(MatTable) table: any
-	@ViewChild('paginatorTop') paginatorTop: MatPaginator
-	@ViewChild('paginatorBottom') paginatorBottom: MatPaginator
+	@ViewChild(MatPaginator) paginator: MatPaginator
 	@ViewChild(MatSort) sort: MatSort
 
 	paginators: MatPaginator[]
@@ -63,7 +62,9 @@ export class SubmissionListComponent implements OnInit {
 			this.columnsToDisplay.push('public')
 			if (this.showRunner && user && user.roles.includes('submissions')) {
 				this.hasSubmissionsRole = true
-				this.columnsToDisplay.push('controls')
+				if (this.router.url !== '/profile') {
+					this.columnsToDisplay.push('controls')
+				}
 			}
 			this.defaultPageSize = 5000
 		}
@@ -75,10 +76,9 @@ export class SubmissionListComponent implements OnInit {
 		if (this.filter) {
 			this.applyFilter(this.filter)
 		}
-		this.paginators = [this.paginatorTop, this.paginatorBottom]
-		this.sort.sortChange.subscribe(() => this.paginators.forEach((pag: MatPaginator) => pag.pageIndex = 0))
+		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
 
-		merge(this.sort.sortChange, this.pageChangedEmitter)
+		merge(this.sort.sortChange, this.paginator.page)
 				.pipe(
 					startWith({}),
 					switchMap(() => {
@@ -86,8 +86,8 @@ export class SubmissionListComponent implements OnInit {
 						return this.submissionService.getSubmissions(
 							this.sort.active,
 							this.sort.direction,
-							this.paginatorTop.pageSize || this.defaultPageSize,
-							this.paginatorTop.pageIndex)
+							this.paginator.pageSize || this.defaultPageSize,
+							this.paginator.pageIndex)
 					}),
 					map((data: GameSubmissionResponse) => {
 						this.isLoadingResults = false
@@ -105,21 +105,15 @@ export class SubmissionListComponent implements OnInit {
 				})
 	}
 
-	onPageChange(event: PageEvent) {
-		for (const pag of this.paginators) {
-			pag.pageIndex = event.pageIndex
-			pag.pageSize = event.pageSize
-		}
-		this.pageChangedEmitter.emit(event.pageIndex)
-	}
-
 	applyFilter(filterValue: string) {
 		filterValue = filterValue.trim()
 		filterValue = filterValue.toLowerCase()
 		this.dataSource.filter = filterValue
 	}
 
-	markSubmission(submission: GameSubmission, status: string, button: HTMLButtonElement) {
+	markSubmission(submission: GameSubmission, status: string, event: any) {
+		event.stopPropagation()
+		const button: HTMLButtonElement = event.target.closest('button')
 		const elems = button.closest('fieldset').getElementsByTagName('button')
 		for (let i = 0; i < elems.length; i++) {
 			elems.item(i).disabled = true
@@ -172,7 +166,7 @@ export class SubmissionListComponent implements OnInit {
 									panelClass: ['snack-success', 'no-action']
 								})
 								// Refresh the table
-								this.pageChangedEmitter.emit(0)
+								this.paginator.page.emit()
 							},
 							(err: any) => {
 								this.snackBar.open('Failed to delete submission', '', {
@@ -186,4 +180,11 @@ export class SubmissionListComponent implements OnInit {
 		})
 	}
 
+	isRowCollapsible(row: GameSubmission) {
+		return row.description && row.description.length > 100 + 200 * row.categories.length ||
+			row.pros && row.pros.length > 100 + 50 * row.categories.length ||
+			row.cons && row.cons.length > 100 + 50 * row.categories.length ||
+			row.incentives && row.incentives.length > 100 + 200 * row.categories.length ||
+			row.categories && row.categories.some((cat: any) => cat.description && cat.description.length > 100)
+	}
 }

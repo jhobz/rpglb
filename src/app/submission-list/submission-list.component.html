@@ -9,71 +9,71 @@
 		</mat-form-field>
 	</div>
 
-	<!--
-		Common sense would use *ngIf directive on mat-paginator here, but this does not work with @ViewChild and
- 		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
-	-->
-	<div [hidden]="!showPagination">
-		<mat-paginator #paginatorTop
-			[length]="resultsLength"
-			[pageSize]="defaultPageSize"
-			[pageSizeOptions]="[5, 10, 20, 50, 5000]"
-			[showFirstLastButtons]="true"
-			(page)="onPageChange($event)">
-		</mat-paginator>
-	</div>
-
 	<mat-table #table [dataSource]="dataSource"
 	           matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
 
 		<ng-container matColumnDef="runner">
-			<mat-header-cell *matHeaderCellDef mat-sort-header>Runner</mat-header-cell>
-			<mat-cell *matCellDef="let submission">{{submission.runner | idToUsername | async}}</mat-cell>
+			<mat-header-cell *matHeaderCellDef>
+				<div mat-sort-header="name">Game</div>
+				<div mat-sort-header="console">Console</div>
+				<div mat-sort-header="runner">Runner</div>
+			</mat-header-cell>
+			<mat-cell *matCellDef="let submission">
+				<span class="cell-title">{{submission.name}}</span>
+				<div class="cell-subtitle">on {{submission.console}}</div>
+				<div class="runner">&mdash; {{submission.runner | idToUsername | async}}</div>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="name">
-			<mat-header-cell *matHeaderCellDef
-				mat-sort-header disableClear="true">Game</mat-header-cell>
+			<mat-header-cell *matHeaderCellDef>Game</mat-header-cell>
 			<mat-cell *matCellDef="let submission">{{submission.name}}</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="console">
-			<mat-header-cell *matHeaderCellDef mat-sort-header>Console</mat-header-cell>
+			<mat-header-cell *matHeaderCellDef>Console</mat-header-cell>
 			<mat-cell *matCellDef="let submission">{{submission.console}}</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="description">
 			<mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-			<mat-cell *matCellDef="let submission" class="preserve-newlines">{{submission.description}}</mat-cell>
+			<mat-cell *matCellDef="let submission" class="preserve-newlines">{{!submission.expand ? (submission.description | truncate:100+(200*submission.categories.length):true) : submission.description}}</mat-cell>
 		</ng-container>
 
-		<ng-container matColumnDef="pros">
-			<mat-header-cell *matHeaderCellDef>Pros</mat-header-cell>
-			<mat-cell *matCellDef="let submission" class="preserve-newlines">{{submission.pros}}</mat-cell>
-		</ng-container>
-
-		<ng-container matColumnDef="cons">
-			<mat-header-cell *matHeaderCellDef>Cons</mat-header-cell>
-			<mat-cell *matCellDef="let submission" class="preserve-newlines">{{submission.cons}}</mat-cell>
+		<ng-container matColumnDef="proscons">
+			<mat-header-cell *matHeaderCellDef>Pros &amp; Cons</mat-header-cell>
+			<mat-cell *matCellDef="let submission">
+				<ng-container *ngIf="submission.pros">
+					<span class="cell-subtitle">PROS</span>
+					<div class="preserve-newlines">{{!submission.expand ? (submission.pros | truncate:100+50*submission.categories.length:true) : submission.pros}}</div>
+					<br />
+				</ng-container>
+				<ng-container *ngIf="submission.cons">
+					<span class="cell-subtitle">CONS</span>
+					<div class="preserve-newlines">{{!submission.expand ? (submission.cons | truncate:100+50*submission.categories.length:true) : submission.cons}}</div>
+				</ng-container>
+			</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="incentives">
 			<mat-header-cell *matHeaderCellDef>Incentives</mat-header-cell>
-			<mat-cell *matCellDef="let submission" class="preserve-newlines">{{submission.incentives}}</mat-cell>
+			<mat-cell *matCellDef="let submission" class="preserve-newlines">{{!submission.expand ? (submission.incentives | truncate:100+200*submission.categories.length:true) : submission.incentives}}</mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="categories">
 			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
 			<mat-cell *matCellDef="let submission">
-				<div *ngFor="let cat of submission.categories">
+				<div *ngFor="let cat of submission.categories" class="category-container">
 					<a *ngIf="hasSubmissionsRole"
+						class="cell-title"
 						[href]="cat.video.includes('http') ? cat.video : 'http://' + cat.video"
 						target="_blank">
-						{{cat.name}} - {{cat.estimate | timeToString}}
-					</a>
-					<span *ngIf="!hasSubmissionsRole">
-						{{cat.name}} - {{cat.estimate | timeToString}}
-					</span>
+						{{cat.name}}</a>
+					<span *ngIf="!hasSubmissionsRole" class="cell-title">{{cat.name}}</span>
+					<div class="cell-subtitle">EST: {{cat.estimate | timeToString}}</div>
+					<br />
+					<div class="description preserve-newlines">{{!submission.expand ? (cat.description | truncate:100:true) : cat.description}}</div>
+					<hr *ngIf="submission.categories.indexOf(cat) < submission.categories.length - 1"/>
 				</div>
 			</mat-cell>
 		</ng-container>
@@ -94,13 +94,13 @@
 					<h3>Visibility</h3>
 					<button mat-raised-button
 						color="primary"
-						(click)="markSubmission(submission, 'public', $event.target.closest('button'))">
+						(click)="markSubmission(submission, 'public', $event)">
 						<span>Mark Public</span>
 						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
 					</button>
 					<button mat-raised-button
 						color="warn"
-						(click)="markSubmission(submission, 'private', $event.target.closest('button'))">
+						(click)="markSubmission(submission, 'private', $event)">
 						<span>Mark Private</span>
 						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
 					</button>
@@ -108,28 +108,28 @@
 					<button mat-raised-button
 						color="primary"
 						disabled
-						(click)="markSubmission(submission, 'accept', $event.target.closest('button'))">
+						(click)="markSubmission(submission, 'accept', $event)">
 						<span>Mark Accepted</span>
 						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
 					</button>
 					<button mat-raised-button
 						color="accent"
 						disabled
-						(click)="markSubmission(submission, 'backup', $event.target.closest('button'))">
+						(click)="markSubmission(submission, 'backup', $event)">
 						<span>Mark Backup</span>
 						<mat-spinner color="accent" [diameter]="28"></mat-spinner>
 					</button>
 					<button mat-raised-button
 						color="warn"
 						disabled
-						(click)="markSubmission(submission, 'reject', $event.target.closest('button'))">
+						(click)="markSubmission(submission, 'reject', $event)">
 						<span>Mark Rejected</span>
 						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
 					</button>
 					<h3>Removal</h3>
 					<button mat-raised-button
 						color="warn"
-						(click)="deleteSubmission(submission)">
+						(click)="deleteSubmission(submission);$event.stopPropagation()">
 						<span>DELETE</span>
 						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
 					</button>
@@ -137,21 +137,23 @@
 			</mat-cell>
 		</ng-container>
 
-		<mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-		<mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+		<mat-header-row *matHeaderRowDef="columnsToDisplay" class="mat-row-sticky top"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: columnsToDisplay"
+			[ngClass]="{'collapsible': isRowCollapsible(row), 'expanded': row.expand}"
+			(click)="row.expand = !row.expand">
+		</mat-row>
 	</mat-table>
 
 	<!--
 		Common sense would use *ngIf directive on mat-paginator here, but this does not work with @ViewChild and
- 		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
+		[hidden] doesn't work on mat-paginator directly, hence the wrapper element
 	-->
-	<div [hidden]="!showPagination">
-		<mat-paginator #paginatorBottom
+	<div [hidden]="!showPagination" class="mat-row-sticky bottom">
+		<mat-paginator #paginator
 			[length]="resultsLength"
 			[pageSize]="defaultPageSize"
-			[pageSizeOptions]="[5, 10, 20, 50, 5000]"
-			[showFirstLastButtons]="true"
-			(page)="onPageChange($event)">
+			[pageSizeOptions]="[5, 10, 50, 100, 5000]"
+			[showFirstLastButtons]="true">
 		</mat-paginator>
 	</div>
 </div>
