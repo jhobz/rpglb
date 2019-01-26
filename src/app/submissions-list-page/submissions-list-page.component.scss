@@ -1,0 +1,34 @@
+@import '../../rpglb-dark-theme.scss';
+
+$primary: map-get($rpglb-app-theme, primary);
+// $accent: map-get($rpglb-app-theme, accent);
+$warn: map-get($rpglb-app-theme, warn);
+// $foreground: map-get($rpglb-app-theme, foreground);
+// $background: map-get($rpglb-app-theme, background);
+
+.wrapper {
+	max-width: 1700px;
+	margin: 50px auto;
+}
+
+.admin-controls {
+	float: right;
+	text-align: right;
+}
+
+.admin-controls > button {
+	margin-left: 10px;
+}
+
+/deep/ .admin-controls > mat-slide-toggle {
+	color: mat-color($warn, lighter);
+
+	&.mat-checked {
+		color: mat-color($primary, 200);
+	}
+
+	.mat-slide-toggle-content {
+		font-size: 1em;
+		font-weight: bold;
+	}
+}

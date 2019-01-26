@@ -4,6 +4,7 @@ require('../config/passport')(passport)
 const jwt = require('jsonwebtoken')
 
 const GameSubmissionService = require('../services/game-submissions.service')
+const SpeedrunEventService = require('../services/speedrun-events.service')
 
 _this = this
 
@@ -56,6 +57,17 @@ exports.createSubmission = async function (req, res, next) {
 		return res.status(401).json( {
 			status: 401,
 			message: 'Unauthorized. You may not create a submission for this user.'
+		} )
+	}
+
+	let activeEvent = await SpeedrunEventService.getActiveSpeedrunEvent()
+	if (!activeEvent.areGameSubmissionsOpen &&
+		(!req.user.roles || !req.user.roles.includes('submissions') || !req.user.roles.includes('admin'))
+	) {
+		console.warn('Unauthorized submission creation attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: `Unauthorized. Game submissions for ${activeEvent.name} are currently closed.`
 		} )
 	}
 
@@ -112,6 +124,17 @@ exports.updateSubmission = async function (req, res, next) {
 		} )
 	}
 
+	let activeEvent = await SpeedrunEventService.getActiveSpeedrunEvent()
+	if (!activeEvent.areGameSubmissionsOpen &&
+		(!req.user.roles || !req.user.roles.includes('submissions') || !req.user.roles.includes('admin'))
+	) {
+		console.warn('User attempted to update submission after submissions closed.', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: `Unauthorized. Game submissions for ${activeEvent.name} are currently closed.`
+		} )
+	}
+
 	let id = req.body._id
 	let submission = {
 		id,
@@ -160,6 +183,17 @@ exports.removeSubmission = async function (req, res, next) {
 		return res.status(401).json( {
 			status: 401,
 			message: 'Unauthorized. You do not have permission to delete this user\'s submission.'
+		} )
+	}
+
+	let activeEvent = await SpeedrunEventService.getActiveSpeedrunEvent()
+	if (!activeEvent.areGameSubmissionsOpen &&
+		(!req.user.roles || !req.user.roles.includes('submissions') || !req.user.roles.includes('admin'))
+	) {
+		console.warn('Unauthorized submission editing attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: `Unauthorized. Game submissions for ${activeEvent.name} are currently closed.`
 		} )
 	}
 
