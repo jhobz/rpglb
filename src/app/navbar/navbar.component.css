@@ -15,6 +15,7 @@ nav {
 nav a {
 	color: #fff;
 	margin: 0 20px;
+	font-weight: bold;
 }
 
 nav > .auth-container {

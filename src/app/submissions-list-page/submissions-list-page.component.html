@@ -1,5 +1,24 @@
 <div class="wrapper">
-	<h1>All Public Submissions - {{event}}</h1>
+	<div *ngIf="hasSubmissionRole" class="admin-controls">
+		<span>Game submissions are:</span>
+		<mat-slide-toggle #slide
+			color="primary"
+			matTooltip="I hope you know what you're doing..."
+			[checked]="speedrunEvent?.areGameSubmissionsOpen"
+			[disabled]="!adminControlsEnabled"
+			labelPosition="before"
+			(change)="updateSubmissionState(slide.checked)">
+			{{speedrunEvent?.areGameSubmissionsOpen ? 'OPEN' : 'CLOSED'}}
+		</mat-slide-toggle>
+		<button
+			mat-mini-fab
+			color="primary"
+			[disabled]="adminControlsEnabled"
+			(click)="enableAdminControls()">
+			<mat-icon>lock_open</mat-icon>
+		</button>
+	</div>
+	<h1>All Public Submissions - {{speedrunEvent?.name}}</h1>
 	<p class="msg-status info">
 		We are aware of a bug currently affecting sorting and filtering by runner name. We apologize for the inconvenience.
 	</p>
@@ -7,7 +26,9 @@
 		Submissions are made public as they are manually reviewed for errors. Because of this,
 		<span class="info">your submissions may not appear in this list just yet.</span>
 		Below are all of the public submissions. You can search the list at the top of the table, or view more results
-		by using the controls at the bottom.
+		by using the controls at the bottom. Submissions will close at 11:59 PM EST on Sunday, January 27th. No further
+		submissions will be accepted after this time, but it may still take a bit for the final few submissions to
+		become public.
 	</p>
 	<app-submission-list></app-submission-list>
 </div>

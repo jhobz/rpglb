@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
 import { AuthenticationService, PasswordData, TokenUserInfo } from '../authentication.service'
+import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../submission.service'
 
 @Component({
@@ -27,11 +28,18 @@ export class ProfileComponent implements OnInit {
 	@ViewChild('f') form: any
 	// TODO: Don't hardcode these
 	event: string = 'RPG Limit Break 2019'
-	areSubmissionsOpen: boolean = true
+	areSubmissionsOpen: boolean
 
-	constructor(private auth: AuthenticationService, private submissionService: SubmissionService) { }
+	constructor(
+		private auth: AuthenticationService,
+		private submissionService: SubmissionService,
+		private speedrunEventService: SpeedrunEventService) { }
 
 	ngOnInit() {
+		this.speedrunEventService.getCurrentSpeedrunEvent()
+			.subscribe((srEvent: SpeedrunEvent) => {
+				this.areSubmissionsOpen = srEvent.areGameSubmissionsOpen
+			})
 		this.user = this.auth.getUserInfo()
 		this.submissionService.getSubmissionsForUser(this.user._id)
 			.map((data: GameSubmissionResponse) => data.docs )

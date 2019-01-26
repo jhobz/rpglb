@@ -12,11 +12,13 @@ import {
 	MatPaginatorModule,
 	MatProgressBarModule,
 	MatProgressSpinnerModule,
+	MatSlideToggleModule,
 	MatSnackBarModule,
 	MatSortModule,
 	MatStepperModule,
 	MatTableModule,
-	MatToolbarModule
+	MatToolbarModule,
+	MatTooltipModule
 } from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -39,6 +41,7 @@ import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-
 import { ProfileComponent } from './profile/profile.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
+import { SpeedrunEventService } from './speedrun-event.service'
 import {
 	SubmissionConfirmationDialogComponent,
 	SubmissionFormComponent
@@ -97,16 +100,19 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		MatPaginatorModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
+		MatSlideToggleModule,
 		MatSnackBarModule,
 		MatStepperModule,
 		MatSortModule,
 		MatTableModule,
-		MatToolbarModule
+		MatToolbarModule,
+		MatTooltipModule
 	],
 	providers: [
 		AuthGuardService,
 		AuthenticationService,
 		RoleGuardService,
+		SpeedrunEventService,
 		UserService
 	],
 	bootstrap: [AppComponent]

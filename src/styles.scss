@@ -39,9 +39,7 @@ html, body {
 
 a {
 	text-decoration: none;
-	/* color: #00ffaf; */
 	color: mat-color($accent, lighter);
-	font-weight: bold;
 }
 
 a:hover {

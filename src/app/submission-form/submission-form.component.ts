@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import { MAT_DIALOG_DATA, MatButton, MatDialog, MatDialogRef } from '@angular/material'
+import { MAT_DIALOG_DATA, MatButton, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material'
 import { of } from 'rxjs/observable/of'
 
 import { AuthenticationService } from '../authentication.service'
-import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../submission.service'
+import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
+import { GameSubmission, GameSubmissionResponse, RunnerData, SubmissionService } from '../submission.service'
 
 @Component({
 	selector: 'app-submission-form',
@@ -17,15 +18,23 @@ export class SubmissionFormComponent implements OnInit {
 	games: GameSubmission[] = []
 	maxGames: number = 5
 	isDebouncing: boolean = false
+	areSubmissionsOpen: boolean
 	@ViewChild('stepper') stepper: any
 
 	constructor(
 		private auth: AuthenticationService,
 		private submissionService: SubmissionService,
+		private speedrunEventService: SpeedrunEventService,
+		private snackBar: MatSnackBar,
 		public dialog: MatDialog
 	) {}
 
 	ngOnInit() {
+		this.speedrunEventService.getCurrentSpeedrunEvent()
+			.subscribe((srEvent: SpeedrunEvent) => {
+				this.areSubmissionsOpen = srEvent.areGameSubmissionsOpen
+			})
+
 		const userId = this.auth.getUserInfo()._id
 		this.submissionService.getSubmissionsForUser(userId)
 			.map((data: GameSubmissionResponse) => data.docs )
@@ -45,23 +54,33 @@ export class SubmissionFormComponent implements OnInit {
 			return false
 		}
 
+		let game = this.games[index]
+
 		const dialogRef = this.dialog.open(SubmissionConfirmationDialogComponent, {
 			width: '800px',
-			data: { game: this.games[index].name || 'New Game' }
+			data: { game: game.name || 'New Game' }
 		})
 
 		dialogRef.afterClosed().subscribe((shouldRemove: boolean) => {
 			if (shouldRemove) {
-				let game
-				game = this.games.splice(index, 1)[0]
-
 				// Remove submission from database
 				const gameId = game._id
 				if (gameId) {
 					this.submissionService.deleteSubmission(gameId)
-						.subscribe((res: any) => {
-							// Maybe do something
-						})
+						.subscribe(
+							(res: any) => {
+								game = this.games.splice(index, 1)[0]
+								this.snackBar.open('Submission deleted', '', {
+									duration: 5000,
+									panelClass: ['snack-success', 'no-action']
+								})
+							},
+							(err: any) => {
+								this.snackBar.open('Something went wrong... submission not deleted', '', {
+									duration: 5000,
+									panelClass: ['snack-warn', 'no-action']
+								})
+							})
 				}
 			}
 		})
@@ -75,21 +94,50 @@ export class SubmissionFormComponent implements OnInit {
 		// Debounce buttons
 		this.isDebouncing = true
 		buttons.forEach((btn: MatButton) => btn.disabled = true)
+		if (game.runner.hasOwnProperty('_id')) {
+			game.runner = (<RunnerData>game.runner)._id
+		}
 		game.public = false
 		if (game._id) {
 			// PUT
 			this.submissionService.editSubmission(game)
-				.subscribe((res: any) => {
-					this.isDebouncing = false
-					buttons.forEach((btn: MatButton) => btn.disabled = false)
-				})
+				.subscribe(
+					(res: any) => {
+						this.isDebouncing = false
+						buttons.forEach((btn: MatButton) => btn.disabled = false)
+						this.snackBar.open('Submission saved!', '', {
+							duration: 5000,
+							panelClass: ['snack-success', 'no-action']
+						})
+					},
+					(err: any) => {
+						this.isDebouncing = false
+						buttons.forEach((btn: MatButton) => btn.disabled = false)
+						this.snackBar.open('Failed to update submission. Check the time, are game submissions closed?', '', {
+							duration: 5000,
+							panelClass: ['snack-warn', 'no-action']
+						})
+					})
 		} else {
 			// POST
 			this.submissionService.createSubmission(game)
-				.subscribe((res: any) => {
-					this.isDebouncing = false
-					buttons.forEach((btn: MatButton) => btn.disabled = false)
-				})
+				.subscribe(
+					(res: any) => {
+						this.isDebouncing = false
+						buttons.forEach((btn: MatButton) => btn.disabled = false)
+						this.snackBar.open('Submission saved!', '', {
+							duration: 5000,
+							panelClass: ['snack-success', 'no-action']
+						})
+					},
+					(err: any) => {
+						this.isDebouncing = false
+						buttons.forEach((btn: MatButton) => btn.disabled = false)
+						this.snackBar.open('Failed to create submission. Check the time, are game submissions closed?', '', {
+							duration: 5000,
+							panelClass: ['snack-warn', 'no-action']
+						})
+					})
 		}
 	}
 

@@ -4,18 +4,20 @@
 		<p>
 			On this page you can create and edit your game submissions for {{event}}. You can submit up to 5 games, each
 			with up to 3 categories. Every game must have at least one category. Fields with an asterisk (*) are required.
-			The "Pros" and "Cons" fields are not required, but are encouraged! Please include any information about
-			potential donation incentives in the <strong>description</strong> field.
+			The "Pros" and "Cons" fields are not required, but are encouraged! Submissions close at 11:59 PM EST on
+			Sunday, January 27th. <span class="warn-light">No submissions will be accepted after this time,</span> even
+			if you leave this page open.
 		</p>
 		<p>
-			<strong class="success">Your game submission is saved when you click the "Next" button,</strong> so be sure to look over your
+			<span class="success">Your game submission is saved when you click the "Next" button,</span> so be sure to look over your
 			submission carefully before continuing to the next game. Don't worry though, you can come back and edit
 			previous games at any time while submissions are still open. If you wish to delete a submission, either replace
-			the information with another game, or simply click the "Remove Game" button. <strong class="warn-light">If you click "Remove Game"
-			and later choose to submit the same game, you will have to enter all of the information again, so be wary.</strong>
+			the information with another game, or simply click the "Remove Game" button. <span class="warn-light">If you click "Remove Game"
+			and later choose to submit the same game, you will have to enter all of the information again, so be wary.</span>
 		</p>
 	</mat-card>
-	<mat-horizontal-stepper linear #stepper="matHorizontalStepper">
+	<div *ngIf="!areSubmissionsOpen" class="msg-status warn">Game submissions are currently closed.</div>
+	<mat-horizontal-stepper *ngIf="areSubmissionsOpen" linear #stepper="matHorizontalStepper">
 		<mat-step *ngFor="let game of games" [completed]="sub.form.valid">
 			<ng-template matStepLabel>{{game.name || 'New Game'}}</ng-template>
 			<div class="step-controls">
