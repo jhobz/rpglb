@@ -7,6 +7,7 @@ exports.getSubmissions = async function (query, page, limit, sort, order) {
 	let options = {
 		page,
 		limit,
+		populate: { path: 'runner', select: 'username' },
 		sort: { [sort]: order }
 	}
 

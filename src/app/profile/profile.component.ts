@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
 		}
 		this.passwordData.username = this.user.username
 		this.auth.changePassword(this.passwordData)
-			.map((data) => data.token)
+			.map((data: any) => data.token)
 			.subscribe((token: string) => {
 				this.auth.updateToken(token)
 				this.form.resetForm()

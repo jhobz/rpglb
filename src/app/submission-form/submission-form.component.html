@@ -68,7 +68,11 @@
 		<mat-step>
 			<ng-template matStepLabel>Done</ng-template>
 			<h2>Your submissions</h2>
-			<app-submission-list #submissionList [dataSource]="getObservableOfGames()" [showFilter]="false" [showRunner]="false" [showPagination]="false"></app-submission-list>
+			<app-submission-list #submissionList
+				[dataSource]="getObservableOfGames()"
+				[showFilter]="false"
+				[showPagination]="false">
+			</app-submission-list>
 			<br />
 			<h3 class="info">Done with submissions?</h3>
 			<p>You can always come back later (until submissions close). Note that your submissions will not show up in the public list just yet. They first need to be approved by the game selection committee and marked as public.</p>
