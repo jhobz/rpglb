@@ -58,7 +58,9 @@ export class SubmissionListComponent implements OnInit {
 
 	ngOnInit() {
 		const user = this.auth.getUserInfo()
-		if (user && user.roles.includes('submissions') || this.router.url === '/profile') {
+		// TODO: Get this url logic out of this component. Replace with more configurable options (see #15)
+		if (user && user.roles.includes('submissions') && this.router.url !== '/submissions/create' ||
+			this.router.url === '/profile') {
 			this.columnsToDisplay.push('public')
 			if (this.showRunner && user && user.roles.includes('submissions')) {
 				this.hasSubmissionsRole = true
@@ -78,31 +80,35 @@ export class SubmissionListComponent implements OnInit {
 		}
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
 
-		merge(this.sort.sortChange, this.paginator.page)
-				.pipe(
-					startWith({}),
-					switchMap(() => {
-						this.isLoadingResults = true
-						return this.submissionService.getSubmissions(
-							this.sort.active,
-							this.sort.direction,
-							this.paginator.pageSize || this.defaultPageSize,
-							this.paginator.pageIndex)
-					}),
-					map((data: GameSubmissionResponse) => {
-						this.isLoadingResults = false
-						this.resultsLength = data.total
+		if (this.dataSource.data !== undefined) {
+			merge(this.sort.sortChange, this.paginator.page)
+					.pipe(
+						startWith({}),
+						switchMap(() => {
+							this.isLoadingResults = true
+							return this.submissionService.getSubmissions(
+								this.sort.active,
+								this.sort.direction,
+								this.paginator.pageSize || this.defaultPageSize,
+								this.paginator.pageIndex)
+						}),
+						map((data: GameSubmissionResponse) => {
+							this.isLoadingResults = false
+							this.resultsLength = data.total
 
-						return data.docs
-					}),
-					catchError(() => {
-						this.isLoadingResults = false
-						// TODO: Display an error message on the table
-						return observableOf([])
+							return data.docs
+						}),
+						catchError(() => {
+							this.isLoadingResults = false
+							// TODO: Display an error message on the table
+							return observableOf([])
+						})
+					).subscribe((data: GameSubmission[]) => {
+						this.dataSource.data = data
 					})
-				).subscribe((data: GameSubmission[]) => {
-					this.dataSource.data = data
-				})
+		} else {
+			this.isLoadingResults = false
+		}
 	}
 
 	applyFilter(filterValue: string) {

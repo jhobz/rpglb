@@ -21,7 +21,7 @@
 			<mat-cell *matCellDef="let submission">
 				<span class="cell-title">{{submission.name}}</span>
 				<div class="cell-subtitle">on {{submission.console}}</div>
-				<div class="runner">&mdash; {{submission.runner | idToUsername | async}}</div>
+				<div class="runner">&mdash; {{submission.runner.username}}</div>
 			</mat-cell>
 		</ng-container>
 

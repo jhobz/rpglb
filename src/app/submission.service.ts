@@ -7,6 +7,11 @@ import { environment } from '../environments/environment'
 
 import { AuthenticationService } from './authentication.service'
 
+export interface RunnerData {
+	_id: string,
+	username: string
+}
+
 export interface GameCategory {
 	_id?: string
 	_uid?: number
@@ -19,7 +24,7 @@ export interface GameCategory {
 
 export interface GameSubmission {
 	_id?: string
-	runner: string
+	runner: string|RunnerData
 	name: string
 	console: string
 	description: string
