@@ -176,10 +176,10 @@ exports.removeSubmission = async function (req, res, next) {
 	let id = req.params.id
 	let submission = await GameSubmissionService.getSubmissionById(id)
 
-	if (req.user._id != submission.runner && (
-		!req.user.roles || req.user.roles.indexOf('submissions') === -1
-	)) {
-		console.warn('Unauthorized submission deletion attempted', req.user, req.body)
+	if (req.user.id != submission.runner && (
+		!req.user.roles || !req.user.roles.includes('submissions'))
+	) {
+		console.warn('Unauthorized submission deletion attempted', req.user, submission)
 		return res.status(401).json( {
 			status: 401,
 			message: 'Unauthorized. You do not have permission to delete this user\'s submission.'
@@ -190,7 +190,7 @@ exports.removeSubmission = async function (req, res, next) {
 	if (!activeEvent.areGameSubmissionsOpen &&
 		(!req.user.roles || !req.user.roles.includes('submissions') || !req.user.roles.includes('admin'))
 	) {
-		console.warn('Unauthorized submission editing attempted', req.user, req.body)
+		console.warn('Submission deletion attempted while submissions are closed', req.user, req.body)
 		return res.status(401).json( {
 			status: 401,
 			message: `Unauthorized. Game submissions for ${activeEvent.name} are currently closed.`
