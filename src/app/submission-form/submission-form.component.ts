@@ -129,6 +129,8 @@ export class SubmissionFormComponent implements OnInit {
 							duration: 5000,
 							panelClass: ['snack-success', 'no-action']
 						})
+						// Set the proper id for the submission, now that the database has generated one
+						game._id = res.data._id
 					},
 					(err: any) => {
 						this.isDebouncing = false
