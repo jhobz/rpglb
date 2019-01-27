@@ -23,7 +23,7 @@ export class SubmissionsListPageComponent implements OnInit {
 
 	ngOnInit() {
 		const user = this.auth.getUserInfo()
-		this.hasSubmissionRole = user.roles.includes('submissions') || user.roles.includes('admin')
+		this.hasSubmissionRole = user && user.roles && (user.roles.includes('submissions') || user.roles.includes('admin'))
 
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
