@@ -126,7 +126,7 @@ exports.updateSubmission = async function (req, res, next) {
 
 	let activeEvent = await SpeedrunEventService.getActiveSpeedrunEvent()
 	if (!activeEvent.areGameSubmissionsOpen &&
-		(!req.user.roles || !req.user.roles.includes('submissions') || !req.user.roles.includes('admin'))
+		(!req.user.roles || !(req.user.roles.includes('submissions') || req.user.roles.includes('admin')))
 	) {
 		console.warn('User attempted to update submission after submissions closed.', req.user, req.body)
 		return res.status(401).json( {
