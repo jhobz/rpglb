@@ -3,6 +3,7 @@
 $primary: map-get($rpglb-app-theme, primary);
 $accent: map-get($rpglb-app-theme, accent);
 $warn: map-get($rpglb-app-theme, warn);
+$bonus: mat-palette($mat-purple, 400, 200);
 $foreground: map-get($rpglb-app-theme, foreground);
 $background: map-get($rpglb-app-theme, background);
 
@@ -55,15 +56,15 @@ $background: map-get($rpglb-app-theme, background);
 	flex-wrap: wrap;
 }
 
-.mat-column-runner {
+.mat-column-runner,
+.mat-column-controls {
 	flex: 2;
 }
 
 .mat-column-description,
 .mat-column-proscons,
 .mat-column-incentives,
-.mat-column-categories,
-.mat-column-controls {
+.mat-column-categories {
 	flex: 3;
 }
 
@@ -79,13 +80,68 @@ $background: map-get($rpglb-app-theme, background);
 }
 
 .category-container {
+	&.selection {
+		margin: -10px -25px 0;
+		padding: 10px 25px 0;
+
+		.selection-status {
+			margin: 0 0 5px -15px;
+			font-style: italic;
+
+			&.bonus {
+				color: mat-color($bonus, lighter);
+			}
+		}
+
+		&:first-child {
+			margin-top: -25px;
+			padding-top: 25px;
+
+			.selection-status {
+				margin-top: -15px;
+			}
+		}
+		&:last-child {
+			margin-bottom: -25px;
+			padding-bottom: 25px;
+		}
+		&.decline {
+			background-color: mat-color($warn, darker, 0.25);
+		}
+		&.accept {
+			background-color: mat-color($primary, lighter, 0.25);
+		}
+		&.backup {
+			background-color: mat-color($accent, lighter, 0.25);
+		}
+		&.bonus {
+
+			background-color: mat-color($bonus, lighter, 0.25);
+		}
+	}
+
 	.cell-title {
 		color: mat-color($accent, lighter);
 		word-wrap: normal;
 	}
+
 	hr {
-		margin-top: 10px;
+		margin: 10px 0;
 		border: 1px solid mat-color($foreground, dividers);
+	}
+
+	.selection-comment-container {
+		margin-top: 20px;
+		font-size: 1.3em;
+
+		.selection-comment-label {
+			font-weight: bold;
+		}
+
+		.selection-comment {
+			font-style: italic;
+			color: mat-color($foreground, secondary-text);
+		}
 	}
 }
 
@@ -134,23 +190,30 @@ $background: map-get($rpglb-app-theme, background);
 	padding: 10px 25px;
 }
 
-.mat-cell > .controls-group {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
+.mat-cell .controls-group {
 	border: 0;
 	padding: 0;
+}
+
+.mat-column-controls > .controls-group {
+	button {
+		width: 100%;
+	}
 
 	h3:first-of-type {
 		margin-top: 0;
 	}
 }
 
+.mat-column-categories .controls-group {
+}
+
 .controls-group > button {
-	width: 122px;
-	height: 36px;
-	margin: 2px 0;
+	margin: 2px 1px 2px 0;
+
+	&.mat-bonus:not([disabled]) {
+		background-color: mat-color($bonus)
+	}
 }
 
 .controls-group .mat-spinner {
@@ -164,6 +227,10 @@ $background: map-get($rpglb-app-theme, background);
 
 .controls-group .showSpinner .mat-spinner {
 	display: block;
+}
+
+.controls-group > .mat-form-field {
+	margin-top: 10px;
 }
 
 .mat-column-public.mat-cell {

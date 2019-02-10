@@ -63,7 +63,25 @@
 		<ng-container matColumnDef="categories">
 			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
 			<mat-cell *matCellDef="let submission">
-				<div *ngFor="let cat of submission.categories" class="category-container">
+				<div *ngFor="let cat of submission.categories"
+					[ngClass]="{
+						'category-container': true,
+						'selection': showControls || showSelections,
+						'decline': (showControls || showSelections) && !cat.selectionStatus,
+						'accept': (showControls || showSelections) && cat.selectionStatus === 1,
+						'backup': (showControls || showSelections) && cat.selectionStatus === 2,
+						'bonus': (showControls || showSelections) && cat.selectionStatus === 3
+					}">
+					<div *ngIf="showControls || showSelections"
+						[ngClass]="{
+							'selection-status': true,
+							'warn': !cat.selectionStatus,
+							'success': cat.selectionStatus === 1,
+							'info': cat.selectionStatus === 2,
+							'bonus': cat.selectionStatus === 3
+						}">
+						{{cat.selectionStatus ? cat.selectionStatus === 1 ? 'ACCEPTED' : cat.selectionStatus === 2 ? 'BACKUP' : 'BONUS' : 'DECLINED'}}
+					</div>
 					<a *ngIf="hasSubmissionsRole"
 						class="cell-title"
 						[href]="cat.video.includes('http') ? cat.video : 'http://' + cat.video"
@@ -73,6 +91,49 @@
 					<div class="cell-subtitle">EST: {{cat.estimate | timeToString}}</div>
 					<br />
 					<div class="description preserve-newlines">{{!submission.expand ? (cat.description | truncate:100:true) : cat.description}}</div>
+
+					<fieldset *ngIf="showControls" class="controls-group" (click)="$event.stopPropagation()">
+						<h3>Selection (Internal)</h3>
+						<button mat-raised-button
+							color="primary"
+							(click)="markSubmission($event, submission, 'accept', submission.categories.indexOf(cat), comment.value)">
+							<span>Accept</span>
+							<mat-spinner color="primary" [diameter]="28"></mat-spinner>
+						</button>
+						<button mat-raised-button
+							color="bonus"
+							(click)="markSubmission($event, submission, 'bonus', submission.categories.indexOf(cat), comment.value)">
+							<span>Bonus</span>
+							<mat-spinner color="accent" [diameter]="28"></mat-spinner>
+						</button>
+						<button mat-raised-button
+							color="accent"
+							(click)="markSubmission($event, submission, 'backup', submission.categories.indexOf(cat), comment.value)">
+							<span>Backup</span>
+							<mat-spinner color="accent" [diameter]="28"></mat-spinner>
+						</button>
+						<button mat-raised-button
+							color="warn"
+							(click)="markSubmission($event, submission, 'decline', submission.categories.indexOf(cat), comment.value)">
+							<span>Decline</span>
+							<mat-spinner color="warn" [diameter]="28"></mat-spinner>
+						</button>
+						<mat-form-field>
+							<input
+								#comment
+								matInput
+								maxlength=560
+								placeholder="Selection comment"
+								[(ngModel)]="cat.selectionComment" />
+							<mat-hint>Press a button above to save</mat-hint>
+						</mat-form-field>
+					</fieldset>
+
+
+					<div *ngIf="!showControls && showSelections && cat.selectionComment" class="selection-comment-container">
+						<div class="selection-comment-label">{{'Selection Comment' | uppercase}}</div>
+						<span class="selection-comment">"{{cat.selectionComment}}"</span>
+					</div>
 					<hr *ngIf="submission.categories.indexOf(cat) < submission.categories.length - 1"/>
 				</div>
 			</mat-cell>
@@ -94,36 +155,14 @@
 					<h3>Visibility</h3>
 					<button mat-raised-button
 						color="primary"
-						(click)="markSubmission(submission, 'public', $event)">
+						(click)="markSubmission($event, submission, 'public')">
 						<span>Mark Public</span>
 						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
 					</button>
 					<button mat-raised-button
 						color="warn"
-						(click)="markSubmission(submission, 'private', $event)">
+						(click)="markSubmission($event, submission, 'private')">
 						<span>Mark Private</span>
-						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
-					</button>
-					<h3>Selection (Internal)<br />[Not yet implemented]</h3>
-					<button mat-raised-button
-						color="primary"
-						disabled
-						(click)="markSubmission(submission, 'accept', $event)">
-						<span>Mark Accepted</span>
-						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
-					</button>
-					<button mat-raised-button
-						color="accent"
-						disabled
-						(click)="markSubmission(submission, 'backup', $event)">
-						<span>Mark Backup</span>
-						<mat-spinner color="accent" [diameter]="28"></mat-spinner>
-					</button>
-					<button mat-raised-button
-						color="warn"
-						disabled
-						(click)="markSubmission(submission, 'reject', $event)">
-						<span>Mark Rejected</span>
 						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
 					</button>
 					<h3>Removal</h3>
@@ -151,7 +190,7 @@
 	<div [hidden]="!showPagination" class="mat-row-sticky bottom">
 		<mat-paginator #paginator
 			[length]="resultsLength"
-			[pageSize]="defaultPageSize"
+			[pageSize]="initialPageSize"
 			[pageSizeOptions]="[5, 10, 50, 100, 5000]"
 			[showFirstLastButtons]="true">
 		</mat-paginator>

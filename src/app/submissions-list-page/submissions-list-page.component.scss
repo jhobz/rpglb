@@ -1,8 +1,9 @@
 @import '../../rpglb-dark-theme.scss';
 
 $primary: map-get($rpglb-app-theme, primary);
-// $accent: map-get($rpglb-app-theme, accent);
+$accent: map-get($rpglb-app-theme, accent);
 $warn: map-get($rpglb-app-theme, warn);
+$bonus: mat-palette($mat-purple, 400, 200);
 // $foreground: map-get($rpglb-app-theme, foreground);
 // $background: map-get($rpglb-app-theme, background);
 
@@ -30,5 +31,42 @@ $warn: map-get($rpglb-app-theme, warn);
 	.mat-slide-toggle-content {
 		font-size: 1em;
 		font-weight: bold;
+	}
+}
+
+.selection-controls {
+	margin: 40px 0 5px;
+	text-align: center;
+}
+
+mat-button-toggle {
+	&[color='primary'] {
+		background-color: mat-color($primary);
+	}
+	&[color='bonus'] {
+		background-color: mat-color($bonus);
+	}
+	&[color='accent'] {
+		background-color: mat-color($accent);
+	}
+	&[color='warn'] {
+		background-color: mat-color($warn);
+	}
+
+	&.mat-button-toggle-checked {
+		color: white;
+
+		&[color='primary'] {
+			background-color: mat-color($primary, darker);
+		}
+		&[color='bonus'] {
+			background-color: mat-color($bonus, darker);
+		}
+		&[color='accent'] {
+			background-color: mat-color($accent, darker);
+		}
+		&[color='warn'] {
+			background-color: mat-color($warn, darker);
+		}
 	}
 }

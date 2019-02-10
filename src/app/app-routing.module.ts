@@ -5,6 +5,7 @@ import { AuthGuardService } from './auth-guard.service'
 import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
+import { GamesListPageComponent } from './games-list-page/games-list-page.component'
 import { LoginComponent } from './login/login.component'
 import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 import { ProfileComponent } from './profile/profile.component'
@@ -18,6 +19,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 const routes: Routes = [
 	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
 	{ path: 'event', component: EventHomeComponent },
+	{ path: 'games', component: GamesListPageComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'rules', component: EventRulesComponent },
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },

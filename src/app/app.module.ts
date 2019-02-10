@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import {
 	MatButtonModule,
+	MatButtonToggleModule,
 	MatCardModule,
 	MatDialogModule,
 	MatFormFieldModule,
@@ -33,6 +34,7 @@ import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
 import { FooterComponent } from './footer/footer.component'
 import { GameSubmissionComponent } from './game-submission/game-submission.component'
+import { GamesListPageComponent } from './games-list-page/games-list-page.component'
 import { IdToUsernamePipe } from './id-to-username.pipe'
 import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
@@ -81,6 +83,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		SubmissionsListPageComponent,
 		PreEventHomePageComponent,
 		TruncatePipe,
+		GamesListPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent
@@ -92,6 +95,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		HttpClientModule,
 		FormsModule,
 		MatButtonModule,
+		MatButtonToggleModule,
 		MatCardModule,
 		MatDialogModule,
 		MatFormFieldModule,

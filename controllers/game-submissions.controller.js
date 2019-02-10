@@ -23,6 +23,14 @@ exports.getSubmissions = async function (req, res, next) {
 		query.runner = req.query.user
 	}
 
+	let statusArray = []
+	if (req.query.selection) {
+		let selectionQuery = req.query.selection
+		selectionQuery = selectionQuery.replace('decline', 0).replace('accept', 1).replace('backup', 2).replace('bonus', 3)
+		statusArray = selectionQuery.split(' ')
+		query['categories.selectionStatus'] = { $in: statusArray }
+	}
+
 	const page = req.query.page ? parseInt(req.query.page) : 1
 	const limit = req.query.limit ? parseInt(req.query.limit) : 10
 	const sort = req.query.sort ? req.query.sort : 'name'
@@ -30,6 +38,13 @@ exports.getSubmissions = async function (req, res, next) {
 
 	try {
 		let submissions = await GameSubmissionService.getSubmissions(query, page, limit, sort, order)
+		if (statusArray.length) {
+			submissions.docs.forEach(doc => {
+				doc.categories = doc.categories.filter(cat => {
+					return statusArray.includes(cat.selectionStatus.toString())
+				})
+			})
+		}
 		return res.status(200).json( {
 			status: 200,
 			data: submissions,
@@ -80,6 +95,8 @@ exports.createSubmission = async function (req, res, next) {
 		pros: req.body.pros,
 		cons: req.body.cons,
 		public: req.body.public,
+		selectionStatus: req.body.selectionStatus,
+		selectionComment: req.body.selectionComment,
 		categories: req.body.categories
 	}
 
@@ -146,6 +163,8 @@ exports.updateSubmission = async function (req, res, next) {
 		pros: req.body.pros ? req.body.pros : null,
 		cons: req.body.cons ? req.body.cons : null,
 		public: req.body.public !== undefined ? req.body.public : null,
+		selectionStatus: req.body.selectionStatus !== undefined ? req.body.selectionStatus : null,
+		selectionComment: req.body.selectionComment ? req.body.selectionComment : null,
 		categories: req.body.categories ? req.body.categories : null
 	}
 

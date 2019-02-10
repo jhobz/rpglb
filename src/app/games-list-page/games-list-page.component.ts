@@ -5,11 +5,11 @@ import { AuthenticationService } from '../authentication.service'
 import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 
 @Component({
-	selector: 'app-submissions-list-page',
-	templateUrl: './submissions-list-page.component.html',
-	styleUrls: ['./submissions-list-page.component.scss']
+	selector: 'app-games-list-page',
+	templateUrl: './games-list-page.component.html',
+	styleUrls: ['./games-list-page.component.scss']
 })
-export class SubmissionsListPageComponent implements OnInit {
+export class GamesListPageComponent implements OnInit {
 	speedrunEvent: SpeedrunEvent
 	hasSubmissionRole: boolean
 	adminControlsEnabled: boolean = false
@@ -34,39 +34,24 @@ export class SubmissionsListPageComponent implements OnInit {
 		this.adminControlsEnabled = true
 	}
 
-	updateSubmissionState(value: boolean) {
-		this.speedrunEvent.areGameSubmissionsOpen = value
+	updateGamesListState(value: boolean) {
+		this.speedrunEvent.isGamesListPublic = value
 		this.speedrunEventService.editSpeedrunEvent(this.speedrunEvent)
 			.subscribe(
 				(srEvent: SpeedrunEvent) => {
-					this.snackBar.open(`Game submissions ${srEvent.areGameSubmissionsOpen ? 'opened' : 'closed'} successfully!`, '', {
+					this.snackBar.open(`Games list made ${srEvent.isGamesListPublic ? 'public' : 'private'} successfully!`, '', {
 						duration: 5000,
 						panelClass: ['snack-success', 'no-action']
 					})
 				},
 				(err: any) => {
-					this.snackBar.open('Failed to update game submission state!', '', {
+					this.snackBar.open('Failed to update games list visibility!', '', {
 						duration: 5000,
 						panelClass: ['snack-warn', 'no-action']
 					})
-					console.error('FAILED TO OPEN/CLOSE SUBMISISONS')
-					this.speedrunEvent.areGameSubmissionsOpen = !value
+					console.error('FAILED TO RELEASE/HIDE GAMES LIST')
+					this.speedrunEvent.isGamesListPublic = !value
 				})
 	}
-
-	// TODO: Implement the below code after upgrading to Angular 6+
-	// Angular 5 and lower do not fire "change" event on matButtonToggleGroup when "multiple" is used
-	/*
-	onSelectionChange(event: any) {
-		const toggle = event.source
-		if (toggle) {
-			const group = toggle.buttonToggleGroup
-			if (event.value.some((item: any) => item === toggle.value)) {
-				group.value = [toggle.value]
-			}
-		}
-		return true
-	}
-	*/
 
 }

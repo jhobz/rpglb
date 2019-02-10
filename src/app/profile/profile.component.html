@@ -5,13 +5,14 @@
 		<app-submission-list #submissionList
 			[dataSource]="games"
 			[showFilter]="false"
-			[showPagination]="false">
+			[showPagination]="false"
+			[showSelections]="speedrunEvent?.isGamesListPublic">
 		</app-submission-list>
 	</ng-container>
-	<div *ngIf="areSubmissionsOpen && (!games || (games && games.length === 0))">You haven't submitted any games to {{event}}</div>
-	<!-- <div *ngIf="!areSubmissionsOpen">Submissions aren't quite open. Check back later.</div> -->
+	<div *ngIf="!games || (games && games.length === 0)">You have no submissions.</div>
+	<div *ngIf="!speedrunEvent?.areGameSubmissionsOpen">Submissions are currently closed.</div>
 	<br />
-	<a *ngIf="areSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>
+	<a *ngIf="speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>
 	<br /><br /><br />
 	<h3>Need to change your password?</h3>
 	<form #f="ngForm" class="form-password" (ngSubmit)="changePassword()">

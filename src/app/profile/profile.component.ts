@@ -26,9 +26,7 @@ export class ProfileComponent implements OnInit {
 	status: 'warn'|'success'
 	statusMessage: string = ''
 	@ViewChild('f') form: any
-	// TODO: Don't hardcode these
-	event: string = 'RPG Limit Break 2019'
-	areSubmissionsOpen: boolean
+	speedrunEvent: SpeedrunEvent
 
 	constructor(
 		private auth: AuthenticationService,
@@ -38,7 +36,7 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() {
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
-				this.areSubmissionsOpen = srEvent.areGameSubmissionsOpen
+				this.speedrunEvent = srEvent
 			})
 		this.user = this.auth.getUserInfo()
 		this.submissionService.getSubmissionsForUser(this.user._id)

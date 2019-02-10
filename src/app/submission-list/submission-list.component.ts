@@ -29,17 +29,24 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 	providers: [SubmissionService]
 })
 export class SubmissionListComponent implements OnInit {
-	columnsToDisplay: string[] = ['name', 'console', 'description', 'proscons', 'incentives', 'categories']
-	defaultPageSize: number = 10
+	@Input() columnsToDisplay: string[] = ['name', 'console', 'description', 'proscons', 'incentives', 'categories']
+	@Input() initialPageSize: number = 10
 	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
 	@Input() showRunner: boolean = true
 	@Input() showPagination: boolean = true
 	@Input() showFilter: boolean = true
-	@Input() filter: string
+	@Input() showControls: boolean = false
+	@Input() showSelections: boolean = false
+	@Input() showVisibility: boolean = false
+	@Input() set filter(f: string) {
+		this.applyFilter(f)
+	}
+	@Input() onlyShowAccepted: boolean = false
 
 	resultsLength: number = 0
 	isLoadingResults: boolean = true
 	hasSubmissionsRole: boolean = false
+	selectionQuery: string
 
 	@ViewChild(MatTable) table: any
 	@ViewChild(MatPaginator) paginator: MatPaginator
@@ -59,16 +66,18 @@ export class SubmissionListComponent implements OnInit {
 	ngOnInit() {
 		const user = this.auth.getUserInfo()
 		// TODO: Get this url logic out of this component. Replace with more configurable options (see #15)
-		if (user && user.roles.includes('submissions') && this.router.url !== '/submissions/create' ||
-			this.router.url === '/profile') {
+		if (user && user.roles.includes('submissions')
+			&& this.router.url !== '/submissions/create' && this.router.url !== '/games'
+			|| this.router.url === '/profile') {
 			this.columnsToDisplay.push('public')
 			if (this.showRunner && user && user.roles.includes('submissions')) {
 				this.hasSubmissionsRole = true
-				if (this.router.url !== '/profile') {
+				if (this.router.url !== '/profile' && this.router.url !== '/games') {
 					this.columnsToDisplay.push('controls')
+					this.showControls = true
 				}
 			}
-			this.defaultPageSize = 5000
+			this.initialPageSize = 5000
 		}
 
 		if (this.showRunner) {
@@ -81,15 +90,17 @@ export class SubmissionListComponent implements OnInit {
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
 
 		if (this.dataSource.data !== undefined) {
+			this.selectionQuery = this.onlyShowAccepted ? 'accept+bonus' : ''
 			merge(this.sort.sortChange, this.paginator.page)
 					.pipe(
 						startWith({}),
 						switchMap(() => {
 							this.isLoadingResults = true
 							return this.submissionService.getSubmissions(
+								this.selectionQuery,
 								this.sort.active,
 								this.sort.direction,
-								this.paginator.pageSize || this.defaultPageSize,
+								this.paginator.pageSize || this.initialPageSize,
 								this.paginator.pageIndex)
 						}),
 						map((data: GameSubmissionResponse) => {
@@ -114,10 +125,23 @@ export class SubmissionListComponent implements OnInit {
 	applyFilter(filterValue: string) {
 		filterValue = filterValue.trim()
 		filterValue = filterValue.toLowerCase()
-		this.dataSource.filter = filterValue
+		if (filterValue.includes('selection:')) {
+			if (filterValue.includes('accept') || filterValue.includes('backup')
+				|| filterValue.includes('bonus') || filterValue.includes('decline')) {
+				this.selectionQuery = filterValue.split(':')[1]
+				this.paginator.page.emit()
+				this.dataSource.filter = ''
+			}
+		} else if (this.selectionQuery) {
+			this.selectionQuery = ''
+			this.paginator.page.emit()
+			this.dataSource.filter = filterValue
+		} else {
+			this.dataSource.filter = filterValue
+		}
 	}
 
-	markSubmission(submission: GameSubmission, status: string, event: any) {
+	markSubmission(event: any, submission: GameSubmission, status: string, catIndex?: number, statusComment?: string) {
 		event.stopPropagation()
 		const button: HTMLButtonElement = event.target.closest('button')
 		const elems = button.closest('fieldset').getElementsByTagName('button')
@@ -125,7 +149,7 @@ export class SubmissionListComponent implements OnInit {
 			elems.item(i).disabled = true
 		}
 		button.classList.add('showSpinner')
-		this.submissionService.markSubmission(submission, status)
+		this.submissionService.markSubmission(submission, status, catIndex, statusComment)
 			.subscribe(
 				(res: any) => {
 					for (let i = 0; i < elems.length; i++) {
