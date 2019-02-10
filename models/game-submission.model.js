@@ -18,10 +18,22 @@ let CategorySchema = new mongoose.Schema({
 		trim: true,
 		maxlength: 560 // Pitch it in 2 tweets or less
 	},
+	selectionStatus: {
+		type: Number,
+		default: 0, // 0 = reject, 1 = accept, 2 = backup, 3 = bonus
+		min: 0,
+		max: 3,
+		required: true
+	},
+	selectionComment: {
+		type: String,
+		trim: true,
+		maxlength: 560
+	},
 	video: {
 		type: String, // URL
 		trim: true,
-		require: true,
+		required: true,
 		maxlength: 500,
 		match: /^(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+$/i
 	}

@@ -63,7 +63,15 @@
 		<ng-container matColumnDef="categories">
 			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
 			<mat-cell *matCellDef="let submission">
-				<div *ngFor="let cat of submission.categories" class="category-container">
+				<div *ngFor="let cat of submission.categories"
+					[ngClass]="{
+						'category-container': true,
+						'selection': showControls,
+						'decline': showControls && !cat.selectionStatus,
+						'accept': showControls && cat.selectionStatus === 1,
+						'backup': showControls && cat.selectionStatus === 2,
+						'bonus': showControls && cat.selectionStatus === 3
+					}">
 					<a *ngIf="hasSubmissionsRole"
 						class="cell-title"
 						[href]="cat.video.includes('http') ? cat.video : 'http://' + cat.video"
@@ -73,6 +81,35 @@
 					<div class="cell-subtitle">EST: {{cat.estimate | timeToString}}</div>
 					<br />
 					<div class="description preserve-newlines">{{!submission.expand ? (cat.description | truncate:100:true) : cat.description}}</div>
+
+					<fieldset *ngIf="showControls" class="controls-group">
+						<h3>Selection (Internal)</h3>
+						<button mat-raised-button
+							color="primary"
+							(click)="markSubmission(submission, 'accept', $event, submission.categories.indexOf(cat))">
+							<span>Accept</span>
+							<mat-spinner color="primary" [diameter]="28"></mat-spinner>
+						</button>
+						<button mat-raised-button
+							color="bonus"
+							(click)="markSubmission(submission, 'bonus', $event, submission.categories.indexOf(cat))">
+							<span>Bonus</span>
+							<mat-spinner color="accent" [diameter]="28"></mat-spinner>
+						</button>
+						<button mat-raised-button
+							color="accent"
+							(click)="markSubmission(submission, 'backup', $event, submission.categories.indexOf(cat))">
+							<span>Backup</span>
+							<mat-spinner color="accent" [diameter]="28"></mat-spinner>
+						</button>
+						<button mat-raised-button
+							color="warn"
+							(click)="markSubmission(submission, 'decline', $event, submission.categories.indexOf(cat))">
+							<span>Decline</span>
+							<mat-spinner color="warn" [diameter]="28"></mat-spinner>
+						</button>
+					</fieldset>
+
 					<hr *ngIf="submission.categories.indexOf(cat) < submission.categories.length - 1"/>
 				</div>
 			</mat-cell>
@@ -102,28 +139,6 @@
 						color="warn"
 						(click)="markSubmission(submission, 'private', $event)">
 						<span>Mark Private</span>
-						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
-					</button>
-					<h3>Selection (Internal)<br />[Not yet implemented]</h3>
-					<button mat-raised-button
-						color="primary"
-						disabled
-						(click)="markSubmission(submission, 'accept', $event)">
-						<span>Mark Accepted</span>
-						<mat-spinner color="primary" [diameter]="28"></mat-spinner>
-					</button>
-					<button mat-raised-button
-						color="accent"
-						disabled
-						(click)="markSubmission(submission, 'backup', $event)">
-						<span>Mark Backup</span>
-						<mat-spinner color="accent" [diameter]="28"></mat-spinner>
-					</button>
-					<button mat-raised-button
-						color="warn"
-						disabled
-						(click)="markSubmission(submission, 'reject', $event)">
-						<span>Mark Rejected</span>
 						<mat-spinner color="warn" [diameter]="28"></mat-spinner>
 					</button>
 					<h3>Removal</h3>

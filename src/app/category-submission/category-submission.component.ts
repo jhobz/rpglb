@@ -12,14 +12,6 @@ import { convertMinutesToTimeString, convertTimeStringToMinutes } from '../time-
 	viewProviders: [ { provide: ControlContainer, useExisting: NgForm }]
 })
 export class CategorySubmissionComponent {
-	private _category: GameCategory = {
-		name: '',
-		estimateTimeString: '',
-		estimate: null,
-		description: '',
-		video: ''
-	}
-
 	@Input()
 	set category(category: GameCategory) {
 		this._category = category
@@ -33,7 +25,17 @@ export class CategorySubmissionComponent {
 	get category(): GameCategory {
 		return this._category
 	}
+
 	@ViewChild('estimate') estimateControl: NgModel
+
+	private _category: GameCategory = {
+		name: '',
+		estimateTimeString: '',
+		estimate: null,
+		description: '',
+		selectionStatus: 0,
+		video: ''
+	}
 
 	constructor() { }
 

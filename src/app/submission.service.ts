@@ -19,6 +19,8 @@ export interface GameCategory {
 	estimateTimeString?: string
 	estimate: number
 	description: string
+	selectionStatus: number
+	selectionComment?: string
 	video: string
 }
 
@@ -45,6 +47,13 @@ export interface GameSubmissionResponse {
 
 @Injectable()
 export class SubmissionService {
+	static SELECTION_STATUS: object = {
+		DECLINE: 0,
+		ACCEPT: 1,
+		BACKUP: 2,
+		BONUS: 3
+	}
+
 	private apiUrl: string = `${environment.apiUrl}/submissions`
 
 	constructor(private auth: AuthenticationService, private http: HttpClient) { }
@@ -95,7 +104,7 @@ export class SubmissionService {
 		return this.http.delete(`${this.apiUrl}/${id}`, options)
 	}
 
-	markSubmission(submission: GameSubmission, status: string): Observable<any> {
+	markSubmission(submission: GameSubmission, status: string, catIndex?: number): Observable<any> {
 		switch (status) {
 			case 'public':
 				submission.public = true
@@ -105,9 +114,13 @@ export class SubmissionService {
 				break
 			case 'accept':
 			case 'backup':
-			case 'reject':
-				// TODO: Uncomment when selection is implemented
-				// submission.selectionStatus = status
+			case 'bonus':
+			case 'decline':
+				if (catIndex === undefined) {
+					throw new Error('catIndex is not specified')
+				}
+				const statusCode = SubmissionService.SELECTION_STATUS[status.toUpperCase()]
+				submission.categories[catIndex].selectionStatus = statusCode
 				break
 		}
 

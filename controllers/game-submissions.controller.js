@@ -80,6 +80,8 @@ exports.createSubmission = async function (req, res, next) {
 		pros: req.body.pros,
 		cons: req.body.cons,
 		public: req.body.public,
+		selectionStatus: req.body.selectionStatus,
+		selectionComment: req.body.selectionComment,
 		categories: req.body.categories
 	}
 
@@ -146,6 +148,8 @@ exports.updateSubmission = async function (req, res, next) {
 		pros: req.body.pros ? req.body.pros : null,
 		cons: req.body.cons ? req.body.cons : null,
 		public: req.body.public !== undefined ? req.body.public : null,
+		selectionStatus: req.body.selectionStatus !== undefined ? req.body.selectionStatus : null,
+		selectionComment: req.body.selectionComment ? req.body.selectionComment : null,
 		categories: req.body.categories ? req.body.categories : null
 	}
 

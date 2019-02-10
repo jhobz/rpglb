@@ -35,6 +35,7 @@ export class SubmissionListComponent implements OnInit {
 	@Input() showRunner: boolean = true
 	@Input() showPagination: boolean = true
 	@Input() showFilter: boolean = true
+	@Input() showControls: boolean = false
 	@Input() filter: string
 
 	resultsLength: number = 0
@@ -66,6 +67,7 @@ export class SubmissionListComponent implements OnInit {
 				this.hasSubmissionsRole = true
 				if (this.router.url !== '/profile') {
 					this.columnsToDisplay.push('controls')
+					this.showControls = true
 				}
 			}
 			this.defaultPageSize = 5000
@@ -117,7 +119,7 @@ export class SubmissionListComponent implements OnInit {
 		this.dataSource.filter = filterValue
 	}
 
-	markSubmission(submission: GameSubmission, status: string, event: any) {
+	markSubmission(submission: GameSubmission, status: string, event: any, catIndex?: number) {
 		event.stopPropagation()
 		const button: HTMLButtonElement = event.target.closest('button')
 		const elems = button.closest('fieldset').getElementsByTagName('button')
@@ -125,7 +127,7 @@ export class SubmissionListComponent implements OnInit {
 			elems.item(i).disabled = true
 		}
 		button.classList.add('showSpinner')
-		this.submissionService.markSubmission(submission, status)
+		this.submissionService.markSubmission(submission, status, catIndex)
 			.subscribe(
 				(res: any) => {
 					for (let i = 0; i < elems.length; i++) {
