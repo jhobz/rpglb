@@ -29,14 +29,17 @@ import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../su
 	providers: [SubmissionService]
 })
 export class SubmissionListComponent implements OnInit {
-	columnsToDisplay: string[] = ['name', 'console', 'description', 'proscons', 'incentives', 'categories']
-	defaultPageSize: number = 10
+	@Input() columnsToDisplay: string[] = ['name', 'console', 'description', 'proscons', 'incentives', 'categories']
+	@Input() initialPageSize: number = 10
 	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
 	@Input() showRunner: boolean = true
 	@Input() showPagination: boolean = true
 	@Input() showFilter: boolean = true
 	@Input() showControls: boolean = false
+	@Input() showSelections: boolean = false
+	@Input() showVisibility: boolean = false
 	@Input() filter: string
+	@Input() onlyShowAccepted: boolean = false
 
 	resultsLength: number = 0
 	isLoadingResults: boolean = true
@@ -60,17 +63,18 @@ export class SubmissionListComponent implements OnInit {
 	ngOnInit() {
 		const user = this.auth.getUserInfo()
 		// TODO: Get this url logic out of this component. Replace with more configurable options (see #15)
-		if (user && user.roles.includes('submissions') && this.router.url !== '/submissions/create' ||
-			this.router.url === '/profile') {
+		if (user && user.roles.includes('submissions')
+			&& this.router.url !== '/submissions/create' && this.router.url !== '/games'
+			|| this.router.url === '/profile') {
 			this.columnsToDisplay.push('public')
 			if (this.showRunner && user && user.roles.includes('submissions')) {
 				this.hasSubmissionsRole = true
-				if (this.router.url !== '/profile') {
+				if (this.router.url !== '/profile' && this.router.url !== '/games') {
 					this.columnsToDisplay.push('controls')
 					this.showControls = true
 				}
 			}
-			this.defaultPageSize = 5000
+			this.initialPageSize = 5000
 		}
 
 		if (this.showRunner) {
@@ -88,10 +92,12 @@ export class SubmissionListComponent implements OnInit {
 						startWith({}),
 						switchMap(() => {
 							this.isLoadingResults = true
+							console.log(this.paginator.pageSize || this.initialPageSize)
 							return this.submissionService.getSubmissions(
+								this.onlyShowAccepted ? 'accept+bonus' : '',
 								this.sort.active,
 								this.sort.direction,
-								this.paginator.pageSize || this.defaultPageSize,
+								this.paginator.pageSize || this.initialPageSize,
 								this.paginator.pageIndex)
 						}),
 						map((data: GameSubmissionResponse) => {
@@ -119,7 +125,7 @@ export class SubmissionListComponent implements OnInit {
 		this.dataSource.filter = filterValue
 	}
 
-	markSubmission(submission: GameSubmission, status: string, event: any, catIndex?: number) {
+	markSubmission(event: any, submission: GameSubmission, status: string, catIndex?: number, statusComment?: string) {
 		event.stopPropagation()
 		const button: HTMLButtonElement = event.target.closest('button')
 		const elems = button.closest('fieldset').getElementsByTagName('button')
@@ -127,7 +133,7 @@ export class SubmissionListComponent implements OnInit {
 			elems.item(i).disabled = true
 		}
 		button.classList.add('showSpinner')
-		this.submissionService.markSubmission(submission, status, catIndex)
+		this.submissionService.markSubmission(submission, status, catIndex, statusComment)
 			.subscribe(
 				(res: any) => {
 					for (let i = 0; i < elems.length; i++) {

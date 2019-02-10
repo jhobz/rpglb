@@ -53,7 +53,8 @@ import { TimeToStringPipe } from './time-to-string.pipe'
 import { TruncatePipe } from './truncate.pipe'
 import { UserListComponent } from './user-list/user-list.component'
 import { UserService } from './user.service'
-import { VerifyPageComponent } from './verify-page/verify-page.component'
+import { VerifyPageComponent } from './verify-page/verify-page.component';
+import { GamesListPageComponent } from './games-list-page/games-list-page.component'
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		SubmissionsListPageComponent,
 		PreEventHomePageComponent,
 		TruncatePipe,
+		GamesListPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent

@@ -30,5 +30,7 @@
 		submissions will be accepted after this time, but it may still take a bit for the final few submissions to
 		become public.
 	</p>
-	<app-submission-list></app-submission-list>
+	<app-submission-list
+		[showSelections]="speedrunEvent?.isGamesListPublic"
+	></app-submission-list>
 </div>

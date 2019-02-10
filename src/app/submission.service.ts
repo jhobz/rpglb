@@ -77,6 +77,7 @@ export class SubmissionService {
 	}
 
 	getSubmissions(
+		selectionStatus?: string,
 		sort: string = 'name',
 		order: string = 'asc',
 		limit: number = 10,
@@ -84,6 +85,7 @@ export class SubmissionService {
 		const options = {
 			headers: this.auth.generateAuthHeader(),
 			params: new HttpParams()
+				.set('selection', selectionStatus)
 				.set('sort', sort)
 				.set('order', order)
 				.set('limit', `${limit}`)
@@ -104,7 +106,11 @@ export class SubmissionService {
 		return this.http.delete(`${this.apiUrl}/${id}`, options)
 	}
 
-	markSubmission(submission: GameSubmission, status: string, catIndex?: number): Observable<any> {
+	markSubmission(
+		submission: GameSubmission,
+		status: string,
+		catIndex?: number,
+		statusComment?: string): Observable<any> {
 		switch (status) {
 			case 'public':
 				submission.public = true
@@ -121,6 +127,9 @@ export class SubmissionService {
 				}
 				const statusCode = SubmissionService.SELECTION_STATUS[status.toUpperCase()]
 				submission.categories[catIndex].selectionStatus = statusCode
+				if (statusComment !== undefined) {
+					submission.categories[catIndex].selectionComment = statusComment
+				}
 				break
 		}
 
