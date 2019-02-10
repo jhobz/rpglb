@@ -54,4 +54,19 @@ export class SubmissionsListPageComponent implements OnInit {
 				})
 	}
 
+	// TODO: Implement the below code after upgrading to Angular 6+
+	// Angular 5 and lower do not fire "change" event on matButtonToggleGroup when "multiple" is used
+	/*
+	onSelectionChange(event: any) {
+		const toggle = event.source
+		if (toggle) {
+			const group = toggle.buttonToggleGroup
+			if (event.value.some((item: any) => item === toggle.value)) {
+				group.value = [toggle.value]
+			}
+		}
+		return true
+	}
+	*/
+
 }

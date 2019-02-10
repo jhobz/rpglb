@@ -38,12 +38,15 @@ export class SubmissionListComponent implements OnInit {
 	@Input() showControls: boolean = false
 	@Input() showSelections: boolean = false
 	@Input() showVisibility: boolean = false
-	@Input() filter: string
+	@Input() set filter(f: string) {
+		this.applyFilter(f)
+	}
 	@Input() onlyShowAccepted: boolean = false
 
 	resultsLength: number = 0
 	isLoadingResults: boolean = true
 	hasSubmissionsRole: boolean = false
+	selectionQuery: string
 
 	@ViewChild(MatTable) table: any
 	@ViewChild(MatPaginator) paginator: MatPaginator
@@ -87,13 +90,14 @@ export class SubmissionListComponent implements OnInit {
 		this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0)
 
 		if (this.dataSource.data !== undefined) {
+			this.selectionQuery = this.onlyShowAccepted ? 'accept+bonus' : ''
 			merge(this.sort.sortChange, this.paginator.page)
 					.pipe(
 						startWith({}),
 						switchMap(() => {
 							this.isLoadingResults = true
 							return this.submissionService.getSubmissions(
-								this.onlyShowAccepted ? 'accept+bonus' : '',
+								this.selectionQuery,
 								this.sort.active,
 								this.sort.direction,
 								this.paginator.pageSize || this.initialPageSize,
@@ -121,7 +125,20 @@ export class SubmissionListComponent implements OnInit {
 	applyFilter(filterValue: string) {
 		filterValue = filterValue.trim()
 		filterValue = filterValue.toLowerCase()
-		this.dataSource.filter = filterValue
+		if (filterValue.includes('selection:')) {
+			if (filterValue.includes('accept') || filterValue.includes('backup')
+				|| filterValue.includes('bonus') || filterValue.includes('decline')) {
+				this.selectionQuery = filterValue.split(':')[1]
+				this.paginator.page.emit()
+				this.dataSource.filter = ''
+			}
+		} else if (this.selectionQuery) {
+			this.selectionQuery = ''
+			this.paginator.page.emit()
+			this.dataSource.filter = filterValue
+		} else {
+			this.dataSource.filter = filterValue
+		}
 	}
 
 	markSubmission(event: any, submission: GameSubmission, status: string, catIndex?: number, statusComment?: string) {

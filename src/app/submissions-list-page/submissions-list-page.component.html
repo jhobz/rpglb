@@ -30,7 +30,29 @@
 		submissions will be accepted after this time, but it may still take a bit for the final few submissions to
 		become public.
 	</p>
+	<!-- Have to use hidden here instead of *ngIf because app-submission-list needs access to group.value -->
+	<div class="selection-controls" [hidden]="!hasSubmissionRole && !speedrunEvent?.isGamesListPublic">
+		<!-- TODO: Make the group allow multiple selections with Angular 6+ -->
+		<mat-button-toggle-group #group="matButtonToggleGroup">
+			<mat-button-toggle color="primary" value="accept">
+				Accept
+			</mat-button-toggle>
+			<mat-button-toggle color="bonus" value="bonus">
+				Bonus
+			</mat-button-toggle>
+			<mat-button-toggle color="accent" value="backup">
+				Backup
+			</mat-button-toggle>
+			<mat-button-toggle color="warn" value="decline">
+				Decline
+			</mat-button-toggle>
+			<mat-button-toggle [checked]="true" value="">
+				All
+			</mat-button-toggle>
+		</mat-button-toggle-group>
+	</div>
 	<app-submission-list
 		[showSelections]="speedrunEvent?.isGamesListPublic"
+		[filter]="group.value ? 'selection:' + group.value : ''"
 	></app-submission-list>
 </div>
