@@ -92,7 +92,6 @@ export class SubmissionListComponent implements OnInit {
 						startWith({}),
 						switchMap(() => {
 							this.isLoadingResults = true
-							console.log(this.paginator.pageSize || this.initialPageSize)
 							return this.submissionService.getSubmissions(
 								this.onlyShowAccepted ? 'accept+bonus' : '',
 								this.sort.active,
