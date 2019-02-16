@@ -225,6 +225,41 @@ exports.verifyEmail = async function (req, res, next) {
 	}
 }
 
+exports.registerUser = async function (req, res, next) {
+	// TODO: More validation
+	if (!req.user || !req.user._id) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Must be logged in to register.'
+		} )
+	}
+
+	if (req.body.v === undefined) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Registration state unknown.'
+		} )
+	}
+
+	try {
+		let updatedUser
+		if (req.body.v.toLowerCase() === 'true') {
+			updatedUser = await UserService.addRoles(req.user._id, ['attendee'])
+		} else {
+			updatedUser = await UserService.removeRoles(req.user._id, ['attendee'])
+		}
+		return res.status(200).json( {
+			status: 200,
+			data: updatedUser
+		} )
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: `Unable to register user.\n${e.message}`
+		} )
+	}
+}
+
 exports.getUserInfo = async function (req, res, next) {
 	try {
 		let user = await UserService.getUserById(req.params.id)

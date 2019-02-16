@@ -98,3 +98,35 @@ exports.getUserById = async function (id) {
 		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
 	}
 }
+
+exports.addRoles = async function (id, roles) {
+	if (!id || !roles || !roles.length) {
+		throw Error(`Must include user id and role to be added`)
+	}
+
+	try {
+		let oldUser = await User.findById({ _id: id })
+		oldUser.roles = Array.from(new Set([...oldUser.roles, ...roles]))
+
+		const savedUser = await oldUser.save()
+		return savedUser
+	} catch (e) {
+		throw Error(`Error occurred while attempting to add roles: ${e.message}`)
+	}
+}
+
+exports.removeRoles = async function (id, roles) {
+	if (!id || !roles || !roles.length) {
+		throw Error(`Must include user id and role to be removed`)
+	}
+
+	try {
+		let oldUser = await User.findById({ _id: id })
+		oldUser.roles = oldUser.roles.filter(role => !roles.includes(role))
+
+		const savedUser = await oldUser.save()
+		return savedUser
+	} catch (e) {
+		throw Error(`Error occurred while attempting to remove roles: ${e.message}`)
+	}
+}
