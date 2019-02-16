@@ -225,6 +225,29 @@ exports.verifyEmail = async function (req, res, next) {
 	}
 }
 
+exports.registerUser = async function(req, res, next) {
+	// TODO: More validation
+	// TODO: Make generic for any event
+	try {
+		if (req.body.v === undefined) {
+			throw new Error()
+		}
+		const updatedUser = await UserService.updateUser({
+			id: req.user._id,
+			isRegistered2019: req.body.v
+		})
+		return res.status(200).json( {
+			status: 200,
+			user: updatedUser
+		} )
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Unable to register user for event.'
+		} )
+	}
+}
+
 exports.getUserInfo = async function (req, res, next) {
 	try {
 		let user = await UserService.getUserById(req.params.id)

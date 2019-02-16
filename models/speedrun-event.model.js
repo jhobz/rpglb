@@ -38,6 +38,7 @@ let SpeedrunEventSchema = new mongoose.Schema({
 	areVolunteerSubmissionsOpen: Boolean,
 	isGamesListPublic: Boolean,
 	isRegistrationOpen: Boolean,
+	maxRegisteredUsers: Number,
 	gameSubmissions: [{
 		type: mongoose.Schema.ObjectId,
 		ref: 'GameSubmission'

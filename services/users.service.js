@@ -27,6 +27,7 @@ exports.createUser = async function (user) {
 		username: user.username,
 		password: user.password,
 		verified: false,
+		isRegistered2019: false,
 		verificationToken: crypto.randomBytes(16).toString('hex')
 	})
 
@@ -55,7 +56,8 @@ exports.updateUser = async function (user) {
 
 	// Replace any changed values
 	Object.keys(user).forEach(key => {
-		if (user[key] || key === 'verified') {
+		// TODO: Make this check for `typeof boolean` rather than individual keys
+		if (user[key] || key === 'verified' || key === 'isRegistered2019') {
 			oldUser[key] = user[key]
 		}
 	})
