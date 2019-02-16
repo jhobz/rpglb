@@ -13,7 +13,6 @@ router.delete('/:id', UserController.removeUser)
 router.post('/login', UserController.loginUser)
 router.post('/changePassword', passport.authenticate('jwt', { session: false }), UserController.changePassword)
 router.post('/verify', UserController.verifyEmail)
-router.post('/registerUser', passport.authenticate('jwt', { session: false }), UserController.registerUser)
 router.get('/:id/:prop', UserController.getUserInfo)
 
 module.exports = router;

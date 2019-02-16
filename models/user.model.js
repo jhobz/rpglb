@@ -57,11 +57,6 @@ let UserSchema = new mongoose.Schema({
 		default: false,
 		required: true
 	},
-	isRegistered2019: {
-		type: Boolean,
-		default: false,
-		required: true
-	},
 	submissions: [{
 		type: mongoose.Schema.ObjectId,
 		ref: 'GameSubmission'
