@@ -30,7 +30,7 @@
 		Otherwise, you will not be able to register. Keep an eye on our <a href="https://twitter.com/rpglimitbreak">Twitter</a>
 		and <a href="https://discord.gg/rpglb">Discord</a> for announcements, as occasionally we are able to increase
 		the maximum cap.
-	<div *ngIf="srEvent && user.email && !isProcessingPayment" class="registration-container">
+	<div *ngIf="srEvent && hasFullUserLoaded && !isProcessingPayment" class="registration-container">
 		<div *ngIf="srEvent.isRegistrationOpen || hasEventRole" class="attendees">
 			Attendee slots taken: <span class="attendees-count">{{srEvent.registeredUsersCount}} / {{srEvent.maxRegisteredUsers}}</span>
 		</div>
@@ -89,7 +89,7 @@
 			Sorry, registration is not currently open or has reached the limit.
 		</div>
 	</div>
-	<div *ngIf="!srEvent || !user || !user.email || isProcessingPayment" class="registration-container">
+	<div *ngIf="!srEvent || !user || !hasFullUserLoaded || isProcessingPayment" class="registration-container">
 		<div class="spinner-message">{{spinnerMessage}}</div>
 		<div class="spinner-error warn">{{spinnerError}}</div>
 		<mat-spinner *ngIf="!spinnerError"></mat-spinner>

@@ -26,6 +26,7 @@ export class RegistrationPageComponent implements OnInit {
 	handler: any
 	paymentAmount: number
 	srEvent: SpeedrunEvent
+	hasFullUserLoaded: boolean = false
 	isFetching: boolean = false
 	isProcessingPayment: boolean = false
 	spinnerMessage: string = 'Fetching user details...'
@@ -48,6 +49,7 @@ export class RegistrationPageComponent implements OnInit {
 		this.auth.profile().subscribe((user: User) => {
 			this.user = user
 			this.dates = user.attendanceDates || {} as StartEndDateModel
+			this.hasFullUserLoaded = true
 		})
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
