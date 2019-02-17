@@ -6,10 +6,12 @@ import {
 	MatButtonModule,
 	MatButtonToggleModule,
 	MatCardModule,
+	MatDatepickerModule,
 	MatDialogModule,
 	MatFormFieldModule,
 	MatIconModule,
 	MatInputModule,
+	MatNativeDateModule,
 	MatPaginatorModule,
 	MatProgressBarModule,
 	MatProgressSpinnerModule,
@@ -35,12 +37,13 @@ import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes
 import { FooterComponent } from './footer/footer.component'
 import { GameSubmissionComponent } from './game-submission/game-submission.component'
 import { GamesListPageComponent } from './games-list-page/games-list-page.component'
-import { IdToUsernamePipe } from './id-to-username.pipe'
 import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
 import { NavbarComponent } from './navbar/navbar.component'
+import { PaymentService } from './payment.service'
 import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 import { ProfileComponent } from './profile/profile.component'
+import { RegistrationPageComponent } from './registration-page/registration-page.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
 import { SpeedrunEventService } from './speedrun-event.service'
@@ -78,12 +81,12 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		SubmissionFormComponent,
 		SubmissionConfirmationDialogComponent,
 		VerifyPageComponent,
-		IdToUsernamePipe,
 		TimeToStringPipe,
 		SubmissionsListPageComponent,
 		PreEventHomePageComponent,
 		TruncatePipe,
 		GamesListPageComponent,
+		RegistrationPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent
@@ -97,10 +100,12 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		MatButtonModule,
 		MatButtonToggleModule,
 		MatCardModule,
+		MatDatepickerModule,
 		MatDialogModule,
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
+		MatNativeDateModule,
 		MatPaginatorModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
@@ -115,6 +120,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 	providers: [
 		AuthGuardService,
 		AuthenticationService,
+		PaymentService,
 		RoleGuardService,
 		SpeedrunEventService,
 		UserService

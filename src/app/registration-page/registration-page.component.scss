@@ -1,0 +1,67 @@
+@import '../../rpglb-dark-theme.scss';
+
+$primary: map-get($rpglb-app-theme, primary);
+$accent: map-get($rpglb-app-theme, accent);
+$warn: map-get($rpglb-app-theme, warn);
+$bonus: mat-palette($mat-purple, 400, 200);
+// $foreground: map-get($rpglb-app-theme, foreground);
+// $background: map-get($rpglb-app-theme, background);
+
+.wrapper {
+	max-width: 1700px;
+	margin: 50px auto;
+}
+
+.admin-controls {
+	float: right;
+	text-align: right;
+}
+
+.admin-controls > button {
+	margin-left: 10px;
+}
+
+/deep/ .admin-controls > mat-slide-toggle {
+	color: mat-color($warn, lighter);
+
+	&.mat-checked {
+		color: mat-color($primary, 200);
+	}
+
+	.mat-slide-toggle-content {
+		font-size: 1em;
+		font-weight: bold;
+	}
+}
+
+.registration-container {
+	margin: 50px 0 0 50px;
+}
+
+.attendees {
+	.attendees-count {
+		font-weight: bold;
+	}
+}
+
+.registration-form {
+	margin-top: 25px;
+}
+
+.payment-button {
+	position: relative;
+	mat-progress-bar {
+		position: absolute;
+		left: 0;
+		right: 0;
+	}
+}
+
+.attendee-message {
+	display: flex;
+	align-items: center;
+
+	:last-child {
+		margin-left: 10px;
+	}
+}

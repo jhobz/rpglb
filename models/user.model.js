@@ -57,6 +57,10 @@ let UserSchema = new mongoose.Schema({
 		default: false,
 		required: true
 	},
+	attendanceDates: {
+		startDate: Date,
+		endDate: Date
+	},
 	submissions: [{
 		type: mongoose.Schema.ObjectId,
 		ref: 'GameSubmission'

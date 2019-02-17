@@ -92,9 +92,35 @@ exports.getUser = async function (username) {
 
 exports.getUserById = async function (id) {
 	try {
-		let user = await User.findOne({ _id: id })
+		let user = await User.findById(id)
 		return user
 	} catch (e) {
 		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
+	}
+}
+
+exports.addRoles = async function (id, roles) {
+	if (!id || !roles || !roles.length) {
+		throw Error(`Must include user id and role to be added`)
+	}
+
+	try {
+		let writeResult = await User.update({ _id: id }, { "$addToSet": { roles: { "$each": roles } } })
+		return writeResult
+	} catch (e) {
+		throw Error(`Error occurred while attempting to add roles: ${e.message}`)
+	}
+}
+
+exports.removeRoles = async function (id, roles) {
+	if (!id || !roles || !roles.length) {
+		throw Error(`Must include user id and role to be removed`)
+	}
+
+	try {
+		let writeResult = await User.update({ _id: id }, { "$pullAll": { roles: roles } })
+		return writeResult
+	} catch (e) {
+		throw Error(`Error occurred while attempting to remove roles: ${e.message}`)
 	}
 }

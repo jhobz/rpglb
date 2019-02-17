@@ -93,7 +93,8 @@ exports.updateUser = async function (req, res, next) {
 		username: req.body.username ? req.body.username : null,
 		password: req.body.password ? req.body.password : null,
 		roles: req.body.roles ? req.body.roles : null,
-		verificationToken: req.body.verificationToken ? req.body.verificationToken : null
+		verificationToken: req.body.verificationToken ? req.body.verificationToken : null,
+		attendanceDates: req.body.attendanceDates ? req.body.attendanceDates : null
 	}
 
 	try {
@@ -225,21 +226,51 @@ exports.verifyEmail = async function (req, res, next) {
 	}
 }
 
-exports.getUserInfo = async function (req, res, next) {
+exports.registerUser = async function (req, res, next) {
+	// TODO: More validation
+	if (!req.user || !req.user._id) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Must be logged in to register.'
+		} )
+	}
+
+	if (req.body.v === undefined) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Registration state unknown.'
+		} )
+	}
+
 	try {
-		let user = await UserService.getUserById(req.params.id)
-		const prop = req.params.prop
-		if (!prop) {
-			return res.status(201).json( {
-				status: 201,
-				data: user
-			} )
+		// TODO: Capture the response of `addRoles` and `removeRoles` and check that it actually worked
+		if (req.body.v) {
+			await UserService.addRoles(req.user._id, ['attendee'])
 		} else {
-			return res.status(201).json( {
-				status: 201,
-				[prop]: user[prop]
-			} )
+			await UserService.removeRoles(req.user._id, ['attendee'])
 		}
+		let updatedUser = await UserService.getUserById(req.user._id)
+		return res.status(200).json( {
+			status: 200,
+			data: updatedUser,
+			token: generateToken(updatedUser) // New token because new roles
+		} )
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: `Unable to register user.\n${e.message}`
+		} )
+	}
+}
+
+exports.getUserInfo = async function (req, res, next) {
+	// TODO: Add more validation
+	try {
+		let user = await UserService.getUserById(req.user._id)
+		return res.status(201).json( {
+			status: 201,
+			data: user
+		} )
 	} catch (e) {
 		return res.status(400).json( {
 			status: 400,

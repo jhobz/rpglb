@@ -87,6 +87,7 @@ export class AuthenticationService {
 	// TODO: Move this to UserService
 	public profile(): Observable<User> {
 		return this.request('get', 'profile')
+			.map((res: any) => res.data)
 	}
 
 	public generateAuthHeader(): HttpHeaders {
@@ -116,7 +117,7 @@ export class AuthenticationService {
 		if (method === 'post') {
 			base = this.http.post(`${this.apiUrl}/users/${type === 'signup' ? '' : type}`, user)
 		} else {
-			base = this.http.get(`${this.apiUrl}/api/users/${type}`, {
+			base = this.http.get(`${this.apiUrl}/users/${type}`, {
 				headers: this.generateAuthHeader()
 			})
 		}
