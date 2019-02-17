@@ -38,6 +38,8 @@ let SpeedrunEventSchema = new mongoose.Schema({
 	areVolunteerSubmissionsOpen: Boolean,
 	isGamesListPublic: Boolean,
 	isRegistrationOpen: Boolean,
+	maxRegisteredUsers: Number,
+	registrationCost: Number,
 	gameSubmissions: [{
 		type: mongoose.Schema.ObjectId,
 		ref: 'GameSubmission'
@@ -54,6 +56,11 @@ let SpeedrunEventSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId,
 		ref: 'User'
 	}]
+})
+
+SpeedrunEventSchema.virtual('registeredUsersCount').get(async function () {
+	var query = await mongoose.model('User').countDocuments({ roles: 'attendee'})
+	return query
 })
 
 SpeedrunEventSchema.plugin(mongoosePaginate)

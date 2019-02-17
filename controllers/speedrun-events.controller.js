@@ -98,6 +98,8 @@ exports.updateSpeedrunEvent = async function (req, res, next) {
 		areVolunteerSubmissionsOpen: req.body.areVolunteerSubmissionsOpen,
 		isGamesListPublic: req.body.isGamesListPublic,
 		isRegistrationOpen: req.body.isRegistrationOpen,
+		maxRegisteredUsers: req.body.maxRegisteredUsers ? req.body.maxRegisteredUsers : null,
+		registrationCost: req.body.registrationCost ? req.body.registrationCost : null,
 		gameSubmissions: req.body.gameSubmissions ? req.body.gameSubmissions : null,
 		volunteerSubmissions: req.body.volunteerSubmissions ? req.body.volunteerSubmissions : null,
 		registeredUsers: req.body.registeredUsers ? req.body.registeredUsers : null,
@@ -173,9 +175,12 @@ exports.getSpeedrunEvent = async function (req, res, next) {
 exports.getActiveSpeedrunEvent = async function (req, res, next) {
 	try {
 		let speedrunEvent = await SpeedrunEventService.getActiveSpeedrunEvent()
+		// Activate async virtual so that it is passed through to client
+		let json = speedrunEvent.toJSON()
+		json.registeredUsersCount = await speedrunEvent.registeredUsersCount
 		return res.status(201).json( {
 			status: 201,
-			data: speedrunEvent
+			data: json
 		} )
 	} catch (e) {
 		return res.status(400).json( {

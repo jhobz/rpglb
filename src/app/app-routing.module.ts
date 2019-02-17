@@ -9,6 +9,7 @@ import { GamesListPageComponent } from './games-list-page/games-list-page.compon
 import { LoginComponent } from './login/login.component'
 import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 import { ProfileComponent } from './profile/profile.component'
+import { RegistrationPageComponent } from './registration-page/registration-page.component'
 import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
 import { SubmissionFormComponent } from './submission-form/submission-form.component'
@@ -24,6 +25,7 @@ const routes: Routes = [
 	{ path: 'rules', component: EventRulesComponent },
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
 	{ path: 'pre', component: PreEventHomePageComponent },
+	{ path: 'register', component: RegistrationPageComponent },
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },

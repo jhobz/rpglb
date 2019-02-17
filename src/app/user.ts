@@ -5,6 +5,10 @@ export interface User {
 	email: string
 	username: string
 	password: string
+	attendanceDates?: {
+		startDate: Date
+		endDate: Date
+	}
 }
 
 export default User

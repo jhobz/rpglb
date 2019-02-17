@@ -54,8 +54,13 @@ export class UserService {
 		})
 	}
 
-	getUsername(id: string): Observable<any> {
-		return this.http.get(`${this.apiUrl}/${id}/username`)
+	registerUser(): Observable<any> {
+		const options = { headers: this.auth.generateAuthHeader() }
+		const obs = this.http.post(`${this.apiUrl}/register`, { v: true }, options)
+		obs.subscribe((res: any) => {
+			this.auth.updateToken(res.token)
+		})
+		return obs
 	}
 
 	private handleError(error: any): Promise<any> {
