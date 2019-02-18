@@ -55,7 +55,7 @@ exports.updateUser = async function (user) {
 
 	// Replace any changed values
 	Object.keys(user).forEach(key => {
-		if (user[key] || key === 'verified') {
+		if (user[key] || typeof user[key] === 'boolean') {
 			oldUser[key] = user[key]
 		}
 	})
