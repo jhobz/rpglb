@@ -45,14 +45,15 @@ exports.createPayment = async function (req, res, next) {
 
 		let amount = payment.amount * 100
 		let stripeCustomer = await stripe.customers.create({
-			email: payment.email,
+			email: payment.stripeEmail,
 			source: payment.stripeToken
 		})
 		let stripeCharge = await stripe.charges.create({
 			amount,
 			description: 'RPG Limit Break 2019 - Attendee fee',
 			currency: 'usd',
-			customer: stripeCustomer.id
+			customer: stripeCustomer.id,
+			receipt_email: payment.stripeEmail
 		})
 
 		let updatedPayment = await PaymentService.updatePayment({
