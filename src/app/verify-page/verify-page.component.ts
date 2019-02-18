@@ -32,9 +32,11 @@ export class VerifyPageComponent implements OnInit {
 						setTimeout(() => {
 							this.router.navigate(['login'])
 						},         1500)
-					}, (err: any) => {
+					},
+					(err: any) => {
 						this.status = 'warn'
-						this.statusMessage = 'Verification failed. Your token may have been expired. Click below to send another email.'
+						this.statusMessage = 'Verification failed. Your token may have been expired. ' +
+							'Click below to send another email.'
 					})
 		})
 	}
@@ -47,7 +49,8 @@ export class VerifyPageComponent implements OnInit {
 						this.emailButton.disabled = true
 						this.status = 'success'
 						this.statusMessage = res.message
-					}, (err: any) => {
+					},
+					(err: any) => {
 						this.status = 'warn'
 						this.statusMessage = err.error.message
 					})

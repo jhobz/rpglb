@@ -90,6 +90,15 @@ exports.getUser = async function (username) {
 	}
 }
 
+exports.getUserByEmail = async function (email) {
+	try {
+		let user = await User.findOne({ email: email })
+		return user
+	} catch (e) {
+		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
+	}
+}
+
 exports.getUserById = async function (id) {
 	try {
 		let user = await User.findById(id)

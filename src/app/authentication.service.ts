@@ -76,7 +76,7 @@ export class AuthenticationService {
 		return false
 	}
 
-	public register(user: TokenPayload): Observable<any> {
+	public signup(user: TokenPayload): Observable<any> {
 		return this.request('post', 'signup', user)
 	}
 

@@ -35,11 +35,11 @@ export class SignupComponent {
 		}
 		if (this.form.valid) {
 			this.isDebouncing = true
-			this.auth.register(this.model)
+			this.auth.signup(this.model)
 				.subscribe(
 					(res: any) => {
 						// TODO: Require email verification
-						this.successMessage = 'User created successfully! Redirecting to profile page...'
+						this.successMessage = 'User created successfully! Redirecting...'
 						setTimeout(() => {
 							this.router.navigateByUrl(`/verify?user=${res.data._id}`)
 						},         1500)
