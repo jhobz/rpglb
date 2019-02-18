@@ -45,6 +45,9 @@ let UserSchema = new mongoose.Schema({
 		maxlength: 128,
 		required: true
 	},
+	resetToken: {
+		type: String
+	},
 	roles: {
 		type: [String],
 		default: []

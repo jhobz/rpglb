@@ -23,6 +23,8 @@
 		</mat-form-field>
 		<br />
 		<button mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid || isDebouncing">Login</button>
+		<br />
+		<a mat-button routerLink="/reset">Forgot your username/password?</a>
 		<div class="msg-status success" *ngIf="successMessage !== ''">{{successMessage}}</div>
 		<mat-progress-bar
 			color="primary"

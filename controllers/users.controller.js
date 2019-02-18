@@ -2,6 +2,7 @@ const passport = require('passport')
 const dbConfig = require('../config/database')
 require('../config/passport')(passport)
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
 
 const EmailService = require('../services/email.service')
 const UserService = require('../services/users.service')
@@ -92,6 +93,7 @@ exports.updateUser = async function (req, res, next) {
 		email: req.body.email ? req.body.email : null,
 		username: req.body.username ? req.body.username : null,
 		password: req.body.password ? req.body.password : null,
+		resetToken: req.body.resetToken ? req.body.resetToken : null,
 		roles: req.body.roles ? req.body.roles : null,
 		verificationToken: req.body.verificationToken ? req.body.verificationToken : null,
 		attendanceDates: req.body.attendanceDates ? req.body.attendanceDates : null,
@@ -192,6 +194,72 @@ exports.changePassword = async function (req, res, next) {
 		return res.status(400).json( {
 			status: 400,
 			message: 'Password unchanged.'
+		} )
+	}
+}
+
+exports.resetPassword = async function (req, res, next) {
+	try{
+		let user
+		if (req.body.user) {
+			user = await UserService.getUserById(req.body.user)
+		} else if (req.body.email) {
+			user = await UserService.getUserByEmail(req.body.email)
+		}
+
+		if (!req.body.token) {
+			// No token, generate new token and send email
+			const newResetToken = crypto.randomBytes(16).toString('hex')
+			const userChanges = {
+				id: user._id,
+				resetToken: newResetToken
+			}
+			let updatedUser = await UserService.updateUser(userChanges)
+
+			return EmailService.sendPasswordResetEmail(updatedUser, req)
+				.then((response) => {
+					if (response.accepted.length > 0) {
+						return res.status(201).json( {
+							status: 201,
+							message: 'Password reset request sent. Check your email for a message from ' +
+								'rpglimitbreak@gmail.com. Be sure to check your spam folder if you can\'t find it in your inbox.'
+						} )
+					} else {
+						return res.status(400).json( {
+							status: 400,
+							message: 'Something went wrong, try again later.'
+						} )
+					}
+				})
+		} else if (user.resetToken === req.body.token) {
+			if (!req.body.new) {
+				return res.status(400).json( {
+					status: 400,
+					message: 'No new password.'
+				} )
+			}
+
+			const updatedUser = await UserService.updateUser({
+				id: user._id,
+				password: req.body.new
+			})
+
+			const token = generateToken(updatedUser)
+			return res.status(200).json( {
+				status: 200,
+				user: user.username,
+				token: token
+			} )
+		} else {
+			return res.status(400).json( {
+				status: 400,
+				message: 'Invalid token.'
+			} )
+		}
+	} catch (e) {
+		return res.status(400).json( {
+			status: 400,
+			message: `Password reset failed: ${e.message}`
 		} )
 	}
 }

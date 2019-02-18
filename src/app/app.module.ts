@@ -41,6 +41,7 @@ import { GamesListPageComponent } from './games-list-page/games-list-page.compon
 import { LoginComponent } from './login/login.component'
 import { MoneifyPipe } from './moneify.pipe'
 import { NavbarComponent } from './navbar/navbar.component'
+import { PasswordResetPageComponent } from './password-reset-page/password-reset-page.component'
 import { PaymentService } from './payment.service'
 import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 import { ProfileComponent } from './profile/profile.component'
@@ -88,6 +89,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		TruncatePipe,
 		GamesListPageComponent,
 		RegistrationPageComponent,
+		PasswordResetPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent

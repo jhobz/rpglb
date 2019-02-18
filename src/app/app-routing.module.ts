@@ -7,6 +7,7 @@ import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
 import { GamesListPageComponent } from './games-list-page/games-list-page.component'
 import { LoginComponent } from './login/login.component'
+import { PasswordResetPageComponent } from './password-reset-page/password-reset-page.component'
 import { PreEventHomePageComponent } from './pre-event-home-page/pre-event-home-page.component'
 import { ProfileComponent } from './profile/profile.component'
 import { RegistrationPageComponent } from './registration-page/registration-page.component'
@@ -26,6 +27,7 @@ const routes: Routes = [
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
 	{ path: 'pre', component: PreEventHomePageComponent },
 	{ path: 'register', component: RegistrationPageComponent, canActivate: [AuthGuardService] },
+	{ path: 'reset', component: PasswordResetPageComponent },
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },

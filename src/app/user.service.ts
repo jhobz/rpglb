@@ -38,6 +38,24 @@ export class UserService {
 		return this.http.delete(`${this.apiUrl}/${id}`)
 	}
 
+	resetPassword(id: string, token: string, password: string): Observable<any> {
+		if (!token) {
+			return of(false)
+		}
+
+		return this.http.post(`${this.apiUrl}/reset`, {
+			user: id,
+			token: token,
+			new: password
+		})
+	}
+
+	sendPasswordResetEmail(email: string): Observable<any> {
+		return this.http.post(`${this.apiUrl}/reset`, {
+			email: email
+		})
+	}
+
 	verifyUser(id: string, token: string): Observable<any> {
 		if (!token) {
 			return of(false)
