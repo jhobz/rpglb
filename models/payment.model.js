@@ -26,7 +26,8 @@ let PaymentSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false,
 		required: true
-	}
+	},
+	refundDate: Date
 })
 
 PaymentSchema.plugin(mongoosePaginate)
