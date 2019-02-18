@@ -64,7 +64,53 @@ let UserSchema = new mongoose.Schema({
 	submissions: [{
 		type: mongoose.Schema.ObjectId,
 		ref: 'GameSubmission'
-	}]
+	}],
+	twitch: {
+		type: String,
+		minlength: 3,
+		maxlength: 26,
+		trim: true
+	},
+	twitter: {
+		type: String,
+		minlength: 3,
+		maxlength: 26,
+		trim: true
+	},
+	discord: {
+		type: String,
+		minlength: 3,
+		maxlength: 32,
+		trim: true
+	},
+	phone: {
+		type: String,
+		minlength: 8,
+		maxlength: 26,
+		trim: true
+	},
+	emergencyContact: {
+		name: {
+			type: String,
+			minlength: 1,
+			maxlength: 128
+		},
+		relationship: {
+			type: String,
+			minlength: 1,
+			maxlength: 128
+		},
+		phone: {
+			type: String,
+			minlength: 8,
+			maxlength: 26
+		}
+	},
+	onSite: Boolean,
+	miscComments: {
+		type: String,
+		maxlength: 560
+	}
 })
 
 function validateUnique(field) {

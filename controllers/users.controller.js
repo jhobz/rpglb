@@ -94,7 +94,14 @@ exports.updateUser = async function (req, res, next) {
 		password: req.body.password ? req.body.password : null,
 		roles: req.body.roles ? req.body.roles : null,
 		verificationToken: req.body.verificationToken ? req.body.verificationToken : null,
-		attendanceDates: req.body.attendanceDates ? req.body.attendanceDates : null
+		attendanceDates: req.body.attendanceDates ? req.body.attendanceDates : null,
+		twitch: req.body.twitch ? req.body.twitch : null,
+		twitter: req.body.twitter ? req.body.twitter : null,
+		discord: req.body.discord ? req.body.discord : null,
+		phone: req.body.phone ? req.body.phone : null,
+		emergencyContact: req.body.emergencyContact ? req.body.emergencyContact : null,
+		onSite: req.body.onSite !== undefined ? req.body.onSite : null,
+		miscComments: req.body.miscComments ? req.body.miscComments : null
 	}
 
 	try {

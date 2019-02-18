@@ -25,7 +25,7 @@ const routes: Routes = [
 	{ path: 'rules', component: EventRulesComponent },
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
 	{ path: 'pre', component: PreEventHomePageComponent },
-	{ path: 'register', component: RegistrationPageComponent },
+	{ path: 'register', component: RegistrationPageComponent, canActivate: [AuthGuardService] },
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },

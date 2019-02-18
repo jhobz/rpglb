@@ -19,13 +19,17 @@
 		</button>
 	</div>
 	<h1>Register for {{srEvent?.name}}</h1>
-	<p>In order to register for {{srEvent?.name}}, first you will need to enter your intended dates of stay. Afterwards,
-		click the "Pay Attendance Fee" button in order to start the payment process. The attendence fee for {{srEvent?.shortname}}
+	<p>In order to register for {{srEvent?.name}}, first you will need to enter your intended dates of stay
+		(the marathon stream will run May 5-11, with setup May 3-4 and teardown on May 12). Afterwards,
+		click the "Pay Attendance Fee" button in order to start the payment process. The attendance fee for {{srEvent?.shortname}}
 		is USD {{ paymentAmount | currency:'USD' }}. This fee helps us cover costs related to
 		running the event for attendees, such as practice TVs, hotel fees, and more. As we are still a relatively small
 		event, the attendance fee is currently not waived for any individuals, including runners, volunteers, and staff.
 		If you need your attendance fee refunded (in the event that you no longer wish to attend), please contact an
-		administrator via email, Twitter, or Discord (links available below).
+		administrator via email, Twitter, or Discord (links available below). The deadline for attendance fee refunds
+		will be April 21 (2 weeks prior to the event start) - after this date no refunds will be given. When attending,
+		you will receive a badge with your username (<strong>{{userTokenInfo.username}}</strong>) printed on it. If you
+		would like to change your username, please contact an adminstrator.
 	</p>
 	<p>Below you will find a number representing the number of attendees currently registered for the event and the
 		total cap. If the cap is reached and you have already begun the payment process, you will be able to finish it.
@@ -42,12 +46,12 @@
 					<input
 						matInput
 						[min]="minDate"
-						[max]="dates.endDate || maxDate"
+						[max]="user.attendanceDates.endDate || maxDate"
 						[matDatepicker]="startDatepicker"
 						name="startDate"
 						placeholder="Arrival date"
-						[(ngModel)]="dates.startDate"
-						(dateChange)="onDateChange()"
+						[(ngModel)]="user.attendanceDates.startDate"
+						(dateChange)="onFormChange()"
 						required />
 					<mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
 					<mat-datepicker #startDatepicker></mat-datepicker>
@@ -55,17 +59,138 @@
 				<mat-form-field>
 					<input
 						matInput
-						[min]="dates.startDate || minDate"
+						[min]="user.attendanceDates.startDate || minDate"
 						[max]="maxDate"
 						[matDatepicker]="endDatepicker"
 						name="endDate"
 						placeholder="Departure date"
-						[(ngModel)]="dates.endDate"
-						(dateChange)="onDateChange()"
+						[(ngModel)]="user.attendanceDates.endDate"
+						(dateChange)="onFormChange()"
 						required />
 					<mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
 					<mat-datepicker #endDatepicker></mat-datepicker>
 				</mat-form-field>
+
+				<div>
+					<mat-form-field class="full-width">
+						<input
+							matInput
+							name="phone"
+							placeholder="Mobile phone number"
+							[(ngModel)]="user.phone"
+							minlength="8"
+							maxlength="26"
+							(change)="onFormChange()"
+							required />
+						<mat-hint>Please include country code if outside of the U.S.</mat-hint>
+					</mat-form-field>
+				</div>
+
+				<div class="flex">
+					<fieldset>
+						<div>Social information</div>
+						<mat-form-field>
+							<input
+								matInput
+								name="twitch"
+								placeholder="Twitch"
+								[(ngModel)]="user.twitch"
+								maxlength="26"
+								(change)="onFormChange()"
+								/>
+							<mat-hint>May be displayed on stream if you are a runner</mat-hint>
+						</mat-form-field>
+						<mat-form-field>
+							<input
+								matInput
+								name="twitter"
+								placeholder="Twitter"
+								[(ngModel)]="user.twitter"
+								maxlength="26"
+								(change)="onFormChange()"
+								/>
+							<mat-hint>May be displayed on stream if you are a runner</mat-hint>
+						</mat-form-field>
+						<mat-form-field>
+							<mat-label>Discord</mat-label>
+							<input
+								matInput
+								name="discord"
+								placeholder="Username#0000"
+								[(ngModel)]="user.discord"
+								maxlength="32"
+								(change)="onFormChange()"
+								/>
+						</mat-form-field>
+					</fieldset>
+
+					<fieldset>
+						<div>Emergency contact information</div>
+						<mat-form-field>
+							<input
+								matInput
+								name="emergencyName"
+								placeholder="Name"
+								[(ngModel)]="user.emergencyContact.name"
+								minlength="1"
+								maxlength="128"
+								(change)="onFormChange()"
+								required />
+							<mat-hint>Name of emergency contact</mat-hint>
+						</mat-form-field>
+						<mat-form-field>
+							<mat-label>Relationship</mat-label>
+							<input
+								matInput
+								name="emergencyRelationship"
+								placeholder="Mother, father, spouse, etc."
+								[(ngModel)]="user.emergencyContact.relationship"
+								minlength="1"
+								maxlength="128"
+								(change)="onFormChange()"
+								required />
+							<mat-hint>Contact's relationship to you</mat-hint>
+						</mat-form-field>
+						<mat-form-field>
+							<input
+								matInput
+								name="emergencyPhone"
+								placeholder="Phone"
+								[(ngModel)]="user.emergencyContact.phone"
+								minlength="8"
+								maxlength="26"
+								(change)="onFormChange()"
+								required />
+							<mat-hint>A phone number where we can reach them</mat-hint>
+						</mat-form-field>
+					</fieldset>
+				</div>
+
+				<mat-checkbox
+					matInput
+					name="onSite"
+					type="checkbox"
+					[(ngModel)]="user.onSite"
+					(change)="onFormChange()"
+					>
+					Staying on-site at the event hotel?
+				</mat-checkbox>
+
+				<div>
+					<mat-form-field class="full-width">
+						<textarea
+							matInput
+							name="misc"
+							placeholder="Special needs/Misc comments"
+							[(ngModel)]="user.miscComments"
+							(change)="onFormChange()"
+							matTextareaAutosize
+							matAutosizeMinRows="2"
+							matAutosizeMaxRows="5" >
+						</textarea>
+						<mat-hint>Anything you would like staff to know, such as food allergies or medical issues (confidential)</mat-hint>
+					</mat-form-field>
+				</div>
 			</form>
 			<button
 				*ngIf="!user.roles.includes('attendee')"

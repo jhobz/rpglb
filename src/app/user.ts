@@ -9,6 +9,17 @@ export interface User {
 		startDate: Date
 		endDate: Date
 	}
+	twitch?: string,
+	twitter?: string,
+	discord?: string,
+	phone?: string,
+	emergencyContact?: {
+		name: string,
+		relationship: string,
+		phone: string
+	},
+	onSite?: boolean,
+	miscComments?: string
 }
 
 export default User

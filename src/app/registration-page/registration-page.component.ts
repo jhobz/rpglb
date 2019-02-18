@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
+import { Subscription } from 'rxjs/Subscription'
 
 import { environment } from '../../environments/environment'
 import { AuthenticationService, TokenUserInfo } from '../authentication.service'
@@ -8,21 +9,19 @@ import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 import { User } from '../user'
 import { UserService } from '../user.service'
 
-interface StartEndDateModel {
-	startDate: Date,
-	endDate: Date
-}
-
 @Component({
 	selector: 'app-registration-page',
 	templateUrl: './registration-page.component.html',
 	styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent implements OnInit {
-	user: TokenUserInfo|User
+	user: User = {
+		attendanceDates: {},
+		emergencyContact: {}
+	} as User
+	userTokenInfo: TokenUserInfo
 	minDate: Date = new Date(2019, 4, 1)
 	maxDate: Date = new Date(2019, 4, 15)
-	dates: StartEndDateModel = {} as StartEndDateModel
 	handler: any
 	paymentAmount: number
 	srEvent: SpeedrunEvent
@@ -43,12 +42,24 @@ export class RegistrationPageComponent implements OnInit {
 		private userService: UserService,
 		private snackBar: MatSnackBar
 	) {
-		this.user = this.auth.getUserInfo()
-		this.hasEventRole = this.user && this.user.roles &&
-			(this.user.roles.includes('event') || this.user.roles.includes('admin'))
+		this.userTokenInfo = this.auth.getUserInfo()
+		this.hasEventRole = this.userTokenInfo && this.userTokenInfo.roles &&
+			(this.userTokenInfo.roles.includes('event') || this.userTokenInfo.roles.includes('admin'))
 		this.auth.profile().subscribe((user: User) => {
 			this.user = user
-			this.dates = user.attendanceDates || {} as StartEndDateModel
+			if (!this.user.attendanceDates) {
+				this.user.attendanceDates = {
+					startDate: null,
+					endDate: null
+				}
+			}
+			if (!this.user.emergencyContact) {
+				this.user.emergencyContact = {
+					name: '',
+					relationship: '',
+					phone: ''
+				}
+			}
 			this.hasFullUserLoaded = true
 		})
 		this.speedrunEventService.getCurrentSpeedrunEvent()
@@ -120,20 +131,18 @@ export class RegistrationPageComponent implements OnInit {
 				})
 	}
 
-	onDateChange() {
+	onFormChange() {
 		if (this.form.valid) {
-			// At this point, this.user *must* be an instance of User, as date fields only appear once this happens
-			(<User>this.user).attendanceDates = this.dates
-			this.userService.editUser(<User>this.user)
+			this.userService.editUser(this.user)
 				.subscribe(
 					(res: any) => {
-						this.snackBar.open('Dates saved', '', {
+						this.snackBar.open('Information saved', '', {
 							duration: 5000,
 							panelClass: ['snack-success', 'no-action']
 						})
 					},
 					(err: any) => {
-						this.snackBar.open('Dates failed to save', '', {
+						this.snackBar.open('Information failed to save', '', {
 							duration: 5000,
 							panelClass: ['snack-warn', 'no-action']
 						})

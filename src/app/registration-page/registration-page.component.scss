@@ -36,6 +36,32 @@ $bonus: mat-palette($mat-purple, 400, 200);
 
 .registration-container {
 	margin: 50px 0 0 50px;
+	// max-width: 1000px;
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	fieldset {
+		display: flex;
+		padding: 25px;
+		margin: 25px 0;
+		width: 100%;
+
+		&:last-of-type {
+			margin-left: 50px;
+		}
+	}
+
+	.full-width {
+		width: 100%;
+		max-width: 825px;
+
+		&:last-of-type {
+			margin-top: 10px;
+		}
+	}
 }
 
 .attendees {
@@ -50,6 +76,8 @@ $bonus: mat-palette($mat-purple, 400, 200);
 
 .payment-button {
 	position: relative;
+	margin-top: 50px;
+
 	mat-progress-bar {
 		position: absolute;
 		left: 0;
