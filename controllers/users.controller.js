@@ -53,7 +53,6 @@ exports.createUser = async function (req, res, next) {
 
 	try {
 		let createdUser = await UserService.createUser(user)
-		const token = generateToken(createdUser)
 		// Send verification email
 		return EmailService.sendVerificationEmail(createdUser, req)
 			.then(async (response) => {
@@ -61,7 +60,6 @@ exports.createUser = async function (req, res, next) {
 					return res.status(201).json( {
 						status: 201,
 						data: createdUser,
-						token: token,
 						message: 'User created successfully'
 					} )
 				} else {
@@ -288,9 +286,12 @@ exports.verifyEmail = async function (req, res, next) {
 				id: user._id,
 				verified: true
 			})
+
+			const token = generateToken(updatedUser)
 			return res.status(200).json( {
 				status: 200,
-				user: user.username
+				user: user.username,
+				token: token
 			} )
 		}
 	} catch (e) {

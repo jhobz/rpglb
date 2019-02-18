@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
+import { share } from 'rxjs/operators'
 import { map } from 'rxjs/operators/map'
 
 import { environment } from '../environments/environment'
@@ -43,11 +44,18 @@ export class UserService {
 			return of(false)
 		}
 
-		return this.http.post(`${this.apiUrl}/reset`, {
+		const obs = this.http.post(`${this.apiUrl}/reset`, {
 			user: id,
 			token: token,
 			new: password
+		}).pipe(share())
+		obs.subscribe((res: any) => {
+			if (res.token) {
+				this.auth.updateToken(res.token)
+			}
 		})
+
+		return obs
 	}
 
 	sendPasswordResetEmail(email: string): Observable<any> {
@@ -60,10 +68,17 @@ export class UserService {
 		if (!token) {
 			return of(false)
 		}
-		return this.http.post(`${this.apiUrl}/verify`, {
+		const obs = this.http.post(`${this.apiUrl}/verify`, {
 			user: id,
 			token: token
+		}).pipe(share())
+		obs.subscribe((res: any) => {
+			if (res.token) {
+				this.auth.updateToken(res.token)
+			}
 		})
+
+		return obs
 	}
 
 	sendVerificationEmail(id: string): Observable<any> {
@@ -74,10 +89,11 @@ export class UserService {
 
 	registerUser(): Observable<any> {
 		const options = { headers: this.auth.generateAuthHeader() }
-		const obs = this.http.post(`${this.apiUrl}/register`, { v: true }, options)
+		const obs = this.http.post(`${this.apiUrl}/register`, { v: true }, options).pipe(share())
 		obs.subscribe((res: any) => {
 			this.auth.updateToken(res.token)
 		})
+
 		return obs
 	}
 
