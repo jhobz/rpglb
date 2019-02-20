@@ -4,13 +4,14 @@ require('dotenv').config()
 _this = this
 
 const transporter = nodemailer.createTransport({
-	service: 'gmail',
+	service: 'SendGrid',
 	auth: {
 		user: process.env.SMTP_USER,
 		pass: process.env.SMTP_PASS
 	}
 }, {
-	from: 'rpglimitbreak@gmail.com'
+	from: 'no-reply@communication.rpglimitbreak.com',
+	replyTo: 'rpglimitbreak@gmail.com'
 })
 
 generateBaseUrl = function (req) {
