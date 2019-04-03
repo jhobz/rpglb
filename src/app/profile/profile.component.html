@@ -2,7 +2,12 @@
 	<h1 class="no-bold">{{user.username}}</h1>
 	<h3>Registration</h3>
 	<p>You are currently <span [class]="user.roles.includes('attendee') ? 'success' : 'warn'">{{user.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
-	<div><a *ngIf="speedrunEvent?.isRegistrationOpen" routerLink="/register">{{user.roles.includes('attendee') ? 'Update registration' : 'Register to attend ' + speedrunEvent?.name}}</a></div>
+	<!-- TODO: Make the message below change wording based on pre- or post-registration period. -->
+	<p *ngIf="!speedrunEvent?.isRegistrationOpen">Registration is no longer open.</p>
+	<div>
+		<a *ngIf="user.roles.includes('attendee')" routerLink="/register">Update registration</a>
+		<a *ngIf="!user.roles.includes('attendee') && speedrunEvent?.isRegistrationOpen" routerLink="/register">Register to attend {{speedrunEvent?.name}}</a>
+	</div>
 	<br /><br /><br />
 	<h3>Your submissions</h3>
 	<ng-container *ngIf="games && games.length > 0">
