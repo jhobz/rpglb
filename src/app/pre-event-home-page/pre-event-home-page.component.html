@@ -9,7 +9,12 @@
 			_target="blank">DoubleTree by Hilton - Salt Lake City Airport.</a>
 	</p>
 	<p>
-		Game submissions and event registration for {{event}} are closed and the <a href="https://horaro.org/rpglb/2019" class="no-icon">schedule</a>
+		Event registration for {{event}} is {{speedrunEvent?.isRegistrationOpen ? 'open' : 'closed.'}}
+		<span *ngIf="speedrunEvent?.isRegistrationOpen">
+			until Sunday, April 7th at 11:59 PM Eastern Daylight Time. You can register from your
+			<a routerLink="/profile">profile</a> after creating an account.
+		</span>
+		Game submissions have closed and the <a href="https://horaro.org/rpglb/2019" class="no-icon">schedule</a>
 		has been posted. Follow us on <a href="https://twitter.com/rpglimitbreak" _target="blank">Twitter</a> and
 		<a href="https://discord.gg/rpglb" _target="blank">Discord</a> for all announcements on this year's and future events!
 	</p>
