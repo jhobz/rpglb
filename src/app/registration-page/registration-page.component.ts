@@ -31,6 +31,7 @@ export class RegistrationPageComponent implements OnInit {
 	spinnerMessage: string = 'Fetching user details...'
 	spinnerError: string
 	hasEventRole: boolean = false
+	canBackdoor: boolean = false
 	adminControlsEnabled: boolean = false
 
 	@ViewChild('f') form: any
@@ -45,6 +46,8 @@ export class RegistrationPageComponent implements OnInit {
 		this.userTokenInfo = this.auth.getUserInfo()
 		this.hasEventRole = this.userTokenInfo && this.userTokenInfo.roles &&
 			(this.userTokenInfo.roles.includes('event') || this.userTokenInfo.roles.includes('admin'))
+		this.canBackdoor = this.userTokenInfo && this.userTokenInfo.roles &&
+			this.userTokenInfo.roles.includes('override-registration')
 		this.auth.profile().subscribe((user: User) => {
 			this.user = user
 			if (!this.user.attendanceDates) {
