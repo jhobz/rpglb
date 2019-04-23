@@ -38,10 +38,11 @@
 		and <a href="https://discord.gg/rpglb">Discord</a> for announcements, as occasionally we are able to increase
 		the maximum cap.
 	<div *ngIf="srEvent && hasFullUserLoaded && !isProcessingPayment" class="registration-container">
-		<div *ngIf="srEvent.isRegistrationOpen || hasEventRole" class="attendees">
+		<div *ngIf="srEvent.isRegistrationOpen || hasEventRole || canBackdoor" class="attendees">
 			Attendee slots taken: <span class="attendees-count">{{srEvent.registeredUsersCount}} / {{srEvent.maxRegisteredUsers}}</span>
 		</div>
-		<div *ngIf="user.roles.includes('attendee') || hasEventRole || (srEvent.isRegistrationOpen && srEvent.registeredUsersCount < srEvent.maxRegisteredUsers)">
+		<div *ngIf="user.roles.includes('attendee') || hasEventRole || canBackdoor ||
+			(srEvent.isRegistrationOpen && srEvent.registeredUsersCount < srEvent.maxRegisteredUsers)">
 			<form novalidate #f="ngForm" class="registration-form">
 				<mat-form-field>
 					<input
