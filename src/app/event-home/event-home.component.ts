@@ -14,24 +14,19 @@ import { DonationData, SpeedrunEvent } from '../speedrun-event'
 export class EventHomeComponent implements OnInit {
 	event: SpeedrunEvent = new SpeedrunEvent()
 	isChatOpen: boolean = false
+	chatButtonText: string = 'Chat with viewers!'
 
 	constructor(private donationService: DonationService) {
-		this.event.name = 'RPG Limit Break 2018'
+		this.event.name = 'RPG Limit Break 2019'
 		this.event.shortName = 'rpglb2018'
 		this.event.cause = 'NAMI: National Alliance on Mental Illness'
 		this.event.causeLink = 'https://www.nami.org'
-		this.event.trackerId = 6
-		this.event.donations = { total: 0, goal: 0 }
+		this.event.trackerId = 7
+		this.event.donations = { total: 50000, goal: 100000 }
 	}
 
-	toggleChat(e: MouseEvent) {
-		e.preventDefault()
+	toggleChat() {
 		this.isChatOpen = !this.isChatOpen
-		let str = 'Chat with viewers!'
-		if (this.isChatOpen) {
-			str = 'Close chat'
-		}
-		$('.event-description > .button').text(str)
 	}
 
 	ngOnInit() {

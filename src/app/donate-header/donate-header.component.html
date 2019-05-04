@@ -1,0 +1,14 @@
+<div class="eventinfo-container">
+	<div class="wrapper">
+		<!-- <h4 class="title">{{event.name}} benefits <a [href]="event.causeLink" target="_blank">{{event.cause}}</a></h4> -->
+		<div class="donation-container">
+			<div class="logo-bg nami"></div>
+			<div>Total Raised:</div>
+			<div class="donation-box" id="donation-total">{{event.donations.total | moneify}}</div>
+			<div>Donation Goal:</div>
+			<div class="donation-box" id="donation-goal">{{event.donations.goal | moneify}}</div>
+			<a mat-raised-button color="accent" href="/donate" target="_blank">DONATE</a>
+			<!-- <button mat-raised-button color="primary" href="/donate" target="_blank">DONATE</button> -->
+		</div>
+	</div>
+</div>
