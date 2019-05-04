@@ -1,12 +1,3 @@
-@import '../../rpglb-dark-theme.scss';
-
-$primary: map-get($rpglb-app-theme, primary);
-$accent: map-get($rpglb-app-theme, accent);
-$warn: map-get($rpglb-app-theme, warn);
-$bonus: mat-palette($mat-purple, 400, 200);
-$foreground: map-get($rpglb-app-theme, foreground);
-$background: map-get($rpglb-app-theme, background);
-
 .main-content {
 	grid-area: content;
 	padding: 25px;

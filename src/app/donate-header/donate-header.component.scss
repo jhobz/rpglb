@@ -20,7 +20,7 @@ $background: map-get($rpglb-app-theme, background);
 }
 
 .eventinfo-container > .wrapper {
-	padding: 20px;
+	padding: 25px 20px 20px;
 	min-width: 650px;
 }
 
@@ -50,15 +50,7 @@ $background: map-get($rpglb-app-theme, background);
 	justify-items: space-between;
 	text-align: center;
 }
-/* .donation-box {
-	color: #fff;
-	border: 1px #30ad8a inset;
-	font-family: 'Roboto', sans-serif;
-	font-size: 1.1em;
-	width: 150px;
-	padding: 5px;
-	text-align: center;
-} */
+
 .mat-raised-button {
 	grid-area: button;
 	border-radius: 5px;
@@ -66,4 +58,9 @@ $background: map-get($rpglb-app-theme, background);
 	font-size: 1.2em;
 	padding: 15px;
 	white-space: nowrap;
+}
+
+.small-link {
+	grid-column: 4;
+	font-size: 0.6em;
 }
