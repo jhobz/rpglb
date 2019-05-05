@@ -10,4 +10,6 @@ export class EventRulesComponent implements OnInit {
 	constructor() {
 	}
 
+	ngOnInit() {}
+
 }
