@@ -32,6 +32,7 @@ import { AppComponent } from './app.component'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthenticationService } from './authentication.service'
 import { CategorySubmissionComponent } from './category-submission/category-submission.component'
+import { DonateHeaderComponent } from './donate-header/donate-header.component'
 import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
@@ -90,6 +91,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		GamesListPageComponent,
 		RegistrationPageComponent,
 		PasswordResetPageComponent,
+		DonateHeaderComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent
