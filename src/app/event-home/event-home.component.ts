@@ -18,7 +18,7 @@ export class EventHomeComponent implements OnInit {
 
 	constructor(private donationService: DonationService) {
 		this.event.name = 'RPG Limit Break 2019'
-		this.event.shortName = 'rpglb2018'
+		this.event.shortName = 'rpglb2019'
 		this.event.cause = 'NAMI: National Alliance on Mental Illness'
 		this.event.causeLink = 'https://www.nami.org'
 		this.event.trackerId = 7
