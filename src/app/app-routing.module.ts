@@ -19,7 +19,7 @@ import { UserListComponent } from './user-list/user-list.component'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
+	{ path: '', redirectTo: '/event', pathMatch: 'full' },
 	{ path: 'event', component: EventHomeComponent },
 	{ path: 'games', component: GamesListPageComponent },
 	{ path: 'login', component: LoginComponent },

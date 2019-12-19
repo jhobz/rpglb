@@ -4,6 +4,7 @@
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
 $rpglb-app-primary: mat-palette( $mat-blue, 700, 500, 900 );
 $rpglb-app-accent:  mat-palette( $mat-orange, A400, A200, A700 );
+$rpglb-app-bonus: mat-palette($mat-purple, 400, 200);
 
 // The warn palette is optional (defaults to red).
 $rpglb-app-warn:    mat-palette( $mat-red, 500, 300, 800 );

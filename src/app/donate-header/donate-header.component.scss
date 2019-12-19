@@ -1,0 +1,66 @@
+@import '../../rpglb-dark-theme.scss';
+
+$primary: map-get($rpglb-app-theme, primary);
+$accent: map-get($rpglb-app-theme, accent);
+$warn: map-get($rpglb-app-theme, warn);
+$bonus: mat-palette($mat-purple, 400, 200);
+$foreground: map-get($rpglb-app-theme, foreground);
+$background: map-get($rpglb-app-theme, background);
+
+.eventinfo-container {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	// background-color: mat-color($primary, darker);
+	background-color: mat-color($bonus, darker);
+}
+
+.title {
+	margin-bottom: 10px;
+}
+
+.eventinfo-container > .wrapper {
+	padding: 25px 20px 20px;
+	min-width: 650px;
+}
+
+.logo-bg {
+	flex-grow: 1;
+	// min-width: 300px;
+	height: 70px;
+	margin-bottom: 5px;
+	grid-area: logo;
+}
+.rpglb {
+	background: url('assets/images/logo_1200x424.png') left center/contain no-repeat;
+}
+.nami {
+	background: url('assets/images/nami_long_white.png') right center/contain no-repeat;
+}
+
+.donation-container {
+	display: grid;
+	grid: 'logo labelt total button' auto
+		  'logo labelg goal button' auto
+		  / 175px auto auto 200px;
+	grid-column-gap: 25px;
+	margin: auto;
+	// width: 850px;
+	align-items: center;
+	justify-items: space-between;
+	text-align: center;
+}
+
+.mat-raised-button {
+	grid-area: button;
+	border-radius: 5px;
+	font-family: 'Segoe UI';
+	font-size: 1.2em;
+	padding: 15px;
+	white-space: nowrap;
+}
+
+.small-link {
+	grid-column: 4;
+	font-size: 0.6em;
+}
