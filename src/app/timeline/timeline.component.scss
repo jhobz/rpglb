@@ -1,0 +1,41 @@
+@import '../../rpglb-dark-theme.scss';
+
+$primary: map-get($rpglb-app-theme, primary);
+$accent: map-get($rpglb-app-theme, accent);
+$warn: map-get($rpglb-app-theme, warn);
+$bonus: mat-palette($mat-purple, 400, 200);
+$foreground: map-get($rpglb-app-theme, foreground);
+$background: map-get($rpglb-app-theme, background);
+
+.container {
+	font-size: 0.8em;
+	background-color: mat-color($primary);
+	padding: 25px;
+}
+
+h1 {
+	font-size: 1.2em;
+	margin-top: 0;
+	text-align: center;
+}
+
+p {
+	margin: 0;
+}
+
+.dates {
+	// color: mat-color($primary, 200);
+	// color: rgba(255, 255, 255, 0.7);
+	color: rgba(0, 0, 0, 1);
+	text-align: right;
+}
+
+.timeline-grid {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-column-gap: 10px;
+}
+
+.special {
+	// font-weight: bold;
+}

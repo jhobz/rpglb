@@ -10,7 +10,7 @@ import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 })
 export class NavbarComponent implements OnInit {
 	// TODO: Don't hardcode these
-	mode: 'pre'|'off'|'event' = 'event'
+	mode: 'pre'|'off'|'event' = 'pre'
 	hasSubmissionRole: boolean
 	speedrunEvent: SpeedrunEvent
 

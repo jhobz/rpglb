@@ -31,6 +31,7 @@ import { AppRoutingModule } from './/app-routing.module'
 import { AppComponent } from './app.component'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthenticationService } from './authentication.service'
+import { BlogComponent } from './blog/blog.component'
 import { CategorySubmissionComponent } from './category-submission/category-submission.component'
 import { DonateHeaderComponent } from './donate-header/donate-header.component'
 import { EventHomeComponent } from './event-home/event-home.component'
@@ -61,7 +62,9 @@ import { TimeToStringPipe } from './time-to-string.pipe'
 import { TruncatePipe } from './truncate.pipe'
 import { UserListComponent } from './user-list/user-list.component'
 import { UserService } from './user.service'
-import { VerifyPageComponent } from './verify-page/verify-page.component'
+import { VerifyPageComponent } from './verify-page/verify-page.component';
+import { ContactComponent } from './contact/contact.component';
+import { TimelineComponent } from './timeline/timeline.component';
 
 
 @NgModule({
@@ -92,6 +95,9 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 		RegistrationPageComponent,
 		PasswordResetPageComponent,
 		DonateHeaderComponent,
+		BlogComponent,
+		ContactComponent,
+		TimelineComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent

@@ -43,3 +43,8 @@ $background: map-get($rpglb-app-theme, background);
 	min-height: 360px;
 	min-width: 640px;
 }
+
+.timeline {
+	max-width: 350px;
+	margin: auto;
+}

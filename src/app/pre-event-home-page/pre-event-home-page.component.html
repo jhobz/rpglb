@@ -1,14 +1,16 @@
 <div class="wrapper">
 	<img class="logo" src="assets/images/logo_1200x424.png" />
 	<h1 class="home-title">{{event}} is coming up soon!</h1>
+	<div class="timeline"><app-timeline></app-timeline></div>
 	<p>
-		{{event}} will be taking place in Salt Lake City, Utah for the 5th year in a row, continuing to benefit the
-		<a href="https://www.nami.org" _target="blank">National Alliance on Mental Illness.</a> The event will take place May 5th to
-		May 11th, at the
+		{{event}} will be taking place in Salt Lake City, Utah for the 6th year in a row, continuing to benefit the
+		<a href="https://www.nami.org" _target="blank">National Alliance on Mental Illness.</a> The event will take place May 10th to
+		May 16th, at the
 		<a href="https://doubletree3.hilton.com/en/hotels/utah/doubletree-by-hilton-hotel-salt-lake-city-airport-SLCARDT/index.html"
-			_target="blank">DoubleTree by Hilton - Salt Lake City Airport.</a>
+			_target="blank">DoubleTree by Hilton - Salt Lake City Airport.</a> You can find a full list of upcoming dates and deadlines
+		above and check out our recent <a routerLink="/blog">blog post</a> for more detailed information.
 	</p>
-	<p>
+	<!-- <p>
 		Event registration for {{event}} is {{speedrunEvent?.isRegistrationOpen ? 'open' : 'closed.'}}
 		<span *ngIf="speedrunEvent?.isRegistrationOpen">
 			until Sunday, April 7th at 11:59 PM Eastern Daylight Time. You can register from your
@@ -17,7 +19,7 @@
 		Game submissions have closed and the <a href="https://horaro.org/rpglb/2019" class="no-icon">schedule</a>
 		has been posted. Follow us on <a href="https://twitter.com/rpglimitbreak" _target="blank">Twitter</a> and
 		<a href="https://discord.gg/rpglb" _target="blank">Discord</a> for all announcements on this year's and future events!
-	</p>
+	</p> -->
 </div>
 <div class="embed-wrapper">
 	<iframe class="embed" src="https://player.twitch.tv/?channel=rpglimitbreak" frameborder="0" scrolling="no" allowfullscreen="true">
