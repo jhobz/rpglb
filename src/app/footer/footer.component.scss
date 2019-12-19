@@ -12,3 +12,7 @@ $background: map-get($rpglb-app-theme, background);
 .wrapper > .title {
 	text-align: left;
 }
+
+p {
+	margin: 0;
+}

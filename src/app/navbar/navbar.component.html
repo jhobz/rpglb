@@ -4,13 +4,14 @@
 		<a *ngIf="mode === 'event'" href="/donate" target="_blank">DONATE</a>
 		<a *ngIf="mode === 'event'" href="/tracker/runs/7">SCHEDULE</a>
 		<!-- <a href="https://horaro.org/rpglb/2019" class="no-icon">SCHEDULE</a> -->
+		<a routerLink="/blog">BLOG</a>
 		<a href="/tracker/7">TRACKER</a>
 		<a *ngIf="mode === 'event'" routerLink="/rules">EVENT RULES</a>
-		<a *ngIf="mode !== 'event'" routerLink="/games">GAMES</a>
-		<a *ngIf="mode !== 'event'" routerLink="/submissions">SUBMISSIONS</a>
+		<!-- <a *ngIf="mode !== 'event'" routerLink="/games">GAMES</a>
+		<a *ngIf="mode !== 'event'" routerLink="/submissions">SUBMISSIONS</a> -->
 		<a *ngIf="speedrunEvent?.areVolunteerSubmissionsOpen" class="no-icon" href="https://bit.ly/2SHcmkH" target="_blank">VOLUNTEER</a>
 		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank">DISCORD</a>
-		<a href="https://theyetee.com/RPGLimitBreak" class="no-icon" target="_blank">MERCH</a>
+		<!-- <a href="https://theyetee.com/RPGLimitBreak" class="no-icon" target="_blank">MERCH</a> -->
 		<!-- <a routerLink="about">ABOUT</a> -->
 		<div class="auth-container" *ngIf="isLoggedIn()">
 			<a routerLink="/profile">PROFILE</a>

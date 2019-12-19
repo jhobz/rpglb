@@ -9,7 +9,7 @@ import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 })
 export class PreEventHomePageComponent implements OnInit {
 	// TODO: Don't hardcode this
-	event: string = 'RPG Limit Break 2019'
+	event: string = 'RPG Limit Break 2020'
 	speedrunEvent: SpeedrunEvent
 
 	constructor(private speedrunEventService: SpeedrunEventService) { }

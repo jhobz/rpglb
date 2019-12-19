@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
 import { AuthGuardService } from './auth-guard.service'
+import { BlogComponent } from './blog/blog.component'
+import { ContactComponent } from './contact/contact.component'
 import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
@@ -19,7 +21,9 @@ import { UserListComponent } from './user-list/user-list.component'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/event', pathMatch: 'full' },
+	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
+	{ path: 'blog', component: BlogComponent },
+	{ path: 'contact', component: ContactComponent },
 	{ path: 'event', component: EventHomeComponent },
 	{ path: 'games', component: GamesListPageComponent },
 	{ path: 'login', component: LoginComponent },
