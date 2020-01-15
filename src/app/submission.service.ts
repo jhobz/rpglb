@@ -35,6 +35,7 @@ export interface GameSubmission {
 	cons: string
 	public: boolean
 	categories: GameCategory[]
+	speedrunEvent?: string
 }
 
 export interface GameSubmissionResponse {
@@ -65,11 +66,16 @@ export class SubmissionService {
 		return this.http.post(this.apiUrl, submission, options)
 	}
 
-	getSubmissionsForUser(userId: string): Observable<GameSubmissionResponse> {
+	getSubmissionsForUser(userId: string, speedrunEventId: string = ''): Observable<GameSubmissionResponse> {
 		const options = {
 			headers: this.auth.generateAuthHeader(),
 			params: new HttpParams()
 				.set('user', userId)
+		}
+
+		if (speedrunEventId) {
+			// HttpParams.set() is immutable; it returns a new object
+			options.params = options.params.set('speedrunEvent', speedrunEventId)
 		}
 
 		return this.http.get<any>(this.apiUrl, options)

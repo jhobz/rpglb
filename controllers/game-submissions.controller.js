@@ -23,6 +23,11 @@ exports.getSubmissions = async function (req, res, next) {
 		query.runner = req.query.user
 	}
 
+	// Get submissions for one event specifically
+	if (req.query.speedrunEvent) {
+		query.speedrunEvent = req.query.speedrunEvent
+	}
+
 	let statusArray = []
 	if (req.query.selection) {
 		let selectionQuery = req.query.selection
@@ -76,7 +81,7 @@ exports.createSubmission = async function (req, res, next) {
 	}
 
 	let activeEvent = await SpeedrunEventService.getActiveSpeedrunEvent()
-	if (!activeEvent.areGameSubmissionsOpen &&
+	if (!activeEvent || !activeEvent.areGameSubmissionsOpen &&
 		(!req.user.roles || !req.user.roles.includes('submissions') || !req.user.roles.includes('admin'))
 	) {
 		console.warn('Unauthorized submission creation attempted', req.user, req.body)
@@ -97,7 +102,8 @@ exports.createSubmission = async function (req, res, next) {
 		public: req.body.public,
 		selectionStatus: req.body.selectionStatus,
 		selectionComment: req.body.selectionComment,
-		categories: req.body.categories
+		categories: req.body.categories,
+		speedrunEvent: activeEvent.id
 	}
 
 	try {

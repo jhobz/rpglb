@@ -84,6 +84,11 @@ let GameSubmissionSchema = new mongoose.Schema({
 		type: [CategorySchema],
 		validate: [numCategoriesValidator, '{PATH} either has too few or too many items'],
 		required: true
+	},
+	speedrunEvent: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'SpeedrunEvent',
+		required: true
 	}
 })
 
