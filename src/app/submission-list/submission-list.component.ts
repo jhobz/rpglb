@@ -116,7 +116,6 @@ export class SubmissionListComponent implements OnInit {
 				startWith({}),
 				switchMap(() => {
 					this.isLoadingResults = true
-					console.log('DEBUG: SPEEDRUN EVENT', this.speedrunEventId)
 					return this.submissionService.getSubmissions(
 						this.selectionQuery,
 						this.sort.active,
@@ -142,7 +141,6 @@ export class SubmissionListComponent implements OnInit {
 	}
 
 	applyFilter(filterValue: string) {
-		console.log(this.dataSource)
 		filterValue = filterValue.trim()
 		filterValue = filterValue.toLowerCase()
 		if (filterValue.includes('selection:')) {

@@ -30,16 +30,16 @@ export class SubmissionFormComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		const userId = this.auth.getUserInfo()._id
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.areSubmissionsOpen = srEvent.areGameSubmissionsOpen
-			})
 
-		const userId = this.auth.getUserInfo()._id
-		this.submissionService.getSubmissionsForUser(userId)
-			.map((data: GameSubmissionResponse) => data.docs )
-			.subscribe((data: GameSubmission[]) => {
-				this.games = data
+				this.submissionService.getSubmissionsForUser(userId, srEvent._id)
+					.map((data: GameSubmissionResponse) => data.docs )
+					.subscribe((data: GameSubmission[]) => {
+						this.games = data
+					})
 			})
 	}
 
