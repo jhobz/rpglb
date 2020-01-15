@@ -19,6 +19,7 @@ import { startWith } from 'rxjs/operators/startWith'
 import { switchMap } from 'rxjs/operators/switchMap'
 
 import { AuthenticationService } from '../authentication.service'
+import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 import { SubmissionConfirmationDialogComponent } from '../submission-form/submission-form.component'
 import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../submission.service'
 
@@ -32,6 +33,7 @@ export class SubmissionListComponent implements OnInit {
 	@Input() columnsToDisplay: string[] = ['name', 'console', 'description', 'proscons', 'incentives', 'categories']
 	@Input() initialPageSize: number = 10
 	@Input() dataSource: MatTableDataSource<GameSubmission> = new MatTableDataSource<GameSubmission>()
+	@Input() speedrunEventId: string
 	@Input() showRunner: boolean = true
 	@Input() showPagination: boolean = true
 	@Input() showFilter: boolean = true
@@ -44,7 +46,7 @@ export class SubmissionListComponent implements OnInit {
 	@Input() onlyShowAccepted: boolean = false
 
 	resultsLength: number = 0
-	isLoadingResults: boolean = true
+	isLoadingResults: boolean = false
 	hasSubmissionsRole: boolean = false
 	selectionQuery: string
 
@@ -59,6 +61,7 @@ export class SubmissionListComponent implements OnInit {
 		public auth: AuthenticationService,
 		public dialog: MatDialog,
 		private snackBar: MatSnackBar,
+		private speedrunEventService: SpeedrunEventService,
 		private submissionService: SubmissionService,
 		private router: Router
 	) { }
@@ -91,35 +94,50 @@ export class SubmissionListComponent implements OnInit {
 
 		if (this.dataSource.data !== undefined) {
 			this.selectionQuery = this.onlyShowAccepted ? 'accept+bonus' : ''
-			merge(this.sort.sortChange, this.paginator.page)
-					.pipe(
-						startWith({}),
-						switchMap(() => {
-							this.isLoadingResults = true
-							return this.submissionService.getSubmissions(
-								this.selectionQuery,
-								this.sort.active,
-								this.sort.direction,
-								this.paginator.pageSize || this.initialPageSize,
-								this.paginator.pageIndex)
-						}),
-						map((data: GameSubmissionResponse) => {
-							this.isLoadingResults = false
-							this.resultsLength = data.total
 
-							return data.docs
-						}),
-						catchError(() => {
-							this.isLoadingResults = false
-							// TODO: Display an error message on the table
-							return observableOf([])
-						})
-					).subscribe((data: GameSubmission[]) => {
-						this.dataSource.data = data
+			if (!this.speedrunEventId) {
+				this.speedrunEventService.getCurrentSpeedrunEvent()
+					.subscribe((srEvent: SpeedrunEvent) => {
+						this.speedrunEventId = srEvent._id
+
+						this.setupTable()
 					})
+			} else {
+				this.setupTable()
+			}
 		} else {
 			this.isLoadingResults = false
 		}
+	}
+
+	setupTable() {
+		merge(this.sort.sortChange, this.paginator.page)
+			.pipe(
+				startWith({}),
+				switchMap(() => {
+					this.isLoadingResults = true
+					return this.submissionService.getSubmissions(
+						this.selectionQuery,
+						this.sort.active,
+						this.sort.direction,
+						this.paginator.pageSize || this.initialPageSize,
+						this.paginator.pageIndex,
+						this.speedrunEventId)
+				}),
+				map((data: GameSubmissionResponse) => {
+					this.isLoadingResults = false
+					this.resultsLength = data.total
+
+					return data.docs
+				}),
+				catchError(() => {
+					this.isLoadingResults = false
+					// TODO: Display an error message on the table
+					return observableOf([])
+				}))
+			.subscribe((data: GameSubmission[]) => {
+				this.dataSource.data = data
+			})
 	}
 
 	applyFilter(filterValue: string) {

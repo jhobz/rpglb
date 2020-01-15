@@ -37,13 +37,13 @@ export class ProfileComponent implements OnInit {
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.speedrunEvent = srEvent
+				this.submissionService.getSubmissionsForUser(this.user._id, this.speedrunEvent._id)
+					.map((data: GameSubmissionResponse) => data.docs )
+					.subscribe((data: GameSubmission[]) => {
+						this.games = data
+					})
 			})
 		this.user = this.auth.getUserInfo()
-		this.submissionService.getSubmissionsForUser(this.user._id)
-			.map((data: GameSubmissionResponse) => data.docs )
-			.subscribe((data: GameSubmission[]) => {
-				this.games = data
-			})
 	}
 
 	changePassword() {

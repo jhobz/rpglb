@@ -30,7 +30,8 @@ exports.createSubmission = async function (submission) {
 		pros: submission.pros,
 		cons: submission.cons,
 		public: submission.public,
-		categories: submission.categories
+		categories: submission.categories,
+		speedrunEvent: submission.speedrunEvent
 	})
 
 	try {

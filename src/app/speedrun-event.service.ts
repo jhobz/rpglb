@@ -9,6 +9,7 @@ import { GameSubmission } from './submission.service'
 import { User } from './user'
 
 export interface SpeedrunEvent {
+	_id?: string,
 	name: string,
 	shortname?: string,
 	cause?: object,
