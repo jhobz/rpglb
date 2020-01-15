@@ -13,8 +13,7 @@ import { GameSubmission, GameSubmissionResponse, RunnerData, SubmissionService }
 	providers: [SubmissionService]
 })
 export class SubmissionFormComponent implements OnInit {
-	// TODO: Don't hardcode this value
-	event: string = 'RPG Limit Break 2019'
+	event: string
 	games: GameSubmission[] = []
 	maxGames: number = 5
 	isDebouncing: boolean = false
@@ -33,6 +32,7 @@ export class SubmissionFormComponent implements OnInit {
 		const userId = this.auth.getUserInfo()._id
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
+				this.event = srEvent.name
 				this.areSubmissionsOpen = srEvent.areGameSubmissionsOpen
 
 				this.submissionService.getSubmissionsForUser(userId, srEvent._id)
