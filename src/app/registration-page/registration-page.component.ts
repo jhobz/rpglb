@@ -20,8 +20,8 @@ export class RegistrationPageComponent implements OnInit {
 		emergencyContact: {}
 	} as User
 	userTokenInfo: TokenUserInfo
-	minDate: Date = new Date(2019, 4, 1)
-	maxDate: Date = new Date(2019, 4, 15)
+	minDate: Date = new Date(2020, 4, 6)
+	maxDate: Date = new Date(2020, 4, 20)
 	handler: any
 	paymentAmount: number
 	srEvent: SpeedrunEvent
