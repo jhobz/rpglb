@@ -20,19 +20,20 @@
 	</div>
 	<h1>Register for {{srEvent?.name}}</h1>
 	<p>In order to register for {{srEvent?.name}}, first you will need to enter your intended dates of stay
-		(the marathon stream will run May 5-11, with setup May 3-4 and teardown on May 12). Afterwards,
+		(the marathon stream will run May 10-16, with setup May 8-9 and teardown on May 17). We use this information
+		for general headcounts and to get an idea of the arrivals per day. You can change it on this page at any time. Afterwards,
 		click the "Pay Attendance Fee" button in order to start the payment process. The attendance fee for {{srEvent?.shortname}}
 		is USD {{ paymentAmount | currency:'USD' }}. This fee helps us cover costs related to
 		running the event for attendees, such as practice TVs, hotel fees, and more. As we are still a relatively small
 		event, the attendance fee is currently not waived for any individuals, including runners, volunteers, and staff.
 		If you need your attendance fee refunded (in the event that you no longer wish to attend), please contact an
 		administrator via email, Twitter, or Discord (links available below). The deadline for attendance fee refunds
-		will be April 21 (2 weeks prior to the event start) - after this date no refunds will be given. When attending,
+		will be April 12 - after this date no refunds will be given. When attending,
 		you will receive a badge with your username (<strong>{{userTokenInfo.username}}</strong>) printed on it. If you
 		would like to change your username, please contact an adminstrator.
 	</p>
 	<p>Below you will find a number representing the number of attendees currently registered for the event and the
-		total cap. Registration will close on Sunday, April 7th at 11:59PM Eastern Daylight Time, or whenever the cap is reached.
+		total cap. Registration will close on Sunday, April 12th at 11:59PM Eastern Daylight Time, or whenever the cap is reached.
 		If the cap is reached and you have already begun the payment process, you will be able to finish it.
 		Otherwise, you will not be able to register. Keep an eye on our <a href="https://twitter.com/rpglimitbreak">Twitter</a>
 		and <a href="https://discord.gg/rpglb">Discord</a> for announcements, as occasionally we are able to increase
@@ -176,7 +177,7 @@
 					Staying on-site at the event hotel?
 				</mat-checkbox>
 
-				<div>
+				<div class="full-width-wrapper">
 					<mat-form-field class="full-width">
 						<textarea
 							matInput
@@ -211,7 +212,7 @@
 				<span>Attendee fee paid. You're all set!</span>
 			</div>
 		</div>
-		<div *ngIf="!srEvent.isRegistrationOpen || srEvent.registeredUsersCount >= srEvent.maxRegisteredUsers && !user.roles.includes('attendee')"
+		<div *ngIf="(!srEvent.isRegistrationOpen || srEvent.registeredUsersCount >= srEvent.maxRegisteredUsers) && !user.roles.includes('attendee')"
 			class="warn-light registration-form">
 			Sorry, registration is not currently open or has reached the limit.
 		</div>

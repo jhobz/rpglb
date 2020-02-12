@@ -7,7 +7,7 @@
 		<a routerLink="/blog">BLOG</a>
 		<a href="/tracker/7">TRACKER</a>
 		<a *ngIf="mode === 'event'" routerLink="/rules">EVENT RULES</a>
-		<!-- <a *ngIf="mode !== 'event'" routerLink="/games">GAMES</a> -->
+		<a *ngIf="mode !== 'event' && speedrunEvent?.isGamesListPublic" routerLink="/games">GAMES</a>
 		<a *ngIf="mode !== 'event'" routerLink="/submissions">SUBMISSIONS</a>
 		<a *ngIf="speedrunEvent?.areVolunteerSubmissionsOpen" class="no-icon" href="https://bit.ly/2SHcmkH" target="_blank">VOLUNTEER</a>
 		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank">DISCORD</a>
