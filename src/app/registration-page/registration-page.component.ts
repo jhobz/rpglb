@@ -11,8 +11,8 @@ import { UserService } from '../user.service'
 
 @Component({
 	selector: 'app-registration-page',
-	templateUrl: './registration-page.component.html',
-	styleUrls: ['./registration-page.component.scss']
+	styleUrls: ['./registration-page.component.scss'],
+	templateUrl: './registration-page.component.html'
 })
 export class RegistrationPageComponent implements OnInit {
 	user: User = {
@@ -74,8 +74,8 @@ export class RegistrationPageComponent implements OnInit {
 
 	ngOnInit() {
 		this.handler = StripeCheckout.configure({
-			key: environment.stripeKey,
 			image: 'https://rpglimitbreak.com/favicon.png',
+			key: environment.stripeKey,
 			locale: 'auto',
 			token: (token: any) => {
 				this.isProcessingPayment = true
@@ -168,9 +168,9 @@ export class RegistrationPageComponent implements OnInit {
 					// Do something when cap is reached
 				} else {
 					this.handler.open({
-						name: this.srEvent.name,
+						amount: this.paymentAmount * 100,
 						description: 'Attendee fee',
-						amount: this.paymentAmount * 100
+						name: this.srEvent.name,
 					})
 				}
 			})
