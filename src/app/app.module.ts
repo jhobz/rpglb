@@ -65,6 +65,7 @@ import { UserService } from './user.service'
 import { VerifyPageComponent } from './verify-page/verify-page.component';
 import { ContactComponent } from './contact/contact.component';
 import { TimelineComponent } from './timeline/timeline.component';
+import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { TimelineComponent } from './timeline/timeline.component';
 		BlogComponent,
 		ContactComponent,
 		TimelineComponent,
+		VolunteerPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent
