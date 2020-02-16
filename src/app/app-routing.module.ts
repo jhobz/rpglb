@@ -19,6 +19,7 @@ import { SubmissionFormComponent } from './submission-form/submission-form.compo
 import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
 import { UserListComponent } from './user-list/user-list.component'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
+import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component'
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
@@ -37,7 +38,8 @@ const routes: Routes = [
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },
 	{ path: 'sweepstakes', component: EventSweepstakesComponent },
 	// { path: 'users', component: UserListComponent },
-	{ path: 'verify', component: VerifyPageComponent }
+	{ path: 'verify', component: VerifyPageComponent },
+	{ path: 'volunteer', component: VolunteerPageComponent }
 ]
 
 @NgModule({
