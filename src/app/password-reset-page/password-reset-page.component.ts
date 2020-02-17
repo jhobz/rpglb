@@ -44,7 +44,7 @@ export class PasswordResetPageComponent implements OnInit {
 	resetPassword() {
 		if (this.passwordData.new !== this.passwordData.confirm) {
 			this.status = 'warn'
-			this.statusMessage = 'New passwords must match'
+			this.statusMessage = 'Passwords must match and be at least 12 characters long'
 			return false
 		}
 
