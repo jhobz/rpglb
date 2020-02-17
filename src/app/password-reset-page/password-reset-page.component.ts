@@ -5,8 +5,8 @@ import { UserService } from '../user.service'
 
 @Component({
 	selector: 'app-password-reset-page',
+	styleUrls: ['./password-reset-page.component.css'],
 	templateUrl: './password-reset-page.component.html',
-	styleUrls: ['./password-reset-page.component.css']
 })
 export class PasswordResetPageComponent implements OnInit {
 	status: 'warn'|'success'|'info'
@@ -15,8 +15,8 @@ export class PasswordResetPageComponent implements OnInit {
 	isFetching: boolean = false
 	emailData: string
 	passwordData: any = {
+		confirm: '',
 		new: '',
-		confirm: ''
 	}
 	hidePassword: boolean = true
 	hidePassword2: boolean = true
@@ -31,7 +31,7 @@ export class PasswordResetPageComponent implements OnInit {
 			if (!params.user || !params.token) {
 				this.status = 'info'
 				this.statusMessage = 'This is the password reset page. It does not appear that you have submitted a ' +
-					'reset request. Check your email for a message from rpglimitbreak@gmail.com, or fill in your ' +
+					'reset request. Check your email for a message from no-reply@communication.rpglimitbreak.com, or fill in your ' +
 					'email and click the button below to send a new reset request.'
 			} else {
 				this.showPasswordInputs = true
