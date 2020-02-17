@@ -95,13 +95,13 @@ export class RegistrationPageComponent implements OnInit {
 										console.error('Registration error', err)
 										this.spinnerError = 'Something went wrong. It looks like your payment was ' +
 											'successful, but registration failed. Please contact an administrator ' +
-											'and be ready to show proof of purchase. DO NOT retry registration unless' +
+											'and be ready to show proof of purchase. DO NOT retry registration unless ' +
 											'instructed.'
 									})
 						},
 						(err: any) => {
 							this.spinnerError = 'It appears we were unable to charge your credit card. Please confirm ' +
-								'that you have not been charged and try again. You may need to check your card balance.' +
+								'that you have not been charged and try again. You may need to check your card balance. ' +
 								'If this issue persists, please contact an administrator.'
 							console.error('error', err)
 						}

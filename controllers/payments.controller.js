@@ -50,7 +50,7 @@ exports.createPayment = async function (req, res, next) {
 		})
 		let stripeCharge = await stripe.charges.create({
 			amount,
-			description: 'RPG Limit Break 2019 - Attendee fee',
+			description: `RPG Limit Break ${(new Date()).getFullYear()} - Attendee fee`,
 			currency: 'usd',
 			customer: stripeCustomer.id,
 			receipt_email: payment.stripeEmail
