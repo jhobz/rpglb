@@ -12,7 +12,8 @@ import { User } from '../user'
 	templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-	user: TokenUserInfo | User
+	userFromToken: TokenUserInfo
+	user: User
 	games: GameSubmission[]
 	passwordData: PasswordData = {
 		username: '',
@@ -37,18 +38,18 @@ export class ProfileComponent implements OnInit {
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.speedrunEvent = srEvent
-				this.submissionService.getSubmissionsForUser(this.user._id, this.speedrunEvent._id)
+				this.submissionService.getSubmissionsForUser(this.userFromToken._id, this.speedrunEvent._id)
 					.map((data: GameSubmissionResponse) => data.docs )
 					.subscribe((data: GameSubmission[]) => {
 						this.games = data
 					})
 			})
-		this.user = this.auth.getUserInfo()
+		this.userFromToken = this.auth.getUserInfo()
 		this.auth.profile().subscribe((usr: User) => {
 			// If there's any mis-match in the user info on the server and the info from the token, log out
-			if (this.user.username !== usr.username ||
-				this.user.roles.length !== usr.roles.length ||
-				!this.user.roles.sort().every((value: string, index: number) => value === usr.roles.sort()[index])) {
+			if (this.userFromToken.username !== usr.username ||
+				this.userFromToken.roles.length !== usr.roles.length ||
+				!this.userFromToken.roles.sort().every((value: string, index: number) => value === usr.roles.sort()[index])) {
 					this.auth.logout()
 					location.reload()
 			}

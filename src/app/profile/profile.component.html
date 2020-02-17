@@ -1,12 +1,12 @@
 <div class="wrapper">
-	<h1 class="no-bold">{{user.username}}</h1>
+	<h1 class="no-bold">{{userFromToken.username}}</h1>
 	<h3>Registration</h3>
-	<p>You are currently <span [class]="user.roles.includes('attendee') ? 'success' : 'warn'">{{user.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
+	<p>You are currently <span [class]="userFromToken.roles.includes('attendee') ? 'success' : 'warn'">{{userFromToken.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
 	<!-- TODO: Make the message below change wording based on pre- or post-registration period. -->
 	<p *ngIf="!speedrunEvent?.isRegistrationOpen">Registration is not open. See the home page for a detailed timeline.</p>
 	<div>
-		<a *ngIf="user.roles.includes('attendee')" routerLink="/register">Update registration</a>
-		<a *ngIf="!user.roles.includes('attendee') && speedrunEvent?.isRegistrationOpen" routerLink="/register">Register to attend {{speedrunEvent?.name}}</a>
+		<a *ngIf="userFromToken.roles.includes('attendee')" routerLink="/register">Update registration</a>
+		<a *ngIf="!userFromToken.roles.includes('attendee') && speedrunEvent?.isRegistrationOpen" routerLink="/register">Register to attend {{speedrunEvent?.name}}</a>
 	</div>
 	<br /><br /><br />
 	<h3>Your submissions</h3>
