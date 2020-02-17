@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
 
 import { AuthenticationService, PasswordData, TokenUserInfo } from '../authentication.service'
 import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../submission.service'
+import { User } from '../user'
 
 @Component({
+	providers: [SubmissionService],
 	selector: 'app-profile',
-	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.css'],
-	providers: [SubmissionService]
+	templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-	user: TokenUserInfo
+	user: TokenUserInfo | User
 	games: GameSubmission[]
 	passwordData: PasswordData = {
 		username: '',
@@ -44,6 +44,16 @@ export class ProfileComponent implements OnInit {
 					})
 			})
 		this.user = this.auth.getUserInfo()
+		this.auth.profile().subscribe((usr: User) => {
+			// If there's any mis-match in the user info on the server and the info from the token, log out
+			if (this.user.username !== usr.username ||
+				this.user.roles.length !== usr.roles.length ||
+				!this.user.roles.sort().every((value: string, index: number) => value === usr.roles.sort()[index])) {
+					this.auth.logout()
+					location.reload()
+			}
+			this.user = usr
+		})
 	}
 
 	changePassword() {

@@ -19,7 +19,8 @@ export interface User {
 		phone: string
 	},
 	onSite?: boolean,
-	miscComments?: string
+	miscComments?: string,
+	roles: string[]
 }
 
 export default User

@@ -25,3 +25,13 @@
 .msg-status {
 	margin-top: 10px;
 }
+
+small {
+	font-size: 0.7em;
+	font-weight: normal;
+	color: #aaa;
+}
+
+::ng-deep .mat-form-field-read-only .mat-form-field-underline {
+	display: none;
+}

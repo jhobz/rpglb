@@ -23,6 +23,39 @@
 	<br />
 	<a *ngIf="speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>
 	<br /><br /><br />
+	<h3>Account info</h3>
+	<form>
+		<mat-form-field class="mat-form-field-read-only">
+			<input
+				matInput
+				type="text"
+				[(ngModel)]="user.firstName"
+				name="firstName"
+				placeholder="First name"
+				maxlength="32"
+				readonly />
+		</mat-form-field>
+		<mat-form-field class="mat-form-field-read-only">
+			<input
+				matInput
+				type="text"
+				[(ngModel)]="user.lastName"
+				name="lastName"
+				placeholder="Last name"
+				maxlength="32"
+				readonly />
+		</mat-form-field>
+		<mat-form-field class="mat-form-field-read-only">
+			<input
+				matInput
+				type="email"
+				[(ngModel)]="user.email"
+				name="email"
+				placeholder="Email"
+				maxlength="64"
+				readonly />
+		</mat-form-field>
+	</form>
 	<h3>Need to change your password?</h3>
 	<form #f="ngForm" class="form-password" (ngSubmit)="changePassword()">
 		<mat-form-field>

@@ -340,7 +340,13 @@ exports.registerUser = async function (req, res, next) {
 }
 
 exports.getUserInfo = async function (req, res, next) {
-	// TODO: Add more validation
+	if (!req.user || !req.user._id) {
+		return res.status(400).json( {
+			status: 400,
+			message: 'Must be logged in to get user info.'
+		} )
+	}
+
 	try {
 		let user = await UserService.getUserById(req.user._id)
 		return res.status(201).json( {
