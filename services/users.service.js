@@ -84,6 +84,9 @@ exports.deleteUser = async function (id) {
 exports.getUser = async function (username) {
 	try {
 		let user = await User.findOne({ username: username })
+		if (user === null) {
+			throw Error(`User with username '${username}' does not exist`)
+		}
 		return user
 	} catch (e) {
 		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
@@ -93,6 +96,9 @@ exports.getUser = async function (username) {
 exports.getUserByEmail = async function (email) {
 	try {
 		let user = await User.findOne({ email: email })
+		if (user === null) {
+			throw Error(`User with email '${email}' does not exist`)
+		}
 		return user
 	} catch (e) {
 		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)
@@ -102,6 +108,9 @@ exports.getUserByEmail = async function (email) {
 exports.getUserById = async function (id) {
 	try {
 		let user = await User.findById(id)
+		if (user === null) {
+			throw Error(`User with id '${id}' does not exist`)
+		}
 		return user
 	} catch (e) {
 		throw Error(`Error occurred while attempting to retrieve user information: ${e.message}`)

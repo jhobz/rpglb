@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
 import { share } from 'rxjs/operators'
-import { map } from 'rxjs/operators/map'
 
 import { environment } from '../environments/environment'
 
@@ -45,9 +44,9 @@ export class UserService {
 		}
 
 		const obs = this.http.post(`${this.apiUrl}/reset`, {
-			user: id,
+			new: password,
 			token: token,
-			new: password
+			user: id,
 		}).pipe(share())
 		obs.subscribe((res: any) => {
 			if (res.token) {
@@ -69,14 +68,14 @@ export class UserService {
 			return of(false)
 		}
 		const obs = this.http.post(`${this.apiUrl}/verify`, {
+			token: token,
 			user: id,
-			token: token
 		}).pipe(share())
 		obs.subscribe((res: any) => {
 			if (res.token) {
 				this.auth.updateToken(res.token)
 			}
-		})
+		},            (err: any) => { /* Error handling performed by component */ })
 
 		return obs
 	}
@@ -95,12 +94,6 @@ export class UserService {
 		})
 
 		return obs
-	}
-
-	private handleError(error: any): Promise<any> {
-		// TODO: Put some proper error handling in later
-		console.error('An error occurred', error)
-		return Promise.reject(error.message || error)
 	}
 
 }

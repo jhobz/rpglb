@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 	}
 }, {
 	from: 'no-reply@communication.rpglimitbreak.com',
-	replyTo: 'rpglimitbreak@gmail.com'
+	replyTo: 'website@rpglimitbreak.com'
 })
 
 generateBaseUrl = function (req) {
@@ -19,6 +19,9 @@ generateBaseUrl = function (req) {
 }
 
 exports.sendVerificationEmail = function (user, req) {
+	if (!user) {
+		throw new Error('User not found.')
+	}
 	const baseUrl = generateBaseUrl(req)
 	const url = `${baseUrl}/verify?user=${user._id}&token=${user.verificationToken}`
 
