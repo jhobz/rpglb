@@ -23,7 +23,7 @@ export class VerifyPageComponent implements OnInit {
 						if (!res) {
 							this.status = 'info'
 							this.statusMessage = 'You haven\'t verified your email yet. Check your email for a message ' +
-								'from rpglimitbreak@gmail.com. Click below to send a new email if you need one. This will ' +
+								'from no-reply@communication.rpglimitbreak.com. Click below to send a new email if you need one. This will ' +
 								'invalidate the email previously sent to you.'
 							return
 						}
@@ -35,8 +35,15 @@ export class VerifyPageComponent implements OnInit {
 					},
 					(err: any) => {
 						this.status = 'warn'
-						this.statusMessage = 'Verification failed. Your token may have been expired. ' +
-							'Click below to send another email.'
+						if (err.error.message === 'User not found.') {
+							this.statusMessage = 'Verification failed. We were not able to locate your account. ' +
+								'Please contact an administrator by sending an email to ' +
+								'website@rpglimitbreak.com and include this error message in the body of your email.'
+							this.emailButton.disabled = true
+						} else {
+							this.statusMessage = 'Verification failed. Your token may be incorrect or expired. ' +
+								'Click below to send another email.'
+						}
 					})
 		})
 	}
@@ -52,7 +59,9 @@ export class VerifyPageComponent implements OnInit {
 					},
 					(err: any) => {
 						this.status = 'warn'
-						this.statusMessage = err.error.message
+						this.statusMessage = `Failed to send email with error: ${err.error.message} ` +
+							'Please contact an administrator by emailing website@rpglimitbreak.com and include ' +
+							'this error message in the body of your email.'
 					})
 		})
 	}

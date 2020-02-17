@@ -101,7 +101,8 @@ exports.updateUser = async function (req, res, next) {
 		phone: req.body.phone ? req.body.phone : null,
 		emergencyContact: req.body.emergencyContact ? req.body.emergencyContact : null,
 		onSite: req.body.onSite !== undefined ? req.body.onSite : null,
-		miscComments: req.body.miscComments ? req.body.miscComments : null
+		miscComments: req.body.miscComments ? req.body.miscComments : null,
+		verified: req.body.verified !== undefined ? req.body.verified : null
 	}
 
 	try {
@@ -293,11 +294,18 @@ exports.verifyEmail = async function (req, res, next) {
 				user: user.username,
 				token: token
 			} )
+		} else {
+			throw Error()
 		}
 	} catch (e) {
+		let message = 'Verification failed.'
+		console.log(e)
+		if (e.message.includes('while attempting to retrieve user information')) {
+			message = 'User not found.'
+		}
 		return res.status(400).json( {
 			status: 400,
-			message: 'Verification failed.'
+			message: message
 		} )
 	}
 }
