@@ -1,5 +1,12 @@
 <article>
 	<header><app-navbar></app-navbar></header>
-	<main><!--<app-donate-header></app-donate-header>--><router-outlet mat-app-background></router-outlet></main>
+	<main>
+		<p class="msg-status wrapper">
+			In response to the COVID-19 pandemic, RPGLB 2020 has been postponed to October. Please see our <a href="/blog#2020move">blog post</a> for more information.<br />
+			If you already registered to attend RPGLB 2020, check the <a routerLink="/profile">profile page</a> for steps on how to confirm your registration for the new dates.
+		</p>
+		<!--<app-donate-header></app-donate-header>-->
+		<router-outlet mat-app-background></router-outlet>
+	</main>
 	<footer><app-footer></app-footer></footer>
 </article>

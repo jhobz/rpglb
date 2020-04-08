@@ -35,3 +35,7 @@ small {
 ::ng-deep .mat-form-field-read-only .mat-form-field-underline {
 	display: none;
 }
+
+.left-align {
+	text-align: left;
+}

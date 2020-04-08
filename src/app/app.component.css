@@ -19,3 +19,13 @@ main {
 
 footer {
 }
+
+.wrapper {
+	max-width: 1280px;
+	margin: 20px auto 50px;
+	/* font-size: 1em; */
+}
+
+.msg-status {
+	background-color: rgb(165, 51, 51);
+}
