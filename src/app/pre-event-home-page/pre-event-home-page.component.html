@@ -1,8 +1,22 @@
 <div class="wrapper">
 	<img class="logo" src="assets/images/logo_1200x424.png" />
-	<h1 class="home-title">{{event}} is coming up soon!</h1>
-	<div class="timeline"><app-timeline></app-timeline></div>
+	<h1 class="home-title">{{event}} has been cancelled</h1>
+	<!-- <div class="timeline"><app-timeline></app-timeline></div> -->
 	<p>
+		Sadly, we have made the tough decision to cancel this year's event. Please read our blog post below for more information.
+	</p>
+
+	<mat-card>
+		<h2 id="2020cancel" class="blog-title">RPGLB 2020 cancellation notice</h2>
+		<em>August 2nd, 2020</em>
+		<hr>
+		<p>With large gatherings and domestic/international travel still discouraged or prohibited by many state and national governments, and based on feedback from many registered attendees, RPGLB staff has made the decision to cancel RPG Limit Break 2020. Fortunately, we were able to postpone our existing event contract with the DoubleTree Salt Lake City Airport until next year (May 16-22, which will be the dates for RPG Limit Break 2021), so RPGLB staff will not be facing any financial or legal impact as a result of this decision.</p>
+		<p>We are considering an online charity event during the planned event week (October 11-17), but if this happens it will be a separate event with new submissions. Trying to convert the existing RPGLB 2020 schedule into an online marathon would face some serious logistical problems (co-op runs in particular), and would also be unfair to the runners who submitted for an onsite event.</p>
+		<p>All registered RPGLB 2020 attendees will receive refunds for their attendance fees in the near future, and all accepted runners can defer their runs to RPG Limit Break 2021 (deferment will be automatic - runners do not need to formally request it or take any other action beyond resubmitting the same game/category to RPGLB 2021). Attendees who had reservations at the event hotel will need to cancel them, either via the link included in the hotel’s confirmation email or phone call to 801-539-1515. Essentia will be reaching out to prize donors who have already made shipments to us, to discuss options for returning those prizes (if desired).</p>
+		<p>While we’re extremely disappointed at being unable to hold RPG Limit Break this year, we are also grateful for all of the support and patience we’ve received from our community all throughout this process. We are looking forward to coming back with our 6th live charity event &amp; RPG speedrun community meetup in 2021!</p>
+		<p>As always, feel free to e-mail <a href="mailto:management@rpglimitbreak.com">management@rpglimitbreak.com</a> with any questions, concerns, or feedback.</p>
+	</mat-card>
+	<!-- <p>
 		{{event}} will be taking place in Salt Lake City, Utah for the 6th year in a row, continuing to benefit the
 		<a href="https://www.nami.org" _target="blank">National Alliance on Mental Illness.</a> The event will take place October 11th to
 		October 17th, at the
@@ -12,7 +26,7 @@
 		<a href="https://doubletree.hilton.com/en/dt/groups/personalized/S/SLCARDT-RLB-20201008/index.jhtml?WT.mc_id=POG" target="_blank">reserve a room</a>
 		at the hotel if you'll be staying on-site. You can find a full list of upcoming dates and deadlines
 		above and check out our <a routerLink="/blog">blog post</a> for more detailed information.
-	</p>
+	</p> -->
 	<!-- <p>
 		Event registration for {{event}} is {{speedrunEvent?.isRegistrationOpen ? 'open' : 'closed.'}}
 		<span *ngIf="speedrunEvent?.isRegistrationOpen">
@@ -25,11 +39,11 @@
 	</p> -->
 </div>
 <div class="embed-wrapper">
-	<iframe class="embed" src="https://player.twitch.tv/?channel=rpglimitbreak" frameborder="0" scrolling="no" allowfullscreen="true">
+	<iframe class="embed" src="https://player.twitch.tv/?channel=rpglimitbreak&parent=rpglimitbreak.com" frameborder="0" scrolling="no" allowfullscreen="true">
 	</iframe>
 </div>
 <div class="wrapper">
-	<h3 class="home-title">We can't wait to see what this year has in store!</h3>
+	<h3 class="home-title">We can't wait to see what next year has in store!</h3>
 	<p>
 		If the anticipation is unbearable, you can always check out VODs from previous events over on
 		<a href="https://youtube.com/rpglimitbreak" _target="blank">our YouTube channel</a> or
