@@ -1,30 +1,9 @@
 <div class="wrapper">
-	<mat-card>
-		<p>If you are a registered <strong>attendee</strong>:</p>
-		<ul>
-			<li>Update your planned attendance dates by clicking “Update registration” below</li>
-			<li>Cancel your May hotel room reservation (via link in your hotel confirmation email or phone call to 801-539-1515)</li>
-			<li>Make a new <a href="https://doubletree.hilton.com/en/dt/groups/personalized/S/SLCARDT-RLB-20201008/index.jhtml?WT.mc_id=POG" target="_blank">hotel room reservation</a> for October</li>
-			<li>If you are no longer planning to attend, send an email to <a href="mailto:management@rpglimitbreak.com">management@rpglimitbreak.com</a> by September 13, 2020, to request an attendance fee refund</li>
-		</ul>
-		<p>If you are a <strong>runner</strong> or <strong>backup runner</strong>:</p>
-		<ul>
-			<li>Update the planned attendance dates by clicking “Update registration” below <strong>no later than September 13, 2020</strong>, to reconfirm your attendance - those dates will be used to schedule your run (send an email to <a href="mailto:committee@rpglimitbreak.com">committee@rpglimitbreak.com</a> if there’s anything else you’d like us to know)</li>
-			<li>Follow the steps for attendees above</li>
-			<li>If you are not planning to attend, send an email to <a href="mailto:committee@rpglimitbreak.com">committee@rpglimitbreak.com</a> to let us know, and we can defer your run to RPGLB 2021 if desired</li>
-		</ul>
-		<p>If you are planning to <strong>volunteer</strong> at RPGLB 2020:</p>
-		<ul>
-			<li>If you have already submitted a volunteer application for the original May event, keep an eye out for an email that you’ll receive from the volunteer coordinators in order to reconfirm your attendance</li>
-			<li>Follow the steps for attendees above</li>
-			<li>If you have not already submitted a volunteer application, go to the <a routerLink="/volunteer">volunteer page</a> and submit one by August 27, 2020.</li>
-		</ul>
-	</mat-card>
-
-
 	<h1 class="no-bold">{{userFromToken.username}}</h1>
 	<h3>Registration</h3>
 	<p>You are currently <span [class]="userFromToken.roles.includes('attendee') ? 'success' : 'warn'">{{userFromToken.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
+		<span *ngIf="userFromToken.roles.includes('attendee')">Your registration fee will automatically be refunded in the near future.</span>
+	</p>
 	<!-- TODO: Make the message below change wording based on pre- or post-registration period. -->
 	<p *ngIf="!speedrunEvent?.isRegistrationOpen">Registration is not open. See the home page for a detailed timeline.</p>
 	<div>
