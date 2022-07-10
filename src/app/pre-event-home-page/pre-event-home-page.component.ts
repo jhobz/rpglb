@@ -8,8 +8,7 @@ import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 	styleUrls: ['./pre-event-home-page.component.scss']
 })
 export class PreEventHomePageComponent implements OnInit {
-	// TODO: Don't hardcode this
-	event: string = 'RPG Limit Break 2020'
+	event: string = 'RPG Limit Break'
 	speedrunEvent: SpeedrunEvent
 
 	constructor(private speedrunEventService: SpeedrunEventService) { }
@@ -18,6 +17,7 @@ export class PreEventHomePageComponent implements OnInit {
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.speedrunEvent = srEvent
+				this.event = this.speedrunEvent.name
 			})
 	}
 
