@@ -9,16 +9,52 @@
 			if you leave this page open.
 		</p>
 		<p>
-			<span class="success">Your game submission is saved when you click the "Next" button,</span> so be sure to look over your
+			Your game submission is <span class="success">saved when you click the "Next" button,</span> so be sure to look over your
 			submission carefully before continuing to the next game. Don't worry though, you can come back and edit
 			previous games at any time while submissions are still open. If you wish to delete a submission, either replace
-			the information with another game, or simply click the "Remove Game" button. <span class="warn-light">If you click "Remove Game"
-			and later choose to submit the same game, you will have to enter all of the information again, so be wary.</span>
+			the information with another game, or simply click the "Remove Game" button. If you click "Remove Game"
+			and later choose to submit the same game, <span class="warn-light">you will have to enter all of the information again, so be wary.</span>
 		</p>
 	</mat-card>
 	<div *ngIf="!areSubmissionsOpen" class="msg-status warn">Game submissions are currently closed.</div>
+	<mat-card class="availability description">
+		<!-- <p>
+			New to this year, you are now required to provide your general hours of availability to perform your run(s), should you be accepted.
+			We are asking for this information up front so as to make the scheduling process smoother, allowing for the games committee to more swiftly work on the schedule.
+		</p> -->
+		<form novalidate #f="ngForm" class="">
+			<h3>Supplementary Information</h3>
+			<mat-form-field>
+				<mat-label>Availability</mat-label>
+				<input
+					matInput
+					name="availability"
+					placeholder="Sunday - Saturday anytime, Monday only 8am - 10pm local time, etc."
+					maxlength="64"
+					[(ngModel)]="availability"
+					required />
+					<mat-hint>Please include time zone if applicable</mat-hint>
+			</mat-form-field>
+			<br /><br />
+			<mat-checkbox name="isRemote" [(ngModel)]="isRemote" labelPosition="after">I am submitting to participate remotely (leave unchecked if you plan to attend on-site)</mat-checkbox>
+			<div *ngIf="isRemote">
+				<mat-form-field>
+					<mat-label>Upload bandwidth</mat-label>
+					<input
+						matInput
+						name="uploadBandwidth"
+						placeholder="20 Mbps"
+						maxlength="64"
+						[(ngModel)]="uploadBandwidth"
+						required />
+					<mat-hint>Please run a speed test using Google or a similar service and put the results above</mat-hint>
+				</mat-form-field>
+			</div>
+		</form>
+	</mat-card>
+
 	<mat-horizontal-stepper *ngIf="areSubmissionsOpen" linear #stepper="matHorizontalStepper">
-		<mat-step *ngFor="let game of games" [completed]="sub.form.valid">
+		<mat-step *ngFor="let game of games" [completed]="sub.form.valid && form.valid">
 			<ng-template matStepLabel>{{game.name || 'New Game'}}</ng-template>
 			<div class="step-controls">
 				<button [disabled]="games.length <= 1" mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Previous</span></button>

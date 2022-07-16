@@ -60,6 +60,31 @@
 			<mat-cell *matCellDef="let submission" class="preserve-newlines">{{!submission.expand ? (submission.incentives | truncate:100+200*submission.categories.length:true) : submission.incentives}}</mat-cell>
 		</ng-container>
 
+		<ng-container matColumnDef="extras">
+			<mat-header-cell *matHeaderCellDef>Extra info</mat-header-cell>
+			<mat-cell *matCellDef="let submission" class="flex-col">
+				<ng-container>
+					<span class="cell-subtitle">AVAILABILITY</span>
+					<div>{{submission.availability}}</div>
+					<br />
+				</ng-container>
+				<ng-container>
+					<span class="cell-subtitle">LOCATION</span>
+					<div>{{submission.isRemote ? 'REMOTE' : 'LOCAL'}}</div>
+					<br />
+				</ng-container>
+				<ng-container>
+					<span class="cell-subtitle">BANDWIDTH</span>
+					<div>{{submission.uploadBandwidth}}</div>
+					<br />
+				</ng-container>
+				<ng-container>
+					<span class="cell-subtitle">TECH NOTES</span>
+					<div>{{submission.techNotes}}</div>
+				</ng-container>
+			</mat-cell>
+		</ng-container>
+
 		<ng-container matColumnDef="categories">
 			<mat-header-cell *matHeaderCellDef>Categories</mat-header-cell>
 			<mat-cell *matCellDef="let submission">
@@ -93,7 +118,7 @@
 					<div class="description preserve-newlines">{{!submission.expand ? (cat.description | truncate:100:true) : cat.description}}</div>
 
 					<fieldset *ngIf="showControls" class="controls-group" (click)="$event.stopPropagation()">
-						<h3>Selection (Internal)</h3>
+						<h3>Committee Selection</h3>
 						<button mat-raised-button
 							color="primary"
 							(click)="markSubmission($event, submission, 'accept', submission.categories.indexOf(cat), comment.value)">

@@ -80,6 +80,26 @@ let GameSubmissionSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
+	availability: {
+		type: String,
+		trim: true,
+		maxlength: 64,
+		required: true
+	},
+	isRemote: {
+		type: Boolean,
+		default: false
+	},
+	uploadBandwidth: {
+		type: String,
+		trim: true,
+		maxlength: 64
+	},
+	techNotes: {
+		type: String,
+		trim: true,
+		maxlength: 560
+	},
 	categories: {
 		type: [CategorySchema],
 		validate: [numCategoriesValidator, '{PATH} either has too few or too many items'],

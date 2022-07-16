@@ -57,6 +57,7 @@ $background: map-get($rpglb-app-theme, background);
 }
 
 .mat-column-runner,
+.mat-column-extras,
 .mat-column-controls {
 	flex: 2;
 }

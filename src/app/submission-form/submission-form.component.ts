@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
+import { FormControl } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatButton, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material'
 import { of } from 'rxjs/observable/of'
 
@@ -19,6 +20,10 @@ export class SubmissionFormComponent implements OnInit {
 	isDebouncing: boolean = false
 	areSubmissionsOpen: boolean
 	@ViewChild('stepper') stepper: any
+	@ViewChild('f') form: any
+	@Input() availability: string
+	@Input() isRemote: boolean
+	@Input() uploadBandwidth: string
 
 	constructor(
 		private auth: AuthenticationService,
@@ -39,13 +44,26 @@ export class SubmissionFormComponent implements OnInit {
 					.map((data: GameSubmissionResponse) => data.docs )
 					.subscribe((data: GameSubmission[]) => {
 						this.games = data
+						if (data.length > 0) {
+							this.availability = data[0].availability
+							this.isRemote = data[0].isRemote
+							if (this.isRemote || data[0].uploadBandwidth != 'N/A' && data[0].uploadBandwidth) {
+								this.uploadBandwidth = data[0].uploadBandwidth
+							}
+						}
 					})
 			})
 	}
 
 	addGame() {
 		const userId = this.auth.getUserInfo()._id
-		this.games.push({runner: userId, categories: [{}]} as GameSubmission)
+		this.games.push({
+			runner: userId,
+			availability: this.availability,
+			isRemote: this.isRemote,
+			uploadBandwidth: this.uploadBandwidth,
+			categories: [{}]
+		} as GameSubmission)
 	}
 
 	removeGame(index: number) {
@@ -87,7 +105,12 @@ export class SubmissionFormComponent implements OnInit {
 	}
 
 	submitGame(game: GameSubmission, form: any, buttons: MatButton[]) {
-		if (!form.valid || this.isDebouncing) {
+		if (!this.form.valid || !form.valid || this.isDebouncing) {
+			if (!this.form.valid) {
+				Object.values(this.form.controls).forEach((control: FormControl) => {
+					control.markAsTouched()
+				})
+			}
 			return false
 		}
 
@@ -98,6 +121,13 @@ export class SubmissionFormComponent implements OnInit {
 			game.runner = (<RunnerData>game.runner)._id
 		}
 		game.public = false
+
+		// Update supplementary information, if applicable
+		if (this.availability !== game.availability || this.isRemote !== game.isRemote || (this.uploadBandwidth !== game.uploadBandwidth && game.uploadBandwidth !== 'N/A')) {
+			game.availability = this.availability
+			game.isRemote = this.isRemote
+			game.uploadBandwidth = this.uploadBandwidth || 'N/A'
+		}
 		if (game._id) {
 			// PUT
 			this.submissionService.editSubmission(game)

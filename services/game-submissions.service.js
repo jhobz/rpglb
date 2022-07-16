@@ -30,6 +30,10 @@ exports.createSubmission = async function (submission) {
 		pros: submission.pros,
 		cons: submission.cons,
 		public: submission.public,
+		availability: submission.availability,
+		isRemote: submission.isRemote,
+		uploadBandwidth: submission.uploadBandwidth,
+		techNotes: submission.techNotes,
 		categories: submission.categories,
 		speedrunEvent: submission.speedrunEvent
 	})

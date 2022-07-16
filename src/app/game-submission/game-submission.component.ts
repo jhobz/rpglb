@@ -35,6 +35,10 @@ export class GameSubmissionComponent implements OnInit {
 		pros: '',
 		cons: '',
 		public: false,
+		availability: '',
+		isRemote: false,
+		uploadBandwidth: 'N/A',
+		techNotes: '',
 		categories: [{ _uid: 0 } as GameCategory]
 	}
 

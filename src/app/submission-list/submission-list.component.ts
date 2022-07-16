@@ -70,8 +70,9 @@ export class SubmissionListComponent implements OnInit {
 		const user = this.auth.getUserInfo()
 		// TODO: Get this url logic out of this component. Replace with more configurable options (see #15)
 		if (user && user.roles.includes('submissions')
-			&& this.router.url !== '/submissions/create' && this.router.url !== '/games'
-			|| this.router.url === '/profile') {
+		&& this.router.url !== '/submissions/create' && this.router.url !== '/games'
+		|| this.router.url === '/profile') {
+			this.columnsToDisplay.push('extras')
 			this.columnsToDisplay.push('public')
 			if (this.showRunner && user && user.roles.includes('submissions')) {
 				this.hasSubmissionsRole = true

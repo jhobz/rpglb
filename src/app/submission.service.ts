@@ -35,6 +35,10 @@ export interface GameSubmission {
 	cons: string
 	public: boolean
 	categories: GameCategory[]
+	availability: string
+	isRemote: boolean
+	uploadBandwidth: string
+	techNotes?: string
 	speedrunEvent?: string
 }
 
