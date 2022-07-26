@@ -8,7 +8,7 @@
 		<a href="/tracker/event/qfghh2">TRACKER</a>
 		<a *ngIf="mode === 'event'" routerLink="/rules">EVENT RULES</a>
 		<a *ngIf="mode !== 'event' && speedrunEvent?.isGamesListPublic" routerLink="/games">GAMES</a>
-		<a *ngIf="mode === 'event' || speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>
+		<a *ngIf="mode !== 'event' || speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>
 		<a *ngIf="mode !== 'event' && speedrunEvent?.areVolunteerSubmissionsOpen" routerLink="/volunteer">VOLUNTEER</a>
 		<a *ngIf="mode !== 'event' && speedrunEvent?.areVolunteerSubmissionsOpen" class="no-icon" target="_blank" href="https://docs.google.com/forms/d/1wXAURhF3byIZA6RQnvZlVygrwNvj_WtnWYdFbQ7mxc8/edit">PRIZES</a>
 		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank">DISCORD</a>
