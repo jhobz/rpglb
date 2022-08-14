@@ -13,3 +13,8 @@ h3 {
 p, li {
     color: #e7e7e7;
 }
+
+.subtle {
+    color: #919191;
+    font-size: 0.8em;
+}
