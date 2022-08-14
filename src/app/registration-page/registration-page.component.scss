@@ -45,9 +45,10 @@ $bonus: mat-palette($mat-purple, 400, 200);
 
 	fieldset {
 		display: flex;
+		flex-direction: column;
 		padding: 25px;
 		margin: 25px 0;
-		width: 100%;
+		flex-grow: 1;
 
 		&:last-of-type {
 			margin-left: 50px;
@@ -69,6 +70,10 @@ $bonus: mat-palette($mat-purple, 400, 200);
 
 	.full-width-wrapper {
 		margin: 20px 0 50px;
+	}
+
+	.wider {
+		min-width: 300px;
 	}
 }
 
@@ -99,4 +104,10 @@ $bonus: mat-palette($mat-purple, 400, 200);
 	:last-child {
 		margin-left: 10px;
 	}
+}
+
+.msg-status {
+	width: fit-content;
+	padding: 10px 30px 10px;
+	margin: auto;
 }

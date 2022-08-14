@@ -92,6 +92,15 @@ let UserSchema = new mongoose.Schema({
 		maxlength: 26,
 		trim: true
 	},
+	pronouns: {
+		type: String,
+		maxlength: 26,
+		trim: true
+	},
+	shouldPrintPronouns: {
+		type: Boolean,
+		default: false,
+	},
 	emergencyContact: {
 		name: {
 			type: String,

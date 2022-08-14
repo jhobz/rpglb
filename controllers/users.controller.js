@@ -99,6 +99,8 @@ exports.updateUser = async function (req, res, next) {
 		twitter: req.body.twitter ? req.body.twitter : null,
 		discord: req.body.discord ? req.body.discord : null,
 		phone: req.body.phone ? req.body.phone : null,
+		pronouns: req.body.pronouns ? req.body.pronouns : null,
+		shouldPrintPronouns: req.body.shouldPrintPronouns ? req.body.shouldPrintPronouns : null,
 		emergencyContact: req.body.emergencyContact ? req.body.emergencyContact : null,
 		onSite: req.body.onSite !== undefined ? req.body.onSite : null,
 		miscComments: req.body.miscComments ? req.body.miscComments : null,

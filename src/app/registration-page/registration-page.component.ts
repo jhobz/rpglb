@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core'
+import { FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material'
 import { Subscription } from 'rxjs/Subscription'
 
@@ -17,7 +18,9 @@ import { UserService } from '../user.service'
 export class RegistrationPageComponent implements OnInit {
 	user: User = {
 		attendanceDates: {},
-		emergencyContact: {}
+		emergencyContact: {},
+		pronouns: '',
+		shouldPrintPronouns: false,
 	} as User
 	userTokenInfo: TokenUserInfo
 	minDate: Date = new Date(2020, 9, 7)
@@ -33,6 +36,7 @@ export class RegistrationPageComponent implements OnInit {
 	hasEventRole: boolean = false
 	canBackdoor: boolean = false
 	adminControlsEnabled: boolean = false
+	covid: boolean = false
 
 	@ViewChild('f') form: any
 

@@ -13,6 +13,8 @@ export interface User {
 	twitter?: string,
 	discord?: string,
 	phone?: string,
+	pronouns?: string,
+	shouldPrintPronouns?: boolean,
 	emergencyContact?: {
 		name: string,
 		relationship: string,
