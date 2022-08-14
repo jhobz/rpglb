@@ -66,6 +66,7 @@ import { VerifyPageComponent } from './verify-page/verify-page.component';
 import { ContactComponent } from './contact/contact.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
+import { CovidPolicyComponent } from './covid-policy/covid-policy.component';
 
 
 @NgModule({
@@ -100,6 +101,7 @@ import { VolunteerPageComponent } from './volunteer-page/volunteer-page.componen
 		ContactComponent,
 		TimelineComponent,
 		VolunteerPageComponent,
+		CovidPolicyComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent

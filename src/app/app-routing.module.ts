@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { AuthGuardService } from './auth-guard.service'
 import { BlogComponent } from './blog/blog.component'
 import { ContactComponent } from './contact/contact.component'
+import { CovidPolicyComponent } from './covid-policy/covid-policy.component'
 import { EventHomeComponent } from './event-home/event-home.component'
 import { EventRulesComponent } from './event-rules/event-rules.component'
 import { EventSweepstakesComponent } from './event-sweepstakes/event-sweepstakes.component'
@@ -25,6 +26,7 @@ const routes: Routes = [
 	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
 	{ path: 'blog', component: BlogComponent },
 	{ path: 'contact', component: ContactComponent },
+	{ path: 'covid', component: CovidPolicyComponent },
 	{ path: 'event', component: EventHomeComponent },
 	{ path: 'games', component: GamesListPageComponent },
 	{ path: 'login', component: LoginComponent },
