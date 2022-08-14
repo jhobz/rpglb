@@ -23,8 +23,8 @@ export class RegistrationPageComponent implements OnInit {
 		shouldPrintPronouns: false,
 	} as User
 	userTokenInfo: TokenUserInfo
-	minDate: Date = new Date(2020, 9, 7)
-	maxDate: Date = new Date(2020, 9, 21)
+	minDate: Date = new Date(2022, 9, 13)
+	maxDate: Date = new Date(2022, 9, 24)
 	handler: any
 	paymentAmount: number
 	srEvent: SpeedrunEvent
