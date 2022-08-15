@@ -14,6 +14,7 @@ import { UserService } from '../user.service'
 
 export class UserListComponent {
 	userList: User[] = []
+	attendees: User[] = []
 
 	constructor(public auth: AuthenticationService, private userService: UserService, private router: Router) { }
 
@@ -22,7 +23,7 @@ export class UserListComponent {
 			.subscribe(
 				(users: User[]) => {
 					this.userList = users
-					console.log(this.userList)
+					this.attendees = this.userList.filter(u => u.roles.includes('attendee'))
 				},
 				(err: any) => {
 					if (err.status === 401) {

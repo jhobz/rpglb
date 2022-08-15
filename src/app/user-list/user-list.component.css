@@ -14,7 +14,11 @@
 
 .user-list {
     width: 45%;
+    font-size: 0.75em;
 }
+
+/* .user-list.all-users {
+} */
 
 hr {
     border-color:#666;
@@ -27,5 +31,17 @@ hr {
 .subtle {
     color: rgb(148, 148, 148);
     font-size: 0.6em;
-    margin-top: 0;
+}
+
+.user {
+    padding: 1.5px 5px;
+}
+
+.user:hover {
+    background-color: #555;
+}
+
+.user .subtle {
+    font-size: 0.9em;
+    float: right;
 }
