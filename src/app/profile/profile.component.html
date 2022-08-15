@@ -2,7 +2,6 @@
 	<h1 class="no-bold">{{userFromToken.username}}</h1>
 	<h3>Registration</h3>
 	<p>You are currently <span [class]="userFromToken.roles.includes('attendee') ? 'success' : 'warn'">{{userFromToken.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
-		<span *ngIf="userFromToken.roles.includes('attendee')">Your registration fee will automatically be refunded in the near future.</span>
 	</p>
 	<!-- TODO: Make the message below change wording based on pre- or post-registration period. -->
 	<p *ngIf="!speedrunEvent?.isRegistrationOpen">Registration is not open. See the home page for a detailed timeline.</p>
@@ -10,6 +9,9 @@
 		<a *ngIf="userFromToken.roles.includes('attendee')" routerLink="/register">Update registration</a>
 		<a *ngIf="!userFromToken.roles.includes('attendee') && speedrunEvent?.isRegistrationOpen" routerLink="/register">Register to attend {{speedrunEvent?.name}}</a>
 	</div>
+	<p *ngIf="userFromToken.roles.includes('attendee')">
+		Please use the following link to book a hotel room at the event rate: <a href="https://www.hilton.com/en/attend-my-event/slcardt-rbo-0a77ce6e-7db1-43f3-9864-f27e8f5cc4a4/">Book a room</a>
+	</p>
 	<br /><br /><br />
 	<h3>Your submissions</h3>
 	<ng-container *ngIf="games && games.length > 0">
