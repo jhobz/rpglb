@@ -22,8 +22,16 @@ function generateToken (user) {
 }
 
 exports.getUsers = async function (req, res, next) {
-	let page = req.query.page ? req.query.page : 1
-	let limit = req.query.limit ? req.query.limit : 10
+	if (!req.user || !req.user._id || !req.user.roles || !req.user.roles.includes('admin')) {
+		console.warn('Unauthorized speedrun event creation attempted', req.user, req.body)
+		return res.status(401).json( {
+			status: 401,
+			message: 'Unauthorized. You do not have permission to create a speedrun event.'
+		} )
+	}
+
+	let page = !isNaN(req.query.page) ? parseInt(req.query.page) : 1
+	let limit = !isNaN(req.query.limit) ? parseInt(req.query.limit) : 10
 
 	try {
 		let users = await UserService.getUsers({}, page, limit)

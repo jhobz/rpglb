@@ -18,14 +18,17 @@ export class UserListComponent {
 	constructor(public auth: AuthenticationService, private userService: UserService, private router: Router) { }
 
 	getUsers() {
-		this.userService.getUsers()
+		this.userService.getUsers({limit: 100000})
 			.subscribe(
 				(users: User[]) => {
 					this.userList = users
+					console.log(this.userList)
 				},
 				(err: any) => {
 					if (err.status === 401) {
 						this.router.navigate(['login'])
+					} else {
+						console.error(err.message)
 					}
 				})
 	}

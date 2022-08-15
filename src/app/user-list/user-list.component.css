@@ -1,0 +1,31 @@
+.wrapper {
+    max-width: 1600px;
+    margin: auto;
+    padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10%;
+}
+
+.full-width {
+    flex-basis: 100%;
+}
+
+.user-list {
+    width: 45%;
+}
+
+hr {
+    border-color:#666;
+}
+
+.header {
+    font-weight: 700;
+}
+
+.subtle {
+    color: rgb(148, 148, 148);
+    font-size: 0.6em;
+    margin-top: 0;
+}

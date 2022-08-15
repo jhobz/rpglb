@@ -1,9 +1,34 @@
-<div *ngIf="!auth.isLoggedIn()"><a routerLink="/login">Login</a></div>
-<div *ngIf="auth.isLoggedIn()"><a routerLink="/profile">{{ auth.getUserInfo()?.username }}</a></div>
-<div *ngIf="auth.isLoggedIn()"><a (click)="auth.logout()">Logout</a></div>
-<button (click)="getUsers()">Fetch Users</button>
-<div class="user-list" *ngFor="let user of userList">
-	<span>{{user.username}}: </span>
-	<span>{{user.firstName}} {{user.lastName}} - </span>
-	<span>{{user.email}}</span>
+<div class="wrapper">
+	<div class="full-width">
+		<div *ngIf="auth.isLoggedIn()">Logged in as {{auth.getUserInfo()?.username}}</div>
+		<div *ngIf="!auth.isLoggedIn()"><a routerLink="/login">Login</a></div>
+		<button (click)="getUsers()">Fetch Users</button>
+	</div>
+	<div class="user-list" id="attendees">
+		<h2>Attendees</h2>
+		<div class="user header">
+			<span>Username - Discord - Email <span class="subtle">(Roles)</span></span>
+		</div>
+		<hr>
+		<ng-container *ngFor="let user of userList">
+			<div *ngIf="user.roles.includes('attendee')" class="user">
+				<span>{{user.username}} -</span>
+				<span>{{user.discord}} -</span>
+				<span>{{user.email}}</span>
+				<p class="subtle">{{user.roles.join('|')}}</p>
+			</div>
+		</ng-container>
+	</div>
+	<div class="user-list">
+		<h2>All Users</h2>
+		<div class="user header">
+			<span>Username - First & Last - Email</span>
+		</div>
+		<hr>
+		<div class="user" *ngFor="let user of userList">
+			<span>{{user.username}} -</span>
+			<span>{{user.firstName}} {{user.lastName}} -</span>
+			<span>{{user.email}}</span>
+		</div>
+	</div>
 </div>

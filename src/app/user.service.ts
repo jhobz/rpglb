@@ -21,8 +21,8 @@ export class UserService {
 		return this.http.post(this.apiUrl, user)
 	}
 
-	getUsers(): Observable<User[]> {
-		const options = { headers: this.auth.generateAuthHeader() }
+	getUsers(opts?: any): Observable<User[]> {
+		const options = { headers: this.auth.generateAuthHeader(), params: {...opts} }
 
 		return this.http.get(this.apiUrl, options)
 			.map( (res: any) => {
