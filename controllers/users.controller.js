@@ -23,10 +23,10 @@ function generateToken (user) {
 
 exports.getUsers = async function (req, res, next) {
 	if (!req.user || !req.user._id || !req.user.roles || !req.user.roles.includes('admin')) {
-		console.warn('Unauthorized speedrun event creation attempted', req.user, req.body)
+		console.warn('Unauthorized user info request attempted', req.user, req.body)
 		return res.status(401).json( {
 			status: 401,
-			message: 'Unauthorized. You do not have permission to create a speedrun event.'
+			message: 'Unauthorized. You do not have permission to get user info.'
 		} )
 	}
 
