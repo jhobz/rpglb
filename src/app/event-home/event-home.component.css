@@ -107,7 +107,7 @@
 .button {
 	border-radius: 5px;
 	color: white;
-	font-family: 'Segoe UI';
+	font-family: 'Segoe UI', 'Lucida Grande', sans-serif;
 	font-size: 1em;
 	padding: 25px;
 	white-space: nowrap;

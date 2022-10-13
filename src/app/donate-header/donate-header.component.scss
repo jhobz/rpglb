@@ -54,7 +54,7 @@ $background: map-get($rpglb-app-theme, background);
 .mat-raised-button {
 	grid-area: button;
 	border-radius: 5px;
-	font-family: 'Segoe UI';
+	font-family: 'Segoe UI', 'Lucida Grande', sans-serif;
 	font-size: 1.2em;
 	padding: 15px;
 	white-space: nowrap;
