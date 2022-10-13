@@ -14,11 +14,11 @@ export class DonateHeaderComponent implements OnInit {
 	event: SpeedrunEvent = new SpeedrunEvent()
 
 	constructor(private donationService: DonationService) {
-		this.event.name = 'RPG Limit Break 2019'
-		this.event.shortName = 'rpglb2018'
+		this.event.name = 'RPG Limit Break 2022'
+		this.event.shortName = 'rpglb2022'
 		this.event.cause = 'NAMI: National Alliance on Mental Illness'
 		this.event.causeLink = 'https://www.nami.org'
-		this.event.trackerId = 7
+		this.event.trackerId = 10
 		this.event.donations = { total: 50000, goal: 100000 }
 	}
 

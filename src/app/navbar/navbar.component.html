@@ -6,7 +6,8 @@
 		<a href="/schedule">SCHEDULE</a>
 		<!-- <a href="https://horaro.org/rpglb/2022" class="no-icon">SCHEDULE</a> -->
 		<a routerLink="/blog">BLOG</a>
-		<a href="/tracker/event/qfghh2">TRACKER</a>
+		<!-- TODO: Stop hardcoding this URL and pull the id from the speedrun event object -->
+		<a href="/tracker/event/rpglb2022">TRACKER</a>
 		<a *ngIf="mode === 'event'" routerLink="/rules">EVENT RULES</a>
 		<a *ngIf="mode !== 'event' && speedrunEvent?.isGamesListPublic" routerLink="/games">GAMES</a>
 		<a *ngIf="mode !== 'event' || speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>

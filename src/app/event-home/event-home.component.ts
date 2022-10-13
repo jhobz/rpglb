@@ -17,12 +17,13 @@ export class EventHomeComponent implements OnInit {
 	chatButtonText: string = 'Chat with viewers!'
 
 	constructor(private donationService: DonationService) {
-		this.event.name = 'RPG Limit Break 2019'
-		this.event.shortName = 'rpglb2019'
+		// TODO: This is all old and gross, really needs to be updated to pull stuff from the event object in the database
+		// this.event.name = 'RPG Limit Break 2022'
+		// this.event.shortName = 'rpglb2022'
 		this.event.cause = 'NAMI: National Alliance on Mental Illness'
 		this.event.causeLink = 'https://www.nami.org'
-		this.event.trackerId = 7
-		this.event.donations = { total: 50000, goal: 100000 }
+		// this.event.trackerId = 10
+		// this.event.donations = { total: 50000, goal: 100000 }
 	}
 
 	toggleChat() {
@@ -30,16 +31,16 @@ export class EventHomeComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.donationService.getTotalForEvent(this.event)
-			.subscribe(
-				(total: string) => this.event.donations.total = Number(total),
-				(error: HttpErrorResponse) => console.error('Error getting donation total', error)
-			)
-		this.donationService.getGoalForEvent(this.event)
-			.subscribe(
-				(goal: string) => this.event.donations.goal = Number(goal),
-				(error: HttpErrorResponse) => console.error('Error getting donation goal', error)
-			)
+		// this.donationService.getTotalForEvent(this.event)
+		// 	.subscribe(
+		// 		(total: string) => this.event.donations.total = Number(total),
+		// 		(error: HttpErrorResponse) => console.error('Error getting donation total', error)
+		// 	)
+		// this.donationService.getGoalForEvent(this.event)
+		// 	.subscribe(
+		// 		(goal: string) => this.event.donations.goal = Number(goal),
+		// 		(error: HttpErrorResponse) => console.error('Error getting donation goal', error)
+		// 	)
 	}
 
 }
