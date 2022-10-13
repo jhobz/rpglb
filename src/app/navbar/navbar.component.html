@@ -2,8 +2,9 @@
 	<a routerLink="/"><img class="logo" src="assets/images/logo_1200x424.png" /></a>
 	<nav>
 		<a *ngIf="mode === 'event'" href="/donate" target="_blank">DONATE</a>
-		<!-- <a *ngIf="mode === 'event'" href="/tracker/runs/7">SCHEDULE</a> -->
-		<a href="https://horaro.org/rpglb/2022" class="no-icon">SCHEDULE</a>
+		<!-- TODO: Add more granual event "modes" that dynamically alter links like the schedule -->
+		<a href="/schedule">SCHEDULE</a>
+		<!-- <a href="https://horaro.org/rpglb/2022" class="no-icon">SCHEDULE</a> -->
 		<a routerLink="/blog">BLOG</a>
 		<a href="/tracker/event/qfghh2">TRACKER</a>
 		<a *ngIf="mode === 'event'" routerLink="/rules">EVENT RULES</a>
