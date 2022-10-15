@@ -19,7 +19,7 @@ export class DonateHeaderComponent implements OnInit {
 		this.event.cause = 'NAMI: National Alliance on Mental Illness'
 		this.event.causeLink = 'https://www.nami.org'
 		this.event.trackerId = 10
-		this.event.donations = { total: 50000, goal: 100000 }
+		this.event.donations = { total: 0, goal: 100000 }
 	}
 
 	ngOnInit() {

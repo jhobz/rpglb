@@ -3,7 +3,8 @@
 		<div class="donation-container">
 			<div class="logo-bg nami"></div>
 			<div>Total Raised:</div>
-			<div class="donation-box" id="donation-total">{{event.donations.total | moneify}}</div>
+			<div *ngIf="event.donations.total > 0" class="donation-box" id="donation-total">{{event.donations.total | moneify}}</div>
+			<div *ngIf="event.donations.total <= 0" class="donation-box" id="donation-total">Soon™</div>
 			<div>Donation Goal:</div>
 			<div class="donation-box" id="donation-goal">{{event.donations.goal | moneify}}</div>
 			<a mat-raised-button color="accent" href="/donate" target="_blank">DONATE</a>
