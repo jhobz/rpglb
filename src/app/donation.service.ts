@@ -9,7 +9,7 @@ import { TrackerJson } from './tracker-json';
 @Injectable()
 export class DonationService {
 	// TODO: Change to local url during production
-	private trackerUrl: string = '/tracker/';
+	private trackerUrl: string = '/tracker/event/';
 
 	constructor(private http: HttpClient) {
 	}
