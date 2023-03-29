@@ -1,43 +1,30 @@
 <div class="wrapper">
 	<img class="logo" src="assets/images/logo_1200x424.png" />
-	<!-- <h1 class="home-title">RPG Limit Break returns this October!</h1> -->
-	<!-- <h1 class="home-title">RPG Limit Break is proud to host Questing for Glory: Hope and Healing 2!</h1> -->
-	<!-- <div class="timeline"><app-timeline></app-timeline></div> -->
-	<!-- <p>
-		Questing for Glory: Hope and Healing 2 proudly benefits NAMI: the National Alliance on Mental Illness. Please consider donating via the tracker link above, or check out <a href="https://nami.org">NAMI's website</a> for more information about the organization.
-	</p> -->
-
-	<!--<mat-card>
-		<h2 id="2020cancel" class="blog-title">RPGLB 2020 cancellation notice</h2>
-		<em>August 2nd, 2020</em>
-		<hr>
-		<p>With large gatherings and domestic/international travel still discouraged or prohibited by many state and national governments, and based on feedback from many registered attendees, RPGLB staff has made the decision to cancel RPG Limit Break 2020. Fortunately, we were able to postpone our existing event contract with the DoubleTree Salt Lake City Airport until next year, so RPGLB staff will not be facing any financial or legal impact as a result of this decision.</p>
-		<p>We are considering an online charity event during the planned event week (October 11-17), but if this happens it will be a separate event with new submissions. Trying to convert the existing RPGLB 2020 schedule into an online marathon would face some serious logistical problems (co-op runs in particular), and would also be unfair to the runners who submitted for an onsite event.</p>
-		<p>All registered RPGLB 2020 attendees will receive refunds for their attendance fees in the near future, and all accepted runners can defer their runs to RPG Limit Break 2021 (deferment will be automatic - runners do not need to formally request it or take any other action beyond resubmitting the same game/category to RPGLB 2021). Attendees who had reservations at the event hotel will need to cancel them, either via the link included in the hotel’s confirmation email or phone call to 801-539-1515. Essentia will be reaching out to prize donors who have already made shipments to us, to discuss options for returning those prizes (if desired).</p>
-		<p>While we’re extremely disappointed at being unable to hold RPG Limit Break this year, we are also grateful for all of the support and patience we’ve received from our community all throughout this process. We are looking forward to coming back with our 6th live charity event &amp; RPG speedrun community meetup in 2021!</p>
-		<p>As always, feel free to e-mail <a href="mailto:management@rpglimitbreak.com">management@rpglimitbreak.com</a> with any questions, concerns, or feedback.</p>
-	</mat-card>-->
-	<!-- <p>
-		{{event}} will take place in Salt Lake City, Utah, continuing to benefit the
-		<a href="https://www.nami.org" _target="blank">National Alliance on Mental Illness.</a> The event will take place October 16th to
-		October 22nd, at the <a href="https://doubletree3.hilton.com/en/hotels/utah/doubletree-by-hilton-hotel-salt-lake-city-airport-SLCARDT/index.html" target="_blank">DoubleTree by Hilton - Salt Lake City Airport</a>, and will be
-		a hybrid event with options to participate remotely. For future updates, <a href="https://twitter.com/rpglimitbreak" target="_blank">follow us on Twitter</a>, <a href="https://discord.gg/rpglb" target="_blank">join our Discord</a>,
-		or check back here regularly. A timeline of upcoming dates and deadlines is posted above, and more detailed event information can be found on our <a routerLink="/blog">blog post.</a>
-	</p>
-	<p>
-		{{event}} will be taking extensive measures to protect against COVID-19, including requiring attendees to be vaccinated and wearing masks in all event spaces. Please see our full <a routerLink="/covid">COVID-19 safety policy</a>
-		for more information.
-	</p>
-	<p>
-		Event registration for {{event}} is {{speedrunEvent?.isRegistrationOpen ? 'open' : 'closed.'}}
-		<span *ngIf="speedrunEvent?.isRegistrationOpen">
-			until Sunday, September 18th at 11:59 PM Eastern Daylight Time. You can register from your
-			<a routerLink="/profile">profile</a> after creating an account.
-		</span>
-		Game submissions have closed and the <a href="https://horaro.org/rpglb/2022" class="no-icon">schedule</a>
-		has been posted. Follow us on <a href="https://twitter.com/rpglimitbreak" _target="blank">Twitter</a> and
-		<a href="https://discord.gg/rpglb" _target="blank">Discord</a> for all announcements on this year's and future events!
-	</p> -->
+	<div *ngIf="speedrunEvent?.state==='pre'">
+		<h1 class="home-title">RPG Limit Break returns this July!</h1>
+		<div class="timeline"><app-timeline></app-timeline></div>
+		<p>
+			{{event}} will take place in Salt Lake City, Utah, continuing to benefit the
+			<a href="https://www.nami.org" _target="blank">National Alliance on Mental Illness.</a> The event will take place July 16th to
+			July 22nd, at the <a href="https://doubletree3.hilton.com/en/hotels/utah/doubletree-by-hilton-hotel-salt-lake-city-airport-SLCARDT/index.html" target="_blank">DoubleTree by Hilton - Salt Lake City Airport</a>, and will be
+			a hybrid event with options to participate remotely. For future updates, <a href="https://twitter.com/rpglimitbreak" target="_blank">follow us on Twitter</a>, <a href="https://discord.gg/rpglb" target="_blank">join our Discord</a>,
+			or check back here regularly. A timeline of upcoming dates and deadlines is posted above, and more detailed event information can be found in our <a routerLink="/blog">news section.</a>
+		</p>
+		<p>
+			{{event}} will be taking extensive measures to protect against COVID-19, including requiring attendees to be vaccinated and wearing masks in all event spaces. Please see our full <a routerLink="/covid">COVID-19 safety policy</a>
+			for more information.
+		</p>
+		<p>
+			Event registration for {{event}} is {{speedrunEvent?.isRegistrationOpen ? 'open' : 'closed.'}}
+			<span *ngIf="speedrunEvent?.isRegistrationOpen">
+				until Sunday, June 18th at 11:59 PM Eastern Daylight Time. You can register from your
+				<a routerLink="/profile">profile</a> after creating an account.
+			</span>
+			<!-- Game submissions have closed and the <a href="https://horaro.org/rpglb/2022" class="no-icon">schedule</a>
+			has been posted.--> Follow us on <a href="https://twitter.com/rpglimitbreak" _target="blank">Twitter</a> and
+			<a href="https://discord.gg/rpglb" _target="blank">Discord</a> for all announcements on this year's and future events!
+		</p>
+	</div>
 	<p *ngIf="speedrunEvent?.state==='post'">Welcome to RPG Limit Break! RPGLB is an annual event where gamers from around the globe gather to perform speedruns and support our efforts to raise money for NAMI, the National Alliance on Mental Illness, via a week-long, 24-hour livestream. RPG Limit Break is currently between events, but we sometimes host online events from the RPG speedrunning community, which you can watch below if we're currently live!</p>
 </div>
 <div class="embed-wrapper">
