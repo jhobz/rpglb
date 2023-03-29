@@ -2,9 +2,9 @@
 	<h1 class="no-bold">{{userFromToken.username}}</h1>
 	<h3>Registration</h3>
 	<p>You are currently <span [class]="userFromToken.roles.includes('attendee') ? 'success' : 'warn'">{{userFromToken.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
+		<!-- TODO: Make the message below change wording based on pre- or post-registration period. -->
+		<span *ngIf="!speedrunEvent?.isRegistrationOpen">The open registration period has either yet to open or has passed. Please see the home page for a detailed timeline.</span>
 	</p>
-	<!-- TODO: Make the message below change wording based on pre- or post-registration period. -->
-	<p *ngIf="!speedrunEvent?.isRegistrationOpen">Registration is not open. See the home page for a detailed timeline.</p>
 	<div>
 		<a *ngIf="userFromToken.roles.includes('attendee')" routerLink="/register">Update registration</a>
 		<a *ngIf="!userFromToken.roles.includes('attendee') && speedrunEvent?.isRegistrationOpen" routerLink="/register">Register to attend {{speedrunEvent?.name}}</a>
@@ -22,8 +22,9 @@
 			[showSelections]="speedrunEvent?.isGamesListPublic">
 		</app-submission-list>
 	</ng-container>
-	<div *ngIf="!games || (games && games.length === 0)">You have no submissions.</div>
-	<div *ngIf="!speedrunEvent?.areGameSubmissionsOpen">Submissions are currently closed.</div>
+	<p *ngIf="!games || (games && games.length === 0)">You have not submitted any runs.
+		<span *ngIf="!speedrunEvent?.areGameSubmissionsOpen">Submissions are not currently open.</span>
+	</p>
 	<br />
 	<a *ngIf="speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>
 	<br /><br /><br />

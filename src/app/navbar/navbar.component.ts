@@ -10,7 +10,7 @@ import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 })
 export class NavbarComponent implements OnInit {
 	// TODO: Don't hardcode these
-	mode: 'pre'|'off'|'event' = 'event'
+	mode: 'pre'|'live'|'post'
 	hasSubmissionRole: boolean
 	speedrunEvent: SpeedrunEvent
 
@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.speedrunEvent = srEvent
+				this.mode = this.speedrunEvent.state
 			})
 	}
 
