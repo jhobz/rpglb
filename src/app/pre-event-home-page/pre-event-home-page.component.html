@@ -15,11 +15,11 @@
 			for more information.
 		</p>
 		<p>
-			Event registration for {{event}} is {{speedrunEvent?.isRegistrationOpen ? 'open' : 'closed.'}}
-			<span *ngIf="speedrunEvent?.isRegistrationOpen">
-				until Sunday, June 18th at 11:59 PM Eastern Daylight Time. You can register from your
+			Event registration for {{event}}
+			<span *ngIf="speedrunEvent?.isRegistrationOpen">is open until Sunday, June 18th at 11:59 PM Eastern Daylight Time. You can register from your
 				<a routerLink="/profile">profile</a> after creating an account.
 			</span>
+			<span *ngIf="!speedrunEvent?.isRegistrationOpen">is either closed or has yet to open. Please check the timeline above for more details.</span>
 			<!-- Game submissions have closed and the <a href="https://horaro.org/rpglb/2022" class="no-icon">schedule</a>
 			has been posted.--> Follow us on <a href="https://twitter.com/rpglimitbreak" _target="blank">Twitter</a> and
 			<a href="https://discord.gg/rpglb" _target="blank">Discord</a> for all announcements on this year's and future events!
