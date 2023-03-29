@@ -23,7 +23,8 @@ import { VerifyPageComponent } from './verify-page/verify-page.component'
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component'
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/event', pathMatch: 'full' },
+	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
+	{ path: 'news', component: BlogComponent },
 	{ path: 'blog', component: BlogComponent },
 	{ path: 'contact', component: ContactComponent },
 	{ path: 'covid', component: CovidPolicyComponent },
