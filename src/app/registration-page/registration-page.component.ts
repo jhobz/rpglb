@@ -142,9 +142,7 @@ export class RegistrationPageComponent implements OnInit {
 	}
 
 	onFormChange() {
-		console.log('something changed')
 		if (this.form.valid) {
-			console.log('form valid')
 			this.userService.editUser(this.user)
 				.subscribe(
 					(res: any) => {
