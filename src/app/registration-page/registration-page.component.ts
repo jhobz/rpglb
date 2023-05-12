@@ -21,10 +21,11 @@ export class RegistrationPageComponent implements OnInit {
 		emergencyContact: {},
 		pronouns: '',
 		shouldPrintPronouns: false,
+		hasAcceptedCovidPolicy: false,
 	} as User
 	userTokenInfo: TokenUserInfo
-	minDate: Date = new Date(2022, 9, 13)
-	maxDate: Date = new Date(2022, 9, 24)
+	minDate: Date = new Date(2023, 6, 13)
+	maxDate: Date = new Date(2023, 6, 24)
 	handler: any
 	paymentAmount: number
 	srEvent: SpeedrunEvent
@@ -36,7 +37,6 @@ export class RegistrationPageComponent implements OnInit {
 	hasEventRole: boolean = false
 	canBackdoor: boolean = false
 	adminControlsEnabled: boolean = false
-	covid: boolean = false
 
 	@ViewChild('f') form: any
 
@@ -66,6 +66,9 @@ export class RegistrationPageComponent implements OnInit {
 					relationship: '',
 					phone: ''
 				}
+			}
+			if (!this.user.hasAcceptedCovidPolicy) {
+				this.user.hasAcceptedCovidPolicy = false
 			}
 			this.hasFullUserLoaded = true
 		})
@@ -139,7 +142,9 @@ export class RegistrationPageComponent implements OnInit {
 	}
 
 	onFormChange() {
+		console.log('something changed')
 		if (this.form.valid) {
+			console.log('form valid')
 			this.userService.editUser(this.user)
 				.subscribe(
 					(res: any) => {

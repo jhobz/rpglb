@@ -22,6 +22,7 @@ export interface User {
 	},
 	onSite?: boolean,
 	miscComments?: string,
+	hasAcceptedCovidPolicy?: boolean,
 	roles: string[]
 }
 

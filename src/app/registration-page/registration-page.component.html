@@ -20,14 +20,14 @@
 	</div>
 	<h1>Register for {{srEvent?.name}}</h1>
 	<p>In order to register for {{srEvent?.name}}, first you will need to enter your intended dates of stay
-		(the marathon stream will run October 16-22, with setup October 14-15 and teardown on October 23). We use this information
+		(the marathon stream will run July 16-22, with setup July 14-15, and teardown on July 23). We use this information
 		for general headcounts and to get an idea of the arrivals per day. You can change it on this page at any time. Afterwards,
 		click the "Pay Attendance Fee" button in order to start the payment process. The attendance fee for {{srEvent?.shortname}}
 		is USD {{ paymentAmount | currency:'USD' }}. This fee helps us cover costs related to
 		running the event for attendees, such as practice TVs, hotel fees, and more.
 		If you need your attendance fee refunded (in the event that you no longer wish to attend), please contact an
 		administrator via email, Twitter, or Discord (links available below). The deadline for attendance fee refunds
-		will be September 18 - after this date no refunds will be given. When attending,
+		will be June 18 - after this date no refunds will be given. When attending,
 		you will receive a badge with your username (<strong>{{userTokenInfo.username}}</strong>) printed on it. If you
 		would like to change your username, please contact an adminstrator.
 	</p>
@@ -35,7 +35,7 @@
 		All attendees must meet the requirements outlined in our <a routerLink="/covid">COVID-19 Safety Policy.</a> Please confirm you meet these requirements before registering to attend.
 	</p>
 	<p>Below you will find a number representing the number of attendees currently registered for the event and the
-		total cap. Registration will close on Sunday, September 18 at 11:59PM Eastern Daylight Time, or whenever the cap is reached.
+		total cap. Registration will close on Sunday, June 18 at 11:59PM Eastern Daylight Time, or whenever the cap is reached.
 		If the cap is reached and you have already begun the payment process, you will be able to finish it.
 		Otherwise, you will not be able to register. Keep an eye on our <a href="https://twitter.com/rpglimitbreak">Twitter</a>
 		and <a href="https://discord.gg/rpglb">Discord</a> for announcements, as occasionally we are able to increase
@@ -223,7 +223,8 @@
 					<mat-checkbox
 						name="covid"
 						(change)="onFormChange()"
-						[(ngModel)]="covid"
+						[(ngModel)]="user.hasAcceptedCovidPolicy"
+						[disabled]="user.roles.includes('attendee')"
 						required >
 						I agree to follow the <a routerLink="covid">COVID-19 Safety Policy</a>
 					</mat-checkbox>

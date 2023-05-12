@@ -122,7 +122,8 @@ let UserSchema = new mongoose.Schema({
 	miscComments: {
 		type: String,
 		maxlength: 560
-	}
+	},
+	hasAcceptedCovidPolicy: Boolean
 })
 
 function validateUnique(field) {
