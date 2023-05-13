@@ -22,6 +22,7 @@ export class RegistrationPageComponent implements OnInit {
 		pronouns: '',
 		shouldPrintPronouns: false,
 		hasAcceptedCovidPolicy: false,
+		isBringingMinors: false,
 	} as User
 	userTokenInfo: TokenUserInfo
 	minDate: Date = new Date(2023, 6, 13)
@@ -67,9 +68,9 @@ export class RegistrationPageComponent implements OnInit {
 					phone: ''
 				}
 			}
-			if (!this.user.hasAcceptedCovidPolicy) {
-				this.user.hasAcceptedCovidPolicy = false
-			}
+			// if (!this.user.hasAcceptedCovidPolicy) {
+			// 	this.user.hasAcceptedCovidPolicy = false
+			// }
 			this.hasFullUserLoaded = true
 		})
 		this.speedrunEventService.getCurrentSpeedrunEvent()

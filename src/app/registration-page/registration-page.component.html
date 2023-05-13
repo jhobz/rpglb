@@ -77,24 +77,33 @@
 					<mat-datepicker #endDatepicker></mat-datepicker>
 				</mat-form-field>
 
-				<div>
-					<mat-form-field class="full-width">
-						<input
-							matInput
-							name="phone"
-							placeholder="Mobile phone number"
-							[(ngModel)]="user.phone"
-							minlength="8"
-							maxlength="26"
-							(change)="onFormChange()"
-							required />
-						<mat-hint>Please include country code if outside of the U.S.</mat-hint>
-					</mat-form-field>
-				</div>
+				<br />
+				<mat-checkbox
+					name="onSite"
+					[(ngModel)]="user.onSite"
+					(change)="onFormChange()"
+					>
+					I will be staying at the event hotel
+				</mat-checkbox>
+				<p class="subtle">Hotel booking link found in profile after registration</p>
+				<br />
+
+				<mat-form-field class="wider-2">
+					<input
+						matInput
+						name="phone"
+						placeholder="Mobile phone number"
+						[(ngModel)]="user.phone"
+						minlength="8"
+						maxlength="26"
+						(change)="onFormChange()"
+						required />
+					<mat-hint>Please include country code if outside of the U.S.</mat-hint>
+				</mat-form-field>
 
 				<div class="flex">
 					<fieldset>
-						<div>Social information</div>
+						<legend>Social information</legend>
 						<mat-form-field>
 							<input
 								matInput
@@ -131,7 +140,7 @@
 					</fieldset>
 
 					<fieldset>
-						<div>Emergency contact information</div>
+						<legend>Emergency contact information</legend>
 						<mat-form-field>
 							<input
 								matInput
@@ -172,15 +181,8 @@
 					</fieldset>
 				</div>
 
-				<mat-checkbox
-					name="onSite"
-					[(ngModel)]="user.onSite"
-					(change)="onFormChange()"
-					>
-					Staying on-site at the event hotel?
-				</mat-checkbox>
-
-				<div>
+				<fieldset>
+					<legend>Pronouns</legend>
 					<mat-form-field class="wider">
 						<mat-label>Pronouns</mat-label>
 						<input
@@ -192,15 +194,52 @@
 							(change)="onFormChange()" />
 						<mat-hint>For use on your badge</mat-hint>
 					</mat-form-field>
-				</div>
-				<br>
-				<mat-checkbox
-					name="shouldPrintPronouns"
-					[(ngModel)]="user.shouldPrintPronouns"
-					(change)="onFormChange()">
-					Include pronouns on badge
-				</mat-checkbox>
-				<p>RPGLB staff reserves the right to take disciplinary action if you use the pronouns field for anything other than its intended purpose.</p>
+					<br>
+					<mat-checkbox
+						name="shouldPrintPronouns"
+						[(ngModel)]="user.shouldPrintPronouns"
+						(change)="onFormChange()">
+						Include pronouns on badge
+					</mat-checkbox>
+					<p class="subtle">RPGLB staff reserves the right to take disciplinary action if you use the pronouns field for anything other than its intended purpose.</p>
+				</fieldset>
+
+				<fieldset>
+					<legend>Minors</legend>
+					<mat-checkbox
+						name="minors"
+						[(ngModel)]="user.isBringingMinors"
+						(change)="onFormChange()"
+						>
+						I am bringing one or more minors
+					</mat-checkbox>
+
+					<ng-container *ngIf="user.isBringingMinors">
+						<mat-form-field>
+							<mat-label>Number</mat-label>
+							<input
+								matInput
+								type="number"
+								name="minorsNum"
+								[(ngModel)]="user.minorsNum"
+								maxlength="2"
+								(change)="onFormChange()"
+								[required]="user.isBringingMinors" />
+							<mat-hint>Number of children attending with you</mat-hint>
+						</mat-form-field>
+						<mat-form-field>
+							<mat-label>Name(s)</mat-label>
+							<input
+								matInput
+								name="minorsNames"
+								[(ngModel)]="user.minorsNames"
+								maxlength="64"
+								(change)="onFormChange()"
+								[required]="user.isBringingMinors" />
+							<mat-hint>List the names of all children attending with you, separated by commas</mat-hint>
+						</mat-form-field>
+					</ng-container>
+				</fieldset>
 
 				<div class="full-width-wrapper">
 					<mat-form-field class="full-width">
@@ -211,7 +250,7 @@
 							[(ngModel)]="user.miscComments"
 							(change)="onFormChange()"
 							matTextareaAutosize
-							matAutosizeMinRows="2"
+							matAutosizeMinRows="1"
 							matAutosizeMaxRows="5" >
 						</textarea>
 						<mat-hint>Use this space to provide any additional information you think event staff may need to know</mat-hint>
@@ -226,7 +265,7 @@
 						[(ngModel)]="user.hasAcceptedCovidPolicy"
 						[disabled]="user.roles.includes('attendee')"
 						required >
-						I agree to follow the <a routerLink="covid">COVID-19 Safety Policy</a>
+						I agree to follow the COVID-19 Safety Policy
 					</mat-checkbox>
 				</div>
 			</form>

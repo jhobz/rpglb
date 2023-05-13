@@ -9,20 +9,23 @@ export interface User {
 		startDate: Date
 		endDate: Date
 	}
-	twitch?: string,
-	twitter?: string,
-	discord?: string,
-	phone?: string,
-	pronouns?: string,
-	shouldPrintPronouns?: boolean,
+	onSite?: boolean
+	twitch?: string
+	twitter?: string
+	discord?: string
+	phone?: string
+	pronouns?: string
+	shouldPrintPronouns?: boolean
 	emergencyContact?: {
 		name: string,
 		relationship: string,
 		phone: string
-	},
-	onSite?: boolean,
-	miscComments?: string,
-	hasAcceptedCovidPolicy?: boolean,
+	}
+	isBringingMinors?: boolean
+	minorsNum?: number
+	minorsNames?: string
+	miscComments?: string
+	hasAcceptedCovidPolicy?: boolean
 	roles: string[]
 }
 

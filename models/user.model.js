@@ -119,6 +119,16 @@ let UserSchema = new mongoose.Schema({
 		}
 	},
 	onSite: Boolean,
+	isBringingMinors: Boolean,
+	minorsNum: {
+		type: Number,
+		min: 0,
+		max: 99
+	},
+	minorsNames: {
+		type: String,
+		maxlength: 64
+	},
 	miscComments: {
 		type: String,
 		maxlength: 560
