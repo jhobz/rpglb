@@ -9,10 +9,19 @@
 		<a *ngIf="userFromToken.roles.includes('attendee')" routerLink="/register">Update registration</a>
 		<a *ngIf="!userFromToken.roles.includes('attendee') && speedrunEvent?.isRegistrationOpen" routerLink="/register">Register to attend {{speedrunEvent?.name}}</a>
 	</div>
-	<p *ngIf="userFromToken.roles.includes('attendee')">
-		Please use the following link to book a hotel room at the event rate: <a href="https://www.hilton.com/en/attend-my-event/slcardt-rbo-0a77ce6e-7db1-43f3-9864-f27e8f5cc4a4/">Book a room</a>
-	</p>
+
+	<br />
+
+	<ng-container *ngIf="userFromToken.roles.includes('attendee')">
+		<h2>What's next?</h2>
+		<p>
+			Please use the following link to book a hotel room at the event rate: <a href="https://www.hilton.com/en/attend-my-event/slcardt-rpg-aa87e409-409d-4399-9524-c44663f7407a/">Book a room</a>
+		</p>
+	</ng-container>
+	<p *ngIf="speedrunEvent?.areVolunteerSubmissionsOpen">We can always use more volunteers! Check out the <a routerLink="/volunteer">volunteering guide</a> for more information. On-site and remote positions available!</p>
+
 	<br /><br /><br />
+	
 	<h3>Your submissions</h3>
 	<ng-container *ngIf="games && games.length > 0">
 		<app-submission-list #submissionList

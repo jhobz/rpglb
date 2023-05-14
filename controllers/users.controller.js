@@ -111,7 +111,11 @@ exports.updateUser = async function (req, res, next) {
 		shouldPrintPronouns: req.body.shouldPrintPronouns ? req.body.shouldPrintPronouns : null,
 		emergencyContact: req.body.emergencyContact ? req.body.emergencyContact : null,
 		onSite: req.body.onSite !== undefined ? req.body.onSite : null,
-		miscComments: req.body.miscComments ? req.body.miscComments : null,
+		isBringingMinors: req.body.isBringingMinors !== undefined ? req.body.isBringingMinors : null,
+		minorsNum: req.body.minorsNum !== undefined ? req.body.minorsNum : null,
+		minorsNames: req.body.minorsNames ? req.body.minorsNames : null,
+		miscComments: req.body.miscComments !== undefined ? req.body.miscComments : null,
+		hasAcceptedCovidPolicy: req.body.hasAcceptedCovidPolicy !== undefined ? req.body.hasAcceptedCovidPolicy : null,
 		verified: req.body.verified !== undefined ? req.body.verified : null
 	}
 

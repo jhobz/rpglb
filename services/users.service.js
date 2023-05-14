@@ -53,9 +53,10 @@ exports.updateUser = async function (user) {
 		return false
 	}
 
-	// Replace any changed values
+	// Replace all values (even if unchanged)
+	// Have to check undefined vs. falsy because of empty strings and booleans
 	Object.keys(user).forEach(key => {
-		if (user[key] || typeof user[key] === 'boolean') {
+		if (user[key] !== undefined) {
 			oldUser[key] = user[key]
 		}
 	})

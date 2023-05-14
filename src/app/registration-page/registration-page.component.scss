@@ -34,32 +34,55 @@ $bonus: mat-palette($mat-purple, 400, 200);
 	}
 }
 
-.registration-container {
-	margin: 50px 0 0 50px;
-	// max-width: 1000px;
+.subtle {
+    color: #919191;
+    font-size: 0.8em;
+    font-style: italic;
+}
 
-	.flex {
-		display: flex;
-		justify-content: space-between;
+.registration-container {
+	margin: 50px auto 0 auto;
+	max-width: 1000px;
+
+	legend {
+		font-weight: bold;
+	}
+
+	mat-checkbox {
+		margin: 0 0 20px 0;
 	}
 
 	fieldset {
+		margin: 25px 0;
+		padding: 25px;
 		display: flex;
 		flex-direction: column;
-		padding: 25px;
-		margin: 25px 0;
 		flex-grow: 1;
-
-		&:last-of-type {
-			margin-left: 50px;
-		}
 
 		mat-form-field {
 			margin: 20px 0;
 
-			&:last-of-type {
-				margin: 0;
+			&:first-of-type {
+				margin-top: 0;
 			}
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+
+		& > h3 {
+			margin-top: 0;
+		}
+	}
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+		gap: 50px;
+
+		fieldset {
+			margin: 25px 0 0;
 		}
 	}
 
@@ -74,6 +97,10 @@ $bonus: mat-palette($mat-purple, 400, 200);
 
 	.wider {
 		min-width: 300px;
+	}
+
+	.wider-2 {
+		min-width: 400px;
 	}
 }
 

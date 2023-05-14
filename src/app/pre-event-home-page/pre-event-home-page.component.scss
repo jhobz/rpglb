@@ -23,14 +23,14 @@ $background: map-get($rpglb-app-theme, background);
 
 .embed-wrapper {
 	position: relative;
-	width: 100%;
+	width: calc(100% + 4em);
 	height: 540px;
 	box-sizing: content-box;
 	padding: 50px 0;
 	display: flex;
 	justify-content: center;
 	background-color: mat-color($background, card);
-	margin: 100px 0;
+	margin: 100px -2em;
 	box-shadow: inset 0 0 20px black;
 }
 

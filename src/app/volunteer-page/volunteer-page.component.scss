@@ -1,6 +1,11 @@
 .main-content {
 	grid-area: content;
 	padding: 25px;
-	max-width: 1600px;
+	max-width: 1250px;
 	margin: 0 auto;
+}
+
+h2 {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #aaaaaa;
 }
