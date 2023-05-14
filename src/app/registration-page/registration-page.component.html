@@ -290,6 +290,7 @@
 			class="warn-light registration-form">
 			Sorry, registration is not currently open or has reached the limit.
 		</div>
+		<p><a routerLink="/profile">Return to profile</a></p>
 	</div>
 	<div *ngIf="!srEvent || !user || !hasFullUserLoaded || isProcessingPayment" class="registration-container">
 		<div class="spinner-message">{{spinnerMessage}}</div>
