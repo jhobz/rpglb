@@ -23,7 +23,7 @@
 				[checked]="speedrunEvent?.areGameSubmissionsOpen"
 				[disabled]="!adminControlsEnabled"
 				labelPosition="before"
-				(change)="updateGameSubmissionState(gameSubmissionSlide.checked)">
+				(change)="updateState('gameSubmissions', gameSubmissionSlide.checked)">
 				{{speedrunEvent?.areGameSubmissionsOpen ? 'OPEN' : 'CLOSED'}}
 			</mat-slide-toggle>
 		</div>
@@ -36,7 +36,7 @@
 				[checked]="speedrunEvent?.isGamesListPublic"
 				[disabled]="!adminControlsEnabled"
 				labelPosition="before"
-				(change)="updateGamesListState(gamesListSlide.checked)">
+				(change)="updateState('gamesList', gamesListSlide.checked)">
 				{{speedrunEvent?.isGamesListPublic ? 'PUBLIC' : 'PRIVATE'}}
 			</mat-slide-toggle>
 		</div>
@@ -49,7 +49,7 @@
 				[checked]="speedrunEvent?.isRegistrationOpen"
 				[disabled]="!adminControlsEnabled"
 				labelPosition="before"
-				(change)="updateRegistrationState(registrationSlide.checked)">
+				(change)="updateState('registration', registrationSlide.checked)">
 				{{speedrunEvent?.isRegistrationOpen ? 'OPEN' : 'CLOSED'}}
 			</mat-slide-toggle>
 		</div>
@@ -62,8 +62,21 @@
 				[checked]="speedrunEvent?.areVolunteerSubmissionsOpen"
 				[disabled]="!adminControlsEnabled"
 				labelPosition="before"
-				(change)="updateVolunteerSubmissionState(volunteerSubmissionSlide.checked)">
+				(change)="updateState('volunteerSubmissions', volunteerSubmissionSlide.checked)">
 				{{speedrunEvent?.areVolunteerSubmissionsOpen ? 'OPEN' : 'CLOSED'}}
+			</mat-slide-toggle>
+		</div>
+
+		<div>
+			<h5>Prize Submissions</h5>
+			<mat-slide-toggle #prizeSubmissionSlide
+				color="primary"
+				matTooltip="I hope you know what you're doing..."
+				[checked]="speedrunEvent?.arePrizeSubmissionsOpen"
+				[disabled]="!adminControlsEnabled"
+				labelPosition="before"
+				(change)="updateState('prizeSubmissions', prizeSubmissionSlide.checked)">
+				{{speedrunEvent?.arePrizeSubmissionsOpen ? 'OPEN' : 'CLOSED'}}
 			</mat-slide-toggle>
 		</div>
 	</fieldset>

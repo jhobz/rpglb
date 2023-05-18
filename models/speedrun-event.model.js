@@ -35,6 +35,7 @@ let SpeedrunEventSchema = new mongoose.Schema({
 		required: true
 	},
 	areGameSubmissionsOpen: Boolean,
+	arePrizeSubmissionsOpen: Boolean,
 	areVolunteerSubmissionsOpen: Boolean,
 	isGamesListPublic: Boolean,
 	isRegistrationOpen: Boolean,

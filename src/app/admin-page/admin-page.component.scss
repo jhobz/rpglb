@@ -27,9 +27,19 @@ fieldset:disabled > :not(legend) {
 
 /* Event controls */
 .event-controls {
-    gap: 15%;
+    column-gap: 9em;
+    row-gap: 3em;
     justify-content: flex-start;
+    flex-wrap: wrap;
     position: relative;
+
+    & > div {
+        min-width: 96px;
+    }
+
+    h5 {
+        white-space: nowrap;
+    }
 }
 
 .lock-button {

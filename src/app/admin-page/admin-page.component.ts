@@ -62,7 +62,7 @@ export class AdminPageComponent implements OnInit {
 		this.adminControlsEnabled = true
 	}
 
-    updateSpeedrunEvent(propertyName: string, propertyValue: boolean, readableName: string, readableValue: string) {
+    updateSpeedrunEvent(propertyName: string, propertyValue: any, readableName: string, readableValue: string) {
 		this.speedrunEvent[propertyName] = propertyValue
 		this.speedrunEventService.editSpeedrunEvent(this.speedrunEvent)
 			.subscribe(
@@ -83,23 +83,25 @@ export class AdminPageComponent implements OnInit {
 				})
     }
 
-    updateGameSubmissionState(value: boolean) {
-        this.updateSpeedrunEvent('areGameSubmissionsOpen', value, 'Game submissions', value ? 'open' : 'closed')
-    }
-
-	updateGamesListState(value: boolean) {
-        this.updateSpeedrunEvent('isGamesListPublic', value, 'Games list & schedule', value ? 'public': 'private')
-	}
-
-    updateRegistrationState(value: boolean) {
-        this.updateSpeedrunEvent('isRegistrationOpen', value, 'Registration', value ? 'open' : 'closed')
-    }
-
-    updateVolunteerSubmissionState(value: boolean) {
-        this.updateSpeedrunEvent('areVolunteerSubmissionsOpen', value, 'Volunteer submissions', value ? 'open' : 'closed')
-    }
-
-    updateEventState(value: boolean) {
-        // this.updateSpeedrunEvent('isRegistrationOpen', value, 'Registration', value ? 'open' : 'closed')
+    updateState(property: string, value: any) {
+        switch (property) {
+            case 'gameSubmissions':
+                this.updateSpeedrunEvent('areGameSubmissionsOpen', value, 'Game submissions', value ? 'open' : 'closed')
+                break
+            case 'gamesList':
+                this.updateSpeedrunEvent('isGamesListPublic', value, 'Games list & schedule', value ? 'public': 'private')
+                break
+            case 'registration':
+                this.updateSpeedrunEvent('isRegistrationOpen', value, 'Registration', value ? 'open' : 'closed')
+                break
+            case 'volunteerSubmissions':
+                this.updateSpeedrunEvent('areVolunteerSubmissionsOpen', value, 'Volunteer submissions', value ? 'open' : 'closed')
+                break
+            case 'prizeSubmissions':
+                this.updateSpeedrunEvent('arePrizeSubmissionsOpen', value, 'Prize submissions', value ? 'open' : 'closed')
+                break
+            default:
+                console.error('unrecognized state change!')
+        }
     }
 }

@@ -2,7 +2,6 @@
 	<a routerLink="/"><img class="logo" src="assets/images/logos/LimitBreak-new-logo-RPGLB-02.png" /></a>
 	<nav>
 		<a *ngIf="mode === 'live'" href="/donate" target="_blank">DONATE</a>
-		<!-- TODO: Add more granular event "modes" that dynamically alter links like the schedule -->
 		<a *ngIf="mode === 'live' || speedrunEvent?.isGamesListPublic" href="/schedule">SCHEDULE</a>
 		<!-- <a href="https://horaro.org/rpglb/2022" class="no-icon">SCHEDULE</a> -->
 		<a routerLink="/news">NEWS</a>
@@ -12,10 +11,9 @@
 		<!-- <a *ngIf="mode !== 'live' && speedrunEvent?.isGamesListPublic" routerLink="/games">GAMES</a> -->
 		<a *ngIf="mode !== 'live' || speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>
 		<a *ngIf="mode !== 'live' && speedrunEvent?.areVolunteerSubmissionsOpen" routerLink="/volunteer">VOLUNTEER</a>
-		<a *ngIf="mode !== 'live' && speedrunEvent?.areVolunteerSubmissionsOpen" class="no-icon" target="_blank" href="https://docs.google.com/forms/d/1wXAURhF3byIZA6RQnvZlVygrwNvj_WtnWYdFbQ7mxc8">PRIZES</a>
+		<a *ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen" class="no-icon" target="_blank" href="https://docs.google.com/forms/d/1wXAURhF3byIZA6RQnvZlVygrwNvj_WtnWYdFbQ7mxc8">PRIZES</a>
 		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank">DISCORD</a>
 		<a *ngIf="mode === 'live'" href="https://theyetee.com/RPGLimitBreak" class="no-icon" target="_blank">MERCH</a>
-		<!-- <a routerLink="about">ABOUT</a> -->
 		<div class="auth-container" *ngIf="isLoggedIn()">
 			<a routerLink="/profile">PROFILE</a>
 			<a (click)="logout()">LOGOUT</a>
