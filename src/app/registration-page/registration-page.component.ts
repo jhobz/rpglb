@@ -142,7 +142,16 @@ export class RegistrationPageComponent implements OnInit {
 				})
 	}
 
-	onFormChange() {
+	onFormChange(target?: string) {
+		// This is a hack to fix the requirement dependency of minorsNum and minorsNames.
+		// This should be handled with a custom, conditional validator upon upgrading the site
+		// to use FormControls.
+		// See https://medium.com/ngx/3-ways-to-implement-conditional-validation-of-reactive-forms-c59ed6fc3325#6a2a
+		if (target === 'minors' && !this.form.controls.minors.value) {
+			setTimeout(() => this.onFormChange(), 100)
+			return
+		}
+
 		if (this.form.valid) {
 			this.userService.editUser(this.user)
 				.subscribe(
