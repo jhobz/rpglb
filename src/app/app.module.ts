@@ -67,6 +67,7 @@ import { ContactComponent } from './contact/contact.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component';
 import { CovidPolicyComponent } from './covid-policy/covid-policy.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import { CovidPolicyComponent } from './covid-policy/covid-policy.component';
 		TimelineComponent,
 		VolunteerPageComponent,
 		CovidPolicyComponent,
+		AdminPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent

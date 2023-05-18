@@ -1,0 +1,109 @@
+<div class="wrapper full-width">
+	<div>Logged in as {{user.username}}</div>
+
+	<!-- Event Management -->
+	<fieldset class="event-controls flex-container" *ngIf="user.roles.includes('event')" [disabled]="!adminControlsEnabled">
+		<legend>
+			<span>Event Management</span>
+			<button
+				mat-mini-fab
+				class="lock-button"
+				color="primary"
+				[disabled]="adminControlsEnabled"
+				(click)="enableAdminControls()">
+				<mat-icon>lock_open</mat-icon>
+			</button>
+		</legend>
+
+		<div>
+			<h5>Game Submissions</h5>
+			<mat-slide-toggle #gameSubmissionSlide
+				color="primary"
+				matTooltip="I hope you know what you're doing..."
+				[checked]="speedrunEvent?.areGameSubmissionsOpen"
+				[disabled]="!adminControlsEnabled"
+				labelPosition="before"
+				(change)="updateGameSubmissionState(gameSubmissionSlide.checked)">
+				{{speedrunEvent?.areGameSubmissionsOpen ? 'OPEN' : 'CLOSED'}}
+			</mat-slide-toggle>
+		</div>
+
+		<div>
+			<h5>Games List / Schedule</h5>
+			<mat-slide-toggle #gamesListSlide
+				color="primary"
+				matTooltip="I hope you know what you're doing..."
+				[checked]="speedrunEvent?.isGamesListPublic"
+				[disabled]="!adminControlsEnabled"
+				labelPosition="before"
+				(change)="updateGamesListState(gamesListSlide.checked)">
+				{{speedrunEvent?.isGamesListPublic ? 'PUBLIC' : 'PRIVATE'}}
+			</mat-slide-toggle>
+		</div>
+
+		<div>
+			<h5>Registration</h5>
+			<mat-slide-toggle #registrationSlide
+				color="primary"
+				matTooltip="I hope you know what you're doing..."
+				[checked]="speedrunEvent?.isRegistrationOpen"
+				[disabled]="!adminControlsEnabled"
+				labelPosition="before"
+				(change)="updateRegistrationState(registrationSlide.checked)">
+				{{speedrunEvent?.isRegistrationOpen ? 'OPEN' : 'CLOSED'}}
+			</mat-slide-toggle>
+		</div>
+
+		<div>
+			<h5>Volunteer Submissions</h5>
+			<mat-slide-toggle #volunteerSubmissionSlide
+				color="primary"
+				matTooltip="I hope you know what you're doing..."
+				[checked]="speedrunEvent?.areVolunteerSubmissionsOpen"
+				[disabled]="!adminControlsEnabled"
+				labelPosition="before"
+				(change)="updateVolunteerSubmissionState(volunteerSubmissionSlide.checked)">
+				{{speedrunEvent?.areVolunteerSubmissionsOpen ? 'OPEN' : 'CLOSED'}}
+			</mat-slide-toggle>
+		</div>
+	</fieldset>
+
+	<!-- User Management -->
+	<fieldset *ngIf="user.roles.includes('admin')">
+		<legend>User Management</legend>
+		<button
+			mat-raised-button
+			color="primary"
+			(click)="getUsers()">
+			<mat-icon>refresh</mat-icon>
+		</button>
+		<div class="flex-container">
+			<div class="user-list" id="attendees">
+				<h2>Attendees <span class="subtle">({{attendees.length}})</span></h2>
+				<div class="user header">
+					<span>Username - Discord - Email <span class="subtle">Roles</span></span>
+				</div>
+				<hr>
+				<div *ngFor="let user of attendees" class="user">
+					<span>{{user.username}} -</span>
+					<span>{{user.discord}} -</span>
+					<span>{{user.email}}</span>
+					<span class="subtle">{{user.roles.join('|')}}</span>
+				</div>
+			</div>
+			<div class="user-list all-users">
+				<h2>All Users <span class="subtle">({{userList.length}})</span></h2>
+				<div class="user header">
+					<span>Username - First & Last - Email <span class="subtle">Roles</span></span>
+				</div>
+				<hr>
+				<div class="user" *ngFor="let user of userList">
+					<span>{{user.username}} -</span>
+					<span>{{user.firstName}} {{user.lastName}} -</span>
+					<span>{{user.email}}</span>
+					<span class="subtle">{{user.roles.join('|')}}</span>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+</div>

@@ -1,0 +1,82 @@
+@import '../../rpglb-dark-theme.scss';
+
+$primary: map-get($rpglb-app-theme, primary);
+$warn: map-get($rpglb-app-theme, warn);
+$background: map-get($rpglb-app-theme, background);
+
+/* General things */
+.wrapper {
+    max-width: 1600px;
+    margin: auto;
+    padding: 50px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+}
+
+fieldset {
+    margin-top: 1em;
+}
+
+fieldset:disabled > :not(legend) {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Event controls */
+.event-controls {
+    gap: 15%;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.lock-button {
+    position: absolute;
+    top: 26px;
+    right: 14px;
+}
+
+/deep/ .event-controls:not(:disabled) mat-slide-toggle {
+	color: mat-color($warn, lighter);
+
+	&.mat-checked {
+		color: mat-color($primary, 200);
+	}
+}
+
+/* User lists */
+
+.user-list {
+    width: 50%;
+    font-size: 0.75em;
+}
+
+hr {
+    border-color:#666;
+}
+
+.header {
+    font-weight: 700;
+}
+
+.subtle {
+    color: rgb(148, 148, 148);
+    font-size: 0.6em;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.user {
+    padding: 1.5px 5px;
+}
+
+.user:hover {
+    background-color: #555;
+}
+
+.user .subtle {
+    font-size: 0.9em;
+    float: right;
+}

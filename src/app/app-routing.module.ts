@@ -21,9 +21,11 @@ import { SubmissionsListPageComponent } from './submissions-list-page/submission
 import { UserListComponent } from './user-list/user-list.component'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component'
+import { AdminPageComponent } from './admin-page/admin-page.component'
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
+	{ path: 'admin', component: AdminPageComponent, canActivate: [AuthGuardService] },
 	{ path: 'news', component: BlogComponent },
 	{ path: 'blog', component: BlogComponent },
 	{ path: 'contact', component: ContactComponent },
