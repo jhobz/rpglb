@@ -39,7 +39,7 @@ export class AdminPageComponent implements OnInit {
 
     ngOnInit() {
 		this.user = this.auth.getUserInfo()
-		if (!this.user || !this.user.roles || (!this.user.roles.includes('event') && !this.user.roles.includes('admin'))) {
+		if (!this.user || !this.user.roles || (!this.user.roles.includes('safety') && !this.user.roles.includes('admin'))) {
             this.router.navigate(['login'])
         }
 

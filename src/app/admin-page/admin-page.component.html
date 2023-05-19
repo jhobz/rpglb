@@ -1,6 +1,6 @@
 <div class="wrapper full-width">
 	<!-- Event Management -->
-	<fieldset class="event-controls flex-container" *ngIf="user.roles.includes('event')" [disabled]="!adminControlsEnabled">
+	<fieldset class="event-controls flex-container" *ngIf="user.roles.includes('admin')" [disabled]="!adminControlsEnabled">
 		<legend>
 			<span>Event State Management</span>
 			<button
@@ -95,7 +95,7 @@
 	</fieldset>
 
 	<!-- Event Info -->
-	<fieldset *ngIf="user.roles.includes('event')" class="event-info">
+	<fieldset *ngIf="user.roles.includes('admin')" class="event-info">
 		<legend>Event Information</legend>
 		<p class="warn">Note: This section is to be used for updating the <em>active event ONLY.</em> Do NOT use this section to change events completely.</p>
 		<p class="subtle">SpeedrunEvent ID: {{speedrunEvent._id}}</p>
@@ -190,7 +190,7 @@
 	</fieldset>
 
 	<!-- User Management -->
-	<fieldset *ngIf="user.roles.includes('admin')">
+	<fieldset *ngIf="user.roles.includes('admin') || user.roles.includes('safety')">
 		<legend>User Management</legend>
 		<button
 			mat-mini-fab
