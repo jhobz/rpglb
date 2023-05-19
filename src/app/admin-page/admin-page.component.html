@@ -207,11 +207,13 @@
 					<span>Username - Discord - Email <span class="subtle">Roles</span></span>
 				</div>
 				<hr>
-				<div *ngFor="let user of attendees" class="user" (click)="onUserClick(user)">
-					<span>{{user.username}} -</span>
-					<span>{{user.discord}} -</span>
-					<span>{{user.email}}</span>
-					<span class="subtle">{{user.roles.join('|')}}</span>
+				<div class="user-wrapper">
+					<div *ngFor="let user of attendees" class="user" (click)="onUserClick(user)">
+						<span>{{user.username}} -</span>
+						<span>{{user.discord}} -</span>
+						<span>{{user.email}}</span>
+						<span class="subtle">{{user.roles.join('|')}}</span>
+					</div>
 				</div>
 			</div>
 			<div class="user-list all-users">
