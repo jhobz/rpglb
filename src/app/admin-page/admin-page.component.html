@@ -1,19 +1,18 @@
 <div class="wrapper full-width">
-	<div>Logged in as {{user.username}}</div>
-
 	<!-- Event Management -->
 	<fieldset class="event-controls flex-container" *ngIf="user.roles.includes('event')" [disabled]="!adminControlsEnabled">
 		<legend>
-			<span>Event Management</span>
-			<button
-				mat-mini-fab
-				class="lock-button"
-				color="primary"
-				[disabled]="adminControlsEnabled"
-				(click)="enableAdminControls()">
-				<mat-icon>lock_open</mat-icon>
-			</button>
+			<span>Event State Management</span>
 		</legend>
+
+		<button
+			mat-mini-fab
+			class="floating-button"
+			color="primary"
+			[disabled]="adminControlsEnabled"
+			(click)="enableAdminControls()">
+			<mat-icon>lock_open</mat-icon>
+		</button>
 
 		<div>
 			<h5>Game Submissions</h5>
@@ -79,13 +78,124 @@
 				{{speedrunEvent?.arePrizeSubmissionsOpen ? 'OPEN' : 'CLOSED'}}
 			</mat-slide-toggle>
 		</div>
+
+		<mat-form-field>
+			<mat-label>Event State</mat-label>
+			<mat-select #eventStateSelect
+				name="state"
+				[(ngModel)]="speedrunEvent.state"
+				[disabled]="!adminControlsEnabled"
+				(change)="updateState('eventState', eventStateSelect.value)"
+				>
+				<mat-option *ngFor="let option of stateOptions" [value]="option">
+					{{option}}
+				</mat-option>
+			</mat-select>
+			<mat-hint>Current time in relation to event dates</mat-hint>
+		</mat-form-field>
+	</fieldset>
+
+	<!-- Event Info -->
+	<fieldset *ngIf="user.roles.includes('event')" class="event-info">
+		<legend>Event Information</legend>
+		<p class="warn">Note: This section is to be used for updating the <em>active event ONLY.</em> Do NOT use this section to change events completely.</p>
+		<p class="subtle">SpeedrunEvent ID: {{speedrunEvent._id}}</p>
+		<form #form="ngForm">
+			<div class="flex-container">
+				<mat-form-field>
+					<mat-label>Name</mat-label>
+					<input
+						matInput
+						type="text"
+						name="name"
+						[(ngModel)]="speedrunEvent.name"
+						required
+						/>
+					<mat-hint>The full name of the event</mat-hint>
+				</mat-form-field>
+				<mat-form-field>
+					<mat-label>Short name</mat-label>
+					<input
+						matInput
+						type="text"
+						name="shortName"
+						[(ngModel)]="speedrunEvent.shortname"
+						required
+						/>
+					<mat-hint>The shorthand for the event</mat-hint>
+				</mat-form-field>
+			</div>
+
+			<fieldset class="flex-container small-fieldset">
+				<legend>Cause</legend>
+				<mat-form-field>
+					<mat-label>Name</mat-label>
+					<input
+						matInput
+						type="text"
+						name="causeName"
+						[(ngModel)]="speedrunEvent.cause.name"
+						required
+						/>
+					<mat-hint>The name of the benefitting charity</mat-hint>
+				</mat-form-field>
+				<mat-form-field>
+					<mat-label>URL</mat-label>
+					<input
+						matInput
+						type="text"
+						name="causeUrl"
+						[(ngModel)]="speedrunEvent.cause.url"
+						required
+						/>
+					<mat-hint>The url for the benefitting charity</mat-hint>
+				</mat-form-field>
+			</fieldset>
+
+			<mat-form-field>
+				<mat-label>Registration Cap</mat-label>
+				<input
+					matInput
+					type="number"
+					name="maxRegisteredUsers"
+					[(ngModel)]="speedrunEvent.maxRegisteredUsers"
+					required
+					/>
+				<mat-hint>Attendees</mat-hint>
+			</mat-form-field>
+
+			<mat-form-field class="small-field">
+				<mat-label>Registration Cost</mat-label>
+				<input
+					matInput
+					type="number"
+					name="registrationCost"
+					[(ngModel)]="speedrunEvent.registrationCost"
+					required
+					/>
+				<span matPrefix>$&nbsp;</span>
+				<span matSuffix>USD</span>
+			</mat-form-field>
+
+			<br>
+			<button
+				mat-raised-button
+				class="floating-button"
+				color="primary"
+				[disabled]="!form.valid"
+				(click)="submitForm()"
+				>
+				Submit
+			</button>
+		</form>
 	</fieldset>
 
 	<!-- User Management -->
 	<fieldset *ngIf="user.roles.includes('admin')">
 		<legend>User Management</legend>
 		<button
-			mat-raised-button
+			mat-mini-fab
+			class="floating-button"
 			color="primary"
 			(click)="getUsers()">
 			<mat-icon>refresh</mat-icon>

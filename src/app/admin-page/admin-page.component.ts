@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { Router } from '@angular/router'
 
@@ -17,8 +17,17 @@ export class AdminPageComponent implements OnInit {
     userList: User[] = []
     attendees: User[] = []
     user: TokenUserInfo
-    speedrunEvent: SpeedrunEvent
+    speedrunEvent: SpeedrunEvent = {
+        name: '',
+        shortname: '',
+        cause: {
+            name: '',
+            url: ''
+        }
+    } as SpeedrunEvent
     adminControlsEnabled: boolean
+    stateOptions = ['pre', 'live', 'post']
+    @ViewChild('form') form: any
 
     constructor(
         private auth: AuthenticationService,
@@ -67,7 +76,7 @@ export class AdminPageComponent implements OnInit {
 		this.speedrunEventService.editSpeedrunEvent(this.speedrunEvent)
 			.subscribe(
 				(srEvent: SpeedrunEvent) => {
-					this.snackBar.open(`${readableName} set to ${readableValue} successfully!`, '', {
+					this.snackBar.open(`${readableName} set to "${readableValue}" successfully!`, '', {
 						duration: 5000,
 						panelClass: ['snack-success', 'no-action']
 					})
@@ -100,8 +109,30 @@ export class AdminPageComponent implements OnInit {
             case 'prizeSubmissions':
                 this.updateSpeedrunEvent('arePrizeSubmissionsOpen', value, 'Prize submissions', value ? 'open' : 'closed')
                 break
+            case 'eventState':
+                this.updateSpeedrunEvent('state', value, 'Event state', value)
+                break
             default:
                 console.error('unrecognized state change!')
         }
+    }
+
+    submitForm() {
+		this.speedrunEventService.editSpeedrunEvent(this.speedrunEvent)
+			.subscribe(
+				(srEvent: SpeedrunEvent) => {
+					this.snackBar.open(`Event info updated successfully!`, '', {
+						duration: 5000,
+						panelClass: ['snack-success', 'no-action']
+					})
+                    this.speedrunEvent = srEvent
+				},
+				(err: any) => {
+					this.snackBar.open(`Failed to update event info!`, '', {
+						duration: 5000,
+						panelClass: ['snack-warn', 'no-action']
+					})
+					console.error('FAILED TO UPDATE SPEEDRUN EVENT')
+				})
     }
 }

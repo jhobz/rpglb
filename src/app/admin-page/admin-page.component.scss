@@ -6,9 +6,8 @@ $background: map-get($rpglb-app-theme, background);
 
 /* General things */
 .wrapper {
-    max-width: 1600px;
-    margin: auto;
-    padding: 50px;
+    max-width: 1500px;
+    margin: 50px auto;
 }
 
 .flex-container {
@@ -19,10 +18,15 @@ $background: map-get($rpglb-app-theme, background);
 
 fieldset {
     margin-top: 1em;
+    position: relative;
 }
 
 fieldset:disabled > :not(legend) {
     color: rgba(255, 255, 255, 0.4);
+}
+
+.warn {
+    font-size: 0.8em;
 }
 
 /* Event controls */
@@ -31,10 +35,14 @@ fieldset:disabled > :not(legend) {
     row-gap: 3em;
     justify-content: flex-start;
     flex-wrap: wrap;
-    position: relative;
 
     & > div {
         min-width: 96px;
+    }
+
+    mat-form-field {
+        margin-bottom: 1em;
+        flex-grow: 0;
     }
 
     h5 {
@@ -42,10 +50,10 @@ fieldset:disabled > :not(legend) {
     }
 }
 
-.lock-button {
+.floating-button {
     position: absolute;
-    top: 26px;
-    right: 14px;
+    top: 5px;
+    right: 15px;
 }
 
 /deep/ .event-controls:not(:disabled) mat-slide-toggle {
@@ -56,8 +64,24 @@ fieldset:disabled > :not(legend) {
 	}
 }
 
-/* User lists */
+/* Event info */
+.event-info {
+    mat-form-field {
+        margin: 1em 2em 1em 0;
+        flex-grow: 1;
+    }
 
+    .flex-container {
+        width: 75%;
+    }
+
+    .small-fieldset {
+        margin: 0;
+        min-width: 750px;
+    }
+}
+
+/* User lists */
 .user-list {
     width: 50%;
     font-size: 0.75em;
