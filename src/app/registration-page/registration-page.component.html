@@ -1,28 +1,13 @@
 <div class="wrapper">
-	<div *ngIf="hasEventRole" class="admin-controls">
-		<span>Event registration is:</span>
-		<mat-slide-toggle #slide
-			color="primary"
-			matTooltip="I hope you know what you're doing..."
-			[checked]="srEvent?.isRegistrationOpen"
-			[disabled]="!adminControlsEnabled"
-			labelPosition="before"
-			(change)="updateRegistrationState(slide.checked)">
-			{{srEvent?.isRegistrationOpen ? 'OPEN' : 'CLOSED'}}
-		</mat-slide-toggle>
-		<button
-			mat-mini-fab
-			color="primary"
-			[disabled]="adminControlsEnabled"
-			(click)="enableAdminControls()">
-			<mat-icon>lock_open</mat-icon>
-		</button>
+	<div *ngIf="hasAdminRole" class="admin-controls">
+		<span>Registration is </span>
+		<span [ngClass]="{'privacy-public': speedrunEvent?.isRegistrationOpen, 'privacy-private': !speedrunEvent?.isRegistrationOpen}">{{speedrunEvent?.isRegistrationOpen ? 'OPEN' : 'CLOSED'}}</span>
 	</div>
-	<h1>Register for {{srEvent?.name}}</h1>
-	<p>In order to register for {{srEvent?.name}}, first you will need to enter your intended dates of stay
+	<h1>Register for {{speedrunEvent?.name}}</h1>
+	<p>In order to register for {{speedrunEvent?.name}}, first you will need to enter your intended dates of stay
 		(the marathon stream will run July 16-22, with setup July 14-15, and teardown on July 23). We use this information
 		for general headcounts and to get an idea of the arrivals per day. You can change it on this page at any time. Afterwards,
-		click the "Pay Attendance Fee" button in order to start the payment process. The attendance fee for {{srEvent?.shortname}}
+		click the "Pay Attendance Fee" button in order to start the payment process. The attendance fee for {{speedrunEvent?.shortname}}
 		is USD {{ paymentAmount | currency:'USD' }}. This fee helps us cover costs related to
 		running the event for attendees, such as practice TVs, hotel fees, and more.
 		If you need your attendance fee refunded (in the event that you no longer wish to attend), please contact an
@@ -41,12 +26,12 @@
 		and <a href="https://discord.gg/rpglb">Discord</a> for announcements, as occasionally we are able to increase
 		the maximum cap.
 	</p>
-	<div *ngIf="srEvent && hasFullUserLoaded && !isProcessingPayment" class="registration-container">
-		<div *ngIf="srEvent.isRegistrationOpen || hasEventRole || canBackdoor" class="attendees">
-			Attendee slots taken: <span class="attendees-count">{{srEvent.registeredUsersCount}} / {{srEvent.maxRegisteredUsers}}</span>
+	<div *ngIf="speedrunEvent && hasFullUserLoaded && !isProcessingPayment" class="registration-container">
+		<div *ngIf="speedrunEvent.isRegistrationOpen || hasEventRole || canBackdoor" class="attendees">
+			Attendee slots taken: <span class="attendees-count">{{speedrunEvent.registeredUsersCount}} / {{speedrunEvent.maxRegisteredUsers}}</span>
 		</div>
 		<div *ngIf="user.roles.includes('attendee') || hasEventRole || canBackdoor ||
-			(srEvent.isRegistrationOpen && srEvent.registeredUsersCount < srEvent.maxRegisteredUsers)">
+			(speedrunEvent.isRegistrationOpen && speedrunEvent.registeredUsersCount < speedrunEvent.maxRegisteredUsers)">
 			<form novalidate #f="ngForm" class="registration-form">
 				<mat-form-field>
 					<input
@@ -286,13 +271,13 @@
 				<span>Attendee fee paid. You're all set!</span>
 			</div>
 		</div>
-		<div *ngIf="(!srEvent.isRegistrationOpen || srEvent.registeredUsersCount >= srEvent.maxRegisteredUsers) && !user.roles.includes('attendee')"
+		<div *ngIf="(!speedrunEvent.isRegistrationOpen || speedrunEvent.registeredUsersCount >= speedrunEvent.maxRegisteredUsers) && !user.roles.includes('attendee')"
 			class="warn-light registration-form">
 			Sorry, registration is not currently open or has reached the limit.
 		</div>
 		<p><a routerLink="/profile">Return to profile</a></p>
 	</div>
-	<div *ngIf="!srEvent || !user || !hasFullUserLoaded || isProcessingPayment" class="registration-container">
+	<div *ngIf="!speedrunEvent || !user || !hasFullUserLoaded || isProcessingPayment" class="registration-container">
 		<div class="spinner-message">{{spinnerMessage}}</div>
 		<div class="spinner-error warn">{{spinnerError}}</div>
 		<mat-spinner *ngIf="!spinnerError"></mat-spinner>

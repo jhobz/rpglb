@@ -15,22 +15,17 @@ $bonus: mat-palette($mat-purple, 400, 200);
 .admin-controls {
 	float: right;
 	text-align: right;
-}
+	font-size: 0.8em;
+	line-height: 2.8em;
+    color: rgb(148, 148, 148);
+	font-style: italic;
 
-.admin-controls > button {
-	margin-left: 10px;
-}
-
-/deep/ .admin-controls > mat-slide-toggle {
-	color: mat-color($warn, lighter);
-
-	&.mat-checked {
-		color: mat-color($primary, 200);
+	.privacy-public {
+		color: mat-color($primary, 200)
 	}
 
-	.mat-slide-toggle-content {
-		font-size: 1em;
-		font-weight: bold;
+	.privacy-private {
+		color: mat-color($warn, lighter)
 	}
 }
 

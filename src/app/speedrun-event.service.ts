@@ -16,6 +16,7 @@ export interface SpeedrunEvent {
 	active: boolean,
 	state: 'pre'|'live'|'post',
 	areGameSubmissionsOpen?: boolean,
+	arePrizeSubmissionsOpen?: boolean,
 	areVolunteerSubmissionsOpen?: boolean,
 	isGamesListPublic?: boolean,
 	isRegistrationOpen?: boolean,

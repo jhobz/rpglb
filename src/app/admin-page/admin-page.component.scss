@@ -1,0 +1,125 @@
+@import '../../rpglb-dark-theme.scss';
+
+$primary: map-get($rpglb-app-theme, primary);
+$warn: map-get($rpglb-app-theme, warn);
+$background: map-get($rpglb-app-theme, background);
+
+/* General things */
+.wrapper {
+    max-width: 1500px;
+    margin: 50px auto;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+}
+
+fieldset {
+    margin-top: 1em;
+    position: relative;
+}
+
+fieldset:disabled > :not(legend) {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.warn {
+    font-size: 0.8em;
+}
+
+/* Event controls */
+.event-controls {
+    column-gap: 9em;
+    row-gap: 3em;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    & > div {
+        min-width: 96px;
+    }
+
+    mat-form-field {
+        margin-bottom: 1em;
+        flex-grow: 0;
+    }
+
+    h5 {
+        white-space: nowrap;
+    }
+}
+
+.floating-button {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+
+legend > .floating-button {
+    top: 25px;
+}
+
+/deep/ .event-controls:not(:disabled) mat-slide-toggle {
+	color: mat-color($warn, lighter);
+
+	&.mat-checked {
+		color: mat-color($primary, 200);
+	}
+}
+
+/* Event info */
+.event-info {
+    mat-form-field {
+        margin: 1em 2em 1em 0;
+        flex-grow: 1;
+    }
+
+    .flex-container {
+        width: 75%;
+    }
+
+    .small-fieldset {
+        margin: 0;
+        min-width: 750px;
+    }
+}
+
+/* User lists */
+.user-list {
+    width: 50%;
+    font-size: 0.75em;
+}
+
+.user-wrapper {
+    max-height: 700px;
+    overflow: auto;
+}
+
+hr {
+    border-color:#666;
+}
+
+.header {
+    font-weight: 700;
+}
+
+.subtle {
+    color: rgb(148, 148, 148);
+    font-size: 0.6em;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.user {
+    padding: 1.5px 5px;
+}
+
+.user:hover {
+    background-color: #555;
+}
+
+.user .subtle {
+    font-size: 0.9em;
+    float: right;
+}

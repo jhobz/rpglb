@@ -29,29 +29,4 @@ export class GamesListPageComponent implements OnInit {
 				this.speedrunEvent = srEvent
 			})
 	}
-
-	enableAdminControls() {
-		this.adminControlsEnabled = true
-	}
-
-	updateGamesListState(value: boolean) {
-		this.speedrunEvent.isGamesListPublic = value
-		this.speedrunEventService.editSpeedrunEvent(this.speedrunEvent)
-			.subscribe(
-				(srEvent: SpeedrunEvent) => {
-					this.snackBar.open(`Games list made ${srEvent.isGamesListPublic ? 'public' : 'private'} successfully!`, '', {
-						duration: 5000,
-						panelClass: ['snack-success', 'no-action']
-					})
-				},
-				(err: any) => {
-					this.snackBar.open('Failed to update games list visibility!', '', {
-						duration: 5000,
-						panelClass: ['snack-warn', 'no-action']
-					})
-					console.error('FAILED TO RELEASE/HIDE GAMES LIST')
-					this.speedrunEvent.isGamesListPublic = !value
-				})
-	}
-
 }

@@ -95,6 +95,7 @@ exports.updateSpeedrunEvent = async function (req, res, next) {
 		active: req.body.active,
 		state: req.body.state ? req.body.state : null,
 		areGameSubmissionsOpen: req.body.areGameSubmissionsOpen,
+		arePrizeSubmissionsOpen: req.body.arePrizeSubmissionsOpen,
 		areVolunteerSubmissionsOpen: req.body.areVolunteerSubmissionsOpen,
 		isGamesListPublic: req.body.isGamesListPublic,
 		isRegistrationOpen: req.body.isRegistrationOpen,

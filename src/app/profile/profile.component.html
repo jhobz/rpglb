@@ -1,4 +1,5 @@
 <div class="wrapper">
+	<a *ngIf="userFromToken.roles.includes('admin') || userFromToken.roles.includes('safety')" routerLink="/admin" class="float-right">Admin dashboard</a>
 	<h1 class="no-bold">{{userFromToken.username}}</h1>
 	<h3>Registration</h3>
 	<p>You are currently <span [class]="userFromToken.roles.includes('attendee') ? 'success' : 'warn'">{{userFromToken.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
