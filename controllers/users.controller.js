@@ -22,7 +22,7 @@ function generateToken (user) {
 }
 
 exports.getUsers = async function (req, res, next) {
-	if (!req.user || !req.user._id || !req.user.roles || !req.user.roles.includes('admin')) {
+	if (!req.user || !req.user._id || !req.user.roles || (!req.user.roles.includes('admin') && !req.user.roles.includes('safety'))) {
 		console.warn('Unauthorized user info request attempted', req.user, req.body)
 		return res.status(401).json( {
 			status: 401,

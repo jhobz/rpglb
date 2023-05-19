@@ -23,7 +23,9 @@ export class AdminPageComponent implements OnInit {
         cause: {
             name: '',
             url: ''
-        }
+        },
+        active: false,
+        state: 'pre',
     } as SpeedrunEvent
     adminControlsEnabled: boolean
     stateOptions = ['pre', 'live', 'post']
@@ -134,5 +136,16 @@ export class AdminPageComponent implements OnInit {
 					})
 					console.error('FAILED TO UPDATE SPEEDRUN EVENT')
 				})
+    }
+
+    async onUserClick(user: User) {
+        // The version of TypeScript we use does not have clipboard as part of the Navigator interface, so we have to cast it
+        try {
+            await (window.navigator as any).clipboard.writeText(user.email)
+            this.snackBar.open(`Copied email to clipboard!`, '', {
+                duration: 2000,
+                panelClass: ['snack-success', 'no-action']
+            })
+        } catch (e) {}
     }
 }

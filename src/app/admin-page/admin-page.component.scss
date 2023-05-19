@@ -91,6 +91,11 @@ legend > .floating-button {
     font-size: 0.75em;
 }
 
+.user-wrapper {
+    max-height: 700px;
+    overflow: auto;
+}
+
 hr {
     border-color:#666;
 }

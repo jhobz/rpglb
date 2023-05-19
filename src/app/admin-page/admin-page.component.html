@@ -199,6 +199,7 @@
 			(click)="getUsers()">
 			<mat-icon>refresh</mat-icon>
 		</button>
+		<p class="subtle">Tip: Click any user to copy their email to the clipboard.</p>
 		<div class="flex-container">
 			<div class="user-list" id="attendees">
 				<h2>Attendees <span class="subtle">({{attendees.length}})</span></h2>
@@ -206,7 +207,7 @@
 					<span>Username - Discord - Email <span class="subtle">Roles</span></span>
 				</div>
 				<hr>
-				<div *ngFor="let user of attendees" class="user">
+				<div *ngFor="let user of attendees" class="user" (click)="onUserClick(user)">
 					<span>{{user.username}} -</span>
 					<span>{{user.discord}} -</span>
 					<span>{{user.email}}</span>
@@ -219,11 +220,13 @@
 					<span>Username - First & Last - Email <span class="subtle">Roles</span></span>
 				</div>
 				<hr>
-				<div class="user" *ngFor="let user of userList">
-					<span>{{user.username}} -</span>
-					<span>{{user.firstName}} {{user.lastName}} -</span>
-					<span>{{user.email}}</span>
-					<span class="subtle">{{user.roles.join('|')}}</span>
+				<div class="user-wrapper">
+					<div class="user" *ngFor="let user of userList" (click)="onUserClick(user)">
+						<span>{{user.username}} -</span>
+						<span>{{user.firstName}} {{user.lastName}} -</span>
+						<span>{{user.email}}</span>
+						<span class="subtle">{{user.roles.join('|')}}</span>
+					</div>
 				</div>
 			</div>
 		</div>
