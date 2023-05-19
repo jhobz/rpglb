@@ -4,7 +4,6 @@ import { AuthenticationService, PasswordData, TokenUserInfo } from '../authentic
 import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 import { GameSubmission, GameSubmissionResponse, SubmissionService } from '../submission.service'
 import { User } from '../user'
-import { UserListComponent } from '../user-list/user-list.component'
 
 @Component({
 	providers: [SubmissionService],
