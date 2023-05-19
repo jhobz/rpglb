@@ -3,16 +3,15 @@
 	<fieldset class="event-controls flex-container" *ngIf="user.roles.includes('event')" [disabled]="!adminControlsEnabled">
 		<legend>
 			<span>Event State Management</span>
+			<button
+				mat-mini-fab
+				class="floating-button"
+				color="primary"
+				[disabled]="adminControlsEnabled"
+				(click)="enableAdminControls()">
+				<mat-icon>lock_open</mat-icon>
+			</button>
 		</legend>
-
-		<button
-			mat-mini-fab
-			class="floating-button"
-			color="primary"
-			[disabled]="adminControlsEnabled"
-			(click)="enableAdminControls()">
-			<mat-icon>lock_open</mat-icon>
-		</button>
 
 		<div>
 			<h5>Game Submissions</h5>

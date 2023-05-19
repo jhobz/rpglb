@@ -56,6 +56,10 @@ fieldset:disabled > :not(legend) {
     right: 15px;
 }
 
+legend > .floating-button {
+    top: 25px;
+}
+
 /deep/ .event-controls:not(:disabled) mat-slide-toggle {
 	color: mat-color($warn, lighter);
 
