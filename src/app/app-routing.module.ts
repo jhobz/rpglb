@@ -18,7 +18,6 @@ import { RoleGuardService } from './role-guard.service'
 import { SignupComponent } from './signup/signup.component'
 import { SubmissionFormComponent } from './submission-form/submission-form.component'
 import { SubmissionsListPageComponent } from './submissions-list-page/submissions-list-page.component'
-import { UserListComponent } from './user-list/user-list.component'
 import { VerifyPageComponent } from './verify-page/verify-page.component'
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component'
 import { AdminPageComponent } from './admin-page/admin-page.component'
@@ -42,7 +41,6 @@ const routes: Routes = [
 	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },
 	{ path: 'sweepstakes', component: EventSweepstakesComponent },
-	{ path: 'users', component: UserListComponent },
 	{ path: 'verify', component: VerifyPageComponent },
 	{ path: 'volunteer', component: VolunteerPageComponent }
 ]

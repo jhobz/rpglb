@@ -39,3 +39,7 @@ small {
 .left-align {
 	text-align: left;
 }
+
+.float-right {
+	float: right;
+}

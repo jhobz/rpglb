@@ -29,13 +29,13 @@ export class RegistrationPageComponent implements OnInit {
 	maxDate: Date = new Date(2023, 6, 24)
 	handler: any
 	paymentAmount: number
-	srEvent: SpeedrunEvent
+	speedrunEvent: SpeedrunEvent
 	hasFullUserLoaded: boolean = false
 	isFetching: boolean = false
 	isProcessingPayment: boolean = false
 	spinnerMessage: string = 'Fetching user details...'
 	spinnerError: string
-	hasEventRole: boolean = false
+	hasAdminRole: boolean = false
 	canBackdoor: boolean = false
 	adminControlsEnabled: boolean = false
 
@@ -49,8 +49,7 @@ export class RegistrationPageComponent implements OnInit {
 		private snackBar: MatSnackBar
 	) {
 		this.userTokenInfo = this.auth.getUserInfo()
-		this.hasEventRole = this.userTokenInfo && this.userTokenInfo.roles &&
-			(this.userTokenInfo.roles.includes('event') || this.userTokenInfo.roles.includes('admin'))
+		this.hasAdminRole = this.userTokenInfo && this.userTokenInfo.roles && this.userTokenInfo.roles.includes('admin')
 		this.canBackdoor = this.userTokenInfo && this.userTokenInfo.roles &&
 			this.userTokenInfo.roles.includes('override-registration')
 		this.auth.profile().subscribe((user: User) => {
@@ -75,7 +74,7 @@ export class RegistrationPageComponent implements OnInit {
 		})
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
-				this.srEvent = srEvent
+				this.speedrunEvent = srEvent
 				this.paymentAmount = srEvent.registrationCost || 0
 			})
 	}
@@ -118,30 +117,6 @@ export class RegistrationPageComponent implements OnInit {
 		})
 	}
 
-	enableAdminControls() {
-		this.adminControlsEnabled = true
-	}
-
-	updateRegistrationState(value: boolean) {
-		this.srEvent.isRegistrationOpen = value
-		this.speedrunEventService.editSpeedrunEvent(this.srEvent)
-			.subscribe(
-				(srEvent: SpeedrunEvent) => {
-					this.snackBar.open(`Event registration ${srEvent.isRegistrationOpen ? 'opened' : 'closed'} successfully!`, '', {
-						duration: 5000,
-						panelClass: ['snack-success', 'no-action']
-					})
-				},
-				(err: any) => {
-					this.snackBar.open('Failed to update event registration state!', '', {
-						duration: 5000,
-						panelClass: ['snack-warn', 'no-action']
-					})
-					console.error('FAILED TO OPEN/CLOSE EVENT REGISTRATION')
-					this.srEvent.isRegistrationOpen = !value
-				})
-	}
-
 	onFormChange(target?: string) {
 		// This is a hack to fix the requirement dependency of minorsNum and minorsNames.
 		// This should be handled with a custom, conditional validator upon upgrading the site
@@ -177,7 +152,7 @@ export class RegistrationPageComponent implements OnInit {
 		// Get latest info to see if registration is still open
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
-				this.srEvent = srEvent
+				this.speedrunEvent = srEvent
 				this.paymentAmount = srEvent.registrationCost || 0
 				this.isFetching = false
 
@@ -187,7 +162,7 @@ export class RegistrationPageComponent implements OnInit {
 					this.handler.open({
 						amount: this.paymentAmount * 100,
 						description: 'Attendee fee',
-						name: this.srEvent.name,
+						name: this.speedrunEvent.name,
 					})
 				}
 			})

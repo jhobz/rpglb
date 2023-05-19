@@ -61,7 +61,6 @@ import { SubmissionsListPageComponent } from './submissions-list-page/submission
 import { TimeRangeValidatorDirective } from './time-range.directive'
 import { TimeToStringPipe } from './time-to-string.pipe'
 import { TruncatePipe } from './truncate.pipe'
-import { UserListComponent } from './user-list/user-list.component'
 import { UserService } from './user.service'
 import { VerifyPageComponent } from './verify-page/verify-page.component';
 import { ContactComponent } from './contact/contact.component';
@@ -78,7 +77,6 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 		MoneifyPipe,
 		EventRulesComponent,
 		EventSweepstakesComponent,
-		UserListComponent,
 		LoginComponent,
 		SignupComponent,
 		ProfileComponent,
