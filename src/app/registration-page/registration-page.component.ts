@@ -76,6 +76,10 @@ export class RegistrationPageComponent implements OnInit {
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.speedrunEvent = srEvent
 				this.paymentAmount = srEvent.registrationCost || 0
+
+				if (this.userTokenInfo.roles.includes('skip-payment')) {
+					this.paymentAmount = 0
+				}
 			})
 	}
 
@@ -146,8 +150,34 @@ export class RegistrationPageComponent implements OnInit {
 		}
 	}
 
-	handlePayment(button: any) {
+	handlePayment(e: any) {
+		// TODO: For some reason, when skipping payment via the next code block, the scroll snaps back to
+		//       the top of the page. This `preventDefault()` call was to try to circumvent that, but it
+		//       doesn't appear to work. Requires more investigation if issue still persists *after*
+		//       migration to newer Stripe flow.
+		e.preventDefault()
 		this.isFetching = true
+
+		// TODO: This code isn't DRY as it's used by the payment processing. Need to handle $0 payments
+		//       better once Stripe Checkout is migrated to newer version.
+		if (this.userTokenInfo.roles.includes('skip-payment')) {
+			this.isProcessingPayment = true
+			this.spinnerMessage = 'Processing payment... Payment successful! Registering for event...'
+			this.userService.registerUser()
+				.subscribe(
+					(regRes: any) => {
+						this.user = regRes.data
+						this.isProcessingPayment = false
+					},
+					(err: any) => {
+						console.error('Registration error', err)
+						this.spinnerError = 'Something went wrong. It looks like your payment was ' +
+							'successful, but registration failed. Please contact an administrator ' +
+							'and be ready to show proof of purchase. DO NOT retry registration unless ' +
+							'instructed.'
+					})
+			return
+		}
 
 		// Get latest info to see if registration is still open
 		this.speedrunEventService.getCurrentSpeedrunEvent()

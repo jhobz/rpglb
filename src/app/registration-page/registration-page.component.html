@@ -258,7 +258,7 @@
 				color="primary"
 				class="payment-button"
 				[disabled]="!f.valid || isFetching"
-				(click)="handlePayment($event.target)">
+				(click)="handlePayment($event)">
 				Pay Attendance Fee
 				<mat-progress-bar
 					*ngIf="isFetching"
