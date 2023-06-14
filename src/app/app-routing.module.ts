@@ -21,6 +21,7 @@ import { SubmissionsListPageComponent } from './submissions-list-page/submission
 import { VerifyPageComponent } from './verify-page/verify-page.component'
 import { VolunteerPageComponent } from './volunteer-page/volunteer-page.component'
 import { AdminPageComponent } from './admin-page/admin-page.component'
+import { RunnerGuideComponent } from './runner-guide/runner-guide.component'
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/pre', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
 	{ path: 'games', component: GamesListPageComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'rules', component: EventRulesComponent },
+	{ path: 'runner', component: RunnerGuideComponent },
 	{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
 	{ path: 'pre', component: PreEventHomePageComponent },
 	{ path: 'register', component: RegistrationPageComponent, canActivate: [AuthGuardService] },
