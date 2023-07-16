@@ -1,6 +1,6 @@
 <article>
 	<header><app-navbar></app-navbar></header>
-	<ng-container *ngIf="speedrunEvent.state==='live'">
+	<ng-container *ngIf="speedrunEvent?.state==='live'">
 		<app-donate-header></app-donate-header>
 	</ng-container>
 	<main>
