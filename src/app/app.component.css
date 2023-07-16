@@ -1,5 +1,4 @@
 article {
-	/* background: var(--color-primary); */
 	display: grid;
 	grid:
 		64px
@@ -14,17 +13,12 @@ header {
 }
 
 main {
-	/* margin: auto 0; */
 	padding: 0 2em;
-}
-
-footer {
 }
 
 .wrapper {
 	max-width: 1280px;
 	margin: 20px auto 50px;
-	/* font-size: 1em; */
 }
 
 .msg-status {

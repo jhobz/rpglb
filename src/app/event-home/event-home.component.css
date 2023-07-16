@@ -8,25 +8,13 @@
 	grid-gap: 25px;
 }
 
+.logo-med {
+	height: 250px;
+}
+
 .logo-small {
 	height: 125px;
 }
-
-/* .logo-bg {
-	flex-grow: 1;
-	min-width: 300px;
-}
-.rpglb {
-	background: url('assets/images/logo_1200x424.png') left center/contain no-repeat;
-}
-.nami {
-	background: url('assets/images/nami_white.png') right center/contain no-repeat;
-} */
-/* .sidebar {
-	background-color: var(--color-primary);
-	grid-area: sidebar;
-	padding: 25px;
-} */
 
 .embed-wrapper {
 	position: relative;

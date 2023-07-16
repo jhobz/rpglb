@@ -69,6 +69,7 @@ import { VolunteerPageComponent } from './volunteer-page/volunteer-page.componen
 import { CovidPolicyComponent } from './covid-policy/covid-policy.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { RunnerGuideComponent } from './runner-guide/runner-guide.component';
+import { SpeedrunEventGuard } from './speedrun-event.guard'
 
 
 @NgModule({
@@ -142,6 +143,7 @@ import { RunnerGuideComponent } from './runner-guide/runner-guide.component';
 		AuthenticationService,
 		PaymentService,
 		RoleGuardService,
+		SpeedrunEventGuard,
 		SpeedrunEventService,
 		UserService
 	],

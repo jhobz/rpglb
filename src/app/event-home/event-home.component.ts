@@ -18,7 +18,7 @@ export class EventHomeComponent implements OnInit {
 
 	constructor(private donationService: DonationService) {
 		// TODO: This is all old and gross, really needs to be updated to pull stuff from the event object in the database
-		// this.event.name = 'RPG Limit Break 2022'
+		this.event.name = 'RPG Limit Break 2023'
 		// this.event.shortName = 'rpglb2022'
 		this.event.cause = 'NAMI: National Alliance on Mental Illness'
 		this.event.causeLink = 'https://www.nami.org'
