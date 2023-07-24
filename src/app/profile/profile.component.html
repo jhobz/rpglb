@@ -2,26 +2,27 @@
 	<a *ngIf="userFromToken.roles.includes('admin') || userFromToken.roles.includes('safety')" routerLink="/admin" class="float-right">Admin dashboard</a>
 	<h1 class="no-bold">{{userFromToken.username}}</h1>
 	<h3>Registration</h3>
-	<p>You are currently <span [class]="userFromToken.roles.includes('attendee') ? 'success' : 'warn'">{{userFromToken.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
+	<p *ngIf="speedrunEvent?.state !== 'post'">You are currently <span [class]="userFromToken.roles.includes('attendee') ? 'success' : 'warn'">{{userFromToken.roles.includes('attendee') ? 'registered' : 'not registered'}}</span> for {{speedrunEvent?.name}}.
 		<!-- TODO: Make the message below change wording based on pre- or post-registration period. -->
 		<span *ngIf="!speedrunEvent?.isRegistrationOpen">The open registration period has either yet to open or has passed. Please see the home page for a detailed timeline.</span>
 	</p>
+	<div *ngIf="speedrunEvent?.state === 'post'">
+		<p *ngIf="userFromToken.roles.includes('attendee')">Thanks for attending {{speedrunEvent?.name}}! We hope you had a great time and to see you again next year!</p>
+		<p *ngIf="!userFromToken.roles.includes('attendee')">{{speedrunEvent?.name}} is all wrapped up but we hope to see you as an attendee next year!</p>
+	</div>
 	<div>
-		<a *ngIf="userFromToken.roles.includes('attendee')" routerLink="/register">Update registration</a>
+		<a *ngIf="speedrunEvent?.state !== 'post' && userFromToken.roles.includes('attendee')" routerLink="/register">Update registration</a>
 		<a *ngIf="!userFromToken.roles.includes('attendee') && speedrunEvent?.isRegistrationOpen" routerLink="/register">Register to attend {{speedrunEvent?.name}}</a>
 	</div>
 
-	<br />
-
-	<ng-container *ngIf="userFromToken.roles.includes('attendee')">
+	<ng-container *ngIf="speedrunEvent?.state !== 'post' && userFromToken.roles.includes('attendee')">
+		<br />
 		<h2>What's next?</h2>
-		<p>
-			Please use the following link to book a hotel room at the event rate: <a href="https://www.hilton.com/en/attend-my-event/slcardt-rpg-aa87e409-409d-4399-9524-c44663f7407a/">Book a room</a>
-		</p>
+		<p>Please use the following link to book a hotel room at the event rate: <a href="https://www.hilton.com/en/attend-my-event/slcardt-rpg-aa87e409-409d-4399-9524-c44663f7407a/">Book a room</a></p>
 	</ng-container>
 	<p *ngIf="speedrunEvent?.areVolunteerSubmissionsOpen">We can always use more volunteers! Check out the <a routerLink="/volunteer">volunteering guide</a> for more information. On-site and remote positions available!</p>
 
-	<br /><br /><br />
+	<br />
 	
 	<h3>Your submissions</h3>
 	<ng-container *ngIf="games && games.length > 0">
@@ -37,7 +38,7 @@
 	</p>
 	<br />
 	<a *ngIf="speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions/create">Create / Edit Submissions</a>
-	<br /><br /><br />
+	<br />
 	<h3>Account info</h3>
 	<form>
 		<mat-form-field class="mat-form-field-read-only">
