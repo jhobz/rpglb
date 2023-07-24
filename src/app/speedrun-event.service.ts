@@ -13,6 +13,7 @@ export interface SpeedrunEvent {
 	name: string,
 	shortname?: string,
 	cause?: object,
+	trackerId?: string,
 	active: boolean,
 	state: 'pre'|'live'|'post',
 	areGameSubmissionsOpen?: boolean,
