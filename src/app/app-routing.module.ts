@@ -23,6 +23,7 @@ import { VolunteerPageComponent } from './volunteer-page/volunteer-page.componen
 import { AdminPageComponent } from './admin-page/admin-page.component'
 import { RunnerGuideComponent } from './runner-guide/runner-guide.component'
 import { SpeedrunEventGuard } from './speedrun-event.guard'
+import { SubmissionGuidelinesPageComponent } from './submission-guidelines-page/submission-guidelines-page.component'
 
 const routes: Routes = [
 	{ path: '', component: PreEventHomePageComponent, pathMatch: 'full', canActivate: [SpeedrunEventGuard] },
@@ -43,6 +44,7 @@ const routes: Routes = [
 	{ path: 'signup', component: SignupComponent },
 	{ path: 'submissions', component: SubmissionsListPageComponent },
 	{ path: 'submissions/create', component: SubmissionFormComponent, canActivate: [AuthGuardService] },
+	{ path: 'submissions/guidelines', component: SubmissionGuidelinesPageComponent },
 	{ path: 'sweepstakes', component: EventSweepstakesComponent },
 	{ path: 'verify', component: VerifyPageComponent },
 	{ path: 'volunteer', component: VolunteerPageComponent }
