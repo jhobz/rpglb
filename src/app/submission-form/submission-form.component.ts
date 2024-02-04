@@ -19,6 +19,7 @@ export class SubmissionFormComponent implements OnInit {
 	maxGames: number = 5
 	isDebouncing: boolean = false
 	areSubmissionsOpen: boolean
+	submissionsCloseDate: Date
 	@ViewChild('stepper') stepper: any
 	@ViewChild('f') form: any
 	@Input() availability: string
@@ -39,6 +40,7 @@ export class SubmissionFormComponent implements OnInit {
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.event = srEvent.name
 				this.areSubmissionsOpen = srEvent.areGameSubmissionsOpen
+				this.submissionsCloseDate = new Date(srEvent.dates.games.submissionsClose)
 
 				this.submissionService.getSubmissionsForUser(userId, srEvent._id)
 					.map((data: GameSubmissionResponse) => data.docs )

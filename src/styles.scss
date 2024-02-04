@@ -113,11 +113,3 @@ a:hover {
 .no-action .mat-simple-snackbar {
 	justify-content: center;
 }
-
-a[href]:not([href*='rpglimitbreak.com']):not([href*='localhost']):not([href^='#']):not([href^='/']):not(.no-icon)::after {
-	font-family: 'Material Icons';
-	content: 'open_in_new';
-	margin-left: 2px;
-	font-size: 0.7em;
-	vertical-align: super;
-}

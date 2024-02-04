@@ -1,28 +1,27 @@
 <div class="wrapper">
-	<img class="logo" src="assets/images/logos/LimitBreak-new-logo-01.png" />
+	<!-- <img class="logo" src="assets/images/logos/LimitBreak-new-logo-01.png" /> -->
 	<div *ngIf="speedrunEvent?.state==='pre'">
-		<h1 class="home-title">RPG Limit Break returns this July!</h1>
-		<div class="timeline"><app-timeline></app-timeline></div>
+		<h1 class="home-title">RPG Limit Break returns this {{speedrunEvent?.dates.event.start | date : 'LLLL'}}!</h1>
+		<div class="timeline"><app-timeline [srEvent]="speedrunEvent"></app-timeline></div>
 		<p>
 			{{event}} will take place in Salt Lake City, Utah, continuing to benefit the
-			<a href="https://www.nami.org" _target="blank">National Alliance on Mental Illness.</a> The event will take place July 16th to
-			July 22nd, at the <a href="https://doubletree3.hilton.com/en/hotels/utah/doubletree-by-hilton-hotel-salt-lake-city-airport-SLCARDT/index.html" target="_blank">DoubleTree by Hilton - Salt Lake City Airport</a>, and will be
-			a hybrid event with options to participate remotely. For future updates, <a href="https://twitter.com/rpglimitbreak" target="_blank">follow us on Twitter</a>, <a href="https://discord.gg/rpglb" target="_blank">join our Discord</a>,
+			<a href="https://www.nami.org" _target="blank">National Alliance on Mental Illness.</a> The event will take place {{speedrunEvent?.dates.event.start | date : 'MMMM d'}} to
+			{{speedrunEvent?.dates.event.end | date : 'MMMM d'}}, at the <a href="https://doubletree3.hilton.com/en/hotels/utah/doubletree-by-hilton-hotel-salt-lake-city-airport-SLCARDT/index.html" target="_blank">DoubleTree by Hilton - Salt Lake City Airport</a>, and will be
+			a hybrid event with options to participate remotely. For future updates, follow us on <a href="https://twitter.com/rpglimitbreak" target="_blank">Twitter</a>, join our <a href="https://discord.gg/rpglb" target="_blank">Discord</a>,
 			or check back here regularly. A timeline of upcoming dates and deadlines is posted above, and more detailed event information can be found in our <a routerLink="/blog">news section.</a>
 		</p>
 		<p>
-			{{event}} will be taking extensive measures to protect against COVID-19, including requiring attendees to be vaccinated and wearing masks in all event spaces. Please see our full <a routerLink="/covid">COVID-19 safety policy</a>
-			for more information.
+			We will be announcing our COVID-19 Safety Policy, including any potential vaccination or masking requirements for attendance, on {{speedrunEvent?.dates.misc.covidPolicy | date: 'MMMM d'}}.
 		</p>
 		<p>
-			Event registration for {{event}}
-			<span *ngIf="speedrunEvent?.isRegistrationOpen">is open until Sunday, June 18th at 11:59 PM Eastern Daylight Time. You can register from your
+			<span *ngIf="registrationStatus === 'pre'">Event registration for {{event}} will open on {{speedrunEvent?.dates.registration.open | date : 'MMMM d'}}. <a routerLink="/signup">Create an account</a> (or login) if you plan on attending,
+				as you'll need one in order to register. We will not be able to accommodate on-site registrations once the event starts, so be sure to register if you're considering attending!
+			</span>
+			<span *ngIf="registrationStatus === 'open'">Event registration for {{event}} is open until {{speedrunEvent?.dates.registration.close | date : 'MMMM d'}} at 11:59 PM Eastern Daylight Time (GMT-4). You can register from your
 				<a routerLink="/profile">profile</a> after creating an account.
 			</span>
-			<span *ngIf="!speedrunEvent?.isRegistrationOpen">is either closed or has yet to open. Please check the timeline above for more details.</span>
-			<!-- Game submissions have closed and the <a href="https://horaro.org/rpglb/2022" class="no-icon">schedule</a>
-			has been posted.--> Follow us on <a href="https://twitter.com/rpglimitbreak" _target="blank">Twitter</a> and
-			<a href="https://discord.gg/rpglb" _target="blank">Discord</a> for all announcements on this year's and future events!
+			<span *ngIf="registrationStatus === 'closed'">The registration period for on-site attendance has passed. We're excited to see all our on-site attendees in Salt Lake City this {{speedrunEvent?.dates.event.start | date : 'LLLL'}} and, if
+				you missed your chance to register this year, we'll be happy to see you in the <a href="https://twitch.tv/rpglimitbreak">Twitch chat</a> during our 24-hour a day, 7-day broadcast!</span>
 		</p>
 	</div>
 	<p class="opening" *ngIf="speedrunEvent?.state==='post'">Welcome to RPG Limit Break! RPGLB is an annual event where gamers from around the globe gather to perform speedruns and support our efforts to raise money for NAMI, the National Alliance on Mental Illness, via a week-long, 24-hour livestream. RPG Limit Break is currently between events, but we sometimes host online events from the RPG speedrunning community, which you can watch below if we're currently live!</p>
@@ -34,9 +33,9 @@
 <div class="wrapper">
 	<h3 class="home-title">We can't wait to see what the next event has in store!</h3>
 	<p>
-		If the anticipation is unbearable, you can always check out VODs from previous events over on
-		<a href="https://youtube.com/rpglimitbreak" _target="blank">our YouTube channel</a> or
-		<a href="https://twitch.tv/rpglimitbreak" _target="blank">follow us on Twitch</a> for RPG speedrunning content all year long!
+		If the anticipation is unbearable, you can always check out VODs from previous events over on our
+		<a href="https://youtube.com/rpglimitbreak" _target="blank">YouTube channel</a> or follow us on
+		<a href="https://twitch.tv/rpglimitbreak" _target="blank">Twitch</a> and <a href="https://twitter.com/RPGLimitBreak" _target="blank">Twitter</a> for RPG speedrunning content all year long!
 		If you'd like to learn more about NAMI and how they help communities at all scales, check out their website at
 		<a href="https://nami.org" _target="blank">nami.org</a>.
 	</p>

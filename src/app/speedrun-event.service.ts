@@ -28,6 +28,35 @@ export interface SpeedrunEvent {
 	volunteerSubmissions?: any,
 	registeredUsers?: User[],
 	admins?: User[]
+	dates: {
+		games: {
+			submissionsOpen: string,
+			submissionsClose: string,
+			listRelease: string,
+			scheduleRelease: string
+		},
+		registration: {
+			open: string,
+			close: string,
+			refundDeadline: string
+		},
+		prizes: {
+			submissionsOpen: string,
+			submissionsClose: string,
+		},
+		volunteers: {
+			applicationsOpen: string,
+			applicationsClose: string,
+			scheduleRelease: string
+		},
+		event: {
+			start: string,
+			end: string
+		},
+		misc?: {
+			covidPolicy?: string
+		}
+	}
 }
 
 @Injectable()

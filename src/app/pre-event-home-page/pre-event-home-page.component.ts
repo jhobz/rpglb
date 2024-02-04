@@ -10,6 +10,7 @@ import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
 export class PreEventHomePageComponent implements OnInit {
 	event: string = 'RPG Limit Break'
 	speedrunEvent: SpeedrunEvent
+	registrationStatus: 'pre' | 'open' | 'closed'
 
 	constructor(private speedrunEventService: SpeedrunEventService) { }
 
@@ -17,7 +18,11 @@ export class PreEventHomePageComponent implements OnInit {
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.speedrunEvent = srEvent
-				this.event = this.speedrunEvent.name
+				this.event = srEvent.name
+				this.registrationStatus = new Date(srEvent.dates.registration.open).getTime() > Date.now() ? 'pre' : 'closed'
+				if (srEvent.isRegistrationOpen) {
+					this.registrationStatus = 'open'
+				}
 			})
 	}
 

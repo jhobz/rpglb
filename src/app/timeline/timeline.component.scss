@@ -9,8 +9,13 @@ $background: map-get($rpglb-app-theme, background);
 
 .container {
 	font-size: 0.8em;
-	background-color: mat-color($primary);
-	padding: 25px;
+	// background-color: mat-color($primary);
+	// padding: 25px;
+	// width: 250px;
+
+	img {
+		width: 100%;
+	}
 }
 
 h1 {
