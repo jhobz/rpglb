@@ -69,7 +69,8 @@ import { VolunteerPageComponent } from './volunteer-page/volunteer-page.componen
 import { CovidPolicyComponent } from './covid-policy/covid-policy.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { RunnerGuideComponent } from './runner-guide/runner-guide.component';
-import { SpeedrunEventGuard } from './speedrun-event.guard'
+import { SpeedrunEventGuard } from './speedrun-event.guard';
+import { SubmissionGuidelinesPageComponent } from './submission-guidelines-page/submission-guidelines-page.component'
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import { SpeedrunEventGuard } from './speedrun-event.guard'
 		CovidPolicyComponent,
 		AdminPageComponent,
 		RunnerGuideComponent,
+		SubmissionGuidelinesPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent

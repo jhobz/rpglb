@@ -4,8 +4,8 @@
 		<p>
 			On this page you can create and edit your game submissions for {{event}}. You can submit up to 5 games, each
 			with up to 3 categories. Every game must have at least one category. Fields with an asterisk (*) are required.
-			The "Pros" and "Cons" fields are not required, but are encouraged! Submissions close at 11:59 PM EDT on
-			Sunday, April 23rd. <span class="warn-light">No submissions will be accepted after this time,</span> even
+			The "Pros" and "Cons" fields are not required, but are encouraged! Submissions close at 11:59 PM EDT ({{submissionsCloseDate | date : 'z'}}) on
+			{{submissionsCloseDate | date : 'EEEE, MMMM d'}}. <span class="warn-light">No submissions will be accepted after this time,</span> even
 			if you leave this page open.
 		</p>
 		<p>
@@ -13,7 +13,7 @@
 			submission carefully before continuing to the next game. Don't worry though, you can come back and edit
 			previous games at any time while submissions are still open. If you wish to delete a submission, either replace
 			the information with another game, or simply click the "Remove Game" button. If you click "Remove Game"
-			and later choose to submit the same game, <span class="warn-light">you will have to enter all of the information again, so be wary.</span>
+			and later choose to submit the same game, <span class="warn-light">you will have to enter all of the information again,</span> so be wary.
 		</p>
 		<p>
 			If you need to change any of the info in the "Supplementary Information" area, please do so, then click "Next" through the entire form until
@@ -22,10 +22,6 @@
 	</mat-card>
 	<div *ngIf="!areSubmissionsOpen" class="msg-status warn">Game submissions are currently closed.</div>
 	<mat-card class="availability description">
-		<!-- <p>
-			New to this year, you are now required to provide your general hours of availability to perform your run(s), should you be accepted.
-			We are asking for this information up front so as to make the scheduling process smoother, allowing for the games committee to more swiftly work on the schedule.
-		</p> -->
 		<form novalidate #f="ngForm" class="">
 			<h3>Supplementary Information</h3>
 			<mat-form-field>

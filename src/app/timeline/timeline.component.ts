@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { SpeedrunEvent } from '../speedrun-event.service'
 
 @Component({
   selector: 'app-timeline',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./timeline.component.scss']
 })
 export class TimelineComponent implements OnInit {
+
+  @Input() srEvent: SpeedrunEvent
 
   constructor() { }
 
