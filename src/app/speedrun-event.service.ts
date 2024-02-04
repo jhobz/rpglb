@@ -28,7 +28,7 @@ export interface SpeedrunEvent {
 	volunteerSubmissions?: any,
 	registeredUsers?: User[],
 	admins?: User[]
-	dates: {
+	dates?: {
 		games: {
 			submissionsOpen: string,
 			submissionsClose: string,
