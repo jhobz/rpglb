@@ -1,9 +1,16 @@
 <div class="wrapper">
-	<div class="title">CONTACT</div>
-	<p>Email: <a href="mailto:management@rpglimitbreak.com">management@rpglimitbreak.com</a></p>
-	<p>Twitter: <a href="https://twitter.com/rpglimitbreak" target="_blank">@RPGLimitBreak</a></p>
-	<p>Discord: <a href="https://discord.gg/rpglb">discord.gg/rpglb</a></p>
-	<p>Department emails can be found on our <a routerLink="/contact">contact page</a>.</p>
-	<br>
-	<p class="dim">&copy; 2023. RPG Limit Break, LLC.</p>
+	<!-- <div class="title">CONTACT</div> -->
+	<!-- <p>Email: <a href="mailto:management@rpglimitbreak.com">management@rpglimitbreak.com</a></p> -->
+	<!-- <p>Twitter: <a href="https://twitter.com/rpglimitbreak" target="_blank">@RPGLimitBreak</a></p>
+	<p>Discord: <a href="https://discord.gg/rpglb">discord.gg/rpglb</a></p> -->
+	<p>A list of department emails can be found on our <a routerLink="/contact">contact page</a>.</p>
+	<div class="social-container">
+		<a href="https://twitch.tv/RPGLimitBreak" [innerHtml]="icons.twitch | sanitizedHtml"></a>
+		<a href="https://youtube.com/@RPGLimitBreak" [innerHtml]="icons.youtube | sanitizedHtml"></a>
+		<a href="https://discord.gg/rpglb" [innerHtml]="icons.discord | sanitizedHtml"></a>
+		<a href="https://twitter.com/RPGLimitBreak" [innerHtml]="icons.twitter | sanitizedHtml"></a>
+		<a href="https://bsky.app/profile/rpglimitbreak.bsky.social" [innerHtml]="icons.bluesky | sanitizedHtml"></a>
+		<a href="https://instagram.com/rpglimitbreak" [innerHtml]="icons.instagram | sanitizedHtml"></a>
+	</div>
+	<p class="dim">&copy; 2024. RPG Limit Break, LLC.</p>
 </div>

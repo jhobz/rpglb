@@ -1,11 +1,11 @@
-@import '../../rpglb-dark-theme.scss';
+@import "../../rpglb-dark-theme.scss";
 
 $background: map-get($rpglb-app-theme, background);
 
 .wrapper {
 	background-color: mat-color($background, app-bar);
 	padding: 25px;
-	font-family: 'Segoe UI', 'Lucida Grande', sans-serif;
+	font-family: "Segoe UI", "Lucida Grande", sans-serif;
 	font-size: 0.75em;
 }
 
@@ -15,4 +15,22 @@ $background: map-get($rpglb-app-theme, background);
 
 p {
 	margin: 0;
+}
+
+.social-container {
+	margin: 10px 0;
+
+	a {
+		display: inline-block;
+		fill: #fafafa;
+		padding: 5px;
+		width: 30px;
+		height: 30px;
+		border-radius: 5px;
+
+		&:hover {
+			background-color: #fafafa;
+			fill: mat-color($background, app-bar);
+		}
+	}
 }
