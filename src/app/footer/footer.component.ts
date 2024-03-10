@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { siBluesky, siDiscord, siInstagram, siTwitch, siX, siYoutube } from 'simple-icons'
 
 @Component({
   selector: 'app-footer',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  icons: {}
 
   constructor() { }
 
   ngOnInit() {
+    this.icons = {
+      bluesky: siBluesky.svg,
+      discord: siDiscord.svg,
+      instagram: siInstagram.svg,
+      twitch: siTwitch.svg,
+      twitter: siX.svg,
+      youtube: siYoutube.svg
+    }
   }
 
 }

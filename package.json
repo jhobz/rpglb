@@ -46,6 +46,7 @@
     "passport-anonymous": "^1.0.1",
     "passport-jwt": "^4.0.0",
     "rxjs": "^5.5.6",
+    "simple-icons": "^11.8.0",
     "stripe": "^6.25.1",
     "zone.js": "^0.8.19"
   },
