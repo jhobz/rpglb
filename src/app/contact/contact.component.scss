@@ -2,3 +2,14 @@
 	grid-area: content;
 	padding: 25px;
 }
+
+.title {
+	margin: 2rem 0;
+	text-align: left;
+}
+
+.flex {
+	display: flex;
+	flex-direction: row;
+	gap: 8rem;
+}
