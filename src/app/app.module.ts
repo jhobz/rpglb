@@ -71,6 +71,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { RunnerGuideComponent } from './runner-guide/runner-guide.component';
 import { SpeedrunEventGuard } from './speedrun-event.guard';
 import { SubmissionGuidelinesPageComponent } from './submission-guidelines-page/submission-guidelines-page.component'
+import { SanitizedHtmlPipe } from './sanitized-html.pipe'
 
 
 @NgModule({
@@ -108,6 +109,7 @@ import { SubmissionGuidelinesPageComponent } from './submission-guidelines-page/
 		AdminPageComponent,
 		RunnerGuideComponent,
 		SubmissionGuidelinesPageComponent,
+		SanitizedHtmlPipe,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent
