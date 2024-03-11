@@ -22,7 +22,7 @@ exports.createSpeedrunEvent = async function (speedrunEvent) {
 	let newSpeedrunEvent = new SpeedrunEvent({
 		name: speedrunEvent.name,
 		shortname: speedrunEvent.shortname,
-		cause: speedrunEvent.cause, // TODO: Might have to assign parts of the object individually here
+		cause: speedrunEvent.cause,
 		active: false,
 		state: 'pre'
 	})

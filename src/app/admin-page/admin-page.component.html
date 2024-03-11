@@ -2,7 +2,7 @@
 	<!-- Event Management -->
 	<fieldset class="event-controls flex-container" *ngIf="user.roles.includes('admin')" [disabled]="!adminControlsEnabled">
 		<legend>
-			<span>Event State Management</span>
+			<span>Event State</span>
 			<button
 				mat-mini-fab
 				class="floating-button"
@@ -99,6 +99,7 @@
 		<legend>Event Information</legend>
 		<p class="warn">Note: This section is to be used for updating the <em>active event ONLY.</em> Do NOT use this section to change events completely.</p>
 		<p class="subtle">SpeedrunEvent ID: {{speedrunEvent._id}}</p>
+		<h3>General information</h3>
 		<form #form="ngForm">
 			<div class="flex-container">
 				<mat-form-field>
@@ -152,7 +153,7 @@
 			</fieldset>
 
 			<mat-form-field>
-				<mat-label>Registration Cap</mat-label>
+				<mat-label>Registration cap</mat-label>
 				<input
 					matInput
 					type="number"
@@ -164,7 +165,7 @@
 			</mat-form-field>
 
 			<mat-form-field class="small-field">
-				<mat-label>Registration Cost</mat-label>
+				<mat-label>Registration cost</mat-label>
 				<input
 					matInput
 					type="number"
@@ -176,7 +177,190 @@
 				<span matSuffix>USD</span>
 			</mat-form-field>
 
-			<br>
+			<h3>Dates</h3>
+			<fieldset class="flex-container">
+				<legend>Games</legend>
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="gameSubsOpenDatepicker"
+						name="dates.games.submissionsOpen"
+						placeholder="Submissions open"
+						[(ngModel)]="speedrunEvent.dates.games.submissionsOpen" />
+					<mat-datepicker-toggle matSuffix [for]="gameSubsOpenDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #gameSubsOpenDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="gameSubsCloseDatepicker"
+						name="dates.games.submissionsClose"
+						placeholder="Submissions close"
+						[(ngModel)]="speedrunEvent.dates.games.submissionsClose" />
+					<mat-datepicker-toggle matSuffix [for]="gameSubsCloseDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #gameSubsCloseDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="gameListReleaseDatepicker"
+						name="dates.games.listRelease"
+						placeholder="Games list releases"
+						[(ngModel)]="speedrunEvent.dates.games.listRelease" />
+					<mat-datepicker-toggle matSuffix [for]="gameListReleaseDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #gameListReleaseDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="gameScheduleReleaseDatepicker"
+						name="dates.games.scheduleRelease"
+						placeholder="Event schedule releases"
+						[(ngModel)]="speedrunEvent.dates.games.scheduleRelease" />
+					<mat-datepicker-toggle matSuffix [for]="gameScheduleReleaseDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #gameScheduleReleaseDatepicker></mat-datepicker>
+				</mat-form-field>
+			</fieldset>
+
+			<fieldset class="flex-container">
+				<legend>Registration</legend>
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="registrationOpenDatepicker"
+						name="dates.registration.open"
+						placeholder="Registration opens"
+						[(ngModel)]="speedrunEvent.dates.registration.open" />
+					<mat-datepicker-toggle matSuffix [for]="registrationOpenDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #registrationOpenDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="registrationCloseDatepicker"
+						name="dates.registration.close"
+						placeholder="Registration closes"
+						[(ngModel)]="speedrunEvent.dates.registration.close" />
+					<mat-datepicker-toggle matSuffix [for]="registrationCloseDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #registrationCloseDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="refundDeadlineDatepicker"
+						name="dates.registration.refundDeadline"
+						placeholder="Refund deadline"
+						[(ngModel)]="speedrunEvent.dates.registration.refundDeadline" />
+					<mat-datepicker-toggle matSuffix [for]="refundDeadlineDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #refundDeadlineDatepicker></mat-datepicker>
+				</mat-form-field>
+			</fieldset>
+
+			<fieldset class="flex-container">
+				<legend>Prizes</legend>
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="prizeSubsOpenDatepicker"
+						name="dates.prizes.submissionsOpen"
+						placeholder="Submissions open"
+						[(ngModel)]="speedrunEvent.dates.prizes.submissionsOpen" />
+					<mat-datepicker-toggle matSuffix [for]="prizeSubsOpenDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #prizeSubsOpenDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="prizeSubsCloseDatepicker"
+						name="dates.prizes.submissionsClose"
+						placeholder="Submissions close"
+						[(ngModel)]="speedrunEvent.dates.prizes.submissionsClose" />
+					<mat-datepicker-toggle matSuffix [for]="prizeSubsCloseDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #prizeSubsCloseDatepicker></mat-datepicker>
+				</mat-form-field>
+			</fieldset>
+
+			<fieldset class="flex-container">
+				<legend>Volunteers</legend>
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="volunteerAppsOpenDatepicker"
+						name="dates.volunteers.applicationsOpen"
+						placeholder="Applications open"
+						[(ngModel)]="speedrunEvent.dates.volunteers.applicationsOpen" />
+					<mat-datepicker-toggle matSuffix [for]="volunteerAppsOpenDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #volunteerAppsOpenDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="volunteerAppsCloseDatepicker"
+						name="dates.volunteers.applicationsClose"
+						placeholder="Applications close"
+						[(ngModel)]="speedrunEvent.dates.volunteers.applicationsClose" />
+					<mat-datepicker-toggle matSuffix [for]="volunteerAppsCloseDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #volunteerAppsCloseDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="volunteerScheduleReleaseDatepicker"
+						name="dates.volunteers.scheduleRelease"
+						placeholder="Volunteer schedule releases"
+						[(ngModel)]="speedrunEvent.dates.volunteers.scheduleRelease" />
+					<mat-datepicker-toggle matSuffix [for]="volunteerScheduleReleaseDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #volunteerScheduleReleaseDatepicker></mat-datepicker>
+				</mat-form-field>
+			</fieldset>
+
+			<fieldset class="flex-container">
+				<legend>Event</legend>
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="eventStartDatepicker"
+						name="dates.event.start"
+						placeholder="Event starts"
+						[(ngModel)]="speedrunEvent.dates.event.start" />
+					<mat-datepicker-toggle matSuffix [for]="eventStartDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #eventStartDatepicker></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="eventEndDatepicker"
+						name="dates.event.end"
+						placeholder="Event ends"
+						[(ngModel)]="speedrunEvent.dates.event.end" />
+					<mat-datepicker-toggle matSuffix [for]="eventEndDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #eventEndDatepicker></mat-datepicker>
+				</mat-form-field>
+			</fieldset>
+
+			<fieldset class="flex-container">
+				<legend>Miscellaneous</legend>
+				<mat-form-field>
+					<input
+						matInput
+						[matDatepicker]="covidPolicyDatepicker"
+						name="dates.misc.covidPolicy"
+						placeholder="Covid policy deadline"
+						[(ngModel)]="speedrunEvent.dates.misc.covidPolicy" />
+					<mat-datepicker-toggle matSuffix [for]="covidPolicyDatepicker"></mat-datepicker-toggle>
+					<mat-datepicker #covidPolicyDatepicker></mat-datepicker>
+				</mat-form-field>
+			</fieldset>
+
 			<button
 				mat-raised-button
 				class="floating-button"
@@ -191,7 +375,7 @@
 
 	<!-- User Management -->
 	<fieldset *ngIf="user.roles.includes('admin') || user.roles.includes('safety')">
-		<legend>User Management</legend>
+		<legend>Users</legend>
 		<button
 			mat-mini-fab
 			class="floating-button"

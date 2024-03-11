@@ -13,11 +13,11 @@ $background: map-get($rpglb-app-theme, background);
 .flex-container {
     display: flex;
     justify-content: space-between;
-    gap: 5%;
+    gap: 3rem;
 }
 
 fieldset {
-    margin-top: 1em;
+    margin-top: 1rem;
     position: relative;
 }
 
