@@ -143,7 +143,7 @@ function validateUnique(field) {
 			if(!this.isNew) {
 				query = query.where('_id').ne(this._id);
 			}
-			query.count(function(err, n) {
+			query.countDocuments(function(err, n) {
 				cb(n < 1);
 			});
 		} else {

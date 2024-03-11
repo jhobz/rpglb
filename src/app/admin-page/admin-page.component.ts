@@ -26,6 +26,35 @@ export class AdminPageComponent implements OnInit {
         },
         active: false,
         state: 'pre',
+        dates: {
+            games: {
+                submissionsOpen: '',
+                submissionsClose: '',
+                listRelease: '',
+                scheduleRelease: ''
+            },
+            registration: {
+                open: '',
+                close: '',
+                refundDeadline: '',
+            },
+            prizes: {
+                submissionsOpen: '',
+                submissionsClose: '',
+            },
+            volunteers: {
+                applicationsOpen: '',
+                applicationsClose: '',
+                scheduleRelease: '',
+            },
+            event: {
+                start: '',
+                end: '',
+            },
+            misc: {
+                covidPolicy: ''
+            },
+        }
     } as SpeedrunEvent
     adminControlsEnabled: boolean
     stateOptions = ['pre', 'live', 'post']
