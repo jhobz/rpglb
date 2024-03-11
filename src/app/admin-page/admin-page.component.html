@@ -1,15 +1,19 @@
 <div class="wrapper full-width">
 	<h1>Administrator Controls</h1>
 	<!-- Event Management -->
-			<button
-				mat-mini-fab
-				class="floating-button"
-				color="primary"
-				[disabled]="adminControlsEnabled"
-				(click)="enableAdminControls()"
-			>
-				<mat-icon>lock_open</mat-icon>
-			</button>
+	<button
+		mat-mini-fab
+		class="floating-button"
+		color="primary"
+		[attr.data-disabled]="adminControlsEnabled"
+		(click)="toggleAdminControls()"
+		[matTooltip]="
+			(adminControlsEnabled ? 'Lock' : 'Unlock') + ' state controls'
+		"
+	>
+		<mat-icon>{{ lockIcon }}</mat-icon>
+	</button>
+
 	<fieldset
 		class="event-controls flex-container"
 		*ngIf="user.roles.includes('admin')"
@@ -135,10 +139,12 @@
 	<!-- Event Info -->
 	<fieldset *ngIf="user.roles.includes('admin')" class="event-info">
 		<legend>Event Information</legend>
-		<p class="subtle">SpeedrunEvent ID: {{ speedrunEvent._id }}</p>
+		<p class="float-right subtle">
+			SpeedrunEvent ID: {{ speedrunEvent._id }}
+		</p>
 		<p class="warn">
-			Note: This section is to be used for updating the
-			<em>active event ONLY.</em> Do NOT use this section to change events
+			WARNING: This section is only to be used for updating the
+			<em>active event.</em> Do NOT use this section to change events
 			completely.
 		</p>
 		<h2>General information</h2>

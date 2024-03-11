@@ -14,6 +14,7 @@ import { SpeedrunEvent, SpeedrunEventService } from '../speedrun-event.service'
     providers: [UserService]
 })
 export class AdminPageComponent implements OnInit {
+    lockIcon: 'lock_open' | 'lock' = 'lock_open'
     userList: User[] = []
     attendees: User[] = []
     user: TokenUserInfo
@@ -98,8 +99,9 @@ export class AdminPageComponent implements OnInit {
                 })
     }
 
-	enableAdminControls() {
-		this.adminControlsEnabled = true
+	toggleAdminControls() {
+		this.adminControlsEnabled = !this.adminControlsEnabled
+        this.lockIcon = this.lockIcon === 'lock_open' ? 'lock' : 'lock_open'
 	}
 
     updateSpeedrunEvent(propertyName: string, propertyValue: any, readableName: string, readableValue: string) {
