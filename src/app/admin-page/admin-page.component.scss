@@ -4,6 +4,12 @@ $primary: map-get($rpglb-app-theme, primary);
 $warn: map-get($rpglb-app-theme, warn);
 $background: map-get($rpglb-app-theme, background);
 
+/* Lock icon */
+button[data-disabled="true"] {
+    background-color: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.3);
+}
+
 /* General things */
 .wrapper {
     max-width: 1500px;
@@ -23,12 +29,12 @@ fieldset {
 }
 
 fieldset:disabled > :not(legend) {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.3);
 }
 
 h2 {
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
 .warn {
@@ -80,6 +86,11 @@ legend > .floating-button {
 
     .floating-button {
         inset: auto 15px 15px auto;
+    }
+
+    .float-right {
+        float: right;
+        margin-right: 1rem;
     }
 }
 
