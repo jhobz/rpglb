@@ -8,6 +8,7 @@ $background: map-get($rpglb-app-theme, background);
 .wrapper {
     max-width: 1500px;
     margin: 50px auto;
+    position: relative;
 }
 
 .flex-container {
@@ -25,35 +26,37 @@ fieldset:disabled > :not(legend) {
     color: rgba(255, 255, 255, 0.4);
 }
 
+h2 {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
 .warn {
     font-size: 0.8em;
 }
 
 /* Event controls */
 .event-controls {
-    column-gap: 9em;
-    row-gap: 3em;
+    gap: 2rem;
     justify-content: flex-start;
     flex-wrap: wrap;
 
-    & > div {
-        min-width: 96px;
-    }
-
-    mat-form-field {
-        margin-bottom: 1em;
-        flex-grow: 0;
+    & > * {
+        flex-grow: 1;
+        flex-basis: 96px;
+        max-width: 200px;
     }
 
     h5 {
+        margin-top: 0;
         white-space: nowrap;
     }
 }
 
 .floating-button {
     position: absolute;
-    top: 5px;
-    right: 15px;
+    inset: 0 0 auto auto;
+    z-index: 99;
 }
 
 legend > .floating-button {
@@ -75,17 +78,18 @@ legend > .floating-button {
         flex-grow: 1;
     }
 
-    .flex-container {
-        width: 75%;
-    }
-
-    .small-fieldset {
-        margin: 0;
-        min-width: 750px;
+    .floating-button {
+        inset: auto 15px 15px auto;
     }
 }
 
 /* User lists */
+.user-info {
+    .floating-button {
+        inset: 5px 15px auto auto;
+    }
+}
+
 .user-list {
     width: 50%;
     font-size: 0.75em;
