@@ -7,7 +7,14 @@ import { siBluesky, siDiscord, siInstagram, siTwitch, siX, siYoutube } from 'sim
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  icons: {}
+  icons: {
+    bluesky: string,
+    discord: string,
+    instagram: string,
+    twitch: string,
+    twitter: string,
+    youtube: string,
+  }
 
   constructor() { }
 
