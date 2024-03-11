@@ -18,13 +18,16 @@ let SpeedrunEventSchema = new mongoose.Schema({
 			type: String,
 			trim: true
 		},
+		shortname: {
+			type: String,
+			trim: true
+		},
 		url: {
 			type: String,
 			lowercase: true,
 			trim: true,
 			match: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i
-		},
-		trackerId: Number
+		}
 	},
 	active: Boolean,
 	state: {
@@ -41,22 +44,52 @@ let SpeedrunEventSchema = new mongoose.Schema({
 	isRegistrationOpen: Boolean,
 	maxRegisteredUsers: Number,
 	registrationCost: Number,
-	gameSubmissions: [{
-		type: mongoose.Schema.ObjectId,
-		ref: 'GameSubmission'
-	}],
-	volunteerSubmissions: [{
-		type: mongoose.Schema.ObjectId,
-		ref: 'VolunteerSubmission'
-	}],
-	registeredUsers: [{
-		type: mongoose.Schema.ObjectId,
-		ref: 'User'
-	}],
-	admins: [{
-		type: mongoose.Schema.ObjectId,
-		ref: 'User'
-	}]
+	trackerId: String,
+	dates: {
+		games: {
+			submissionsOpen: Date,
+			submissionsClose: Date,
+			listRelease: Date,
+			scheduleRelease: Date
+		},
+		registration: {
+			open: Date,
+			close: Date,
+			refundDeadline: Date
+		},
+		prizes: {
+			submissionsOpen: Date,
+			submissionsClose: Date
+		},
+		volunteers: {
+			applicationsOpen: Date,
+			applicationsClose: Date,
+			scheduleRelease: Date
+		},
+		event: {
+			start: Date,
+			end: Date
+		},
+		misc: {
+			covidPolicy: Date
+		}
+	},
+	// gameSubmissions: [{
+	// 	type: mongoose.Schema.ObjectId,
+	// 	ref: 'GameSubmission'
+	// }],
+	// volunteerSubmissions: [{
+	// 	type: mongoose.Schema.ObjectId,
+	// 	ref: 'VolunteerSubmission'
+	// }],
+	// registeredUsers: [{
+	// 	type: mongoose.Schema.ObjectId,
+	// 	ref: 'User'
+	// }],
+	// admins: [{
+	// 	type: mongoose.Schema.ObjectId,
+	// 	ref: 'User'
+	// }]
 })
 
 SpeedrunEventSchema.virtual('registeredUsersCount').get(async function () {
