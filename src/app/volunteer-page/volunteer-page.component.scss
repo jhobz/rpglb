@@ -9,6 +9,16 @@ $warn: map-get($rpglb-app-theme, warn);
 	margin: 0 auto;
 }
 
+.mat-card {
+	margin: 0 auto;
+	width: fit-content;
+	text-align: center;
+
+	p {
+		text-align: left;
+	}
+}
+
 h2 {
 	// padding-bottom: 5px;
 	// border-bottom: 1px solid #aaaaaa;
