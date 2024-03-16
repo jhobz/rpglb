@@ -27,6 +27,7 @@ import {
 } from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MarkdownModule } from 'ngx-markdown'
 
 import { AppRoutingModule } from './/app-routing.module'
 import { AppComponent } from './app.component'
@@ -140,7 +141,8 @@ import { SanitizedHtmlPipe } from './sanitized-html.pipe'
 		MatSortModule,
 		MatTableModule,
 		MatToolbarModule,
-		MatTooltipModule
+		MatTooltipModule,
+		MarkdownModule.forRoot()
 	],
 	providers: [
 		AuthGuardService,
