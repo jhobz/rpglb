@@ -25,8 +25,8 @@ export class RegistrationPageComponent implements OnInit {
 		isBringingMinors: false,
 	} as User
 	userTokenInfo: TokenUserInfo
-	minDate: Date = new Date(2023, 6, 13)
-	maxDate: Date = new Date(2023, 6, 24)
+	minDate: Date
+	maxDate: Date
 	handler: any
 	paymentAmount: number
 	speedrunEvent: SpeedrunEvent
@@ -67,16 +67,18 @@ export class RegistrationPageComponent implements OnInit {
 					phone: ''
 				}
 			}
-			// if (!this.user.hasAcceptedCovidPolicy) {
-			// 	this.user.hasAcceptedCovidPolicy = false
-			// }
 			this.hasFullUserLoaded = true
 		})
 		this.speedrunEventService.getCurrentSpeedrunEvent()
 			.subscribe((srEvent: SpeedrunEvent) => {
 				this.speedrunEvent = srEvent
-				this.paymentAmount = srEvent.registrationCost || 0
 
+				this.minDate = new Date(srEvent.dates.event.start)
+				this.minDate.setDate(this.minDate.getDate() - 3)
+				this.maxDate = new Date(srEvent.dates.event.end)
+				this.maxDate.setDate(this.maxDate.getDate() + 1)
+
+				this.paymentAmount = srEvent.registrationCost || 0
 				if (this.userTokenInfo.roles.includes('skip-payment')) {
 					this.paymentAmount = 0
 				}
