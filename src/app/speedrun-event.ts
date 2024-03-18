@@ -8,7 +8,7 @@ export class SpeedrunEvent {
 	cause: string
 	causeLink: string
 	donations: DonationData
-	trackerId: number
+	trackerId: string
 }
 
 export interface DonationData {

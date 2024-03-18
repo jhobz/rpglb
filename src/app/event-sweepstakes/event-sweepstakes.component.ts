@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
 
 import { DonationService } from '../donation.service';
 import { DonationData, SpeedrunEvent } from '../speedrun-event';
@@ -16,12 +15,13 @@ export class EventSweepstakesComponent implements OnInit {
 	isChatOpen: boolean = false;
 
 	constructor(private donationService: DonationService) {
-		this.event.name = 'RPG Limit Break 2018';
-		this.event.shortName = 'rpglb2018';
-		this.event.cause = 'NAMI: National Alliance on Mental Illness';
-		this.event.causeLink = 'https://www.nami.org';
-		this.event.trackerId = 6;
-		this.event.donations = { total: 0, goal: 0 };
+		// TODO: #150 MAKE THIS ACTUALLY PULL FROM THE SPEEDRUN EVENT WTH
+		// this.event.name = 'RPG Limit Break 2018';
+		// this.event.shortName = 'rpglb2018';
+		// this.event.cause = 'NAMI: National Alliance on Mental Illness';
+		// this.event.causeLink = 'https://www.nami.org';
+		// this.event.trackerId = 6;
+		// this.event.donations = { total: 0, goal: 0 };
 	}
 
 	ngOnInit() {

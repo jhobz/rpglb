@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
-import * as $ from 'jquery'
 
 import { DonationService } from '../donation.service'
 import { DonationData, SpeedrunEvent } from '../speedrun-event'
@@ -17,7 +16,7 @@ export class EventHomeComponent implements OnInit {
 	chatButtonText: string = 'Chat with viewers!'
 
 	constructor(private donationService: DonationService) {
-		// TODO: This is all old and gross, really needs to be updated to pull stuff from the event object in the database
+		// TODO: #148 This is all old and gross, really needs to be updated to pull stuff from the event object in the database
 		this.event.name = 'RPG Limit Break 2023'
 		// this.event.shortName = 'rpglb2022'
 		this.event.cause = 'NAMI: National Alliance on Mental Illness'

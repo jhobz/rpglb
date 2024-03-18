@@ -14,12 +14,13 @@ export class DonateHeaderComponent implements OnInit {
 	event: SpeedrunEvent = new SpeedrunEvent()
 
 	constructor(private donationService: DonationService) {
-		this.event.name = 'RPG Limit Break 2023'
-		this.event.shortName = 'rpglb2023'
-		this.event.cause = 'NAMI: National Alliance on Mental Illness'
-		this.event.causeLink = 'https://www.nami.org'
-		this.event.trackerId = 11
-		this.event.donations = { total: 0, goal: 100000 }
+		// TODO: #149 MAKE THIS ACTUALLY PULL FROM THE SPEEDRUN EVENT WTH
+		// this.event.name = 'RPG Limit Break 2023'
+		// this.event.shortName = 'rpglb2023'
+		// this.event.cause = 'NAMI: National Alliance on Mental Illness'
+		// this.event.causeLink = 'https://www.nami.org'
+		// this.event.trackerId = 11
+		// this.event.donations = { total: 0, goal: 100000 }
 	}
 
 	ngOnInit() {
