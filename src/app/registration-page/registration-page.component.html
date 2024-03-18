@@ -1,37 +1,90 @@
 <div class="wrapper">
 	<div *ngIf="hasAdminRole" class="admin-controls">
 		<span>Registration is </span>
-		<span [ngClass]="{'privacy-public': speedrunEvent?.isRegistrationOpen, 'privacy-private': !speedrunEvent?.isRegistrationOpen}">{{speedrunEvent?.isRegistrationOpen ? 'OPEN' : 'CLOSED'}}</span>
+		<span
+			[ngClass]="{
+				'privacy-public': speedrunEvent?.isRegistrationOpen,
+				'privacy-private': !speedrunEvent?.isRegistrationOpen
+			}"
+			>{{ speedrunEvent?.isRegistrationOpen ? "OPEN" : "CLOSED" }}</span
+		>
 	</div>
-	<h1>Register for {{speedrunEvent?.name}}</h1>
-	<p>In order to register for {{speedrunEvent?.name}}, first you will need to enter your intended dates of stay
-		(the marathon stream will run July 16-22, with setup July 14-15, and teardown on July 23). We use this information
-		for general headcounts and to get an idea of the arrivals per day. You can change it on this page at any time. Afterwards,
-		click the "Pay Attendance Fee" button in order to start the payment process. The attendance fee for {{speedrunEvent?.shortname}}
-		is USD {{ paymentAmount | currency:'USD' }}. This fee helps us cover costs related to
-		running the event for attendees, such as practice TVs, hotel fees, and more.
-		If you need your attendance fee refunded (in the event that you no longer wish to attend), please contact an
-		administrator via email, Twitter, or Discord (links available below). The deadline for attendance fee refunds
-		will be June 18 - after this date no refunds will be given. When attending,
-		you will receive a badge with your username (<strong>{{userTokenInfo.username}}</strong>) printed on it. If you
-		would like to change your username, please contact an adminstrator.
+	<h1>Register for {{ speedrunEvent?.name }}</h1>
+	<p>
+		In order to register for {{ speedrunEvent?.name }}, first you will need
+		to enter your intended dates of stay (the marathon stream will run
+		{{ speedrunEvent?.dates?.event.start | date : "MMMM d" : "-0400" }} to
+		{{ speedrunEvent?.dates?.event.end | date : "MMMM d" : "-0400" }}, with
+		setup starting {{ minDate | date : "MMMM d" : "-0400" }}, and teardown
+		on {{ maxDate | date : "MMMM d" : "-0400" }}). We use this information
+		for general headcounts and to get an idea of the arrivals per day. You
+		can change it on this page at any time. Afterwards, click the "Pay
+		Attendance Fee" button in order to start the payment process. The
+		attendance fee for {{ speedrunEvent?.shortname }} is USD
+		{{ paymentAmount | currency : "USD" }}. This fee helps us cover costs
+		related to running the event for attendees, such as practice TVs, hotel
+		fees, and more. If you need your attendance fee refunded (in the event
+		that you no longer wish to attend), please contact an administrator via
+		email, Twitter, or Discord (links available below). The deadline for
+		attendance fee refunds will be
+		{{
+			speedrunEvent?.dates?.registration.refundDeadline
+				| date : "MMMM d" : "-0400"
+		}}
+		- after this date no refunds will be given. When attending, you will
+		receive a badge with your username (<strong>{{
+			userTokenInfo.username
+		}}</strong
+		>) printed on it. If you would like to change your username, please
+		contact an adminstrator.
 	</p>
 	<p class="msg-status success">
-		All attendees must meet the requirements outlined in our <a routerLink="/covid">COVID-19 Safety Policy.</a> Please confirm you meet these requirements before registering to attend.
+		All attendees must meet the requirements outlined in our
+		<a routerLink="/covid">COVID-19 Safety Policy.</a> Please confirm you
+		meet these requirements before registering to attend.
 	</p>
-	<p>Below you will find a number representing the number of attendees currently registered for the event and the
-		total cap. Registration will close on Sunday, June 18 at 11:59PM Eastern Daylight Time, or whenever the cap is reached.
-		If the cap is reached and you have already begun the payment process, you will be able to finish it.
-		Otherwise, you will not be able to register. Keep an eye on our <a href="https://twitter.com/rpglimitbreak">Twitter</a>
-		and <a href="https://discord.gg/rpglb">Discord</a> for announcements, as occasionally we are able to increase
-		the maximum cap.
+	<p>
+		Below you will find a number representing the number of attendees
+		currently registered for the event and the total cap. Registration will
+		close on
+		{{
+			speedrunEvent?.dates?.registration.open
+				| date : "EEEE, MMMM d" : "-0400"
+		}}
+		at 11:59PM Eastern Daylight Time, or whenever the cap is reached. If the
+		cap is reached and you have already begun the payment process, you will
+		be able to finish it. Otherwise, you will not be able to register. Keep
+		an eye on our
+		<a href="https://twitter.com/rpglimitbreak">Twitter</a> and
+		<a href="https://discord.gg/rpglb">Discord</a> for announcements, as
+		occasionally we are able to increase the maximum cap.
 	</p>
-	<div *ngIf="speedrunEvent && hasFullUserLoaded && !isProcessingPayment" class="registration-container">
-		<div *ngIf="speedrunEvent.isRegistrationOpen || hasEventRole || canBackdoor" class="attendees">
-			Attendee slots taken: <span class="attendees-count">{{speedrunEvent.registeredUsersCount}} / {{speedrunEvent.maxRegisteredUsers}}</span>
+	<div
+		*ngIf="speedrunEvent && hasFullUserLoaded && !isProcessingPayment"
+		class="registration-container"
+	>
+		<div
+			*ngIf="
+				speedrunEvent.isRegistrationOpen || hasEventRole || canBackdoor
+			"
+			class="attendees"
+		>
+			Attendee slots taken:
+			<span class="attendees-count"
+				>{{ speedrunEvent.registeredUsersCount }} /
+				{{ speedrunEvent.maxRegisteredUsers }}</span
+			>
 		</div>
-		<div *ngIf="user.roles.includes('attendee') || hasEventRole || canBackdoor ||
-			(speedrunEvent.isRegistrationOpen && speedrunEvent.registeredUsersCount < speedrunEvent.maxRegisteredUsers)">
+		<div
+			*ngIf="
+				user.roles.includes('attendee') ||
+				hasEventRole ||
+				canBackdoor ||
+				(speedrunEvent.isRegistrationOpen &&
+					speedrunEvent.registeredUsersCount <
+						speedrunEvent.maxRegisteredUsers)
+			"
+		>
 			<form novalidate #f="ngForm" class="registration-form">
 				<mat-form-field>
 					<input
@@ -43,8 +96,12 @@
 						placeholder="Arrival date"
 						[(ngModel)]="user.attendanceDates.startDate"
 						(dateChange)="onFormChange()"
-						required />
-					<mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+						required
+					/>
+					<mat-datepicker-toggle
+						matSuffix
+						[for]="startDatepicker"
+					></mat-datepicker-toggle>
 					<mat-datepicker #startDatepicker></mat-datepicker>
 				</mat-form-field>
 				<mat-form-field>
@@ -57,8 +114,12 @@
 						placeholder="Departure date"
 						[(ngModel)]="user.attendanceDates.endDate"
 						(dateChange)="onFormChange()"
-						required />
-					<mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+						required
+					/>
+					<mat-datepicker-toggle
+						matSuffix
+						[for]="endDatepicker"
+					></mat-datepicker-toggle>
 					<mat-datepicker #endDatepicker></mat-datepicker>
 				</mat-form-field>
 
@@ -67,10 +128,12 @@
 					name="onSite"
 					[(ngModel)]="user.onSite"
 					(change)="onFormChange()"
-					>
+				>
 					I will be staying at the event hotel
 				</mat-checkbox>
-				<p class="subtle">Hotel booking link found in profile after registration</p>
+				<p class="subtle">
+					Hotel booking link found in profile after registration
+				</p>
 				<br />
 
 				<mat-form-field class="wider-2">
@@ -82,8 +145,12 @@
 						minlength="8"
 						maxlength="26"
 						(change)="onFormChange()"
-						required />
-					<mat-hint>Please include country code if outside of the U.S.</mat-hint>
+						required
+					/>
+					<mat-hint
+						>Please include country code if outside of the
+						U.S.</mat-hint
+					>
 				</mat-form-field>
 
 				<div class="flex">
@@ -97,8 +164,11 @@
 								[(ngModel)]="user.twitch"
 								maxlength="26"
 								(change)="onFormChange()"
-								/>
-							<mat-hint>May be displayed on stream if you are a runner</mat-hint>
+							/>
+							<mat-hint
+								>May be displayed on stream if you are a
+								runner</mat-hint
+							>
 						</mat-form-field>
 						<mat-form-field>
 							<input
@@ -108,8 +178,11 @@
 								[(ngModel)]="user.twitter"
 								maxlength="26"
 								(change)="onFormChange()"
-								/>
-							<mat-hint>May be displayed on stream if you are a runner</mat-hint>
+							/>
+							<mat-hint
+								>May be displayed on stream if you are a
+								runner</mat-hint
+							>
 						</mat-form-field>
 						<mat-form-field>
 							<mat-label>Discord</mat-label>
@@ -120,7 +193,7 @@
 								[(ngModel)]="user.discord"
 								maxlength="32"
 								(change)="onFormChange()"
-								/>
+							/>
 						</mat-form-field>
 					</fieldset>
 
@@ -135,7 +208,8 @@
 								minlength="1"
 								maxlength="128"
 								(change)="onFormChange()"
-								required />
+								required
+							/>
 							<mat-hint>Name of emergency contact</mat-hint>
 						</mat-form-field>
 						<mat-form-field>
@@ -148,7 +222,8 @@
 								minlength="1"
 								maxlength="128"
 								(change)="onFormChange()"
-								required />
+								required
+							/>
 							<mat-hint>Contact's relationship to you</mat-hint>
 						</mat-form-field>
 						<mat-form-field>
@@ -160,8 +235,12 @@
 								minlength="8"
 								maxlength="26"
 								(change)="onFormChange()"
-								required />
-							<mat-hint>A phone number where we can reach them</mat-hint>
+								required
+							/>
+							<mat-hint
+								>A phone number where we can reach
+								them</mat-hint
+							>
 						</mat-form-field>
 					</fieldset>
 				</div>
@@ -176,15 +255,21 @@
 							placeholder="she/her, he/him, any/all, etc."
 							[(ngModel)]="user.pronouns"
 							maxlength="26"
-							(change)="onFormChange()" />
+							(change)="onFormChange()"
+						/>
 					</mat-form-field>
 					<mat-checkbox
 						name="shouldPrintPronouns"
 						[(ngModel)]="user.shouldPrintPronouns"
-						(change)="onFormChange()">
+						(change)="onFormChange()"
+					>
 						Include pronouns on badge
 					</mat-checkbox>
-					<p class="subtle">RPGLB staff reserves the right to take disciplinary action if you use the pronouns field for anything other than its intended purpose.</p>
+					<p class="subtle">
+						RPGLB staff reserves the right to take disciplinary
+						action if you use the pronouns field for anything other
+						than its intended purpose.
+					</p>
 				</fieldset>
 
 				<fieldset>
@@ -193,7 +278,7 @@
 						name="minors"
 						[(ngModel)]="user.isBringingMinors"
 						(change)="onFormChange('minors')"
-						>
+					>
 						I am bringing one or more minors
 					</mat-checkbox>
 
@@ -207,8 +292,11 @@
 								[(ngModel)]="user.minorsNum"
 								maxlength="2"
 								(change)="onFormChange()"
-								[required]="user.isBringingMinors" />
-							<mat-hint>Number of children attending with you</mat-hint>
+								[required]="user.isBringingMinors"
+							/>
+							<mat-hint
+								>Number of children attending with you</mat-hint
+							>
 						</mat-form-field>
 						<mat-form-field>
 							<mat-label>Name(s)</mat-label>
@@ -218,8 +306,12 @@
 								[(ngModel)]="user.minorsNames"
 								maxlength="64"
 								(change)="onFormChange()"
-								[required]="user.isBringingMinors" />
-							<mat-hint>List the names of all children attending with you, separated by commas</mat-hint>
+								[required]="user.isBringingMinors"
+							/>
+							<mat-hint
+								>List the names of all children attending with
+								you, separated by commas</mat-hint
+							>
 						</mat-form-field>
 					</ng-container>
 				</fieldset>
@@ -234,20 +326,36 @@
 							(change)="onFormChange()"
 							matTextareaAutosize
 							matAutosizeMinRows="1"
-							matAutosizeMaxRows="5" >
+							matAutosizeMaxRows="5"
+						>
 						</textarea>
-						<mat-hint>Use this space to provide any additional information you think event staff may need to know</mat-hint>
+						<mat-hint
+							>Use this space to provide any additional
+							information you think event staff may need to
+							know</mat-hint
+						>
 					</mat-form-field>
 				</div>
 
 				<div class="full-width-wrapper">
-					<p>By checking the box below, I confirm that I have read, understand, and will comply with all requirements outlined in the <a routerLink="/covid">COVID-19 Safety Policy</a>, including, but not limited to, providing vaccination records and wearing a mask in all event spaces. I also understand that refusal to comply with the COVID-19 policies may result in barring my attendance with no refund.</p>
+					<p>
+						By checking the box below, I confirm that I have read,
+						understand, and will comply with all requirements
+						outlined in the
+						<a routerLink="/covid">COVID-19 Safety Policy</a>,
+						including, but not limited to, providing vaccination
+						records and wearing a mask in all designated event
+						spaces. I also understand that refusal to comply with
+						the COVID-19 policies may result in barring my
+						attendance with no refund.
+					</p>
 					<mat-checkbox
 						name="covid"
 						(change)="onFormChange()"
 						[(ngModel)]="user.hasAcceptedCovidPolicy"
 						[disabled]="user.roles.includes('attendee')"
-						required >
+						required
+					>
 						I agree to follow the COVID-19 Safety Policy
 					</mat-checkbox>
 				</div>
@@ -258,28 +366,45 @@
 				color="primary"
 				class="payment-button"
 				[disabled]="!f.valid || isFetching"
-				(click)="handlePayment($event)">
+				(click)="handlePayment($event)"
+			>
 				Pay Attendance Fee
 				<mat-progress-bar
 					*ngIf="isFetching"
 					color="primary"
-					mode="indeterminate">
+					mode="indeterminate"
+				>
 				</mat-progress-bar>
 			</button>
-			<div *ngIf="user.roles.includes('attendee')" class="attendee-message success">
+			<div
+				*ngIf="user.roles.includes('attendee')"
+				class="attendee-message success"
+			>
 				<mat-icon>check_circle_outline</mat-icon>
 				<span>Attendee fee paid. You're all set!</span>
 			</div>
 		</div>
-		<div *ngIf="(!speedrunEvent.isRegistrationOpen || speedrunEvent.registeredUsersCount >= speedrunEvent.maxRegisteredUsers) && !user.roles.includes('attendee')"
-			class="warn-light registration-form">
+		<div
+			*ngIf="
+				(!speedrunEvent.isRegistrationOpen ||
+					speedrunEvent.registeredUsersCount >=
+						speedrunEvent.maxRegisteredUsers) &&
+				!user.roles.includes('attendee')
+			"
+			class="warn-light registration-form"
+		>
 			Sorry, registration is not currently open or has reached the limit.
 		</div>
 		<p><a routerLink="/profile">Return to profile</a></p>
 	</div>
-	<div *ngIf="!speedrunEvent || !user || !hasFullUserLoaded || isProcessingPayment" class="registration-container">
-		<div class="spinner-message">{{spinnerMessage}}</div>
-		<div class="spinner-error warn">{{spinnerError}}</div>
+	<div
+		*ngIf="
+			!speedrunEvent || !user || !hasFullUserLoaded || isProcessingPayment
+		"
+		class="registration-container"
+	>
+		<div class="spinner-message">{{ spinnerMessage }}</div>
+		<div class="spinner-error warn">{{ spinnerError }}</div>
 		<mat-spinner *ngIf="!spinnerError"></mat-spinner>
 	</div>
 </div>

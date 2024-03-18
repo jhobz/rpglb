@@ -10,7 +10,7 @@
 		<!-- <a *ngIf="mode !== 'live' && speedrunEvent?.isGamesListPublic" routerLink="/games">GAMES</a> -->
 		<a *ngIf="mode !== 'live' || speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>
 		<a *ngIf="mode !== 'live' && speedrunEvent?.areVolunteerSubmissionsOpen" routerLink="/volunteer">VOLUNTEER</a>
-		<a *ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen" class="no-icon" target="_blank" href="https://docs.google.com/forms/d/1wXAURhF3byIZA6RQnvZlVygrwNvj_WtnWYdFbQ7mxc8">PRIZES</a>
+		<a *ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen" class="no-icon" target="_blank" href="https://forms.gle/gKx6K5myQ9AVv4499">PRIZES</a>
 		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank">DISCORD</a>
 		<a *ngIf="mode === 'post'" class="no-icon" href="https://youtube.com/@RPGLimitBreak">VODS</a>
 		<a *ngIf="mode === 'live'" href="https://theyetee.com/RPGLimitBreak" class="no-icon" target="_blank">MERCH</a>
