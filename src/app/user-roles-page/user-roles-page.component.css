@@ -1,0 +1,43 @@
+.flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.main-content {
+    flex: 2 0 900px;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    height: calc(100vh - 64px - 140px - 4rem)
+}
+
+.detail-content {
+    flex: 1 0 400px;
+}
+
+.title {
+    margin-bottom: 1rem;
+    text-align: left;
+    font-size: 1.4em;
+}
+
+.table-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-table {
+    overflow: auto;
+}
+
+.mat-column-id {
+    max-width: 60px;
+    overflow: hidden;
+    text-wrap: nowrap;
+}

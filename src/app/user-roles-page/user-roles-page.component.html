@@ -1,0 +1,55 @@
+<div class="flex-wrapper">
+	<div class="main-content">
+		<h1 class="title">Role Management</h1>
+
+		<div class="table-header">
+			<mat-form-field>
+				<input
+					matInput
+          [formControl]="filter"
+					placeholder="Filter by username"
+				/>
+			</mat-form-field>
+		</div>
+
+		<mat-table #table [dataSource]="dataSource">
+			<!-- Username Column -->
+			<ng-container matColumnDef="username">
+				<mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+				<mat-cell *matCellDef="let u">{{ u.username }}</mat-cell>
+			</ng-container>
+
+			<!-- Email Column -->
+			<ng-container matColumnDef="email">
+				<mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+				<mat-cell *matCellDef="let u">{{ u.email }}</mat-cell>
+			</ng-container>
+
+			<!-- Roles Column -->
+			<ng-container matColumnDef="roles">
+				<mat-header-cell *matHeaderCellDef>Roles</mat-header-cell>
+				<mat-cell *matCellDef="let u">
+					<div *ngFor="let role of u.roles">
+						{{ role }}
+					</div>
+				</mat-cell>
+			</ng-container>
+
+			<!-- ID Column -->
+			<ng-container matColumnDef="id">
+				<mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+				<mat-cell *matCellDef="let u">{{ u._id }}</mat-cell>
+			</ng-container>
+
+			<mat-header-row
+				*matHeaderRowDef="displayedColumns"
+			></mat-header-row>
+			<mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)"></mat-row>
+		</mat-table>
+
+    <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+	</div>
+	<div class="detail-content">
+		<p>Hello</p>
+	</div>
+</div>

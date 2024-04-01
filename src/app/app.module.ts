@@ -1,7 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
 	MatButtonModule,
 	MatButtonToggleModule,
@@ -71,7 +71,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { RunnerGuideComponent } from './runner-guide/runner-guide.component';
 import { SpeedrunEventGuard } from './speedrun-event.guard';
 import { SubmissionGuidelinesPageComponent } from './submission-guidelines-page/submission-guidelines-page.component'
-import { SanitizedHtmlPipe } from './sanitized-html.pipe'
+import { SanitizedHtmlPipe } from './sanitized-html.pipe';
+import { UserRolesPageComponent } from './user-roles-page/user-roles-page.component'
 
 
 @NgModule({
@@ -110,6 +111,7 @@ import { SanitizedHtmlPipe } from './sanitized-html.pipe'
 		RunnerGuideComponent,
 		SubmissionGuidelinesPageComponent,
 		SanitizedHtmlPipe,
+		UserRolesPageComponent,
 	],
 	entryComponents: [
 		SubmissionConfirmationDialogComponent
@@ -140,7 +142,8 @@ import { SanitizedHtmlPipe } from './sanitized-html.pipe'
 		MatSortModule,
 		MatTableModule,
 		MatToolbarModule,
-		MatTooltipModule
+		MatTooltipModule,
+		ReactiveFormsModule
 	],
 	providers: [
 		AuthGuardService,

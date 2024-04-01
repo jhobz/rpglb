@@ -9,6 +9,14 @@ import { environment } from '../environments/environment'
 import { AuthenticationService } from './authentication.service'
 import { User } from './user'
 
+type PaginationResponse<T> = {
+	docs: T[]
+	limit: number
+	page: number
+	pages: number
+	total: number
+}
+
 @Injectable()
 export class UserService {
 	private apiUrl: string = `${environment.apiUrl}/users`
@@ -28,6 +36,16 @@ export class UserService {
 			.map( (res: any) => {
 				return res.data.docs as User[]
 			} )
+	}
+
+	// TODO: This should really replace the getUsers method, but is introduced separately here so as not to make a breaking change
+	getPaginatedUsers(opts?: any): Observable<PaginationResponse<User>> {
+		const options = { headers: this.auth.generateAuthHeader(), params: {...opts} }
+
+		return this.http.get(this.apiUrl, options)
+			.map( (res: { data: PaginationResponse<User>, message: string, status: number }) => {
+				return res.data
+			})
 	}
 
 	editUser(user: User): Observable<any> {

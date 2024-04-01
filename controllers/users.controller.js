@@ -32,9 +32,10 @@ exports.getUsers = async function (req, res, next) {
 
 	let page = !isNaN(req.query.page) ? parseInt(req.query.page) : 1
 	let limit = !isNaN(req.query.limit) ? parseInt(req.query.limit) : 10
+	let filter = req.query.filter ? req.query.filter : ''
 
 	try {
-		let users = await UserService.getUsers({}, page, limit)
+		let users = await UserService.getUsers({username: {$regex: filter, $options: 'i'}}, page, limit)
 		return res.status(200).json( {
 			status: 200,
 			data: users,

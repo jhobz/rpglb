@@ -24,10 +24,12 @@ import { AdminPageComponent } from './admin-page/admin-page.component'
 import { RunnerGuideComponent } from './runner-guide/runner-guide.component'
 import { SpeedrunEventGuard } from './speedrun-event.guard'
 import { SubmissionGuidelinesPageComponent } from './submission-guidelines-page/submission-guidelines-page.component'
+import { UserRolesPageComponent } from './user-roles-page/user-roles-page.component'
 
 const routes: Routes = [
 	{ path: '', component: PreEventHomePageComponent, pathMatch: 'full', canActivate: [SpeedrunEventGuard] },
 	{ path: 'admin', component: AdminPageComponent, canActivate: [AuthGuardService] },
+	{ path: 'admin/roles', component: UserRolesPageComponent, canActivate: [AuthGuardService] },
 	{ path: 'news', component: BlogComponent },
 	{ path: 'blog', component: BlogComponent },
 	{ path: 'contact', component: ContactComponent },
