@@ -1,19 +1,59 @@
 <mat-toolbar class="wrapper mat-elevation-z6" color="primary">
-	<a routerLink="/"><img class="logo" src="assets/images/logos/LimitBreak-new-logo-RPGLB-02.png" /></a>
+	<a routerLink="/"
+		><img
+			class="logo"
+			src="assets/images/logos/LimitBreak-new-logo-RPGLB-02.png"
+	/></a>
 	<nav>
 		<a *ngIf="mode === 'live'" href="/donate" target="_blank">DONATE</a>
-		<a *ngIf="mode === 'live' || mode === 'pre' && speedrunEvent?.isGamesListPublic" href="/schedule">SCHEDULE</a>
+		<a
+			*ngIf="
+				mode === 'live' ||
+				(mode === 'pre' && speedrunEvent?.isGamesListPublic)
+			"
+			href="/schedule"
+			>SCHEDULE</a
+		>
 		<a routerLink="/news">NEWS</a>
-		<!-- TODO: Stop hardcoding this URL and pull the id from the speedrun event object -->
 		<a [href]="'/tracker/event/' + speedrunEvent?.trackerId">TRACKER</a>
 		<a *ngIf="mode === 'live'" routerLink="/rules">EVENT RULES</a>
 		<!-- <a *ngIf="mode !== 'live' && speedrunEvent?.isGamesListPublic" routerLink="/games">GAMES</a> -->
-		<a *ngIf="mode !== 'live' || speedrunEvent?.areGameSubmissionsOpen" routerLink="/submissions">SUBMISSIONS</a>
-		<a *ngIf="mode !== 'live' && speedrunEvent?.areVolunteerSubmissionsOpen" routerLink="/volunteer">VOLUNTEER</a>
-		<a *ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen" class="no-icon" target="_blank" href="https://forms.gle/gKx6K5myQ9AVv4499">PRIZES</a>
-		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank">DISCORD</a>
-		<a *ngIf="mode === 'post'" class="no-icon" href="https://youtube.com/@RPGLimitBreak">VODS</a>
-		<a *ngIf="mode === 'live'" href="https://theyetee.com/RPGLimitBreak" class="no-icon" target="_blank">MERCH</a>
+		<a
+			*ngIf="mode !== 'live' || speedrunEvent?.areGameSubmissionsOpen"
+			routerLink="/submissions"
+			>SUBMISSIONS</a
+		>
+		<a
+			*ngIf="
+				mode !== 'live' && speedrunEvent?.areVolunteerSubmissionsOpen
+			"
+			routerLink="/volunteer"
+			>VOLUNTEER</a
+		>
+		<a
+			*ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen"
+			class="no-icon"
+			target="_blank"
+			href="https://forms.gle/gKx6K5myQ9AVv4499"
+			>PRIZES</a
+		>
+		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank"
+			>DISCORD</a
+		>
+		<a
+			*ngIf="mode === 'post'"
+			class="no-icon"
+			href="https://youtube.com/@RPGLimitBreak"
+			>VODS</a
+		>
+		<a
+			*ngIf="mode === 'live'"
+			href="https://theyetee.com/RPGLimitBreak"
+			class="no-icon"
+			target="_blank"
+			>MERCH</a
+		>
+		<a href="https://store.rpglimitbreak.com">STORE</a>
 		<div class="auth-container" *ngIf="isLoggedIn()">
 			<a routerLink="/profile">PROFILE</a>
 			<a (click)="logout()">LOGOUT</a>
