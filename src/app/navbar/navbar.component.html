@@ -14,7 +14,6 @@
 			href="/schedule"
 			>SCHEDULE</a
 		>
-		<a href="https://store.rpglimitbreak.com">STORE</a>
 		<a routerLink="/news">NEWS</a>
 		<a [href]="'/tracker/event/' + speedrunEvent?.trackerId">TRACKER</a>
 		<a *ngIf="mode === 'live'" routerLink="/rules">EVENT RULES</a>
@@ -54,6 +53,7 @@
 			target="_blank"
 			>MERCH</a
 		>
+		<a href="https://store.rpglimitbreak.com">STORE</a>
 		<div class="auth-container" *ngIf="isLoggedIn()">
 			<a routerLink="/profile">PROFILE</a>
 			<a (click)="logout()">LOGOUT</a>
