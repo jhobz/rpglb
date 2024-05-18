@@ -1,6 +1,3 @@
-// const passport = require('passport')
-// require('../config/passport')(passport)
-
 const SpeedrunEventService = require('../services/speedrun-events.service')
 
 exports.getSpeedrunEvents = async function (req, res, next) {
@@ -35,7 +32,7 @@ exports.createSpeedrunEvent = async function (req, res, next) {
 	let speedrunEvent = {
 		name: req.body.name,
 		shortname: req.body.shortname,
-		cause: req.body.cause, // TODO: Might need to update this more granularly
+		cause: req.body.cause,
 	}
 
 	try {
@@ -101,9 +98,11 @@ exports.updateSpeedrunEvent = async function (req, res, next) {
 		isRegistrationOpen: req.body.isRegistrationOpen,
 		maxRegisteredUsers: req.body.maxRegisteredUsers ? req.body.maxRegisteredUsers : null,
 		registrationCost: req.body.registrationCost ? req.body.registrationCost : null,
-		gameSubmissions: req.body.gameSubmissions ? req.body.gameSubmissions : null,
-		volunteerSubmissions: req.body.volunteerSubmissions ? req.body.volunteerSubmissions : null,
-		registeredUsers: req.body.registeredUsers ? req.body.registeredUsers : null,
+		trackerId: req.body.trackerId ? req.body.trackerId : null,
+		dates: req.body.dates ? req.body.dates : null,
+		// gameSubmissions: req.body.gameSubmissions ? req.body.gameSubmissions : null,
+		// volunteerSubmissions: req.body.volunteerSubmissions ? req.body.volunteerSubmissions : null,
+		// registeredUsers: req.body.registeredUsers ? req.body.registeredUsers : null,
 	}
 
 	if (userRoles.includes('admin')) {
