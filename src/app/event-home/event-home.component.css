@@ -3,8 +3,9 @@
 	/* grid-area: content; */
 	padding: 25px;
 	display: grid;
-	grid: 'embed' auto
-		  'about' auto / 1fr;
+	grid:
+		"embed" auto
+		"about" auto / 1fr;
 	grid-gap: 25px;
 }
 
@@ -95,13 +96,39 @@
 .button {
 	border-radius: 5px;
 	color: white;
-	font-family: 'Segoe UI', 'Lucida Grande', sans-serif;
+	font-family: "Segoe UI", "Lucida Grande", sans-serif;
 	font-size: 1em;
 	padding: 25px;
 	white-space: nowrap;
 }
 
-@media all and (min-width: 960px) {
+.sponsors {
+	grid-column: span 2;
+}
+
+.sponsor-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 5em;
+	margin: 0 10vw;
+}
+
+.sponsor-row > * {
+	flex: 1 1 50vw;
+}
+
+.sponsor-row > a {
+	width: 50vw;
+	height: 20em;
+	background: transparent no-repeat center / contain;
+	background-image: url("assets/images/sponsors/Spotlight11logo.png");
+}
+
+/* Responsiveness */
+
+@media all and (min-width: 1150px) {
 	/* .offevent {
 		grid:
 			'header header' 50px
@@ -110,6 +137,6 @@
 			/ 1fr 250px;
 	} */
 	.main-content {
-		grid: 'embed about' auto / 2fr 1fr;
+		grid: "embed about" auto / 2fr 1fr;
 	}
 }

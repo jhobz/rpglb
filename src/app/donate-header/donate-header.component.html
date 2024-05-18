@@ -3,13 +3,32 @@
 		<div class="donation-container">
 			<div class="logo-bg nami"></div>
 			<div>Total Raised:</div>
-			<div *ngIf="event.donations.total > 0" class="donation-box" id="donation-total">{{event.donations.total | moneify}}</div>
-			<div *ngIf="event.donations.total <= 0" class="donation-box" id="donation-total">Soon™</div>
+			<!-- TODO: PUT ? OPERATORS ON THE EVENT AND DONATIONS THINGS HERE-->
+			<div
+				*ngIf="event?.donations?.total > 0"
+				class="donation-box"
+				id="donation-total"
+			>
+				{{ event?.donations?.total | moneify }}
+			</div>
+			<div
+				*ngIf="event?.donations?.total <= 0"
+				class="donation-box"
+				id="donation-total"
+			>
+				Soon™
+			</div>
 			<div>Donation Goal:</div>
-			<div class="donation-box" id="donation-goal">{{event.donations.goal | moneify}}</div>
-			<a mat-raised-button color="accent" href="/donate" target="_blank">DONATE</a>
+			<div class="donation-box" id="donation-goal">
+				{{ event?.donations?.goal | moneify }}
+			</div>
+			<a mat-raised-button color="accent" href="/donate" target="_blank"
+				>DONATE</a
+			>
 			<!-- <button mat-raised-button color="primary" href="/donate" target="_blank">DONATE</button> -->
-			<a class="small-link" routerLink="/sweepstakes">Prize sweepstakes rules</a>
+			<a class="small-link" routerLink="/sweepstakes"
+				>Prize sweepstakes rules</a
+			>
 		</div>
 	</div>
 </div>
