@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 
 import { DonationService } from "../donation.service";
-import { DonationData, SpeedrunEvent } from "../speedrun-event";
+import { SpeedrunEvent, SpeedrunEventService } from "../speedrun-event.service";
 
 @Component({
 	selector: "app-event-home",
@@ -11,25 +11,22 @@ import { DonationData, SpeedrunEvent } from "../speedrun-event";
 	providers: [DonationService],
 })
 export class EventHomeComponent implements OnInit {
-	event: SpeedrunEvent = new SpeedrunEvent();
+	event: SpeedrunEvent;
 	isChatOpen: boolean = false;
 	chatButtonText: string = "Chat with viewers!";
 
-	constructor(private donationService: DonationService) {
-		// TODO: #148 This is all old and gross, really needs to be updated to pull stuff from the event object in the database
-		this.event.name = "RPG Limit Break 2024";
-		// this.event.shortName = 'rpglb2022'
-		this.event.cause = "NAMI: National Alliance on Mental Illness";
-		this.event.causeLink = "https://www.nami.org";
-		// this.event.trackerId = 10
-		// this.event.donations = { total: 50000, goal: 100000 }
-	}
+	constructor(private speedrunEventService: SpeedrunEventService) {}
 
 	toggleChat() {
 		this.isChatOpen = !this.isChatOpen;
 	}
 
 	ngOnInit() {
+		this.speedrunEventService
+			.getCurrentSpeedrunEvent()
+			.subscribe((srEvent: SpeedrunEvent) => {
+				this.event = srEvent;
+			});
 		// this.donationService.getTotalForEvent(this.event)
 		// 	.subscribe(
 		// 		(total: string) => this.event.donations.total = Number(total),
