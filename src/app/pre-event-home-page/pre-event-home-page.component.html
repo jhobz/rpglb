@@ -1,5 +1,9 @@
 <div class="wrapper">
-    <img class="logo" src="assets/images/logos/LimitBreak-new-logo-01.png" />
+    <img
+        *ngIf="speedrunEvent?.state !== 'pre'"
+        class="logo"
+        src="assets/images/logos/LimitBreak-new-logo-01.png"
+    />
     <div *ngIf="speedrunEvent?.state === 'pre'">
         <h1 class="home-title">
             RPG Limit Break returns this
