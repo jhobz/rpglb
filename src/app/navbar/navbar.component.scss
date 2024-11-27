@@ -1,0 +1,47 @@
+.wrapper {
+    font-family: "Roboto", "Lucida Grande", sans-serif;
+    font-weight: 700;
+
+    height: auto; /* overrides library style */
+    min-height: 64px;
+}
+
+.mat-nav-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin-left: 0.5rem;
+    padding-top: 0;
+}
+
+.auth-container {
+    flex-direction: column;
+    align-items: end;
+    margin-left: auto;
+
+    .mat-list-item {
+        height: 24px;
+    }
+
+    & > :last-child {
+        font-size: 0.625em;
+        color: #ccc;
+
+        .mat-icon {
+            width: 1em;
+            height: 1em;
+            font-size: 1em;
+        }
+
+        /* This selector is overly specific in order to override a library style */
+        .mat-list-item-content .mat-list-text:not(:nth-child(2)) {
+            padding-left: 0;
+        }
+    }
+}
+
+.logo {
+    height: 40px;
+    vertical-align: middle;
+}

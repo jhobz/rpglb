@@ -1,4 +1,4 @@
-@import '../../rpglb-dark-theme.scss';
+@import "../../rpglb-dark-theme.scss";
 
 $primary: map-get($rpglb-app-theme, primary);
 $accent: map-get($rpglb-app-theme, accent);
@@ -8,240 +8,236 @@ $foreground: map-get($rpglb-app-theme, foreground);
 $background: map-get($rpglb-app-theme, background);
 
 .table-container {
-	display: flex;
-	flex-direction: column;
-	max-width: 1700px;
-	position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 1700px;
+    position: relative;
 }
 
 .loading-shade {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 56px;
-	right: 0;
-	background: rgba(0, 0, 0, 0.45);
-	z-index: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .table-header {
-	min-height: 64px;
-	padding: 8px 24px 0;
-	font-size: 14px;
+    min-height: 64px;
+    padding: 8px 24px 0;
+    font-size: 14px;
 }
 
 .table-header > .mat-form-field {
-	width: 100%;
+    width: 100%;
 }
 
 .mat-row-sticky {
-	position: sticky;
-	z-index: 10;
-	background: mat-color($background, card);
+    position: sticky;
+    z-index: 10;
+    background: mat-color($background, card);
 
-	&.top {
-		top: 0;
-	}
-	&.bottom {
-		bottom: 0;
-		border-top: 1px solid mat-color($foreground, dividers);
-	}
+    &.top {
+        top: 0;
+    }
+    &.bottom {
+        bottom: 0;
+        border-top: 1px solid mat-color($foreground, dividers);
+    }
 }
 
 .mat-row {
-	align-items: flex-start;
-	flex-wrap: wrap;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .mat-column-runner,
 .mat-column-extras,
 .mat-column-controls {
-	flex: 2;
+    flex: 2;
 }
 
 .mat-column-description,
 .mat-column-proscons,
 .mat-column-incentives,
 .mat-column-categories {
-	flex: 3;
+    flex: 3;
 }
 
 // These columns are purely used for sorting and are thus hidden
 .mat-column-name,
 .mat-column-console {
-	display: none;
+    display: none;
 }
 
 .mat-column-proscons .title {
-	margin-bottom: 0;
-	text-align: left;
+    margin-bottom: 0;
+    text-align: left;
 }
 
 .category-container {
-	&.selection {
-		margin: -10px -25px 0;
-		padding: 10px 25px 0;
+    &.selection {
+        margin: -10px -25px 0;
+        padding: 10px 25px 0;
 
-		.selection-status {
-			margin: 0 0 5px -15px;
-			font-style: italic;
+        .selection-status {
+            margin: 0 0 5px -15px;
+            font-style: italic;
 
-			&.bonus {
-				color: mat-color($bonus, lighter);
-			}
-		}
+            &.bonus {
+                color: mat-color($bonus, lighter);
+            }
+        }
 
-		&:first-child {
-			margin-top: -25px;
-			padding-top: 25px;
+        &:first-child {
+            margin-top: -25px;
+            padding-top: 25px;
 
-			.selection-status {
-				margin-top: -15px;
-			}
-		}
-		&:last-child {
-			margin-bottom: -25px;
-			padding-bottom: 25px;
-		}
-		&.decline {
-			background-color: mat-color($warn, darker, 0.25);
-		}
-		&.accept {
-			background-color: mat-color($primary, lighter, 0.25);
-		}
-		&.backup {
-			background-color: mat-color($accent, lighter, 0.25);
-		}
-		&.bonus {
+            .selection-status {
+                margin-top: -15px;
+            }
+        }
+        &:last-child {
+            margin-bottom: -25px;
+            padding-bottom: 25px;
+        }
+        &.decline {
+            background-color: mat-color($warn, darker, 0.25);
+        }
+        &.accept {
+            background-color: mat-color($primary, lighter, 0.25);
+        }
+        &.backup {
+            background-color: mat-color($accent, lighter, 0.25);
+        }
+        &.bonus {
+            background-color: mat-color($bonus, lighter, 0.25);
+        }
+    }
 
-			background-color: mat-color($bonus, lighter, 0.25);
-		}
-	}
+    .cell-title {
+        color: mat-color($accent, lighter);
+        word-wrap: normal;
+    }
 
-	.cell-title {
-		color: mat-color($accent, lighter);
-		word-wrap: normal;
-	}
+    hr {
+        margin: 10px 0;
+        border: 1px solid mat-color($foreground, dividers);
+    }
 
-	hr {
-		margin: 10px 0;
-		border: 1px solid mat-color($foreground, dividers);
-	}
+    .selection-comment-container {
+        margin-top: 20px;
+        font-size: 1.3em;
 
-	.selection-comment-container {
-		margin-top: 20px;
-		font-size: 1.3em;
+        .selection-comment-label {
+            font-weight: bold;
+        }
 
-		.selection-comment-label {
-			font-weight: bold;
-		}
-
-		.selection-comment {
-			font-style: italic;
-			color: mat-color($foreground, secondary-text);
-		}
-	}
+        .selection-comment {
+            font-style: italic;
+            color: mat-color($foreground, secondary-text);
+        }
+    }
 }
 
 .cell-title {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: mat-color($primary, 200);
+    font-size: 1.2em;
+    font-weight: bold;
+    color: mat-color($primary, 200);
 }
 
 .cell-subtitle {
-	color: mat-color($foreground, base, 0.7);
-	font-style: italic;
+    color: mat-color($foreground, base, 0.7);
+    font-style: italic;
 }
 
 .runner {
-	font-size: 1.1em;
+    font-size: 1.1em;
 }
 
 .collapsible {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .collapsible::after {
-	display: block;
-	font-family: 'Material Icons';
-	font-size: 1.5em;
-	color: mat-color($foreground, base, 0.7);
-	content: 'expand_more';
-	text-align: center;
-	flex-basis: 100%;
+    display: block;
+    font-family: "Material Icons";
+    font-size: 1.5em;
+    color: mat-color($foreground, base, 0.7);
+    content: "expand_more";
+    text-align: center;
+    flex-basis: 100%;
 }
 
 .collapsible.expanded::after {
-	content: 'expand_less';
+    content: "expand_less";
 }
 
 .collapsible:hover {
-	background-color: mat-color($background, hover);
+    background-color: mat-color($background, hover);
 }
 
 .mat-cell {
-	padding: 25px;
+    padding: 25px;
 }
 
 .mat-header-cell {
-	padding: 10px 25px;
+    padding: 10px 25px;
 }
 
 .mat-cell .controls-group {
-	border: 0;
-	padding: 0;
+    border: 0;
+    padding: 0;
 }
 
 .mat-column-controls > .controls-group {
-	button {
-		width: 100%;
-	}
+    button {
+        width: 100%;
+    }
 
-	h3:first-of-type {
-		margin-top: 0;
-	}
-}
-
-.mat-column-categories .controls-group {
+    h3:first-of-type {
+        margin-top: 0;
+    }
 }
 
 .controls-group > button {
-	margin: 2px 1px 2px 0;
+    margin: 2px 1px 2px 0;
 
-	&.mat-bonus:not([disabled]) {
-		background-color: mat-color($bonus)
-	}
+    &.mat-bonus:not([disabled]) {
+        background-color: mat-color($bonus);
+    }
 }
 
 .controls-group .mat-spinner {
-	margin: 4px auto;
-	display: none;
+    margin: 4px auto;
+    display: none;
 }
 
 .controls-group .showSpinner span {
-	display: none;
+    display: none;
 }
 
 .controls-group .showSpinner .mat-spinner {
-	display: block;
+    display: block;
 }
 
 .controls-group > .mat-form-field {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 .mat-column-public.mat-cell {
-	text-align: center;
-	font-weight: bold;
+    text-align: center;
+    font-weight: bold;
 
-	&.primary {
-		color: mat-color($primary, 300);
-	}
-	&.warn {
-		color: mat-color($warn);
-	}
+    &.primary {
+        color: mat-color($primary, 300);
+    }
+    &.warn {
+        color: mat-color($warn);
+    }
 }
