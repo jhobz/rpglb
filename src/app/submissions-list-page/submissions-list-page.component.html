@@ -1,43 +1,62 @@
 <div class="wrapper">
-	<div *ngIf="hasSubmissionRole" class="admin-controls">
-		<span>Game submissions are </span>
-		<span [ngClass]="{'privacy-public': speedrunEvent?.areGameSubmissionsOpen, 'privacy-private': !speedrunEvent?.areGameSubmissionsOpen}">{{speedrunEvent?.areGameSubmissionsOpen ? 'OPEN' : 'CLOSED'}}</span>
-	</div>
-	<h1>All Public Submissions - {{speedrunEvent?.name}}</h1>
-	<p class="msg-status info">
-		We are aware of a bug currently affecting filtering by runner name. We apologize for the inconvenience.
-	</p>
-	<p>
-		Submissions are made public as they are manually reviewed for errors. Because of this,
-		<span class="info">your submissions may not appear in this list just yet.</span>
-		Below are all of the public submissions. You can search the list at the top of the table, or view more results
-		by using the controls at the bottom. Submissions will close at 11:59 PM EST ({{speedrunEvent?.dates.games.submissionsClose | date:'z':'-0500'}}) on {{speedrunEvent?.dates.games.submissionsClose | date:'EEEE, MMMM d':'-0500'}}. No further
-		submissions will be accepted after this time, but it may still take a bit for the final few submissions to
-		become public.
-	</p>
-	<!-- Have to use hidden here instead of *ngIf because app-submission-list needs access to group.value -->
-	<div class="selection-controls" [hidden]="!hasSubmissionRole && !speedrunEvent?.isGamesListPublic">
-		<!-- TODO: Make the group allow multiple selections with Angular 6+ -->
-		<mat-button-toggle-group #group="matButtonToggleGroup">
-			<mat-button-toggle color="primary" value="accept">
-				Accept
-			</mat-button-toggle>
-			<mat-button-toggle color="bonus" value="bonus">
-				Bonus
-			</mat-button-toggle>
-			<mat-button-toggle color="accent" value="backup">
-				Backup
-			</mat-button-toggle>
-			<mat-button-toggle color="warn" value="decline">
-				Decline
-			</mat-button-toggle>
-			<mat-button-toggle [checked]="true" value="">
-				All
-			</mat-button-toggle>
-		</mat-button-toggle-group>
-	</div>
-	<app-submission-list
-		[showSelections]="speedrunEvent?.isGamesListPublic"
-		[filter]="group.value ? 'selection:' + group.value : ''"
-	></app-submission-list>
+    <div class="text-content">
+        <div *ngIf="hasSubmissionRole" class="admin-controls">
+            <span>Game submissions are </span>
+            <span
+                [ngClass]="{
+                    'privacy-public': speedrunEvent?.areGameSubmissionsOpen,
+                    'privacy-private': !speedrunEvent?.areGameSubmissionsOpen
+                }"
+                >{{
+                    speedrunEvent?.areGameSubmissionsOpen ? "OPEN" : "CLOSED"
+                }}</span
+            >
+        </div>
+        <h1>All Public Submissions - {{ speedrunEvent?.name }}</h1>
+        <p>
+            Submissions are made public as they are manually reviewed for
+            errors. Submissions will close at 11:59 PM EST ({{
+                speedrunEvent?.dates.games.submissionsClose
+                    | date : "z" : "-0500"
+            }}) on
+            {{
+                speedrunEvent?.dates.games.submissionsClose
+                    | date : "EEEE, MMMM d" : "-0500"
+            }}. No further submissions will be accepted after this time, but it
+            may still take a bit for the final few submissions to become public.
+        </p>
+        <!-- TODO: FIX THIS BUG -->
+        <!-- <p class="msg-status info">
+            We are aware of a bug currently affecting filtering by runner name.
+            We apologize for the inconvenience.
+        </p> -->
+    </div>
+    <!-- Have to use hidden here instead of *ngIf because app-submission-list needs access to group.value -->
+    <div
+        class="selection-controls"
+        [hidden]="!hasSubmissionRole && !speedrunEvent?.isGamesListPublic"
+    >
+        <!-- TODO: Make the group allow multiple selections with Angular 6+ -->
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+            <mat-button-toggle color="primary" value="accept">
+                Accept
+            </mat-button-toggle>
+            <mat-button-toggle color="bonus" value="bonus">
+                Bonus
+            </mat-button-toggle>
+            <mat-button-toggle color="accent" value="backup">
+                Backup
+            </mat-button-toggle>
+            <mat-button-toggle color="warn" value="decline">
+                Decline
+            </mat-button-toggle>
+            <mat-button-toggle [checked]="true" value="">
+                All
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <app-submission-list
+        [showSelections]="speedrunEvent?.isGamesListPublic"
+        [filter]="group.value ? 'selection:' + group.value : ''"
+    ></app-submission-list>
 </div>

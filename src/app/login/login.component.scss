@@ -1,26 +1,18 @@
 .form-wrapper {
-	width: 500px;
-	margin: auto;
-	display: flex;
-	flex-direction: column;
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-wrapper > * {
-	width: 100%;
+    width: 100%;
 }
 
 .msg-status.warn {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .msg-status.success {
-	margin-top: 20px;
-}
-
-.login-subheader {
-	margin-top: 80px;
-}
-
-.mat-icon {
-	cursor: pointer;
+    margin-top: 20px;
 }

@@ -1,33 +1,22 @@
-.main-content {
-	grid-area: content;
-	padding: 25px;
-	max-width: 1600px;
-	margin: 0 auto;
-}
-
 .blog-title {
-	margin-bottom: 5px;
+    margin-bottom: 1rem;
 }
-
-// .blog-post-header {
-
-// }
 
 .blog-post-end {
-	width: 20%;
+    width: 20%;
 }
 
 .blog-archived {
-	display: none;
+    display: none;
 }
 
 .timeline {
-	max-width: 500px;
-	margin: auto;
+    max-width: 500px;
+    margin: auto;
 }
 
 .soft {
-	color: rgba(255, 255, 255, 0.8);
-	font-size: 0.8em;
-	font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8em;
+    font-style: italic;
 }

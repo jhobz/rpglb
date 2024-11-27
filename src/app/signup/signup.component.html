@@ -1,94 +1,127 @@
 <div class="form-wrapper">
-	<form class="form-wrapper" #f="ngForm" novalidate (ngSubmit)="register()">
-		<h2 class="form-signup-header">Sign Up</h2>
-		<div class="msg-status warn" role="alert" *ngIf="errorMessage !== ''">{{errorMessage}}</div>
-		<div class="form-name-wrapper">
-			<mat-form-field>
-				<input
-					matInput
-					name="firstName"
-					placeholder="First name"
-					[(ngModel)]="model.firstName"
-					maxlength="32"
-					required />
-			</mat-form-field>
-			<mat-form-field>
-				<input
-					matInput
-					name="lastName"
-					placeholder="Last name"
-					[(ngModel)]="model.lastName"
-					maxlength="32"
-					required />
-			</mat-form-field>
-		</div>
+    <form class="form-wrapper" #f="ngForm" novalidate (ngSubmit)="register()">
+        <h2 class="form-signup-header">Sign Up</h2>
+        <div class="msg-status warn" role="alert" *ngIf="errorMessage !== ''">
+            {{ errorMessage }}
+        </div>
+        <div class="form-name-wrapper">
+            <mat-form-field>
+                <input
+                    matInput
+                    name="firstName"
+                    placeholder="First name"
+                    [(ngModel)]="model.firstName"
+                    maxlength="32"
+                    required
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    matInput
+                    name="lastName"
+                    placeholder="Last name"
+                    [(ngModel)]="model.lastName"
+                    maxlength="32"
+                    required
+                />
+            </mat-form-field>
+        </div>
 
-		<mat-form-field>
-			<input
-				matInput
-				#email="ngModel"
-				type="email"
-				name="email"
-				placeholder="Email"
-				[(ngModel)]="model.email"
-				maxlength="64"
-				pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-				required />
-			<mat-error *ngIf="email.errors?.pattern">Must be a valid email address (all lowercase)</mat-error>
-		</mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                #email="ngModel"
+                type="email"
+                name="email"
+                placeholder="Email"
+                [(ngModel)]="model.email"
+                maxlength="64"
+                pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                required
+            />
+            <mat-error *ngIf="email.errors?.pattern"
+                >Must be a valid email address (all lowercase)</mat-error
+            >
+        </mat-form-field>
 
-		<mat-form-field>
-			<input
-				matInput
-				#username="ngModel"
-				name="username"
-				placeholder="Username"
-				[(ngModel)]="model.username"
-				minlength="3"
-				maxlength="26"
-				pattern="[A-Za-z0-9_]+"
-				required />
-			<mat-error *ngIf="username.errors?.pattern">Username can only contain letters, numbers, and underscores</mat-error>
-		</mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                #username="ngModel"
+                name="username"
+                placeholder="Username"
+                [(ngModel)]="model.username"
+                minlength="3"
+                maxlength="26"
+                pattern="[A-Za-z0-9_]+"
+                required
+            />
+            <mat-error *ngIf="username.errors?.pattern"
+                >Username can only contain letters, numbers, and
+                underscores</mat-error
+            >
+        </mat-form-field>
 
-		<mat-form-field>
-			<input
-				matInput
-				#password="ngModel"
-				type="password"
-				name="password"
-				placeholder="Password"
-				[(ngModel)]="model.password"
-				[type]="hidePassword ? 'password' : 'text'"
-				minlength="12"
-				maxlength="128"
-				required />
-			<mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-			<mat-error *ngIf="password.errors?.minlength && !password.errors.required">Password must be at least 12 characters</mat-error>
-		</mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                #password="ngModel"
+                type="password"
+                name="password"
+                placeholder="Password"
+                [(ngModel)]="model.password"
+                [type]="hidePassword ? 'password' : 'text'"
+                minlength="12"
+                maxlength="128"
+                required
+            />
+            <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
+                hidePassword ? "visibility" : "visibility_off"
+            }}</mat-icon>
+            <mat-error
+                *ngIf="password.errors?.minlength && !password.errors.required"
+                >Password must be at least 12 characters</mat-error
+            >
+        </mat-form-field>
 
-		<mat-form-field>
-			<input
-				matInput
-				#confirm="ngModel"
-				type="password"
-				name="confirmPassword"
-				placeholder="Confirm password"
-				[(ngModel)]="model.confirm"
-				[type]="hidePassword2 ? 'password' : 'text'"
-				minlength="12"
-				maxlength="128"
-				required />
-			<mat-icon matSuffix (click)="hidePassword2 = !hidePassword2">{{hidePassword2 ? 'visibility' : 'visibility_off'}}</mat-icon>
-			<mat-error *ngIf="confirm.errors?.minlength && !confirm.errors.required">Passwords must match</mat-error>
-		</mat-form-field>
-		<br />
-		<button mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid || isDebouncing">Create</button>
-		<div class="msg-status success" *ngIf="successMessage !== ''">{{successMessage}}</div>
-		<mat-progress-bar
-			color="primary"
-			mode="indeterminate"
-			role="alert"
-			*ngIf="successMessage !== ''"></mat-progress-bar>
-	</form>
+        <mat-form-field>
+            <input
+                matInput
+                #confirm="ngModel"
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password"
+                [(ngModel)]="model.confirm"
+                [type]="hidePassword2 ? 'password' : 'text'"
+                minlength="12"
+                maxlength="128"
+                required
+            />
+            <mat-icon matSuffix (click)="hidePassword2 = !hidePassword2">{{
+                hidePassword2 ? "visibility" : "visibility_off"
+            }}</mat-icon>
+            <mat-error
+                *ngIf="confirm.errors?.minlength && !confirm.errors.required"
+                >Passwords must match</mat-error
+            >
+        </mat-form-field>
+        <br />
+        <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!f.form.valid || isDebouncing"
+        >
+            Create
+        </button>
+        <div class="msg-status success" *ngIf="successMessage !== ''">
+            {{ successMessage }}
+        </div>
+        <mat-progress-bar
+            color="primary"
+            mode="indeterminate"
+            role="alert"
+            *ngIf="successMessage !== ''"
+        ></mat-progress-bar>
+    </form>
 </div>

@@ -1,15 +1,10 @@
-.main-content {
-	grid-area: content;
-	padding: 25px;
-}
-
 .title {
-	margin: 2rem 0;
-	text-align: left;
+    text-align: left;
 }
 
 .flex {
-	display: flex;
-	flex-direction: row;
-	gap: 8rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 8rem;
 }

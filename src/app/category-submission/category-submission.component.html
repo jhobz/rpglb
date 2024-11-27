@@ -1,60 +1,82 @@
 <div class="form-wrapper">
-	<div class="row-wrapper">
-		<mat-form-field>
-			<input
-				matInput
-				[name]="'cat-'+(category._uid || category._id)+'-name'"
-				placeholder="Category Name"
-				maxlength="64"
-				[(ngModel)]="category.name"
-				required />
-		</mat-form-field>
+    <div class="row-wrapper">
+        <mat-form-field>
+            <input
+                matInput
+                [name]="'cat-' + (category._uid || category._id) + '-name'"
+                placeholder="Category Name"
+                maxlength="64"
+                [(ngModel)]="category.name"
+                required
+            />
+        </mat-form-field>
 
-		<mat-form-field>
-			<mat-label>Estimate</mat-label>
-			<input
-				matInput
-				#estimate="ngModel"
-				[name]="'cat-'+(category._uid || category._id)+'-estimate'"
-				placeholder="HH:MM"
-				pattern="([0-9]?[0-9]?[0-9]):([0-5][0-9])"
-				appTimeRange="[1,10080]"
-				[(ngModel)]="category.estimateTimeString"
-				(change)="onEstimateChange(estimate.value)"
-				required />
-			<mat-hint>Round to the whole minute</mat-hint>
-			<mat-error *ngIf="estimate.errors?.pattern && !estimate.errors.required">Please enter a valid time in the format HH:MM</mat-error>
-			<mat-error *ngIf="estimate.errors?.timeRange?.bound === 'max' && !estimate.errors.pattern && !estimate.errors.required">I see someone's a fan of Baten Kaitos...</mat-error>
-			<mat-error *ngIf="estimate.errors?.timeRange?.bound === 'min' && !estimate.errors.pattern && !estimate.errors.required">I see someone's a fan of Clue...</mat-error>
-		</mat-form-field>
-	</div>
+        <mat-form-field>
+            <mat-label>Estimate</mat-label>
+            <input
+                matInput
+                #estimate="ngModel"
+                [name]="'cat-' + (category._uid || category._id) + '-estimate'"
+                placeholder="HH:MM"
+                pattern="([0-9]?[0-9]?[0-9]):([0-5][0-9])"
+                appTimeRange="[1,10080]"
+                [(ngModel)]="category.estimateTimeString"
+                (change)="onEstimateChange(estimate.value)"
+                required
+            />
+            <mat-hint>Round to the whole minute</mat-hint>
+            <mat-error
+                *ngIf="estimate.errors?.pattern && !estimate.errors.required"
+                >Please enter a valid time in the format HH:MM</mat-error
+            >
+            <mat-error
+                *ngIf="
+                    estimate.errors?.timeRange?.bound === 'max' &&
+                    !estimate.errors.pattern &&
+                    !estimate.errors.required
+                "
+                >I see someone's a fan of Baten Kaitos...</mat-error
+            >
+            <mat-error
+                *ngIf="
+                    estimate.errors?.timeRange?.bound === 'min' &&
+                    !estimate.errors.pattern &&
+                    !estimate.errors.required
+                "
+                >I see someone's a fan of Clue...</mat-error
+            >
+        </mat-form-field>
+    </div>
 
-	<mat-form-field>
-		<textarea
-			matInput
-			#desc
-			[name]="'cat-'+(category._uid || category._id)+'-description'"
-			placeholder="Description"
-			maxlength="560"
-			[(ngModel)]="category.description"
-			matTextareaAutosize
-			matAutosizeMinRows="2"
-			matAutosizeMaxRows="5" >
-		</textarea>
-		<mat-hint>Pitch/describe this category in 2 tweets or less</mat-hint>
-		<mat-hint align="end">{{desc.value?.length || 0}}/560</mat-hint>
-	</mat-form-field>
+    <mat-form-field>
+        <textarea
+            matInput
+            #desc
+            [name]="'cat-' + (category._uid || category._id) + '-description'"
+            placeholder="Description"
+            maxlength="560"
+            [(ngModel)]="category.description"
+            matTextareaAutosize
+            matAutosizeMinRows="2"
+            matAutosizeMaxRows="5"
+        >
+        </textarea>
+        <mat-hint align="end">{{ desc.value?.length || 0 }}/560</mat-hint>
+    </mat-form-field>
 
-	<mat-form-field>
-		<input
-			matInput
-			#video="ngModel"
-			[name]="'cat-'+(category._uid || category._id)+'-video'"
-			placeholder="Video link"
-			maxlength="500"
-			pattern="(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+"
-			[(ngModel)]="category.video"
-			required />
-			<mat-error *ngIf="video.errors?.pattern && !video.errors.required">Please enter a valid video URL</mat-error>
-	</mat-form-field>
+    <mat-form-field>
+        <input
+            matInput
+            #video="ngModel"
+            [name]="'cat-' + (category._uid || category._id) + '-video'"
+            placeholder="Video link"
+            maxlength="500"
+            pattern="(?:http(s)?:\/\/(?:www\.)?)?(?:\w+\.\w+)+\/\S+"
+            [(ngModel)]="category.video"
+            required
+        />
+        <mat-error *ngIf="video.errors?.pattern && !video.errors.required"
+            >Please enter a valid video URL</mat-error
+        >
+    </mat-form-field>
 </div>

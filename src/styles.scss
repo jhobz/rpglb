@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -7,12 +7,12 @@
 @include mat-core();
 
 // Import custom theme
-@import 'rpglb-dark-theme.scss';
+@import "rpglb-dark-theme.scss";
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme( $rpglb-app-theme );
+@include angular-material-theme($rpglb-app-theme);
 
 $primary: map-get($rpglb-app-theme, primary);
 $accent: map-get($rpglb-app-theme, accent);
@@ -21,92 +21,112 @@ $foreground: map-get($rpglb-app-theme, foreground);
 $background: map-get($rpglb-app-theme, background);
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-html, body {
-	/* color: var(--color-text); */
-	font-family: 'Roboto', sans-serif;
-	margin: 0;
-	padding: 0;
-	font-size: 1.1em;
-	width: 100%;
-	height: 100%;
+html,
+body {
+    /* color: var(--color-text); */
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    width: 100%;
+    height: fit-content;
 }
 
 a {
-	text-decoration: none;
-	color: mat-color($accent, lighter);
+    text-decoration: none;
+    color: mat-color($accent, lighter);
 }
 
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 .title {
-	font-size: 2em;
-	font-weight: bold;
-	margin-top: 0;
-	text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    // margin-top: 0;
+    text-align: center;
 }
 
 .title > a {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .dim {
-	color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0,0,0,0);
-	border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 .msg-status {
-	background-color: mat-color($background, card);
-	font-size: 0.8em;
-	padding: 10px;
-	border-radius: 5px;
-	text-align: center;
+    background-color: mat-color($background, card);
+    font-size: 0.8em;
+    width: fit-content;
+    margin: auto;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .warn {
-	color: mat-color($warn);
+    color: mat-color($warn);
 }
 
 .warn-light {
-	color: mat-color($warn, lighter);
+    color: mat-color($warn, lighter);
 }
 
 .success {
-	color: mat-color($primary, 200);
+    color: mat-color($primary, 200);
 }
 
 .info {
-	color: mat-color($accent, lighter);
+    color: mat-color($accent, lighter);
 }
 
 .preserve-newlines {
-	white-space: pre-line;
+    white-space: pre-line;
 }
 
 .snack-success {
-	background-color: mat-color($primary);
-	color: white;
+    background-color: mat-color($primary);
+    color: white;
 }
 
 .snack-warn {
-	background-color: mat-color($warn);
-	color: white;
+    background-color: mat-color($warn);
+    color: white;
 }
 
 .no-action .mat-simple-snackbar {
-	justify-content: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-top: 1em;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 1.625em;
+}
+
+.text-content {
+    margin: 0 auto;
+    max-width: 80ch;
 }
