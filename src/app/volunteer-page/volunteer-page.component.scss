@@ -1,53 +1,50 @@
-@import '../../rpglb-dark-theme.scss';
+@import "../../rpglb-dark-theme.scss";
 $primary: map-get($rpglb-app-theme, primary);
 $warn: map-get($rpglb-app-theme, warn);
 
-.main-content {
-	grid-area: content;
-	padding: 25px;
-	max-width: 1250px;
-	margin: 0 auto;
-}
-
 .mat-card {
-	margin: 0 auto;
-	width: fit-content;
-	text-align: center;
+    margin: 0 auto;
+    width: fit-content;
+    text-align: center;
 
-	p {
-		text-align: left;
-	}
+    p {
+        text-align: left;
+    }
 }
 
 h2 {
-	// padding-bottom: 5px;
-	// border-bottom: 1px solid #aaaaaa;
-	margin-top: 3rem;
+    margin-top: 3rem;
 }
 
 h3 {
-	font-size: 1.25em;
-	margin-top: 2rem;
-	margin-bottom: 0;
+    font-size: 1.25em;
+    margin-top: 2rem;
+    margin-bottom: 0;
 }
 
 .subtitle {
-	font-size: .75em;
-	font-style: italic;
-	color: rgba(255, 255, 255, 0.5);
-	margin-top: 0.5rem;
+    font-size: 0.75em;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.5rem;
 }
 
 .additional {
-	font-size: 0.9em;
-	font-style: italic;
-	color: rgba(255,255,255, 0.7);
+    font-size: 0.9em;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
 
-	&.success {
-		color: adjust-color($color: mat-color($primary, 200), $saturation: -40%);
-	}
+    &.success {
+        color: adjust-color(
+            $color: mat-color($primary, 200),
+            $saturation: -40%
+        );
+    }
 
-	&.warn {
-		color: adjust-color($color: mat-color($warn, lighter), $saturation: -40%);
-	}
+    &.warn {
+        color: adjust-color(
+            $color: mat-color($warn, lighter),
+            $saturation: -40%
+        );
+    }
 }

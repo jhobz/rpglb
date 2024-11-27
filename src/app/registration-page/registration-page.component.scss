@@ -1,32 +1,25 @@
-@import '../../rpglb-dark-theme.scss';
+@import "../../rpglb-dark-theme.scss";
 
 $primary: map-get($rpglb-app-theme, primary);
 $accent: map-get($rpglb-app-theme, accent);
 $warn: map-get($rpglb-app-theme, warn);
 $bonus: mat-palette($mat-purple, 400, 200);
-// $foreground: map-get($rpglb-app-theme, foreground);
-// $background: map-get($rpglb-app-theme, background);
-
-.wrapper {
-	max-width: 1700px;
-	margin: 50px auto;
-}
 
 .admin-controls {
-	float: right;
-	text-align: right;
-	font-size: 0.8em;
-	line-height: 2.8em;
+    float: right;
+    text-align: right;
+    font-size: 0.8em;
+    line-height: 2.8em;
     color: rgb(148, 148, 148);
-	font-style: italic;
+    font-style: italic;
 
-	.privacy-public {
-		color: mat-color($primary, 200)
-	}
+    .privacy-public {
+        color: mat-color($primary, 200);
+    }
 
-	.privacy-private {
-		color: mat-color($warn, lighter)
-	}
+    .privacy-private {
+        color: mat-color($warn, lighter);
+    }
 }
 
 .subtle {
@@ -36,100 +29,102 @@ $bonus: mat-palette($mat-purple, 400, 200);
 }
 
 .registration-container {
-	margin: 50px auto 0 auto;
-	max-width: 1000px;
+    margin: 50px auto 0 auto;
+    max-width: 1000px;
 
-	legend {
-		font-weight: bold;
-	}
+    legend {
+        font-weight: bold;
+    }
 
-	mat-checkbox {
-		margin: 0 0 20px 0;
-	}
+    mat-checkbox {
+        margin: 0 0 20px 0;
+    }
 
-	fieldset {
-		margin: 25px 0;
-		padding: 25px;
-		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
+    fieldset {
+        margin: 25px 0;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
 
-		mat-form-field {
-			margin: 20px 0;
+        mat-form-field {
+            margin: 20px 0;
 
-			&:first-of-type {
-				margin-top: 0;
-			}
+            &:first-of-type {
+                margin-top: 0;
+            }
 
-			&:last-of-type {
-				margin-bottom: 0;
-			}
-		}
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
 
-		& > h3 {
-			margin-top: 0;
-		}
-	}
+        & > h3 {
+            margin-top: 0;
+        }
+    }
 
-	.flex {
-		display: flex;
-		justify-content: space-between;
-		gap: 50px;
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        column-gap: 1.5em;
 
-		fieldset {
-			margin: 25px 0 0;
-		}
-	}
+        fieldset {
+            margin: 25px 0 0;
+        }
+    }
 
-	.full-width {
-		width: 100%;
-		max-width: 825px;
-	}
+    .full-width {
+        width: 100%;
+        max-width: 825px;
+    }
 
-	.full-width-wrapper {
-		margin: 20px 0 50px;
-	}
+    .full-width-wrapper {
+        margin: 20px 0 50px;
+    }
 
-	.wider {
-		min-width: 300px;
-	}
+    .wider {
+        min-width: 300px;
+    }
 
-	.wider-2 {
-		min-width: 400px;
-	}
+    .wider-2 {
+        min-width: 400px;
+    }
+
+    @media screen and (max-width: 700px) {
+        .wider,
+        .wider-2 {
+            min-width: 0;
+        }
+    }
 }
 
 .attendees {
-	.attendees-count {
-		font-weight: bold;
-	}
+    .attendees-count {
+        font-weight: bold;
+    }
 }
 
 .registration-form {
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 .payment-button {
-	position: relative;
+    position: relative;
 
-	mat-progress-bar {
-		position: absolute;
-		left: 0;
-		right: 0;
-	}
+    mat-progress-bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
 }
 
 .attendee-message {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 
-	:last-child {
-		margin-left: 10px;
-	}
-}
-
-.msg-status {
-	width: fit-content;
-	padding: 10px 30px 10px;
-	margin: auto;
+    :last-child {
+        margin-left: 10px;
+    }
 }

@@ -1,45 +1,45 @@
-.wrapper {
-	max-width: 1500px;
-	margin: 50px auto;
+/* Overriding max width here due to submissions table */
+.text-content {
+    max-width: 120ch;
 }
 
 .no-bold {
-	font-weight: normal;
-	border-left: 2px solid;
-	padding-left: 10px;
+    font-weight: normal;
+    border-left: 2px solid;
+    padding-left: 10px;
 }
 
 .mat-form-field {
-	display: block;
-	width: 350px;
+    display: block;
+    width: 350px;
 }
 
 .mat-form-field .mat-icon {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .form-password {
-	display: inline-block;
+    display: inline-block;
 }
 
 .msg-status {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 small {
-	font-size: 0.7em;
-	font-weight: normal;
-	color: #aaa;
+    font-size: 0.7em;
+    font-weight: normal;
+    color: #aaa;
 }
 
 ::ng-deep .mat-form-field-read-only .mat-form-field-underline {
-	display: none;
+    display: none;
 }
 
 .left-align {
-	text-align: left;
+    text-align: left;
 }
 
 .float-right {
-	float: right;
+    float: right;
 }

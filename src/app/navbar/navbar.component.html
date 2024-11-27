@@ -1,66 +1,78 @@
 <mat-toolbar class="wrapper mat-elevation-z6" color="primary">
-	<a routerLink="/"
-		><img
-			class="logo"
-			src="assets/images/logos/LimitBreak-new-logo-RPGLB-02.png"
-	/></a>
-	<nav>
-		<a *ngIf="mode === 'live'" href="/donate" target="_blank">DONATE</a>
-		<a
-			*ngIf="
-				mode === 'live' ||
-				(mode === 'pre' && speedrunEvent?.isGamesListPublic)
-			"
-			href="/schedule"
-			>SCHEDULE</a
-		>
-		<a routerLink="/news">NEWS</a>
-		<a [href]="'/tracker/event/' + speedrunEvent?.trackerId">TRACKER</a>
-		<a *ngIf="mode === 'live'" routerLink="/rules">EVENT RULES</a>
-		<!-- <a *ngIf="mode !== 'live' && speedrunEvent?.isGamesListPublic" routerLink="/games">GAMES</a> -->
-		<a
-			*ngIf="mode !== 'live' || speedrunEvent?.areGameSubmissionsOpen"
-			routerLink="/submissions"
-			>SUBMISSIONS</a
-		>
-		<a
-			*ngIf="
-				mode !== 'live' && speedrunEvent?.areVolunteerSubmissionsOpen
-			"
-			routerLink="/volunteer"
-			>VOLUNTEER</a
-		>
-		<a
-			*ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen"
-			class="no-icon"
-			target="_blank"
-			href="https://forms.gle/gKx6K5myQ9AVv4499"
-			>PRIZES</a
-		>
-		<a href="https://discord.gg/rpglb" class="no-icon" target="_blank"
-			>DISCORD</a
-		>
-		<a
-			*ngIf="mode === 'post'"
-			class="no-icon"
-			href="https://youtube.com/@RPGLimitBreak"
-			>VODS</a
-		>
-		<a
-			*ngIf="mode === 'live'"
-			href="https://theyetee.com/RPGLimitBreak"
-			class="no-icon"
-			target="_blank"
-			>MERCH</a
-		>
-		<a href="https://store.rpglimitbreak.com">STORE</a>
-		<div class="auth-container" *ngIf="isLoggedIn()">
-			<a routerLink="/profile">PROFILE</a>
-			<a (click)="logout()">LOGOUT</a>
-		</div>
-		<div class="auth-container" *ngIf="!isLoggedIn()">
-			<a routerLink="/login">LOGIN</a>
-			<a routerLink="/signup">SIGN UP</a>
-		</div>
-	</nav>
+    <a routerLink="/">
+        <img
+            class="logo"
+            src="assets/images/logos/LimitBreak-new-logo-RPGLB-02.png"
+        />
+    </a>
+    <mat-nav-list>
+        <a mat-list-item *ngIf="mode === 'live'" href="/donate" target="_blank"
+            >Donate</a
+        >
+        <a
+            mat-list-item
+            *ngIf="
+                mode === 'live' ||
+                (mode === 'pre' && speedrunEvent?.isGamesListPublic)
+            "
+            href="/schedule"
+            >Schedule</a
+        >
+        <a mat-list-item routerLink="/news">News</a>
+        <a mat-list-item [href]="'/tracker/event/' + speedrunEvent?.trackerId"
+            >Tracker</a
+        >
+        <a mat-list-item *ngIf="mode === 'live'" routerLink="/rules"
+            >Event Rules</a
+        >
+        <a
+            mat-list-item
+            *ngIf="mode !== 'live' || speedrunEvent?.areGameSubmissionsOpen"
+            routerLink="/submissions"
+            >Submissions</a
+        >
+        <a
+            mat-list-item
+            *ngIf="
+                mode !== 'live' && speedrunEvent?.areVolunteerSubmissionsOpen
+            "
+            routerLink="/volunteer"
+            >Volunteer</a
+        >
+        <a
+            mat-list-item
+            *ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen"
+            target="_blank"
+            href="https://forms.gle/gKx6K5myQ9AVv4499"
+            >Prizes</a
+        >
+        <a mat-list-item href="https://discord.gg/rpglb" target="_blank"
+            >Discord</a
+        >
+        <a
+            mat-list-item
+            *ngIf="mode === 'post'"
+            href="https://youtube.com/@RPGLimitBreak"
+            >VODs</a
+        >
+        <a
+            mat-list-item
+            *ngIf="mode === 'live'"
+            href="https://theyetee.com/RPGLimitBreak"
+            target="_blank"
+            >Event Merch</a
+        >
+        <a mat-list-item href="https://store.rpglimitbreak.com">Store</a>
+    </mat-nav-list>
+    <mat-nav-list class="auth-container" *ngIf="isLoggedIn()">
+        <a mat-list-item routerLink="/profile">{{ username }}</a>
+        <mat-list-item (click)="logout($event)">
+            <p matLine>Logout</p>
+            <mat-icon matListIcon>logout</mat-icon>
+        </mat-list-item>
+    </mat-nav-list>
+    <mat-nav-list class="auth-container" *ngIf="!isLoggedIn()">
+        <a mat-list-item routerLink="/login">Login</a>
+        <a mat-list-item routerLink="/signup">Sign Up</a>
+    </mat-nav-list>
 </mat-toolbar>

@@ -1,75 +1,50 @@
-.submission-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	margin: 25px;
-}
-
-.submission-wrapper > :first-child {
-	margin-right: 25px;
-}
-
 .form-wrapper {
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-}
-
-.form-wrapper > * {
-	width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 20px;
 }
 
 .row-wrapper {
-	display: flex;
-	flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5em;
+}
+
+@media screen and (max-width: 725px) {
+    .row-wrapper {
+        flex-direction: column;
+    }
 }
 
 .row-wrapper > * {
-	flex-grow: 1;
+    flex-grow: 1;
 }
 
-.row-wrapper > :first-child {
-	margin-right: 10px;
-}
-
-.row-wrapper.5-1 > :first-child {
-	flex-grow: 5;
+.row-wrapper.flex-5 > :first-child {
+    flex-grow: 5;
 }
 
 .category-info {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-}
-
-.category-info > * {
-	margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .category-info > fieldset > button {
-	float: right;
+    float: right;
 }
 
 .category-new {
-	min-width: 533px;
-	min-height: 338px;
-	padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .category-new > button {
-	width: 100%;
-	height: 100%;
-	font-size: 2em;
-}
-
-.category-new mat-icon {
-	width: 100px;
-	height: 100px;
-	font-size: 100px;
-	line-height: 100px;
+    text-transform: capitalize;
 }
 
 .category-id {
-	line-height: 36px;
+    line-height: 36px;
 }

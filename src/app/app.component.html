@@ -1,10 +1,10 @@
-<article>
-	<header><app-navbar></app-navbar></header>
-	<ng-container *ngIf="speedrunEvent?.state==='live'">
-		<app-donate-header></app-donate-header>
-	</ng-container>
-	<main>
-		<router-outlet mat-app-background></router-outlet>
-	</main>
-	<footer><app-footer></app-footer></footer>
-</article>
+<div class="wrapper">
+    <header><app-navbar></app-navbar></header>
+    <ng-container *ngIf="speedrunEvent?.state === 'live'">
+        <app-donate-header></app-donate-header>
+    </ng-container>
+    <main>
+        <router-outlet mat-app-background></router-outlet>
+    </main>
+    <footer><app-footer></app-footer></footer>
+</div>

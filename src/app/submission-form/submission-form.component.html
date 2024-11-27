@@ -1,125 +1,224 @@
 <div class="submission-flow-container">
-	<h1>{{event}} Game Submission</h1>
-	<mat-card class="description">
-		<p>
-			On this page you can create and edit your game submissions for {{event}}. You can submit up to 5 games, each
-			with up to 3 categories. Every game must have at least one category. Fields with an asterisk (*) are required.
-			The "Pros" and "Cons" fields are not required, but are encouraged! Submissions close at 11:59 PM EDT ({{submissionsCloseDate | date:'z':'-0500'}}) on
-			{{submissionsCloseDate | date:'EEEE, MMMM d':'-0500'}}. <span class="warn-light">No submissions will be accepted after this time,</span> even
-			if you leave this page open.
-		</p>
-		<p>
-			Your game submission is <span class="success">saved when you click the "Next" button,</span> so be sure to look over your
-			submission carefully before continuing to the next game. Don't worry though, you can come back and edit
-			previous games at any time while submissions are still open. If you wish to delete a submission, either replace
-			the information with another game, or simply click the "Remove Game" button. If you click "Remove Game"
-			and later choose to submit the same game, <span class="warn-light">you will have to enter all of the information again,</span> so be wary.
-		</p>
-		<p>
-			If you need to change any of the info in the "Supplementary Information" area, please do so, then click "Next" through the entire form until
-			you've completed it again. This will ensure the information gets properly updated.
-		</p>
-	</mat-card>
-	<div *ngIf="!areSubmissionsOpen" class="msg-status warn">Game submissions are currently closed.</div>
-	<mat-card class="availability description">
-		<form novalidate #f="ngForm" class="">
-			<h3>Supplementary Information</h3>
-			<mat-form-field>
-				<mat-label>Availability</mat-label>
-				<input
-					matInput
-					name="availability"
-					placeholder="Sunday - Saturday anytime, Monday only 8am - 10pm local time, etc."
-					maxlength="64"
-					[(ngModel)]="availability"
-					required />
-					<mat-hint>Please include time zone if applicable</mat-hint>
-			</mat-form-field>
-			<br /><br />
-			<mat-checkbox name="isRemote" [(ngModel)]="isRemote" labelPosition="after">I am submitting to participate remotely (leave unchecked if you plan to attend on-site)</mat-checkbox>
-			<div *ngIf="isRemote">
-				<mat-form-field>
-					<mat-label>Upload bandwidth</mat-label>
-					<input
-						matInput
-						name="uploadBandwidth"
-						placeholder="20 Mbps"
-						maxlength="64"
-						[(ngModel)]="uploadBandwidth"
-						required />
-					<mat-hint>Please run a speed test using Google or a similar service and put the results above</mat-hint>
-				</mat-form-field>
-			</div>
-		</form>
-	</mat-card>
+    <div class="text-content">
+        <h1>Game Submissions</h1>
+        <h2>Rules</h2>
+        <p>
+            You may submit up to 5 games, each with up to 3 categories. Every
+            game must have at least one category.
+            <span class="warn-light">
+                Submissions close at 11:59 PM EDT ({{
+                    submissionsCloseDate | date : "z" : "-0500"
+                }}) on
+                {{ submissionsCloseDate | date : "EEEE, MMMM d" : "-0500" }}.
+            </span>
+        </p>
+        <p>
+            <span class="success"
+                >Your game submission is saved when you click the "Next"
+                button.</span
+            >
+            You can come back and edit your submissions at any time before the
+            deadline.
+        </p>
+        <p>
+            By submitting to our event you are agreeing to our
+            <a routerLink="/submissions/guidelines">submission guidelines</a>.
+        </p>
+        <h2>Editing information</h2>
+        <p>
+            If you need to edit any information after submitting, including in
+            the "Supplementary Information" area, make sure to click "Next"
+            through the entire form until you've completed it again. This will
+            ensure our records are properly updated.
+        </p>
+    </div>
 
-	<mat-horizontal-stepper *ngIf="areSubmissionsOpen" linear #stepper="matHorizontalStepper">
-		<mat-step *ngFor="let game of games" [completed]="sub.form.valid && form.valid">
-			<ng-template matStepLabel>{{game.name || 'New Game'}}</ng-template>
-			<div class="step-controls">
-				<button [disabled]="games.length <= 1" mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Previous</span></button>
-				<button
-					[disabled]="games.length <= 0"
-					mat-raised-button
-					color="warn"
-					(click)="removeGame(games.indexOf(game))">
-					<mat-icon>clear</mat-icon>
-					<span>Remove Game</span>
-				</button>
-				<button #nextBtnTop mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form, [nextBtnTop, nextBtnBot])"><span>Next</span><mat-icon>arrow_forward</mat-icon></button>
-			</div>
-			<app-game-submission #sub [game]="game"></app-game-submission>
-			<div class="step-controls">
-				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon>Previous</button>
-				<button
-					[disabled]="games.length <= 0"
-					mat-raised-button
-					color="warn"
-					(click)="removeGame(games.indexOf(game))">
-					<mat-icon>clear</mat-icon>
-					<span>Remove Game</span>
-				</button>
-				<button #nextBtnBot mat-raised-button color="primary" matStepperNext (click)="submitGame(game, sub.form, [nextBtnTop, nextBtnBot])">Next<mat-icon>arrow_forward</mat-icon></button>
-			</div>
-			<br />
-		</mat-step>
+    <!-- Form -->
+    <hr />
 
-		<mat-step *ngIf="games.length < maxGames">
-			<ng-template matStepLabel>More...</ng-template>
-			<div class="step-controls">
-				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Previous</span></button>
-				<button mat-raised-button color="primary" matStepperNext><span>Skip to End</span><mat-icon>arrow_forward</mat-icon></button>
-			</div>
-			<div class="center-wrapper">
-				<button mat-raised-button color="primary" class="btn-add-game" (click)="addGame()">
-					<mat-icon>add_circle</mat-icon>
-					<span>Add another game</span>
-				</button>
-			</div>
-			<div class="step-controls">
-				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon>Previous</button>
-				<button mat-raised-button color="primary" matStepperNext>Skip to End<mat-icon>arrow_forward</mat-icon></button>
-			</div>
-			<br />
-		</mat-step>
+    <div class="availability text-content">
+        <h2>Submission</h2>
 
-		<mat-step>
-			<ng-template matStepLabel>Done</ng-template>
-			<h2>Your submissions</h2>
-			<app-submission-list #submissionList
-				[dataSource]="getObservableOfGames()"
-				[showFilter]="false"
-				[showPagination]="false">
-			</app-submission-list>
-			<br />
-			<h3 class="info">Done with submissions?</h3>
-			<p>You can always come back later (until submissions close). Note that your submissions will not show up in the public list just yet. They first need to be approved by the game selection committee and marked as public.</p>
-			<div class="step-controls">
-				<button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon><span>Go Back</span></button>
-				<!-- TODO: Make this a link to all submissions or profile or something -->
-				<a mat-raised-button color="primary" routerLink="/profile" matStepperNext>I'm done for now<mat-icon>arrow_forward</mat-icon></a>
-			</div>
-			<br />
-		</mat-step>
-	</mat-horizontal-stepper>
+        <div *ngIf="!areSubmissionsOpen" class="msg-status warn">
+            Game submissions are currently closed.
+        </div>
+
+        <form novalidate #f="ngForm" class="">
+            <h3>Supplementary Information</h3>
+            <mat-form-field>
+                <mat-label>Availability</mat-label>
+                <input
+                    matInput
+                    name="availability"
+                    placeholder="Sunday - Saturday anytime, Monday only 8am - 10pm local time, etc."
+                    maxlength="64"
+                    [(ngModel)]="availability"
+                    required
+                />
+                <mat-hint>Please include time zone if applicable</mat-hint>
+            </mat-form-field>
+            <br /><br />
+            <mat-checkbox
+                name="isRemote"
+                [(ngModel)]="isRemote"
+                labelPosition="after"
+                >I am submitting to run remotely</mat-checkbox
+            >
+            <div *ngIf="isRemote">
+                <mat-form-field>
+                    <mat-label>Upload bandwidth</mat-label>
+                    <input
+                        matInput
+                        name="uploadBandwidth"
+                        placeholder="20 Mbps"
+                        maxlength="64"
+                        [(ngModel)]="uploadBandwidth"
+                        required
+                    />
+                    <mat-hint
+                        >Please run a speed test using Google or a similar
+                        service and put the results above</mat-hint
+                    >
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <!-- Stepper -->
+    <mat-horizontal-stepper
+        *ngIf="areSubmissionsOpen"
+        linear
+        #stepper="matHorizontalStepper"
+    >
+        <mat-step
+            *ngFor="let game of games"
+            [completed]="sub.form.valid && form.valid"
+        >
+            <ng-template matStepLabel>{{
+                game.name || "New Game"
+            }}</ng-template>
+            <div class="step-controls">
+                <button
+                    [disabled]="games.length <= 1"
+                    mat-raised-button
+                    matStepperPrevious
+                >
+                    <mat-icon>arrow_back</mat-icon><span>Previous</span>
+                </button>
+                <button
+                    [disabled]="games.length <= 0"
+                    mat-raised-button
+                    color="warn"
+                    (click)="removeGame(games.indexOf(game))"
+                >
+                    <mat-icon>clear</mat-icon>
+                    <span>Remove Game</span>
+                </button>
+                <button
+                    #nextBtnTop
+                    mat-raised-button
+                    color="primary"
+                    matStepperNext
+                    (click)="
+                        submitGame(game, sub.form, [nextBtnTop, nextBtnBot])
+                    "
+                >
+                    <span>Next</span><mat-icon>arrow_forward</mat-icon>
+                </button>
+            </div>
+            <app-game-submission #sub [game]="game"></app-game-submission>
+            <div class="step-controls step-controls-bottom">
+                <button mat-raised-button matStepperPrevious>
+                    <mat-icon>arrow_back</mat-icon>Previous
+                </button>
+                <button
+                    [disabled]="games.length <= 0"
+                    mat-raised-button
+                    color="warn"
+                    (click)="removeGame(games.indexOf(game))"
+                >
+                    <mat-icon>clear</mat-icon>
+                    <span>Remove Game</span>
+                </button>
+                <button
+                    #nextBtnBot
+                    mat-raised-button
+                    color="primary"
+                    matStepperNext
+                    (click)="
+                        submitGame(game, sub.form, [nextBtnTop, nextBtnBot])
+                    "
+                >
+                    Next<mat-icon>arrow_forward</mat-icon>
+                </button>
+            </div>
+            <br />
+        </mat-step>
+
+        <mat-step *ngIf="games.length < maxGames">
+            <ng-template matStepLabel>More...</ng-template>
+            <div class="step-controls">
+                <button mat-raised-button matStepperPrevious>
+                    <mat-icon>arrow_back</mat-icon><span>Previous</span>
+                </button>
+                <button mat-raised-button color="primary" matStepperNext>
+                    <span>Skip to End</span><mat-icon>arrow_forward</mat-icon>
+                </button>
+            </div>
+            <div class="center-wrapper">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    class="btn-add-game"
+                    (click)="addGame()"
+                >
+                    <mat-icon>add_circle</mat-icon>
+                    <span>Add game</span>
+                </button>
+            </div>
+            <div class="step-controls step-controls-bottom">
+                <button mat-raised-button matStepperPrevious>
+                    <mat-icon>arrow_back</mat-icon>Previous
+                </button>
+                <button mat-raised-button color="primary" matStepperNext>
+                    Skip to End<mat-icon>arrow_forward</mat-icon>
+                </button>
+            </div>
+            <br />
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <h2>Your submissions</h2>
+            <!-- TODO: this table breaks responsivenes at small screen sizes -->
+            <app-submission-list
+                #submissionList
+                [dataSource]="getObservableOfGames()"
+                [showFilter]="false"
+                [showPagination]="false"
+            >
+            </app-submission-list>
+            <br />
+            <h3 class="info">Done with submissions?</h3>
+            <p>
+                You can always come back later (until submissions close). Note
+                that your submissions will not show up in the public list just
+                yet. They first need to be approved by the game selection
+                committee and marked as public.
+            </p>
+            <div class="step-controls">
+                <button mat-raised-button matStepperPrevious>
+                    <mat-icon>arrow_back</mat-icon><span>Go Back</span>
+                </button>
+                <a
+                    mat-raised-button
+                    color="primary"
+                    routerLink="/profile"
+                    matStepperNext
+                    >I'm done for now<mat-icon>arrow_forward</mat-icon></a
+                >
+            </div>
+            <br />
+        </mat-step>
+    </mat-horizontal-stepper>
 </div>

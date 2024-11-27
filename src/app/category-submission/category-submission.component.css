@@ -1,24 +1,16 @@
 .form-wrapper {
-	min-width: 500px;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-wrapper > * {
-	width: 100%;
+    width: 100%;
 }
 
 .row-wrapper {
-	display: flex;
-	flex-direction: row;
-}
-
-.row-wrapper > * {
-	flex-grow: 1;
-}
-
-.row-wrapper > :first-child {
-	flex-grow: 5;
-	margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5em;
 }
