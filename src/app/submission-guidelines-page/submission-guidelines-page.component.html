@@ -1,12 +1,17 @@
 <div class="text-content">
-    <h1 class="title">RPGLB 2024 Game Selection Criteria</h1>
+    <h1 class="title">
+        {{ speedrunEvent?.shortname || "RPGLB" }} Game Selection Criteria
+    </h1>
 
     <h2>Length</h2>
     <p>
-        This will be a 6 1/2-day marathon (running roughly from noon on 5/19 to
-        9PM the night of 5/25, for about 153 total hours). We want to have as
-        much variety on the schedule as possible (both for games and runners),
-        so 6+ hour runs will need to be very strong in the below areas.
+        This will be a 6 1/2-day marathon (running roughly from noon on
+        {{ speedrunEvent?.dates.event.start | date : "MMMM d" : "-0400" }} to 9
+        PM the night of
+        {{ speedrunEvent?.dates.event.end | date : "MMMM d" : "-0400" }}, for
+        about 153 total hours). We want to have as much variety on the schedule
+        as possible (both for games and runners), so 6+ hour runs will need to
+        be very strong in the below areas.
     </p>
 
     <h2>Donation Incentives</h2>
@@ -157,9 +162,10 @@
         <li>EVGA GeForce RTX 3060 12GB GPU</li>
         <li>HP X500 Mouse</li>
         <li>NPET K10 V3-RGB Keyboard</li>
+        <li>Viewsonic VX2476 Monitor (1080p, 60 FPS)</li>
     </ul>
 
-    <hr />
+    <h2>What defines an RPG?</h2>
     <p>
         Defining what is/isn't an RPG is something we do not attempt - our goal
         is to produce a schedule of games that appeal to fans of the RPG genre;
