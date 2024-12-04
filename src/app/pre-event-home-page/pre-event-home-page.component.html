@@ -13,16 +13,16 @@
             <app-timeline [srEvent]="speedrunEvent"></app-timeline>
         </div>
         <p>
-            {{ event }} will take place in Salt Lake City, Utah, continuing to
+            {{ event }} will take place in Denver, Colorado, continuing to
             benefit the
             <a href="https://www.nami.org" _target="blank"
                 >National Alliance on Mental Illness.</a
             >
             The event will take place
             {{ speedrunEvent?.dates.event.start | date : "MMMM d" : "-0400" }}
-            to {{ speedrunEvent?.dates.event.end | date : "MMMM d" : "-0400" }},
-            in Denver, Colorado and will be a hybrid event with options to
-            participate remotely. For future updates, follow us on
+            to {{ speedrunEvent?.dates.event.end | date : "MMMM d" : "-0400" }}
+            and will be a hybrid event with options to participate remotely. For
+            future updates, follow us on
             <a href="https://twitter.com/rpglimitbreak" target="_blank"
                 >Twitter</a
             >, join our
