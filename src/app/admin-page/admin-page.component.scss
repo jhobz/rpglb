@@ -4,25 +4,37 @@ $primary: map-get($rpglb-app-theme, primary);
 $warn: map-get($rpglb-app-theme, warn);
 $background: map-get($rpglb-app-theme, background);
 
+/* Lock icon */
+button[data-disabled="true"] {
+    background-color: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.3);
+}
+
 /* General things */
 .wrapper {
     max-width: 1500px;
     margin: 50px auto;
+    position: relative;
 }
 
 .flex-container {
     display: flex;
     justify-content: space-between;
-    gap: 5%;
+    gap: 3rem;
 }
 
 fieldset {
-    margin-top: 1em;
+    margin-top: 1rem;
     position: relative;
 }
 
 fieldset:disabled > :not(legend) {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.3);
+}
+
+h2 {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
 .warn {
@@ -31,29 +43,26 @@ fieldset:disabled > :not(legend) {
 
 /* Event controls */
 .event-controls {
-    column-gap: 9em;
-    row-gap: 3em;
+    gap: 2rem;
     justify-content: flex-start;
     flex-wrap: wrap;
 
-    & > div {
-        min-width: 96px;
-    }
-
-    mat-form-field {
-        margin-bottom: 1em;
-        flex-grow: 0;
+    & > * {
+        flex-grow: 1;
+        flex-basis: 96px;
+        max-width: 200px;
     }
 
     h5 {
+        margin-top: 0;
         white-space: nowrap;
     }
 }
 
 .floating-button {
     position: absolute;
-    top: 5px;
-    right: 15px;
+    inset: 0 0 auto auto;
+    z-index: 99;
 }
 
 legend > .floating-button {
@@ -75,17 +84,23 @@ legend > .floating-button {
         flex-grow: 1;
     }
 
-    .flex-container {
-        width: 75%;
+    .floating-button {
+        inset: auto 15px 15px auto;
     }
 
-    .small-fieldset {
-        margin: 0;
-        min-width: 750px;
+    .float-right {
+        float: right;
+        margin-right: 1rem;
     }
 }
 
 /* User lists */
+.user-info {
+    .floating-button {
+        inset: 5px 15px auto auto;
+    }
+}
+
 .user-list {
     width: 50%;
     font-size: 0.75em;
