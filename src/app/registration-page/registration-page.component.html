@@ -13,14 +13,14 @@
     <p>
         In order to register for {{ speedrunEvent?.name }}, first you will need
         to enter your intended dates of stay (the marathon stream will run
-        {{ speedrunEvent?.dates?.event.start | date : "MMMM d" : "-0400" }} to
-        {{ speedrunEvent?.dates?.event.end | date : "MMMM d" : "-0400" }}, with
-        setup starting {{ minDate | date : "MMMM d" : "-0400" }}, and teardown
-        on {{ maxDate | date : "MMMM d" : "-0400" }}). We use this information
-        for general headcounts and to get an idea of the arrivals per day. You
-        can change it on this page at any time. Afterwards, click the "Pay
-        Attendance Fee" button in order to start the payment process. The
-        attendance fee for {{ speedrunEvent?.shortname }} is USD
+        {{ speedrunEvent?.dates?.event.start | date : "MMMM d" }} to
+        {{ speedrunEvent?.dates?.event.end | date : "MMMM d" }}, with setup
+        starting {{ minDate | date : "MMMM d" }}, and teardown on
+        {{ maxDate | date : "MMMM d" }}). We use this information for general
+        headcounts and to get an idea of the arrivals per day. You can change it
+        on this page at any time. Afterwards, click the "Pay Attendance Fee"
+        button in order to start the payment process. The attendance fee for
+        {{ speedrunEvent?.shortname }} is USD
         {{ paymentAmount | currency : "USD" }}. This fee helps us cover costs
         related to running the event for attendees, such as practice TVs, hotel
         fees, and more. If you need your attendance fee refunded (in the event
@@ -28,8 +28,7 @@
         email, Twitter, or Discord (links available below). The deadline for
         attendance fee refunds will be
         {{
-            speedrunEvent?.dates?.registration.refundDeadline
-                | date : "MMMM d" : "-0400"
+            speedrunEvent?.dates?.registration.refundDeadline | date : "MMMM d"
         }}
         - after this date no refunds will be given. When attending, you will
         receive a badge with your username (<strong>{{
@@ -47,14 +46,11 @@
         Below you will find a number representing the number of attendees
         currently registered for the event and the total cap. Registration will
         close on
-        {{
-            speedrunEvent?.dates?.registration.open
-                | date : "EEEE, MMMM d" : "-0400"
-        }}
-        at 11:59PM Eastern Daylight Time, or whenever the cap is reached. If the
-        cap is reached and you have already begun the payment process, you will
-        be able to finish it. Otherwise, you will not be able to register. Keep
-        an eye on our
+        {{ speedrunEvent?.dates?.registration.close | date : "EEEE, MMMM d" }}
+        at {{ speedrunEvent?.dates?.registration.close | date : "hh:mm a z" }},
+        or whenever the cap is reached. If the cap is reached and you have
+        already begun the payment process, you will be able to finish it.
+        Otherwise, you will not be able to register. Keep an eye on our
         <a href="https://twitter.com/rpglimitbreak">Twitter</a> and
         <a href="https://discord.gg/rpglb">Discord</a> for announcements, as
         occasionally we are able to increase the maximum cap.

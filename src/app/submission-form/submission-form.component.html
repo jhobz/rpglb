@@ -6,10 +6,9 @@
             You may submit up to 5 games, each with up to 3 categories. Every
             game must have at least one category.
             <span class="warn-light">
-                Submissions close at 11:59 PM EDT ({{
-                    submissionsCloseDate | date : "z" : "-0500"
-                }}) on
-                {{ submissionsCloseDate | date : "EEEE, MMMM d" : "-0500" }}.
+                Submissions close at
+                {{ submissionsCloseDate | date : "hh:mm a z" }} on
+                {{ submissionsCloseDate | date : "EEEE, MMMM d" }}.
             </span>
         </p>
         <p>

@@ -4,12 +4,13 @@
     <mat-card>
         <h2 id="important-volunteer-dates">Important Volunteer Dates</h2>
         <p>
-            {{ closeDate | date : "MMMM d" : "-0400" }} at 11:59 PM EDT &#x2013;
-            Onsite &amp; Remote Volunteer Applications Close
+            {{ closeDate | date : "MMMM d" }} at
+            {{ closeDate | date : "hh:mm a z" }} &#x2013; Onsite &amp; Remote
+            Volunteer Applications Close
         </p>
         <p>
-            {{ scheduleDate | date : "MMMM d" : "-0400" }} &#x2013; Onsite &amp;
-            Remote Volunteer Schedule Releases
+            {{ scheduleDate | date : "MMMM d" }} &#x2013; Onsite &amp; Remote
+            Volunteer Schedule Releases
         </p>
     </mat-card>
 

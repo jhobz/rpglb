@@ -15,13 +15,14 @@
         <h1>All Public Submissions - {{ speedrunEvent?.name }}</h1>
         <p>
             Submissions are made public as they are manually reviewed for
-            errors. Submissions will close at 11:59 PM EST ({{
-                speedrunEvent?.dates.games.submissionsClose
-                    | date : "z" : "-0500"
-            }}) on
+            errors. Submissions will close at
+            {{
+                speedrunEvent?.dates.games.submissionsClose | date : "hh:mm a z"
+            }}
+            on
             {{
                 speedrunEvent?.dates.games.submissionsClose
-                    | date : "EEEE, MMMM d" : "-0500"
+                    | date : "EEEE, MMMM d"
             }}. No further submissions will be accepted after this time, but it
             may still take a bit for the final few submissions to become public.
         </p>
