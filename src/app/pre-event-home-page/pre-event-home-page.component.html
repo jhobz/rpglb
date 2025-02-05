@@ -1,3 +1,20 @@
+<div
+    *ngIf="speedrunEvent?.areGameSubmissionsOpen"
+    class="banner mat-elevation-z3"
+>
+    <p>
+        Game submissions for {{ speedrunEvent?.shortname }} are now open! Login
+        and go to your <a routerLink="/profile">profile</a> to submit your
+        speedruns!
+    </p>
+</div>
+<div *ngIf="speedrunEvent?.isRegistrationOpen" class="banner mat-elevation-z3">
+    <p>
+        Registration for {{ speedrunEvent?.shortname }} is now open! Login and
+        go to your <a routerLink="/profile">profile</a> to purchase your ticket
+        to attend!
+    </p>
+</div>
 <div class="text-content">
     <img
         *ngIf="speedrunEvent?.state !== 'pre'"
@@ -32,14 +49,29 @@
             be found in our <a routerLink="/news">news section.</a>
         </p>
         <p>
+            <span *ngIf="speedrunEvent?.areGameSubmissionsOpen">
+                Game submissions for {{ event }} will be open from
+                {{
+                    speedrunEvent?.dates.games.submissionsOpen | date : "MMMM d"
+                }}
+                -
+                {{ speedrunEvent?.dates.games.submissionsClose | date : "d" }}.
+                To submit games for the event,
+                <a routerLink="/signup">create an account</a> (or
+                <a routerLink="/login">login</a> to an existing one), go to your
+                <a routerLink="/profile">profile</a>, and click
+                &quot;Create/Edit Submissions.&quot;
+            </span>
+        </p>
+        <p>
             <span *ngIf="registrationStatus === 'pre'"
                 >Event registration for {{ event }} will open on
                 {{ speedrunEvent?.dates.registration.open | date : "MMMM d" }}.
-                <a routerLink="/signup">Create an account</a> (or login) if you
-                plan on attending, as you'll need one in order to register. We
-                will not be able to accommodate on-site registrations once the
-                event starts, so be sure to register if you're considering
-                attending!
+                <a routerLink="/signup">Create an account</a> (or
+                <a routerLink="/login">login</a>) if you plan on attending, as
+                you'll need one in order to register. We will not be able to
+                accommodate on-site registrations once the event starts, so be
+                sure to register if you're considering attending!
             </span>
             <span *ngIf="registrationStatus === 'open'"
                 >Event registration for {{ event }} is open until

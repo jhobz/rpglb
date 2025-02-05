@@ -5,6 +5,7 @@ $accent: map-get($rpglb-app-theme, accent);
 $warn: map-get($rpglb-app-theme, warn);
 $foreground: map-get($rpglb-app-theme, foreground);
 $background: map-get($rpglb-app-theme, background);
+$bonus: mat-palette($mat-purple, 400, 200);
 
 .home-title {
     text-align: center;
@@ -53,4 +54,22 @@ $background: map-get($rpglb-app-theme, background);
 .timeline {
     max-width: 500px;
     margin: auto;
+}
+
+.banner {
+    background-color: mat-color($bonus);
+    margin: 0 -1.5em;
+    padding: 1.2em;
+    text-align: center;
+    font-size: 1.1rem;
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        // color: white;
+        font-weight: 700;
+    }
 }
