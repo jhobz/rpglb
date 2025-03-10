@@ -69,10 +69,7 @@
         <p>
             Please use the following link to book a hotel room at the event
             rate:
-            <a
-                href="https://www.hilton.com/en/attend-my-event/slcardt-rpg-e1036ad1-9137-40eb-b5ae-f807aee0e10c/"
-                >Book a room</a
-            >
+            <a [href]="speedrunEvent?.hotelBookingUrl">Book a room</a>
         </p>
     </ng-container>
     <p *ngIf="speedrunEvent?.areVolunteerSubmissionsOpen">
