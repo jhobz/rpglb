@@ -134,6 +134,9 @@ exports.updateSpeedrunEvent = async function (req, res, next) {
         volunteerFormUrl: req.body.volunteerFormUrl
             ? req.body.volunteerFormUrl
             : null,
+        hotelBookingUrl: req.body.volunteerFormUrl
+            ? req.body.hotelBookingUrl
+            : null,
         gameSubmissions: req.body.gameSubmissions
             ? req.body.gameSubmissions
             : null,

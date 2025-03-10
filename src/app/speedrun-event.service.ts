@@ -28,6 +28,7 @@ export interface SpeedrunEvent {
     maxRegisteredUsers?: number
     registrationCost?: number
     volunteerFormUrl?: string
+    hotelBookingUrl?: string
     gameSubmissions?: GameSubmission[]
     volunteerSubmissions?: any
     registeredUsers?: User[]
