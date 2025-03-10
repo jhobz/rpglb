@@ -29,9 +29,6 @@ $bonus: mat-palette($mat-purple, 400, 200);
 }
 
 .registration-container {
-    margin: 50px auto 0 auto;
-    max-width: 1000px;
-
     legend {
         font-weight: bold;
     }
@@ -101,8 +98,15 @@ $bonus: mat-palette($mat-purple, 400, 200);
 }
 
 .attendees {
+    margin: 4em 0;
+
     .attendees-count {
         font-weight: bold;
+        text-align: center;
+    }
+
+    .registration-progress {
+        height: 15px;
     }
 }
 

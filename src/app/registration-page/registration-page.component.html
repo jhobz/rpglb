@@ -11,49 +11,24 @@
     </div> -->
     <h1>Register for {{ speedrunEvent?.name }}</h1>
     <p>
-        In order to register for {{ speedrunEvent?.name }}, first you will need
-        to enter your intended dates of stay (the marathon stream will run
-        {{ speedrunEvent?.dates?.event.start | date : "MMMM d" }} to
-        {{ speedrunEvent?.dates?.event.end | date : "MMMM d" }}, with setup
-        starting {{ minDate | date : "MMMM d" }}, and teardown on
-        {{ maxDate | date : "MMMM d" }}). We use this information for general
-        headcounts and to get an idea of the arrivals per day. You can change it
-        on this page at any time. Afterwards, click the "Pay Attendance Fee"
-        button in order to start the payment process. The attendance fee for
+        Please fill out the form below to register. The attendance fee for
         {{ speedrunEvent?.shortname }} is USD
         {{ paymentAmount | currency : "USD" }}. This fee helps us cover costs
-        related to running the event for attendees, such as practice TVs, hotel
-        fees, and more. If you need your attendance fee refunded (in the event
-        that you no longer wish to attend), please contact an administrator via
-        email, Twitter, or Discord (links available below). The deadline for
-        attendance fee refunds will be
+        related to running the event for attendees.
+        <strong
+            >Your registration is not complete until you complete the payment
+            process!</strong
+        >
+        In the event that your plans change and you need to cancel your
+        registration, please contact an administrator via email, social media,
+        or Discord (links available at the bottom of any page). The deadline for
+        attendance fee refunds is
         {{
             speedrunEvent?.dates?.registration.refundDeadline | date : "MMMM d"
-        }}
-        - after this date no refunds will be given. When attending, you will
-        receive a badge with your username (<strong>{{
-            userTokenInfo.username
-        }}</strong
+        }}. When attending, you will receive a badge with your username (<strong
+            >{{ userTokenInfo.username }}</strong
         >) printed on it. If you would like to change your username, please
         contact an adminstrator.
-    </p>
-    <p class="msg-status success">
-        All attendees must meet the requirements outlined in our
-        <a routerLink="/covid">COVID-19 Safety Policy.</a> Please confirm you
-        meet these requirements before registering to attend.
-    </p>
-    <p>
-        Below you will find a number representing the number of attendees
-        currently registered for the event and the total cap. Registration will
-        close on
-        {{ speedrunEvent?.dates?.registration.close | date : "EEEE, MMMM d" }}
-        at {{ speedrunEvent?.dates?.registration.close | date : "hh:mm a z" }},
-        or whenever the cap is reached. If the cap is reached and you have
-        already begun the payment process, you will be able to finish it.
-        Otherwise, you will not be able to register. Keep an eye on our
-        <a href="https://twitter.com/rpglimitbreak">Twitter</a> and
-        <a href="https://discord.gg/rpglb">Discord</a> for announcements, as
-        occasionally we are able to increase the maximum cap.
     </p>
     <div
         *ngIf="speedrunEvent && hasFullUserLoaded && !isProcessingPayment"
@@ -65,11 +40,15 @@
             "
             class="attendees"
         >
-            Attendee slots taken:
-            <span class="attendees-count"
-                >{{ speedrunEvent.registeredUsersCount }} /
-                {{ speedrunEvent.maxRegisteredUsers }}</span
-            >
+            <mat-progress-bar
+                class="registration-progress"
+                mode="determinate"
+                [value]="registrationCapPercentage"
+            ></mat-progress-bar>
+            <p class="attendees-count">
+                {{ speedrunEvent.registeredUsersCount }} /
+                {{ speedrunEvent.maxRegisteredUsers }} attendees registered
+            </p>
         </div>
         <div
             *ngIf="
@@ -81,6 +60,14 @@
                         speedrunEvent.maxRegisteredUsers)
             "
         >
+            <p>
+                Please indicate your intended dates of stay. The marathon stream
+                will run
+                {{ speedrunEvent?.dates?.event.start | date : "MMMM d" }} to
+                {{ speedrunEvent?.dates?.event.end | date : "MMMM d" }}, with
+                setup starting {{ minDate | date : "MMMM d" }}, and teardown on
+                {{ maxDate | date : "MMMM d" }}.
+            </p>
             <form novalidate #f="ngForm" class="registration-form">
                 <mat-form-field>
                     <input
@@ -170,14 +157,14 @@
                             <input
                                 matInput
                                 name="twitter"
-                                placeholder="Twitter"
+                                placeholder="Social media"
                                 [(ngModel)]="user.twitter"
                                 maxlength="26"
                                 (change)="onFormChange()"
                             />
                             <mat-hint
-                                >May be displayed on stream if you are a
-                                runner</mat-hint
+                                >Please include full link to your
+                                profile</mat-hint
                             >
                         </mat-form-field>
                         <mat-form-field>
@@ -338,12 +325,7 @@
                         By checking the box below, I confirm that I have read,
                         understand, and will comply with all requirements
                         outlined in the
-                        <a routerLink="/covid">COVID-19 Safety Policy</a>,
-                        including, but not limited to, providing vaccination
-                        records and wearing a mask in all designated event
-                        spaces. I also understand that refusal to comply with
-                        the COVID-19 policies may result in barring my
-                        attendance with no refund.
+                        <a routerLink="/health">Health Policy</a>.
                     </p>
                     <mat-checkbox
                         name="covid"
@@ -352,7 +334,7 @@
                         [disabled]="user.roles.includes('attendee')"
                         required
                     >
-                        I agree to follow the COVID-19 Safety Policy
+                        I agree to follow the Health Policy
                     </mat-checkbox>
                 </div>
             </form>
