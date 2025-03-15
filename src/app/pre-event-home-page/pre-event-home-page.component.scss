@@ -22,8 +22,8 @@ $bonus: mat-palette($mat-purple, 400, 200);
     justify-content: center;
 
     box-sizing: content-box;
-    margin: 100px -2em;
-    width: calc(100% + 4em);
+    margin: 100px -1.5rem;
+    width: calc(100% + 3rem);
     height: 540px;
     padding: 50px 0;
 
@@ -58,7 +58,7 @@ $bonus: mat-palette($mat-purple, 400, 200);
 
 .banner {
     background-color: mat-color($bonus);
-    margin: 0 -1.5em;
+    margin: 0 -1.5rem;
     padding: 1.2em;
     text-align: center;
     font-size: 1.1rem;
