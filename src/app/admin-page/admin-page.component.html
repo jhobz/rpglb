@@ -217,6 +217,8 @@
                 <span matSuffix>USD</span>
             </mat-form-field>
 
+            <h4>Links</h4>
+
             <div class="flex-container">
                 <mat-form-field>
                     <mat-label>Volunteer Application Form URL</mat-label>
@@ -238,6 +240,30 @@
                         type="text"
                         name="hotelBookingUrl"
                         [(ngModel)]="speedrunEvent.hotelBookingUrl"
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="flex-container">
+                <mat-form-field>
+                    <mat-label>Merch URL</mat-label>
+                    <input
+                        matInput
+                        type="text"
+                        name="merchUrl"
+                        [(ngModel)]="speedrunEvent.merchUrl"
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="flex-container">
+                <mat-form-field>
+                    <mat-label>Prize Submission URL</mat-label>
+                    <input
+                        matInput
+                        type="text"
+                        name="prizeSubmissionUrl"
+                        [(ngModel)]="speedrunEvent.prizeSubmissionUrl"
                     />
                 </mat-form-field>
             </div>

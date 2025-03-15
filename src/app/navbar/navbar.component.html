@@ -43,7 +43,7 @@
             mat-list-item
             *ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen"
             target="_blank"
-            href="https://forms.gle/gKx6K5myQ9AVv4499"
+            [href]="speedrunEvent?.prizeSubmissionUrl"
             >Prizes</a
         >
         <a mat-list-item href="https://discord.gg/rpglb" target="_blank"
@@ -58,7 +58,7 @@
         <a
             mat-list-item
             *ngIf="mode === 'live'"
-            href="https://theyetee.com/RPGLimitBreak"
+            [href]="speedrunEvent?.merchUrl"
             target="_blank"
             >Event Merch</a
         >

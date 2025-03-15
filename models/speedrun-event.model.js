@@ -51,6 +51,16 @@ let SpeedrunEventSchema = new mongoose.Schema({
         trim: true,
         match: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i,
     },
+    merchUrl: {
+        type: String,
+        trim: true,
+        match: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i,
+    },
+    prizeSubmissionUrl: {
+        type: String,
+        trim: true,
+        match: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i,
+    },
     gameSubmissions: [
         {
             type: mongoose.Schema.ObjectId,

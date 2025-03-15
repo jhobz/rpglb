@@ -69,7 +69,17 @@
         <p>
             Please use the following link to book a hotel room at the event
             rate:
-            <a [href]="speedrunEvent?.hotelBookingUrl">Book a room</a>
+            <a [href]="speedrunEvent?.hotelBookingUrl" target="_blank"
+                >Book a room</a
+            >
+        </p>
+        <p>
+            Check out our
+            <a [href]="speedrunEvent?.merchUrl" target="_blank"
+                >official event merchandise</a
+            >
+            early, including an exclusive t-shirt for attendees! Order early to
+            pick up your merch at the event!
         </p>
     </ng-container>
     <p *ngIf="speedrunEvent?.areVolunteerSubmissionsOpen">
