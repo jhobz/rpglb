@@ -138,6 +138,9 @@ exports.updateSpeedrunEvent = async function (req, res, next) {
             ? req.body.hotelBookingUrl
             : null,
         merchUrl: req.body.merchUrl ? req.body.merchUrl : null,
+        attendeeGuideUrl: req.body.attendeeGuideUrl
+            ? req.body.attendeeGuideUrl
+            : null,
         prizeSubmissionUrl: req.body.prizeSubmissionUrl
             ? req.body.prizeSubmissionUrl
             : null,
