@@ -23,6 +23,7 @@ import { AdminPageComponent } from "./admin-page/admin-page.component"
 import { RunnerGuideComponent } from "./runner-guide/runner-guide.component"
 import { SpeedrunEventGuard } from "./speedrun-event.guard"
 import { SubmissionGuidelinesPageComponent } from "./submission-guidelines-page/submission-guidelines-page.component"
+import { SpeedrunEventResolver } from "./speedrun-event-resolver.service"
 
 const routes: Routes = [
     {
@@ -30,6 +31,10 @@ const routes: Routes = [
         component: PreEventHomePageComponent,
         pathMatch: "full",
         canActivate: [SpeedrunEventGuard],
+        // TODO: Convert pages that need the SpeedrunEvent to use this resolver to get it
+        resolve: {
+            speedrunEvent: SpeedrunEventResolver,
+        },
     },
     {
         path: "admin",
@@ -41,7 +46,11 @@ const routes: Routes = [
     { path: "contact", component: ContactComponent },
     { path: "covid", component: HealthPolicyComponent },
     { path: "health", component: HealthPolicyComponent },
-    { path: "event", component: EventHomeComponent },
+    {
+        path: "event",
+        component: EventHomeComponent,
+        canActivate: [SpeedrunEventGuard],
+    },
     { path: "games", component: GamesListPageComponent },
     { path: "login", component: LoginComponent },
     { path: "rules", component: EventRulesComponent },
@@ -77,5 +86,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
+    providers: [SpeedrunEventResolver],
 })
 export class AppRoutingModule {}

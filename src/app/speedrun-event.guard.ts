@@ -26,7 +26,9 @@ export class SpeedrunEventGuard implements CanActivate {
             .getCurrentSpeedrunEvent()
             .subscribe((srEvent: SpeedrunEvent) => {
                 route = this.getRoute(srEvent)
-                this.router.navigate([route], { skipLocationChange: true })
+                this.router.navigate([route], {
+                    skipLocationChange: state.url === "/",
+                })
             })
         return true
     }
