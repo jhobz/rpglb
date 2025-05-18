@@ -11,45 +11,46 @@
     </div>
     <div class="event-description">
         <iframe
-            [ngClass]="{ 'show-chat': isChatOpen }"
+            [ngClass]="{ hide: !isChatOpen }"
             frameborder="0"
             src="https://www.twitch.tv/embed/rpglimitbreak/chat?parent=rpglimitbreak.com&parent=www.rpglimitbreak.com&parent=localhost"
         >
         </iframe>
-        <p class="blurb">
-            Welcome to RPG Limit Break, a week-long marathon of RPG speedruns!
-            RPGLB is an annual event where attendees come to perform speedruns
-            and support our efforts to raise money for
-            <a
-                [href]="event?.cause?.url ? event.cause.url : '#'"
-                target="_blank"
-                >{{ event?.cause?.name }}</a
-            >. We also work closely with NAMI to help spread awareness about
-            mental illness and the donation effort.
-        </p>
-        <p class="blurb">
-            {{ event?.name }} is live
-            {{ event?.dates.event.start | date : "MMMM d" }} -
-            {{ event?.dates.event.end | date : "d" }}. The event takes place in
-            Denver, CO, but anyone can watch our live-stream throughout the
-            whole event which runs non-stop from start to finish. Be sure to
-            check out our schedule & donation incentives, and please support the
-            cause & spread the word!
-        </p>
-        <hr />
-        <img
-            class="logo-med"
-            src="assets/images/logos/LimitBreak-new-logo-01.png"
-        />
-        <p class="title">in support of</p>
-        <a href="https://nami.org" class="clear no-icon"
-            ><img class="logo-small" src="assets/images/nami_long_white.png"
-        /></a>
+        <div class="blurb">
+            <img
+                class="logo-med"
+                src="assets/images/logos/LimitBreak-new-logo-01.png"
+            />
+            <p>
+                Welcome to RPG Limit Break, a week-long marathon of RPG
+                speedruns! RPGLB is an annual event where attendees come to
+                perform speedruns and support our efforts to raise money for
+                <a
+                    [href]="event?.cause?.url ? event.cause.url : '#'"
+                    target="_blank"
+                    >{{ event?.cause?.name }}</a
+                >. We also work closely with NAMI to help spread awareness about
+                mental illness and the donation effort.
+            </p>
+            <a href="https://nami.org" class="clear no-icon"
+                ><img
+                    class="logo-small"
+                    src="assets/images/nami_long_white.png"
+            /></a>
+            <p>
+                {{ event?.name }} is live
+                {{ event?.dates.event.start | date : "MMMM d" }} -
+                {{ event?.dates.event.end | date : "d" }}. The event takes place
+                in Denver, CO, but anyone can watch our live-stream throughout
+                the whole event which runs non-stop from start to finish. Be
+                sure to check out our schedule & donation incentives, and please
+                support the cause & spread the word!
+            </p>
+        </div>
         <a
             *ngIf="!isChatOpen"
             mat-raised-button
             color="accent"
-            class="fixed-bottom"
             (click)="toggleChat()"
             >Chat with viewers!</a
         >
@@ -67,17 +68,14 @@
         </h2>
         <div class="sponsor-row">
             <!-- TODO: Don't hardcode sponsors -->
-            <a href="https://deck13.com"></a>
-            <div>
-                <h3>Deck13</h3>
-                <p>
-                    Blah Blah Blah… some marketing speech here about how great
-                    we are. Honestly? Who cares? Yes, we publish games. And you
-                    should only care for the games. Enjoy our games, wishlist
-                    them and support cool indies. Take a look at Drova, Spindle,
-                    Elements Destiny, Chained Echoes and CrossCode!
-                </p>
-            </div>
+            <a
+                href="https://tantrummerch.com/rpglimitbreak/"
+                data-sponsor-name="Tantrum"
+            ></a>
+            <a
+                href="https://dragonroast.coffee/"
+                data-sponsor-name="DragonRoastCoffee"
+            ></a>
         </div>
     </section>
 </div>

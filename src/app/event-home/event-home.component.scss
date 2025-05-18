@@ -1,0 +1,159 @@
+@import "../../rpglb-dark-theme.scss";
+
+$primary: map-get($rpglb-app-theme, primary);
+$accent: map-get($rpglb-app-theme, accent);
+$warn: map-get($rpglb-app-theme, warn);
+$foreground: map-get($rpglb-app-theme, foreground);
+$background: map-get($rpglb-app-theme, background);
+$bonus: mat-palette($mat-purple, 400, 200);
+
+.main-content {
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 25px;
+    max-width: 100rem;
+    margin: auto;
+    border: 2px solid green;
+    align-items: stretch;
+}
+
+.sponsor-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 0 10vw;
+}
+
+.sponsor-row > a {
+    width: 100%;
+    height: 20em;
+    background: transparent no-repeat center / contain;
+}
+.sponsor-row > a[data-sponsor-name="Tantrum"] {
+    background-image: url("assets/images/sponsors/Tantrum.jpg");
+}
+.sponsor-row > a[data-sponsor-name="DragonRoastCoffee"] {
+    background-color: mat-color($background, card);
+    background-image: url("assets/images/sponsors/DragonRoastCoffee.png");
+}
+
+@media all and (min-width: 1150px) {
+    .main-content {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .sponsors {
+        grid-column: span 2;
+    }
+
+    .sponsor-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.logo-med {
+    height: 250px;
+}
+
+.logo-small {
+    height: 125px;
+}
+
+.embed-wrapper {
+    display: flex;
+    justify-content: center;
+
+    box-sizing: content-box;
+    width: 100%;
+    height: 540px;
+    padding: 50px 0;
+    /* border: 2px solid red; */
+
+    background-color: mat-color($background, card);
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 20px black;
+}
+
+@media screen and (max-width: calc(960px + 50px * 2)) {
+    .embed-wrapper {
+        height: 360px;
+        padding: 35px 0;
+    }
+}
+
+@media screen and (max-width: calc(640px + 35px * 2)) {
+    .embed-wrapper {
+        height: 240px;
+        padding: 20px 0;
+    }
+}
+
+.embed {
+    aspect-ratio: 16/9;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.event-description {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event-description > iframe {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 40px);
+    left: 0;
+    top: 0;
+    right: 0;
+    opacity: 1;
+    display: block;
+    transition: all 0.25s allow-discrete;
+}
+
+.event-description > .hide {
+    opacity: 0;
+    display: none;
+}
+
+.event-description > .blurb {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link-wrapper {
+    width: calc(100%);
+    max-width: 500px;
+}
+
+.event-description img {
+    max-width: 100%;
+    max-height: 160px;
+    margin: auto;
+}
+
+.event-description > a.clear {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.event-description > .button {
+    padding: 10px;
+    border-radius: 0;
+    margin-top: 10px;
+}
+
+.button {
+    border-radius: 5px;
+    color: white;
+    font-family: "Segoe UI", "Lucida Grande", sans-serif;
+    font-size: 1em;
+    padding: 25px;
+    white-space: nowrap;
+}

@@ -8,7 +8,7 @@ import { Router } from "@angular/router"
 @Component({
     selector: "app-event-home",
     templateUrl: "./event-home.component.html",
-    styleUrls: ["./event-home.component.css"],
+    styleUrls: ["./event-home.component.scss"],
     providers: [DonationService],
 })
 export class EventHomeComponent implements OnInit {
