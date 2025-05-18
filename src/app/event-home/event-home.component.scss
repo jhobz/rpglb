@@ -14,7 +14,6 @@ $bonus: mat-palette($mat-purple, 400, 200);
     grid-gap: 25px;
     max-width: 100rem;
     margin: auto;
-    border: 2px solid green;
     align-items: stretch;
 }
 
@@ -68,7 +67,6 @@ $bonus: mat-palette($mat-purple, 400, 200);
     width: 100%;
     height: 540px;
     padding: 50px 0;
-    /* border: 2px solid red; */
 
     background-color: mat-color($background, card);
     border-radius: 0.5rem;
