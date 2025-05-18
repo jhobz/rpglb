@@ -1,4 +1,4 @@
-@import '../../rpglb-dark-theme.scss';
+@import "../../rpglb-dark-theme.scss";
 
 $primary: map-get($rpglb-app-theme, primary);
 $accent: map-get($rpglb-app-theme, accent);
@@ -8,59 +8,83 @@ $foreground: map-get($rpglb-app-theme, foreground);
 $background: map-get($rpglb-app-theme, background);
 
 .eventinfo-container {
-	display: flex;
-	justify-content: center;
-	position: relative;
-	// background-color: mat-color($primary, darker);
-	background-color: mat-color($bonus, darker);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    // background-color: mat-color($primary, darker);
+    background-color: mat-color($bonus, darker);
 }
 
 .title {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .eventinfo-container > .wrapper {
-	padding: 25px 20px 20px;
-	min-width: 650px;
+    padding: 25px 20px 20px;
+    min-width: 650px;
 }
 
 .logo-bg {
-	flex-grow: 1;
-	// min-width: 300px;
-	height: 70px;
-	margin-bottom: 5px;
-	grid-area: logo;
+    flex-grow: 1;
+    height: 70px;
+    margin-bottom: 5px;
+    grid-area: logo;
 }
 .rpglb {
-	background: url('assets/images/logos/logo_1200x424.png') left center/contain no-repeat;
+    background: url("assets/images/logos/logo_1200x424.png") left center/contain
+        no-repeat;
 }
 .nami {
-	background: url('assets/images/nami_long_white.png') right center/contain no-repeat;
+    background: url("assets/images/nami_long_white.png") right center/contain
+        no-repeat;
 }
 
 .donation-container {
-	display: grid;
-	grid: 'logo labelt total button' auto
-		  'logo labelg goal button' auto
-		  / 175px auto auto 200px;
-	grid-column-gap: 25px;
-	margin: auto;
-	// width: 850px;
-	align-items: center;
-	justify-items: space-between;
-	text-align: center;
+    display: grid;
+    grid:
+        "logo numbers button"
+        / 175px auto 200px;
+    grid-column-gap: 25px;
+    margin: auto;
+    align-items: center;
+    text-align: center;
 }
 
 .mat-raised-button {
-	grid-area: button;
-	border-radius: 5px;
-	font-family: 'Segoe UI', 'Lucida Grande', sans-serif;
-	font-size: 1.2em;
-	padding: 15px;
-	white-space: nowrap;
+    grid-area: button;
+    border-radius: 5px;
+    font-family: "Segoe UI", "Lucida Grande", sans-serif;
+    font-size: 1.2em;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.mat-raised-button:hover,
+.mat-raised-button:focus {
+    text-decoration: none;
+    background-color: lighten($color: mat-color($accent), $amount: 5);
 }
 
 .small-link {
-	grid-column: 4;
-	font-size: 0.6em;
+    grid-column: 3;
+    font-size: 0.6em;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.total > p {
+    margin: 0;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7ch;
+
+    &#donation-total {
+        font-size: 2rem;
+        letter-spacing: revert;
+    }
 }

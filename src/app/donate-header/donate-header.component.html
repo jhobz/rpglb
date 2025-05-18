@@ -1,36 +1,51 @@
 <div class="eventinfo-container">
-	<div class="wrapper">
-		<div class="donation-container">
-			<div class="logo-bg nami"></div>
-			<div>Total Raised:</div>
-			<div
-				*ngIf="donations?.total && donations.total > 0; else elseTotal"
-				class="donation-box"
-				id="donation-total"
-			>
-				{{ donations.total | moneify }}
-			</div>
-			<ng-template #elseTotal class="donation-box" id="donation-total"
-				>Soon™</ng-template
-			>
+    <div class="wrapper">
+        <div class="donation-container">
+            <div class="logo-bg nami"></div>
+            <div class="flex">
+                <div class="total">
+                    <p
+                        *ngIf="
+                            donations?.total && donations.total > 0;
+                            else elseTotal
+                        "
+                        class="donation-box"
+                        id="donation-total"
+                    >
+                        {{ donations.total | moneify }}
+                    </p>
+                    <ng-template #elseTotal
+                        ><p class="donation-box" id="donation-total">
+                            <!-- Soon™ -->
+                            $1,774.10
+                        </p></ng-template
+                    >
+                    <p>&nbsp;total raised</p>
+                </div>
 
-			<div>Donation Goal:</div>
-			<div
-				*ngIf="donations?.goal; else elseGoal"
-				class="donation-box"
-				id="donation-goal"
-			>
-				{{ donations.goal | moneify }}
-			</div>
-			<ng-template #elseGoal class="donation-box" id="donation-goal"
-				>Soon™</ng-template
-			>
-			<a mat-raised-button color="accent" href="/donate" target="_blank"
-				>DONATE</a
-			>
-			<a class="small-link" routerLink="/sweepstakes"
-				>Prize sweepstakes rules</a
-			>
-		</div>
-	</div>
+                <!-- <div class="goal">
+                    <span>Donation Goal:</span>
+                    <span
+                        *ngIf="donations?.goal; else elseGoal"
+                        class="donation-box"
+                        id="donation-goal"
+                    >
+                        {{ donations.goal | moneify }}
+                    </span>
+                    <ng-template
+                        #elseGoal
+                        class="donation-box"
+                        id="donation-goal"
+                        >Soon™</ng-template
+                    >
+                </div> -->
+            </div>
+            <a mat-raised-button color="accent" href="/donate" target="_blank"
+                >DONATE</a
+            >
+            <a class="small-link" routerLink="/sweepstakes"
+                >Prize sweepstakes rules</a
+            >
+        </div>
+    </div>
 </div>
