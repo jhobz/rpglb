@@ -30,7 +30,10 @@ export class DonateHeaderComponent implements OnInit, OnDestroy {
             .getCurrentSpeedrunEvent()
             .subscribe((srEvent: SpeedrunEvent) => {
                 this.event = srEvent
-                this.timer = window.setInterval(this.updateDonations, 5000)
+                this.timer = window.setInterval(
+                    () => this.updateDonations(),
+                    5000
+                )
             })
     }
 
