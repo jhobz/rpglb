@@ -48,9 +48,8 @@ export class DonateHeaderComponent implements OnInit, OnDestroy {
                 }
                 const elapsed = timestamp - initialTime
                 const progress = easeOutQuad(elapsed / ANIM_DURATION)
-                const displayNumber = Math.floor(
-                    start + progress * (end - start)
-                )
+                const realNumber = start + progress * (end - start)
+                const displayNumber = Math.round(realNumber * 100) / 100
 
                 // Make 100% sure the correct number is displayed at the end
                 if (elapsed >= ANIM_DURATION) {
@@ -68,7 +67,7 @@ export class DonateHeaderComponent implements OnInit, OnDestroy {
     updateDonations() {
         this.donationService.getTotalForEvent(this.event).subscribe(
             (total: string) => {
-                this.animateCountUp(this.donations.total, Number(total))
+                this.animateCountUp(this.donations.total || 0, Number(total))
             },
             (error: HttpErrorResponse) => {
                 console.error("Error getting donation total", error)
