@@ -39,11 +39,19 @@
             routerLink="/volunteer"
             >Volunteer</a
         >
+        <!-- Prize submissions (before event) -->
         <a
             mat-list-item
             *ngIf="mode !== 'live' && speedrunEvent?.arePrizeSubmissionsOpen"
             target="_blank"
             [href]="speedrunEvent?.prizeSubmissionUrl"
+            >Prizes</a
+        >
+        <!-- Prizes (during event) -->
+        <a
+            mat-list-item
+            *ngIf="mode === 'live' && !speedrunEvent?.arePrizeSubmissionsOpen"
+            href="/prizes"
             >Prizes</a
         >
         <a mat-list-item href="https://discord.gg/rpglb" target="_blank"
