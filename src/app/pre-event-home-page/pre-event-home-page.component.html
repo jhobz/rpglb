@@ -1,3 +1,4 @@
+<!-- BANNERS -->
 <div
     *ngIf="speedrunEvent?.areGameSubmissionsOpen"
     class="banner mat-elevation-z3"
@@ -15,7 +16,9 @@
         to attend!
     </p>
 </div>
-<div class="text-content">
+
+<!-- MAIN CONTENT -->
+<section class="text-content">
     <img
         *ngIf="speedrunEvent?.state !== 'pre'"
         class="logo"
@@ -107,8 +110,9 @@
         events, but we sometimes host online events from the RPG speedrunning
         community, which you can watch below if we're currently live!
     </p>
-</div>
-<div class="embed-wrapper">
+</section>
+
+<section class="embed-wrapper">
     <iframe
         class="embed"
         src="https://player.twitch.tv/?channel=rpglimitbreak&parent=rpglimitbreak.com&parent=www.rpglimitbreak.com&parent=localhost"
@@ -117,8 +121,9 @@
         allowfullscreen="true"
     >
     </iframe>
-</div>
-<div class="text-content">
+</section>
+
+<section class="text-content">
     <h3 class="home-title">
         We can't wait to see what the next event has in store!
     </h3>
@@ -135,4 +140,4 @@
         about NAMI and how they help communities at all scales, check out their
         website at <a href="https://nami.org" _target="blank">nami.org</a>.
     </p>
-</div>
+</section>

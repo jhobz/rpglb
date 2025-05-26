@@ -7,12 +7,16 @@ $foreground: map-get($rpglb-app-theme, foreground);
 $background: map-get($rpglb-app-theme, background);
 $bonus: mat-palette($mat-purple, 400, 200);
 
+.text-content {
+    margin-top: 4em;
+}
+
 .home-title {
     text-align: center;
 }
 
 .logo {
-    height: 300px;
+    width: 100%;
     margin: 0 auto;
     display: block;
 }
@@ -69,7 +73,6 @@ $bonus: mat-palette($mat-purple, 400, 200);
     }
 
     a {
-        // color: white;
         font-weight: 700;
     }
 }
