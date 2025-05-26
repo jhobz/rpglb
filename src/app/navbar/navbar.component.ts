@@ -13,13 +13,14 @@ export class NavbarComponent implements OnInit {
     hasSubmissionRole: boolean
     speedrunEvent: SpeedrunEvent
     username: string
+    shouldShowEventMerchLink = false
 
     constructor(
         private auth: AuthenticationService,
         private speedrunEventService: SpeedrunEventService
     ) {}
 
-    ngOnInit() {
+    async ngOnInit() {
         const user = this.auth.getUserInfo()
         this.username = user && user.username
         this.hasSubmissionRole =
@@ -33,6 +34,9 @@ export class NavbarComponent implements OnInit {
                 this.speedrunEvent = srEvent
                 this.mode = this.speedrunEvent.state
             })
+
+        this.shouldShowEventMerchLink =
+            await this.speedrunEventService.isEventMerchOpen()
     }
 
     logout(e: MouseEvent) {

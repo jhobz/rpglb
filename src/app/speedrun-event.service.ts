@@ -63,6 +63,8 @@ export interface SpeedrunEvent {
         }
         misc?: {
             covidPolicy?: string
+            eventMerchOpen: string
+            eventMerchClose: string
         }
     }
 }
@@ -89,5 +91,18 @@ export class SpeedrunEventService {
             .map((res: any) => {
                 return res.data as SpeedrunEvent
             })
+    }
+
+    private isWithinDateStrings(start: string, end: string): boolean {
+        const now = new Date()
+        return now > new Date(start) && now < new Date(end)
+    }
+
+    async isEventMerchOpen(): Promise<boolean> {
+        const srEvent = await this.getCurrentSpeedrunEvent().toPromise()
+        return this.isWithinDateStrings(
+            srEvent.dates.misc.eventMerchOpen,
+            srEvent.dates.misc.eventMerchClose
+        )
     }
 }

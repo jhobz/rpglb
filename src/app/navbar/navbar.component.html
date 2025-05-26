@@ -65,7 +65,7 @@
         >
         <a
             mat-list-item
-            *ngIf="mode === 'live'"
+            *ngIf="shouldShowEventMerchLink"
             [href]="speedrunEvent?.merchUrl"
             target="_blank"
             >Event Merch</a
