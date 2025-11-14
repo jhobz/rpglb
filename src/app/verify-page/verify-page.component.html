@@ -1,6 +1,18 @@
 <div class="wrapper">
-	<h1>Verify your email</h1>
-	<div [class]="'msg-status ' + status">{{statusMessage}}</div>
-	<mat-progress-bar *ngIf="status === 'success' && statusMessage !== 'Email sent.'" mode="indeterminate" color="primary"></mat-progress-bar>
-	<button #btn *ngIf="status !== 'success'" mat-raised-button color="accent" (click)="sendVerificationEmail()">Resend verification email</button>
+    <h1>Verify your email</h1>
+    <div [class]="'msg-status ' + status">{{ statusMessage }}</div>
+    <mat-progress-bar
+        *ngIf="status === 'success' && statusMessage !== 'Email sent.'"
+        mode="indeterminate"
+        color="primary"
+    ></mat-progress-bar>
+    <button
+        #btn
+        *ngIf="status !== 'success'"
+        mat-raised-button
+        color="accent"
+        (click)="sendVerificationEmail()"
+    >
+        Resend verification email
+    </button>
 </div>

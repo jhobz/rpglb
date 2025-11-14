@@ -72,7 +72,8 @@ import { RunnerGuideComponent } from "./runner-guide/runner-guide.component"
 import { SpeedrunEventGuard } from "./speedrun-event.guard"
 import { SubmissionGuidelinesPageComponent } from "./submission-guidelines-page/submission-guidelines-page.component"
 import { SanitizedHtmlPipe } from "./sanitized-html.pipe"
-import { RedirectGuard } from "./redirect.guard"
+import { RedirectGuard } from "./redirect.guard";
+import { EmailTestPageComponent } from './email-test-page/email-test-page.component'
 
 @NgModule({
     declarations: [
@@ -110,6 +111,7 @@ import { RedirectGuard } from "./redirect.guard"
         RunnerGuideComponent,
         SubmissionGuidelinesPageComponent,
         SanitizedHtmlPipe,
+        EmailTestPageComponent,
     ],
     entryComponents: [SubmissionConfirmationDialogComponent],
     imports: [
