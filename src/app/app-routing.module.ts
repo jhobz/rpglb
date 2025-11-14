@@ -24,6 +24,7 @@ import { RunnerGuideComponent } from "./runner-guide/runner-guide.component"
 import { SpeedrunEventGuard } from "./speedrun-event.guard"
 import { SubmissionGuidelinesPageComponent } from "./submission-guidelines-page/submission-guidelines-page.component"
 import { SpeedrunEventResolver } from "./speedrun-event-resolver.service"
+import { EmailTestPageComponent } from "./email-test-page/email-test-page.component"
 
 const routes: Routes = [
     {
@@ -46,6 +47,11 @@ const routes: Routes = [
     { path: "contact", component: ContactComponent },
     { path: "covid", component: HealthPolicyComponent },
     { path: "health", component: HealthPolicyComponent },
+    {
+        path: "emailtest",
+        component: EmailTestPageComponent,
+        canActivate: [AuthGuardService],
+    },
     {
         path: "event",
         component: EventHomeComponent,
