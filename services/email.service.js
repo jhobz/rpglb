@@ -63,8 +63,7 @@ exports.sendVerificationEmail = async function (user, req) {
 
 				<div style="margin: 0 auto; text-align: center">
 					<a
-						href="#"
-								href="${url}"
+						href="${url}"
 						style="
 							display: inline-block;
 							background-color: #1976d2;
@@ -81,7 +80,8 @@ exports.sendVerificationEmail = async function (user, req) {
 					If the link above doesn't work, copy and paste the following URL
 					into your browser:
 				</p>
-				<p
+				<a
+					href="${url}"
 					style="
 						display: inline-block;
 						background: rgb(48, 48, 48);
@@ -91,7 +91,7 @@ exports.sendVerificationEmail = async function (user, req) {
 					"
 				>
 					${url}
-				</p>
+				</a>
 			</div>`,
     }
 
@@ -148,7 +148,8 @@ exports.sendPasswordResetEmail = async function (user, req) {
 					If you cannot click the link above, copy and paste the following URL
 					into your browser:
 				</p>
-				<p
+				<a
+					href="${url}"
 					style="
 						display: inline-block;
 						background: rgb(48, 48, 48);
@@ -158,7 +159,7 @@ exports.sendPasswordResetEmail = async function (user, req) {
 					"
 				>
 					${url}
-				</p>
+				</a>
 			</div>`,
     }
 
