@@ -235,7 +235,7 @@ exports.resetPassword = async function (req, res, next) {
 						return res.status(201).json( {
 							status: 201,
 							message: 'Password reset request sent. Check your email for a message from ' +
-								'rpglimitbreak@gmail.com. Be sure to check your spam folder if you can\'t find it in your inbox.'
+								'website@rpglimitbreak.com. Be sure to check your spam folder if you can\'t find it in your inbox.'
 						} )
 					} else {
 						return res.status(400).json( {
