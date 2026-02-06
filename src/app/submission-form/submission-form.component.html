@@ -7,8 +7,8 @@
             game must have at least one category.
             <span class="warn-light">
                 Submissions close at
-                {{ submissionsCloseDate | date : "hh:mm a z" }} on
-                {{ submissionsCloseDate | date : "EEEE, MMMM d" }}.
+                {{ submissionsCloseDate | date: "hh:mm a z" }} on
+                {{ submissionsCloseDate | date: "EEEE, MMMM d" }}.
             </span>
         </p>
         <p>
@@ -44,17 +44,23 @@
 
         <form novalidate #f="ngForm" class="">
             <h3>Supplementary Information</h3>
+            <p>
+                We will try to accommodate your provided availability as best as
+                we can, but we may not be able to in every case. Please
+                <a href="mailto:committee@rpglimitbreak.com">email us</a> if you
+                have any specific scheduling needs.
+            </p>
             <mat-form-field>
                 <mat-label>Availability</mat-label>
                 <input
                     matInput
                     name="availability"
-                    placeholder="Sunday - Saturday anytime, Monday only 8am - 10pm local time, etc."
+                    placeholder="Sun - Sat anytime, Mon 8am - 10pm ET, etc."
                     maxlength="64"
                     [(ngModel)]="availability"
                     required
                 />
-                <mat-hint>Please include time zone if applicable</mat-hint>
+                <mat-hint>Please include time zone for remote runs</mat-hint>
             </mat-form-field>
             <br /><br />
             <mat-checkbox

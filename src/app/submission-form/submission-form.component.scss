@@ -68,6 +68,10 @@
     flex-direction: column;
 }
 
+.availability p {
+    text-wrap: balance;
+}
+
 .availability > form .mat-form-field {
     width: 100%;
     max-width: 540px;
