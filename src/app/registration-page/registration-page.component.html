@@ -13,7 +13,7 @@
     <p>
         Please fill out the form below to register. The attendance fee for
         {{ speedrunEvent?.shortname }} is USD
-        {{ paymentAmount | currency : "USD" }}. This fee helps us cover costs
+        {{ paymentAmount | currency: "USD" }}. This fee helps us cover costs
         related to running the event for attendees.
         <strong
             >Your registration is not complete until you complete the payment
@@ -24,7 +24,7 @@
         or Discord (links available at the bottom of any page). The deadline for
         attendance fee refunds is
         {{
-            speedrunEvent?.dates?.registration.refundDeadline | date : "MMMM d"
+            speedrunEvent?.dates?.registration.refundDeadline | date: "MMMM d"
         }}. When attending, you will receive a badge with your username (<strong
             >{{ userTokenInfo.username }}</strong
         >) printed on it. If you would like to change your username, please
@@ -63,10 +63,10 @@
             <p>
                 Please indicate your intended dates of stay. The marathon stream
                 will run
-                {{ speedrunEvent?.dates?.event.start | date : "MMMM d" }} to
-                {{ speedrunEvent?.dates?.event.end | date : "MMMM d" }}, with
-                setup starting {{ minDate | date : "MMMM d" }}, and teardown on
-                {{ maxDate | date : "MMMM d" }}.
+                {{ speedrunEvent?.dates?.event.start | date: "MMMM d" }} to
+                {{ speedrunEvent?.dates?.event.end | date: "MMMM d" }}, with
+                setup starting {{ minDate | date: "MMMM d" }}, and teardown on
+                {{ maxDate | date: "MMMM d" }}.
             </p>
             <form novalidate #f="ngForm" class="registration-form">
                 <mat-form-field>
@@ -159,7 +159,7 @@
                                 name="twitter"
                                 placeholder="Social media"
                                 [(ngModel)]="user.twitter"
-                                maxlength="26"
+                                maxlength="128"
                                 (change)="onFormChange()"
                             />
                             <mat-hint
