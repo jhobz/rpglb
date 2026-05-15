@@ -39,8 +39,8 @@
             /></a>
             <p>
                 {{ event?.name }} is live
-                {{ event?.dates.event.start | date : "MMMM d" }} -
-                {{ event?.dates.event.end | date : "d" }}. The event takes place
+                {{ event?.dates.event.start | date: "MMMM d" }} -
+                {{ event?.dates.event.end | date: "d" }}. The event takes place
                 in Denver, CO, but anyone can watch our live-stream throughout
                 the whole event which runs non-stop from start to finish. Be
                 sure to check out our schedule & donation incentives, and please
@@ -68,6 +68,14 @@
         </h2>
         <div class="sponsor-row">
             <!-- TODO: Don't hardcode sponsors -->
+            <a
+                href="https://marvelous-usa.com/"
+                data-sponsor-name="Marvelous USA"
+            ></a>
+            <a
+                href="https://www.iddybiddygames.com/"
+                data-sponsor-name="Iddy Biddy Games"
+            ></a>
             <a
                 href="https://tantrummerch.com/rpglimitbreak/"
                 data-sponsor-name="Tantrum"

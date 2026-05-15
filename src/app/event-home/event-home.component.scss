@@ -29,6 +29,12 @@ $bonus: mat-palette($mat-purple, 400, 200);
     height: 20em;
     background: transparent no-repeat center / contain;
 }
+.sponsor-row > a[data-sponsor-name="Marvelous USA"] {
+    background-image: url("assets/images/sponsors/MarvelousUSA.png");
+}
+.sponsor-row > a[data-sponsor-name="Iddy Biddy Games"] {
+    background-image: url("assets/images/sponsors/IddyBiddyGames.png");
+}
 .sponsor-row > a[data-sponsor-name="Tantrum"] {
     background-image: url("assets/images/sponsors/Tantrum.jpg");
 }
