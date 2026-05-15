@@ -27,7 +27,7 @@
     <div *ngIf="speedrunEvent?.state === 'pre'">
         <h1 class="home-title">
             RPG Limit Break returns this
-            {{ speedrunEvent?.dates.event.start | date : "LLLL" }}!
+            {{ speedrunEvent?.dates.event.start | date: "LLLL" }}!
         </h1>
         <div class="timeline">
             <app-timeline [srEvent]="speedrunEvent"></app-timeline>
@@ -39,8 +39,11 @@
                 >National Alliance on Mental Illness.</a
             >
             The event will take place
-            {{ speedrunEvent?.dates.event.start | date : "MMMM d" }}
-            to {{ speedrunEvent?.dates.event.end | date : "MMMM d" }}
+            {{ speedrunEvent?.dates.event.start | date: "MMMM d" }}
+            to {{ speedrunEvent?.dates.event.end | date: "MMMM d" }} at the
+            <a [href]="speedrunEvent?.hotelBookingUrl" target="_blank"
+                >Embassy Suites by Hilton Denver Tech Center</a
+            >
             and will be a hybrid event with options to participate remotely. For
             future updates, follow us on
             <a href="https://twitter.com/rpglimitbreak" target="_blank"
@@ -55,10 +58,10 @@
             <span *ngIf="speedrunEvent?.areGameSubmissionsOpen">
                 Game submissions for {{ event }} will be open from
                 {{
-                    speedrunEvent?.dates.games.submissionsOpen | date : "MMMM d"
+                    speedrunEvent?.dates.games.submissionsOpen | date: "MMMM d"
                 }}
                 -
-                {{ speedrunEvent?.dates.games.submissionsClose | date : "d" }}.
+                {{ speedrunEvent?.dates.games.submissionsClose | date: "d" }}.
                 To submit games for the event,
                 <a routerLink="/signup">create an account</a> (or
                 <a routerLink="/login">login</a> to an existing one), go to your
@@ -69,7 +72,7 @@
         <p>
             <span *ngIf="registrationStatus === 'pre'"
                 >Event registration for {{ event }} will open on
-                {{ speedrunEvent?.dates.registration.open | date : "MMMM d" }}.
+                {{ speedrunEvent?.dates.registration.open | date: "MMMM d" }}.
                 <a routerLink="/signup">Create an account</a> (or
                 <a routerLink="/login">login</a>) if you plan on attending, as
                 you'll need one in order to register. We will not be able to
@@ -78,18 +81,17 @@
             </span>
             <span *ngIf="registrationStatus === 'open'"
                 >Event registration for {{ event }} is open until
-                {{ speedrunEvent?.dates.registration.close | date : "MMMM d" }}
+                {{ speedrunEvent?.dates.registration.close | date: "MMMM d" }}
                 at
                 {{
-                    speedrunEvent?.dates.registration.close
-                        | date : "hh:mm a z"
+                    speedrunEvent?.dates.registration.close | date: "hh:mm a z"
                 }}. You can register from your
                 <a routerLink="/profile">profile</a> after creating an account.
             </span>
             <span *ngIf="registrationStatus === 'closed'"
                 >The registration period for on-site attendance has passed.
                 We're excited to see all our on-site attendees in Denver this
-                {{ speedrunEvent?.dates.event.start | date : "LLLL" }}
+                {{ speedrunEvent?.dates.event.start | date: "LLLL" }}
                 and, if you missed your chance to register this year, we'll be
                 happy to see you on
                 <a href="https://twitch.tv/rpglimitbreak" target="_blank"
