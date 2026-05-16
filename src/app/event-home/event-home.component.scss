@@ -36,11 +36,11 @@ $bonus: mat-palette($mat-purple, 400, 200);
     background-image: url("assets/images/sponsors/IddyBiddyGames.png");
 }
 .sponsor-row > a[data-sponsor-name="Tantrum"] {
-    background-image: url("assets/images/sponsors/Tantrum.jpg");
+    background-image: url("assets/images/sponsors/RPGLimitBreak_2026_PromoGraphic_AllMerch.jpg");
 }
 .sponsor-row > a[data-sponsor-name="DragonRoastCoffee"] {
-    background-color: mat-color($background, card);
-    background-image: url("assets/images/sponsors/DragonRoastCoffee.png");
+    // background-color: mat-color($background, card);
+    background-image: url("assets/images/sponsors/RPGLB26-MimisLoot-StaticAd5.png");
 }
 
 @media all and (min-width: 1150px) {
