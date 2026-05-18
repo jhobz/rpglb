@@ -4,6 +4,10 @@
     min-height: 100vh;
 }
 
+.wrapper:has(app-donate-header) {
+    grid-template-rows: auto auto 1fr auto;
+}
+
 header {
     position: sticky;
     width: 100%;
