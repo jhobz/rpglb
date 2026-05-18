@@ -14,13 +14,13 @@ const easeOutQuad = (t: number) => t * (2 - t)
     providers: [DonationService],
 })
 export class DonateHeaderComponent implements OnInit, OnDestroy {
-    event: SpeedrunEvent
+    event?: SpeedrunEvent
     donations: { total: number; goal: number }
-    timer: number
+    timer?: number
 
     constructor(
         private speedrunEventService: SpeedrunEventService,
-        private donationService: DonationService
+        private donationService: DonationService,
     ) {
         this.donations = {} as { total: number; goal: number }
     }
@@ -32,7 +32,7 @@ export class DonateHeaderComponent implements OnInit, OnDestroy {
                 this.event = srEvent
                 this.timer = window.setInterval(
                     () => this.updateDonations(),
-                    5000
+                    5000,
                 )
             })
     }
@@ -65,21 +65,35 @@ export class DonateHeaderComponent implements OnInit, OnDestroy {
     }
 
     updateDonations() {
+        if (!this.event) {
+            return
+        }
+
         this.donationService.getTotalForEvent(this.event).subscribe(
-            (total: string) => {
-                this.animateCountUp(this.donations.total || 0, Number(total))
+            (total: number) => {
+                if (total <= 0) {
+                    return
+                }
+
+                this.animateCountUp(this.donations.total || 0, total)
             },
             (error: HttpErrorResponse) => {
                 console.error("Error getting donation total", error)
                 this.donations.total = 0
-            }
+            },
         )
         this.donationService.getGoalForEvent(this.event).subscribe(
-            (goal: string) => (this.donations.goal = Number(goal)),
+            (goal: number) => {
+                if (goal <= 0) {
+                    return
+                }
+
+                this.donations.goal = goal
+            },
             (error: HttpErrorResponse) => {
                 console.error("Error getting donation goal", error)
                 this.donations.goal = 0
-            }
+            },
         )
     }
 
