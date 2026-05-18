@@ -82,19 +82,19 @@ export class DonateHeaderComponent implements OnInit, OnDestroy {
                 this.donations.total = 0
             },
         )
-        this.donationService.getGoalForEvent(this.event).subscribe(
-            (goal: number) => {
-                if (goal <= 0) {
-                    return
-                }
+        // this.donationService.getGoalForEvent(this.event).subscribe(
+        //     (goal: number) => {
+        //         if (goal <= 0) {
+        //             return
+        //         }
 
-                this.donations.goal = goal
-            },
-            (error: HttpErrorResponse) => {
-                console.error("Error getting donation goal", error)
-                this.donations.goal = 0
-            },
-        )
+        //         this.donations.goal = goal
+        //     },
+        //     (error: HttpErrorResponse) => {
+        //         console.error("Error getting donation goal", error)
+        //         this.donations.goal = 0
+        //     },
+        // )
     }
 
     ngOnDestroy() {

@@ -19,7 +19,7 @@ export class DonationService {
                 PaginationInfo<TrackerEvent>
             >(`${this.trackerBase}/events?totals=&short=${event.trackerId}`)
             .map((data: PaginationInfo<TrackerEvent>) => {
-                return data.results[0]?.donation_total || 0
+                return data.results[0] ? data.results[0].donation_total || 0 : 0
             })
     }
 
@@ -29,12 +29,12 @@ export class DonationService {
                 PaginationInfo<APIMilestone>
             >(`${this.trackerBase}/milestones.json`)
             .map((data: PaginationInfo<APIMilestone>) => {
-                return (
-                    data.results.filter(
-                        (milestone) =>
-                            milestone.event?.short === event.trackerId,
-                    )[0]?.amount || 0
+                const milestones = data.results.filter(
+                    (milestone) =>
+                        milestone.event &&
+                        milestone.event.short === event.trackerId,
                 )
+                return milestones[0] ? milestones[0].amount || 0 : 0
             })
     }
 }
